@@ -1,0 +1,7 @@
+DOCUMENTATION
+We will put all the documentation produced during the project here.
+INDEX
+	JDConcept - The concept submitted to professor lanzi 
+	JDConceptD - A drawing explaining some of the core game mechanics
+	JDIdeas - A google doc to gather all our ideas for the game https://docs.google.com/document/d/1Y_hhSWFc-GJtKl53XNBAM0Hl3e1P0lNVlAW9l344JpU/edit
+	
