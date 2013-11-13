@@ -6,17 +6,19 @@ public class CameraControl : MonoBehaviour
 	public float speed = 10; 
 	public float horizontalMovement = 100;
 	public float verticalMovement = 100;
+	public float zoomAmount = 100;
 	public float rotationSpeed = 10;
 	public float rotationAngle = 10;
 	public float maxAngleX = 310;
 	public float minAngleX = 70;
-	
-	// Use this for initialization
+	public float rayLenght = 1.5f;
+	public bool debugDraw = false;
+	public bool debugNoRaycast = false;
+
 	void Start () 
 	{
 	}
 	
-	// Update is called once per frame
 	void Update () 
 	{
 		Move();
@@ -30,17 +32,70 @@ public class CameraControl : MonoBehaviour
 		Vector3 origin = transform.position;
 		
 		direction.x = Input.GetAxis("Horizontal") * horizontalMovement;
+
 		direction.z = Input.GetAxis("Vertical") * verticalMovement;
-		
-		Vector3 movement = transform.TransformDirection(direction);
-		movement.y = 0;
-		
-		Vector3 destination = origin + movement;
-		
-		if(destination != origin)
+
+		if(!debugNoRaycast && direction.x != 0 && direction.x > 0 && Physics.Raycast(new Ray(transform.position,transform.TransformDirection(Vector3.right)),rayLenght))
 		{
-			transform.position = Vector3.MoveTowards(origin,destination,Time.deltaTime * speed);
+			direction.x = 0;
+
+			if(debugDraw)
+			Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.right),Color.red);
+
+		} else if (debugDraw) {
+			Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.right));
 		}
+
+
+		if(!debugNoRaycast && direction.x != 0 && direction.x < 0 &&  Physics.Raycast(new Ray(transform.position,transform.TransformDirection(Vector3.left)),rayLenght))
+		{
+			direction.x = 0;
+
+			if(debugDraw)
+			Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.left),Color.red);
+
+		} else if (debugDraw) {
+			Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.left));
+		}
+
+		if(!debugNoRaycast && direction.z != 0  && direction.z > 0 &&  Physics.Raycast(new Ray(transform.position,transform.TransformDirection(Vector3.forward)),rayLenght))
+		{
+			direction.z = 0;
+			if(debugDraw)
+				Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.forward),Color.red);
+
+		} else if(debugDraw){
+			Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.forward));
+		}
+
+		if(!debugNoRaycast && direction.z != 0 && direction.z < 0 && Physics.Raycast(new Ray(transform.position,transform.TransformDirection(Vector3.back)),rayLenght))
+		{
+			direction.z = 0;
+
+			if(debugDraw)
+				Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.back),Color.red);
+
+		} else if(debugDraw){
+			Debug.DrawRay(transform.position,transform.TransformDirection(Vector3.back));
+		}
+
+		Vector3 movement = transform.TransformDirection(direction);
+
+		movement.y = Input.GetAxis("Mouse ScrollWheel") * zoomAmount;
+
+		if(!debugNoRaycast && movement.y != 0 && movement.y < 0 && Physics.Raycast(new Ray(transform.position,Vector3.down),rayLenght))
+		{
+			movement.y = 0;
+		}
+		
+		if(!debugNoRaycast && movement.y != 0 && movement.y > 0 && Physics.Raycast(new Ray(transform.position,Vector3.up),rayLenght))
+		{
+			movement.y = 0;
+		}
+
+		Vector3 destination = origin + movement;
+
+		transform.position = Vector3.MoveTowards(origin,destination,Time.deltaTime * speed);
 	}
 	
 	void Rotate()
@@ -54,7 +109,7 @@ public class CameraControl : MonoBehaviour
 			
 			Vector3 interpolatedRotation = Vector3.Slerp(transform.eulerAngles,transform.eulerAngles + rotation, Time.deltaTime * rotationSpeed);
 			
-			if(interpolatedRotation.x >= minAngleX && interpolatedRotation.x <= maxAngleX )
+			if(interpolatedRotation.x >= minAngleX && interpolatedRotation.x <= maxAngleX)
 			{
 				if(interpolatedRotation.x >= 180)
 			     {
