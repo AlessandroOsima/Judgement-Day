@@ -20,6 +20,20 @@ ModelImporter:
     100028: Bone_035
     100030: Cylinder_005
     100032: //RootNode
+    100034: head
+    100036: left_arm
+    100038: left_foot
+    100040: left_hand
+    100042: left_hip
+    100044: left_leg
+    100046: left_shoulder
+    100048: right_arm
+    100050: right_foot
+    100052: right_hand
+    100054: right_hip
+    100056: right_leg
+    100058: right_shoulder
+    100060: torso
     400000: Armature
     400002: Bone_020
     400004: Bone_021
@@ -37,6 +51,20 @@ ModelImporter:
     400028: Bone_035
     400030: Cylinder_005
     400032: //RootNode
+    400034: head
+    400036: left_arm
+    400038: left_foot
+    400040: left_hand
+    400042: left_hip
+    400044: left_leg
+    400046: left_shoulder
+    400048: right_arm
+    400050: right_foot
+    400052: right_hand
+    400054: right_hip
+    400056: right_leg
+    400058: right_shoulder
+    400060: torso
     4300000: Cylinder_005
     7400000: Default Take
     7400002: PoseLib
@@ -44,6 +72,8 @@ ModelImporter:
     7400006: Stand
     7400008: Walk
     7400010: Idle
+    7400012: Shocked
+    7400014: Dying
     9500000: //RootNode
     13700000: Cylinder_005
   materials:
@@ -166,23 +196,23 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Idle
-      takeName: Idle
+      name: Shocked
+      takeName: Shocked
       firstFrame: -1
-      lastFrame: 65
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
       loopBlendPositionY: 0
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -193,33 +223,153 @@ ModelImporter:
         weight: 1
       - path: Armature
         weight: 1
-      - path: Armature/Bone_020
+      - path: Armature/head
         weight: 1
-      - path: Armature/Bone_020/Bone_021
+      - path: Armature/head/left_shoulder
         weight: 1
-      - path: Armature/Bone_020/Bone_021/Bone_024
+      - path: Armature/head/left_shoulder/left_arm
         weight: 1
-      - path: Armature/Bone_020/Bone_021/Bone_024/Bone_025
+      - path: Armature/head/left_shoulder/left_arm/left_hand
         weight: 1
-      - path: Armature/Bone_020/Bone_021/Bone_024/Bone_025/Bone_026
+      - path: Armature/head/right_shoulder
         weight: 1
-      - path: Armature/Bone_020/Bone_021/Bone_027
+      - path: Armature/head/right_shoulder/right_arm
         weight: 1
-      - path: Armature/Bone_020/Bone_021/Bone_027/Bone_028
+      - path: Armature/head/right_shoulder/right_arm/right_hand
         weight: 1
-      - path: Armature/Bone_020/Bone_021/Bone_027/Bone_028/Bone_029
+      - path: Armature/head/torso
         weight: 1
-      - path: Armature/Bone_020/Bone_022
+      - path: Armature/head/torso/left_hip
         weight: 1
-      - path: Armature/Bone_020/Bone_022/Bone_034
+      - path: Armature/head/torso/left_hip/left_leg
         weight: 1
-      - path: Armature/Bone_020/Bone_022/Bone_034/Bone_035
+      - path: Armature/head/torso/left_hip/left_leg/left_foot
         weight: 1
-      - path: Armature/Bone_020/Bone_023
+      - path: Armature/head/torso/right_hip
         weight: 1
-      - path: Armature/Bone_020/Bone_023/Bone_030
+      - path: Armature/head/torso/right_hip/right_leg
         weight: 1
-      - path: Armature/Bone_020/Bone_023/Bone_030/Bone_033
+      - path: Armature/head/torso/right_hip/right_leg/right_foot
+        weight: 1
+      - path: Cylinder_005
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Dying
+      takeName: Dying
+      firstFrame: -1
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 10
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/head
+        weight: 1
+      - path: Armature/head/left_shoulder
+        weight: 1
+      - path: Armature/head/left_shoulder/left_arm
+        weight: 1
+      - path: Armature/head/left_shoulder/left_arm/left_hand
+        weight: 1
+      - path: Armature/head/right_shoulder
+        weight: 1
+      - path: Armature/head/right_shoulder/right_arm
+        weight: 1
+      - path: Armature/head/right_shoulder/right_arm/right_hand
+        weight: 1
+      - path: Armature/head/torso
+        weight: 1
+      - path: Armature/head/torso/left_hip
+        weight: 1
+      - path: Armature/head/torso/left_hip/left_leg
+        weight: 1
+      - path: Armature/head/torso/left_hip/left_leg/left_foot
+        weight: 1
+      - path: Armature/head/torso/right_hip
+        weight: 1
+      - path: Armature/head/torso/right_hip/right_leg
+        weight: 1
+      - path: Armature/head/torso/right_hip/right_leg/right_foot
+        weight: 1
+      - path: Cylinder_005
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: -1
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/head
+        weight: 1
+      - path: Armature/head/left_shoulder
+        weight: 1
+      - path: Armature/head/left_shoulder/left_arm
+        weight: 1
+      - path: Armature/head/left_shoulder/left_arm/left_hand
+        weight: 1
+      - path: Armature/head/right_shoulder
+        weight: 1
+      - path: Armature/head/right_shoulder/right_arm
+        weight: 1
+      - path: Armature/head/right_shoulder/right_arm/right_hand
+        weight: 1
+      - path: Armature/head/torso
+        weight: 1
+      - path: Armature/head/torso/left_hip
+        weight: 1
+      - path: Armature/head/torso/left_hip/left_leg
+        weight: 1
+      - path: Armature/head/torso/left_hip/left_leg/left_foot
+        weight: 1
+      - path: Armature/head/torso/right_hip
+        weight: 1
+      - path: Armature/head/torso/right_hip/right_leg
+        weight: 1
+      - path: Armature/head/torso/right_hip/right_leg/right_foot
         weight: 1
       - path: Cylinder_005
         weight: 1

@@ -4,10 +4,22 @@ using System.Collections;
 public class Animation_Script : MonoBehaviour
 {
 
+	float dt;
+	//---------Constants
+	public float RunningSpeed =5f;
+	public float WalkingSpeed =2f;
+
 	//---------Atributes
 	public Vector3 Target; 		//Actual target of the person
 	public float Speed;			//Movement speed (NavMesh speed)
 	public float FearLevel;	//Determines movement behaviour
+
+	//---------Counters
+	private float _burnTimer;
+	public float BurnWaitTime=10f;
+	public float DeathBurnTime=5f;
+
+	
 
 	//---------Components
 	
@@ -29,21 +41,21 @@ public class Animation_Script : MonoBehaviour
 	}
 
 	//-----------Fear Procedures
-
-	void Burn(){
-		SetSpeed(5f);
+	void StartBurning(){
+		_anim.SetInteger("State",3);
+		_burnTimer=0;
+		SetSpeed(RunningSpeed);
 		SetFearLevel(100);
-		_anim.SetBool("Burning",true);
-		_emitter.emit=true;
+	}
+	void Burn(bool burning){
+		_anim.SetBool("Burning",burning);
+		_emitter.emit=burning;
 	}
 
 	void Calm(){
-		SetSpeed(3f);
+		SetSpeed(WalkingSpeed);
 		SetFearLevel(20);
-		_anim.SetBool("Burning",false);
-		_emitter.emit=false;
 	}
-
 
 	void Start () {
 		//Get Components
@@ -52,25 +64,77 @@ public class Animation_Script : MonoBehaviour
 		_emitter = GetComponent<ParticleEmitter>();
 	}
 
+	// Update is called once per frame
+	//List of States:
+	// 0 = Dead
+	// 1 = Calm
+	// 2 = Concerned
+	// 3 = Panic
+	// 4 = Shocked
+	void Update () {
+		//--------------Put something to update-------//
+		dt=Time.deltaTime;
+		if(_anim.GetInteger("State")==0){
+			if(_anim.GetBool("Burning")==true){
+				_burnTimer += dt;
+				if (_burnTimer >= BurnWaitTime){
+					Burn (false);
+				}
+			}
+		}
+		if(_anim.GetInteger("State")==1){
+			if(_anim.GetBool("Burning")==true){
+				StartBurning();
+			}
+		}
+		if(_anim.GetInteger("State")==2){
+			if(_anim.GetBool("Burning")==true){
+				StartBurning();
+			}
+		}
+		if(_anim.GetInteger("State")==3){
+			if(_anim.GetBool("Burning")==true){
+				_burnTimer += Time.deltaTime;
+				if (_burnTimer >= DeathBurnTime){
+					SetSpeed(0f);
+					_anim.SetInteger("State",0);
+				}
+			}else{
+				_burnTimer=0;
+				_anim.SetInteger("State",1);
+			}
+
+
+		}
+
+		if(_anim.GetInteger("State")==4){
+			SetSpeed(0f);
+			_burnTimer=5;
+			Burn (true);
+			_anim.SetInteger("State",0);
+		}
+
+	}
+
 	//------------Colliding Triggers
 	void OnTriggerEnter(Collider other){
 		
 		if (other.tag=="fire"){
             //Make them Fear with Fire
-			Burn();
+			Burn(true);
 		}
 
 		if (other.tag=="water"){
 			//Calm people
-			Calm();
+			Burn(false);
 		}
 
 		if (other.tag=="person"){
 			Debug.Log("Hit a person");
-			Animator other_anim = GetComponent<Animator>();
+			Animator other_anim = other.GetComponent<Animator>();
 			if(other_anim.GetBool("Burning")==true){
 				Debug.Log("Hit a Burning person");
-				Burn();
+				Burn(true);
 			}
 		}
 	}

@@ -4,7 +4,9 @@ using System;
 
 public class UnitController : MonoBehaviour {
 	float dt;
-	
+	//---------Constants
+	public float RunningSpeed =5f;
+	public float WalkingSpeed =2f;
 	//---------Atributes
 	public Vector3 Target; 		//Actual target of the person
 	public float Speed;			//Movement speed (_navMesh speed)
@@ -49,7 +51,7 @@ public class UnitController : MonoBehaviour {
 		_anim = GetComponent<Animator>();
 		SetNewDestination();
 		//_nav.destination = patrolWayPoints[wayPointIndex].position;
-		SetSpeed(3f);
+		SetSpeed(WalkingSpeed);
 		SetFearLevel(20);
         
        
@@ -95,42 +97,50 @@ public class UnitController : MonoBehaviour {
 		//Debug.Log("Still " + _nav.remainingDistance + " to " + _nav.stoppingDistance);
         // Set an appropriate speed for the _navMeshAgent.
        // _nav.speed = patrolSpeed;
-				
-        // If near the next waypoint or there is no destination...
-		if (_nav.remainingDistance == _nav.stoppingDistance){
-			Debug.Log("Arrived to Target: "+ (wayPointIndex+1));
-		}
-		if (_nav.remainingDistance <= _nav.stoppingDistance)
-        {
-			if(_anim.GetBool("Burning")==false){
-				// ... increment the timer.
-	            patrolTimer += Time.deltaTime;
-				SetSpeed(0f);
-				SetFearLevel(0);
-	            // If the timer exceeds the wait time...
-	            if (patrolTimer >= patrolWaitTime)
-	            {
-	                // ... increment the wayPointIndex.-----------Scelta dei waypoint!!!!
-	                /*if (wayPointIndex == patrolWayPoints.Length - 1)
-	                    wayPointIndex = 0;
-	                else
-	                    wayPointIndex++;*/
-					 // Set the destination to the patrolWayPoint.
-	                // Reset the timer.
-	                patrolTimer = 0;
-					SetNewDestination();
-					SetSpeed(3f);
-					SetFearLevel(20);
-	            }
-			}else{
-				SetNewDestination();
+		if(_anim.GetInteger("State")>0 && _anim.GetInteger("State")<4){		
+	        // If near the next waypoint or there is no destination...
+			if (_nav.remainingDistance == _nav.stoppingDistance){
+				Debug.Log("Arrived to Target: "+ (wayPointIndex+1));
 			}
-        }else
-		if(_anim.GetBool("Burning")==false){
-            // If not near a destination, reset the timer.
-            patrolTimer = 0;
-			SetSpeed(3f);
-			SetFearLevel(20);
+			if (_nav.remainingDistance < _nav.stoppingDistance)
+	        {
+				if(_anim.GetBool("Burning")==false){
+					// ... increment the timer.
+					dt=Time.deltaTime;
+		            patrolTimer += dt;
+					SetSpeed(0f);
+					SetFearLevel(0);
+		            // If the timer exceeds the wait time...
+		            if (patrolTimer >= patrolWaitTime)
+		            {
+		                // ... increment the wayPointIndex.-----------Scelta dei waypoint!!!!
+		                /*if (wayPointIndex == patrolWayPoints.Length - 1)
+		                    wayPointIndex = 0;
+		                else
+		                    wayPointIndex++;*/
+						 // Set the destination to the patrolWayPoint.
+		                // Reset the timer.
+		                patrolTimer = 0;
+						SetNewDestination();
+						SetSpeed(WalkingSpeed);
+						SetFearLevel(20);
+		            }
+				}else{
+					SetNewDestination();
+				}
+	        }else{
+				patrolTimer = 0;
+				if(_anim.GetInteger("State")==3){
+					// If not near a destination, reset the timer.
+					SetSpeed(RunningSpeed);
+					SetFearLevel(100);
+				}
+				if(_anim.GetInteger("State")==1){
+		            // If not near a destination, reset the timer.
+					SetSpeed(WalkingSpeed);
+					SetFearLevel(20);
+				}
+			}
 		}
         
     }
