@@ -31,12 +31,14 @@ public class UnitController : MonoBehaviour {
 
 
 	//-----------Set Procedures
-	void SetFearLevel (int Fear){
+	void SetFearLevel (int Fear)
+	{
 		FearLevel = Fear/100f;
 		_anim.SetFloat("Speed",FearLevel);
 	}
 	
-	void SetSpeed (float speed){
+	void SetSpeed (float speed)
+	{
 		Speed = speed;
 		_nav.speed=Speed;
 		if(Speed>0)
@@ -45,7 +47,7 @@ public class UnitController : MonoBehaviour {
 
 	//---------Use this for initialization
 	void Start () {
-        Debug.Log("Start");
+        //Debug.Log("Start");
 		//Get Components
 		_nav = GetComponent<NavMeshAgent>();
 		_anim = GetComponent<Animator>();
@@ -67,7 +69,6 @@ public class UnitController : MonoBehaviour {
 	}
 	
 	
-	// Update is called once per frame
 	void Update () {
 		//--------------Put something to update-------//
         Patrolling();
@@ -81,13 +82,21 @@ public class UnitController : MonoBehaviour {
 		System.Random rnd = new System.Random();
 		int Random_num;
 		Random_num = rnd.Next(0,patrolWayPoints.Length);
-		while (Random_num == wayPointIndex){
+
+		while (patrolWayPoints[Random_num] == null || Random_num == wayPointIndex)
+		{
 			Random_num = rnd.Next(0,patrolWayPoints.Length);
+
+			if(patrolWayPoints[Random_num] == null)
+			{
+				throw new NullReferenceException("Waypoints " + Random_num + " in patrolWaypoints is null, you must define it in the editor");
+			}
 		}
+
 		wayPointIndex = Random_num;
 		_nav.destination = patrolWayPoints[wayPointIndex].position;
 		Target = _nav.destination;
-		Debug.Log("Going to Target: " + (wayPointIndex+1));
+		//Debug.Log("Going to Target: " + (wayPointIndex+1));
 	}
 	
 	
@@ -97,16 +106,19 @@ public class UnitController : MonoBehaviour {
 		//Debug.Log("Still " + _nav.remainingDistance + " to " + _nav.stoppingDistance);
         // Set an appropriate speed for the _navMeshAgent.
        // _nav.speed = patrolSpeed;
-		if(_anim.GetInteger("State")>0 && _anim.GetInteger("State")<4){		
+
+		if(_anim.GetInteger("State") > 0 && _anim.GetInteger("State") < 4)
+		{		
 	        // If near the next waypoint or there is no destination...
-			if (_nav.remainingDistance == _nav.stoppingDistance){
-				Debug.Log("Arrived to Target: "+ (wayPointIndex+1));
+			if (_nav.remainingDistance == _nav.stoppingDistance)
+			{
+				//Debug.Log("Arrived at Target: "+ (wayPointIndex + 1));
 			}
 			if (_nav.remainingDistance < _nav.stoppingDistance)
 	        {
 				if(_anim.GetBool("Burning")==false){
 					// ... increment the timer.
-					dt=Time.deltaTime;
+					dt = Time.deltaTime;
 		            patrolTimer += dt;
 					SetSpeed(0f);
 					SetFearLevel(0);

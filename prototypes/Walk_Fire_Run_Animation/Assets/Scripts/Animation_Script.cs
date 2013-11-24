@@ -3,11 +3,17 @@ using System.Collections;
 
 public class Animation_Script : MonoBehaviour
 {
+	// 0 = Dead
+	// 1 = Calm
+	// 2 = Concerned
+	// 3 = Panic
+	// 4 = Shocked
 
 	float dt;
 	//---------Constants
 	public float RunningSpeed =5f;
 	public float WalkingSpeed =2f;
+	bool isDead = false;
 
 	//---------Atributes
 	public Vector3 Target; 		//Actual target of the person
@@ -18,9 +24,7 @@ public class Animation_Script : MonoBehaviour
 	private float _burnTimer;
 	public float BurnWaitTime=10f;
 	public float DeathBurnTime=5f;
-
 	
-
 	//---------Components
 	
 	private Animator _anim;
@@ -74,10 +78,20 @@ public class Animation_Script : MonoBehaviour
 	void Update () {
 		//--------------Put something to update-------//
 		dt=Time.deltaTime;
-		if(_anim.GetInteger("State")==0){
+		if(_anim.GetInteger("State")==0)
+		{
+			if(!isDead)
+			{
+				GlobalManager.globalManager.decrementPopulation(1);
+				GlobalManager.globalManager.incrementScore(1);
+				GlobalManager.globalManager.incrementSouls(3);
+				isDead = true;
+			}
+
 			if(_anim.GetBool("Burning")==true){
 				_burnTimer += dt;
-				if (_burnTimer >= BurnWaitTime){
+				if (_burnTimer >= BurnWaitTime)
+				{
 					Burn (false);
 				}
 			}
@@ -95,7 +109,8 @@ public class Animation_Script : MonoBehaviour
 		if(_anim.GetInteger("State")==3){
 			if(_anim.GetBool("Burning")==true){
 				_burnTimer += Time.deltaTime;
-				if (_burnTimer >= DeathBurnTime){
+				if (_burnTimer >= DeathBurnTime)
+				{
 					SetSpeed(0f);
 					_anim.SetInteger("State",0);
 				}
@@ -119,21 +134,24 @@ public class Animation_Script : MonoBehaviour
 	//------------Colliding Triggers
 	void OnTriggerEnter(Collider other){
 		
-		if (other.tag=="fire"){
+		if (other.tag=="fire")
+		{
             //Make them Fear with Fire
 			Burn(true);
 		}
 
-		if (other.tag=="water"){
+		if (other.tag=="water")
+		{
 			//Calm people
 			Burn(false);
 		}
 
-		if (other.tag=="person"){
-			Debug.Log("Hit a person");
+		if (other.tag=="person")
+		{
+			//Debug.Log("Hit a person");
 			Animator other_anim = other.GetComponent<Animator>();
 			if(other_anim.GetBool("Burning")==true){
-				Debug.Log("Hit a Burning person");
+				//Debug.Log("Hit a Burning person");
 				Burn(true);
 			}
 		}

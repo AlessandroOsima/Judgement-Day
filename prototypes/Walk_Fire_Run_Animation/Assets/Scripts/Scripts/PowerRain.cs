@@ -1,51 +1,71 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerRain : MonoBehaviour {
-	public float speed = 25f;
-	public Player_Score pscore; //declaring the script
-	//public Status stat;
-	bool pressedR = false;
-	bool ready = false;
+public class PowerRain : Power 
+{
+	//Public Variables
+	public float distance = 10f;
+	//The power's particle effects renderers
+	public LineRenderer thunderRenderer;
+	public ParticleRenderer fireRenderer;
+	public float speed = 35f;
+	//Private Variables
+	bool ready = true;
 	int souls;
 	Vector3 startPosition;
-	Vector3 Location; //for the preview of the power
-	public float distance = 10f;
-	// Use this for initialization
-	void Start () {
+	//for the preview of the power
+	Vector3 Location;
+	
+	void Start() //also good for initializing stuff, it's better not to set up any event listener here, use OnEnable/OnDisable for that.
+	{
 		startPosition = transform.position; //saves the start position
-		pscore = GameObject.Find("_Global").GetComponent<Player_Score>(); //initializing the script
-		//stat = GameObject.Find("Human").GetComponent<Status>();
+	}
+
+	void OnEnable() //The Power is activated by the power manager, initialize stuff here, do NOT use any find* function (Slooow !!)
+	{
+		//enable the thunder and fire renderers so that the power can be seen by the player
+		thunderRenderer.enabled = true;
+		fireRenderer.enabled = true;
+	}
+
+	void OnDisable() //The Power is deactivated by the power manager, deinitialize stuff here, do NOT use any find* function
+	{
+		//disable the thunder and fire renderers so that the power can't be seen by the player
+		thunderRenderer.enabled = false;
+		fireRenderer.enabled = false;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		souls = pscore.reportSouls();
-		if((souls >= 5) && (Input.GetKeyDown(KeyCode.R)) && !ready){ //if you have enough souls and want to do the rain power
-			pressedR = true;
-		}
-		if(pressedR){
+	void Update () 
+	{
+		souls = GlobalManager.globalManager.souls;
+
+		if(ready)
+		{
 			//PREVIEW
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			Location = ray.origin + (ray.direction * distance);
 			Location.y = 10;
 			transform.position = Location;
-			if(Input.GetMouseButton(0)){ //if pressed the left button it takes the coord for the power to take place
-				pscore.decrementSouls(5);
-				pressedR = false;
-				ready = true;
-			}
-			if(Input.GetMouseButton(1)){ //if pressed the right button cancels the power
-				pressedR = false;
+
+
+			if(Input.GetMouseButton(0))
+			{ 
+				ready = false;
 			}
 		}
 
-		if(ready){
+		if(!ready)
+		{
 			transform.position = transform.position + Vector3.down*speed*Time.deltaTime;
-			if(transform.position.y < -20){
-				ready = false;
-				transform.position = startPosition;
+
+			if(transform.position.y < -20)
+			{
+				ready = true;
+				transform.position = Location;
+				GlobalManager.globalManager.decrementSouls(price);
 			}
 		}
 	}
+
+
 }

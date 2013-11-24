@@ -69,7 +69,7 @@ function FixedUpdate(){
 		MakeLights();
 	else if(lights.length > 0){
 		for(var oldLight : int = 0; oldLight < lights.length; oldLight++){
-			Destroy(lights[oldLight].gameObject);
+			Destroy(lights[oldLight]);
 		}
 		lights = new Transform[0];
 	}
@@ -133,7 +133,7 @@ function MakeLights(){
 //	lights = new GameObject[dis / 5];
 	if(lights.length > (dis / 5)){
 		while(lights.length > (dis / 5)){
-			Destroy(lights.Pop().gameObject);
+			Destroy(lights.Pop());
 		}
 	}
 	for(var l : int = 1; l < (dis / 5); l++){
@@ -143,7 +143,7 @@ function MakeLights(){
 			aLight.light.color = color;
 			lights.Add(aLight);
 		}
-		lights[l - 1].localPosition = curPos[l * 5];
+		//lights[l - 1].localPosition = curPos[l * 5];
 	}
 }
 /*function Glow(){

@@ -4,14 +4,15 @@ using System.Collections;
 public class Status : MonoBehaviour {
 	private int health, fear, curiosity, random;
 	public float speed = 2f;
-	public Player_Score player;
+	public GlobalManager manager;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		health = 30;
 		fear = 0;
 		curiosity = 0;
-		player = GameObject.Find("_PlayerStats").GetComponent<Player_Score>(); //initializing the script
+		manager = GameObject.Find("_PlayerStats").GetComponent<GlobalManager>(); //initializing the script
 	}
 	
 	// Update is called once per frame
@@ -73,11 +74,12 @@ public class Status : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.name == "Rain"){
+		if(other.name == "Rain")
+		{
 			decreaseHealth(8);
 			increaseFear(3);
-			player.decrementSouls(-10);
-			player.incrementScore(50);
+			//player.decrementSouls(-10);
+			//player.incrementScore(50);
 		}
 	}
 
