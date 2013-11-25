@@ -107,6 +107,7 @@ public class PowersManager : MonoBehaviour
 		} else if(selected != power)
 		{
 			selected.enabled = false;
+			selected.powerState = PowerState.Enabled;
 		    selected = power;
 			power.powerState = PowerState.Active;
 			selected.enabled = true;

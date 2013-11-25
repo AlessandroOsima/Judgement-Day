@@ -4,157 +4,249 @@ using System;
 
 public class UnitController : MonoBehaviour {
 	float dt;
+	System.Random rnd;
+
+	public enum PatrolType
+	{
+		Patrol,
+		Fixed,
+		Idle,
+		Panic
+	}
+
 	//---------Constants
-	public float RunningSpeed =5f;
-	public float WalkingSpeed =2f;
+	public float RunningSpeed = 5f;		//Unit running Speed
+	public float MiddleSpeed  = 3.5f;	//Unit concerned Speed
+	public float WalkingSpeed = 2f;		//Unit walking Speed
+	public float patrolWaitTime = 3f;	// The amount of time to wait when the patrol way point is reached.
+
 	//---------Atributes
-	public Vector3 Target; 		//Actual target of the person
-	public float Speed;			//Movement speed (_navMesh speed)
-	public float FearLevel;	//Determines movement behaviour
-
-    public float patrolSpeed = 50f;                          // The _nav mesh agent's speed when patrolling.
-    public float chaseSpeed = 5f;                           // The _nav mesh agent's speed when chasing.
-    public float chaseWaitTime = 5f;                        // The amount of time to wait when the last sighting is reached.
-    public float patrolWaitTime = 2f;                       // The amount of time to wait when the patrol way point is reached.
-    public Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
-
+	public PatrolType Type = PatrolType.Idle;	//Type of Unit
+	public Animation_Script.AnimState State;						//Current State
+	public bool Randomness = true;
+	public Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
+	public Transform[] panicWayPoints;                     	// An array of transforms for the running route.
+	//public Vector3 Target; 			//Actual target of the person
+	//public Transform[] otherWayPoints;					// An array of transforms for other route.
+    //public float patrolSpeed = 50f;                       // The _nav mesh agent's speed when patrolling.
+    //public float chaseSpeed = 5f;                         // The _nav mesh agent's speed when chasing.
+    //public float chaseWaitTime = 5f;                      // The amount of time to wait when the last sighting is reached.
     //private LastPlayerSighting lastPlayerSighting;
-    //private PersonSight personSight;                          // Reference to the EnemySight script.
-    private float chaseTimer;                               // A timer for the chaseWaitTime.
-    private float patrolTimer;                              // A timer for the patrolWaitTime.
-    private int wayPointIndex;  
+    //private PersonSight personSight;                      // Reference to the EnemySight script.
+    //private float chaseTimer;                               // A timer for the chaseWaitTime.
+
+	//---------Counters
+    private float patrolTimer;			// A timer for the patrolWaitTime.
+    private int wayPointIndex;			// Index of the current Waypoint
+	private bool Stand=false;
 
 		
 	//---------Components
-	private Animator _anim;
 	private NavMeshAgent _nav;  // Reference to the _nav mesh agent.
+	Animation_Script _animator;	// Reference to the Animator_Script Class
 
 
 	//-----------Set Procedures
-	void SetFearLevel (int Fear)
-	{
-		FearLevel = Fear/100f;
-		_anim.SetFloat("Speed",FearLevel);
-	}
-	
-	void SetSpeed (float speed)
-	{
-		Speed = speed;
-		_nav.speed=Speed;
-		if(Speed>0)
-			_nav.acceleration=Speed;
+	void SetSpeed (float speed){
+		_nav.speed=speed;
+		if(speed>0)
+			_nav.acceleration=speed;
 	}
 
-	//---------Use this for initialization
+	void SetNewDestination(PatrolType Type_Patrol){
+		int Random_num;
+		Transform[] WayPoints;
+
+		if(Type_Patrol==PatrolType.Patrol || Type_Patrol==PatrolType.Fixed){
+			WayPoints=patrolWayPoints;
+		}else
+		if(Type_Patrol==PatrolType.Panic || Type_Patrol==PatrolType.Idle){
+			WayPoints=panicWayPoints;
+		}else WayPoints=null;
+
+		if(Type_Patrol==PatrolType.Fixed){
+			wayPointIndex++;
+			if(wayPointIndex>=WayPoints.Length) wayPointIndex=0;
+		}else{
+			Random_num = rnd.Next(0,WayPoints.Length);
+			while (Random_num == wayPointIndex){
+				Random_num = rnd.Next(0,WayPoints.Length);
+			}
+			wayPointIndex = Random_num;
+		}
+		_nav.destination = WayPoints[wayPointIndex].position;
+		Debug.Log(transform.name+" going to Target: " + (WayPoints[wayPointIndex].name));
+	}
+	
+	
+	
+	void Patrolling(){
+		// If near the next waypoint or there is no destination...
+		if(_nav.destination==null){
+			SetNewDestination(Type);
+		}
+		if (_nav.remainingDistance == _nav.stoppingDistance){
+			Debug.Log("Arrived to Target: "+ (patrolWayPoints[wayPointIndex].name));
+		}
+		if (_nav.remainingDistance < _nav.stoppingDistance){
+			if(Type==PatrolType.Idle){
+				SetNewDestination(Type);
+				//SetSpeed(MiddleSpeed);
+			}else
+			if(State==Animation_Script.AnimState.Calm)
+				Stand=true;
+		}
+		if(Stand){
+			patrolTimer += dt;
+			if (Randomness){
+				patrolTimer -= UnityEngine.Random.value/100f;
+				patrolTimer += UnityEngine.Random.value/100f;
+			}
+			_animator.ChangeState(Animation_Script.AnimState.Idle);
+			if (patrolTimer >= patrolWaitTime){
+				patrolTimer = 0;
+				SetNewDestination(Type);
+				Stand=false;
+				_animator.ChangeState(Animation_Script.AnimState.Calm);
+			}
+		}else{
+			if (Randomness){
+				patrolTimer += dt;
+				if (patrolTimer >= patrolWaitTime){
+					if(UnityEngine.Random.value>0.99){
+						Stand=true;
+						patrolTimer = 0;
+					}
+					if(UnityEngine.Random.value>0.999){
+						SetNewDestination(PatrolType.Patrol);
+						patrolTimer = 0;
+					}
+				}
+			}else{
+				patrolTimer = 0;
+			}
+		}
+	}
+	
+	void Panicking(){
+		// If near the next waypoint or there is no destination...
+		if (_nav.remainingDistance == _nav.stoppingDistance){
+			Debug.Log("Arrived to Target: "+ (panicWayPoints[wayPointIndex].name));
+		}
+		if (_nav.remainingDistance < _nav.stoppingDistance){
+			SetNewDestination(PatrolType.Panic);
+		}else{
+			if (Randomness){
+				if(UnityEngine.Random.value>0.999)	SetNewDestination(PatrolType.Panic);
+			}
+		}
+	}
+
+	void SetTarget(){
+		GameObject[] Persons = GameObject.FindGameObjectsWithTag(GlobalManager.npcsTag);
+		float closestDist = Mathf.Infinity; 
+		int closest = -1;
+		for (int i=0;i<Persons.Length;i++) { 
+			if(Persons[i].GetComponent<Animation_Script>().isAlive()){
+				float dist = (transform.position - Persons[i].transform.position).sqrMagnitude; 
+				
+				if (dist!=0 && dist < closestDist) { 
+					closestDist = dist; 
+					closest = i; 
+				}
+			}
+		}
+		if(closest!=-1)
+			_nav.destination = Persons[closest].transform.position;
+	}
+
+
+
+//---------Use this for initialization
 	void Start () {
-        //Debug.Log("Start");
 		//Get Components
 		_nav = GetComponent<NavMeshAgent>();
-		_anim = GetComponent<Animator>();
-		SetNewDestination();
-		//_nav.destination = patrolWayPoints[wayPointIndex].position;
-		SetSpeed(WalkingSpeed);
-		SetFearLevel(20);
-        
-       
-		//Set Atributes
-		//Target = GameObject.Find("_target1").transform.position;
-		
-		//Set destination and speed
-		//_nav.destination = Target;
-		//SetSpeed(3f);
-		//SetFearLevel(0.1f);
-        //Debug.Log(patrolWayPoints[0].position);
-        //Debug.Log(patrolWayPoints[0].transform.position);
+		_animator = GetComponent<Animation_Script>();
+		rnd = new System.Random();
+		State=_animator.ReturnState();
+		//Debug.Log(transform.name+": "+State);
+		if(State==Animation_Script.AnimState.Calm){
+			if(Type==PatrolType.Patrol){
+				SetNewDestination(Type);
+				SetSpeed(WalkingSpeed);
+			}
+			if(Type==PatrolType.Fixed){
+				Randomness=false;
+				SetNewDestination(Type);
+				SetSpeed(WalkingSpeed);
+			}
+		}
+		if(State==Animation_Script.AnimState.Concerned){
+			//if(Type=="Patrol"){
+				SetNewDestination(PatrolType.Patrol);
+				SetSpeed(MiddleSpeed);
+			//}
+		}
+		if(State==Animation_Script.AnimState.Panic){
+			SetNewDestination(PatrolType.Panic);
+			SetSpeed(RunningSpeed);
+		}
 	}
 	
 	
+	// Update is called once per frame
 	void Update () {
+		dt=Time.deltaTime;
 		//--------------Put something to update-------//
-        Patrolling();
-        
-	}
-	
-	
-
-	
-	void SetNewDestination(){
-		System.Random rnd = new System.Random();
-		int Random_num;
-		Random_num = rnd.Next(0,patrolWayPoints.Length);
-
-		while (patrolWayPoints[Random_num] == null || Random_num == wayPointIndex)
-		{
-			Random_num = rnd.Next(0,patrolWayPoints.Length);
-
-			if(patrolWayPoints[Random_num] == null)
-			{
-				throw new NullReferenceException("Waypoints " + Random_num + " in patrolWaypoints is null, you must define it in the editor");
+		if(_animator.isAlive()){
+			State=_animator.ReturnState();
+			if(State==Animation_Script.AnimState.Shocked){
+				SetSpeed(0f);
 			}
-		}
-
-		wayPointIndex = Random_num;
-		_nav.destination = patrolWayPoints[wayPointIndex].position;
-		Target = _nav.destination;
-		//Debug.Log("Going to Target: " + (wayPointIndex+1));
-	}
-	
-	
-
-    void Patrolling()
-    {
-		//Debug.Log("Still " + _nav.remainingDistance + " to " + _nav.stoppingDistance);
-        // Set an appropriate speed for the _navMeshAgent.
-       // _nav.speed = patrolSpeed;
-
-		if(_anim.GetInteger("State") > 0 && _anim.GetInteger("State") < 4)
-		{		
-	        // If near the next waypoint or there is no destination...
-			if (_nav.remainingDistance == _nav.stoppingDistance)
-			{
-				//Debug.Log("Arrived at Target: "+ (wayPointIndex + 1));
+			if(State==Animation_Script.AnimState.Idle){
+				if(Type==PatrolType.Patrol){
+					Patrolling();
+				}
+				if(Type==PatrolType.Fixed){
+					Patrolling();
+				}
 			}
-			if (_nav.remainingDistance < _nav.stoppingDistance)
-	        {
-				if(_anim.GetBool("Burning")==false){
-					// ... increment the timer.
-					dt = Time.deltaTime;
-		            patrolTimer += dt;
-					SetSpeed(0f);
-					SetFearLevel(0);
-		            // If the timer exceeds the wait time...
-		            if (patrolTimer >= patrolWaitTime)
-		            {
-		                // ... increment the wayPointIndex.-----------Scelta dei waypoint!!!!
-		                /*if (wayPointIndex == patrolWayPoints.Length - 1)
-		                    wayPointIndex = 0;
-		                else
-		                    wayPointIndex++;*/
-						 // Set the destination to the patrolWayPoint.
-		                // Reset the timer.
-		                patrolTimer = 0;
-						SetNewDestination();
-						SetSpeed(WalkingSpeed);
-						SetFearLevel(20);
-		            }
-				}else{
-					SetNewDestination();
-				}
-	        }else{
-				patrolTimer = 0;
-				if(_anim.GetInteger("State")==3){
-					// If not near a destination, reset the timer.
-					SetSpeed(RunningSpeed);
-					SetFearLevel(100);
-				}
-				if(_anim.GetInteger("State")==1){
-		            // If not near a destination, reset the timer.
+			if(State==Animation_Script.AnimState.Calm){
+				if(Type==PatrolType.Patrol){
 					SetSpeed(WalkingSpeed);
-					SetFearLevel(20);
+					Patrolling();
+				}
+				if(Type==PatrolType.Fixed){
+					SetSpeed(WalkingSpeed);
+					Patrolling();
 				}
 			}
+			if(State==Animation_Script.AnimState.Concerned){
+				//SetNewDestination(Type);
+				Debug.Log (_nav.destination);
+				SetSpeed(MiddleSpeed);
+				Patrolling();
+			}
+
+
+			if(State==Animation_Script.AnimState.Panic){
+				SetSpeed(RunningSpeed);
+				Panicking();
+			}
+
+			if(State==Animation_Script.AnimState.Raged){
+				SetTarget();
+				SetSpeed(MiddleSpeed);
+			}
+
+		}else{
+			SetSpeed(0f);
 		}
-        
-    }
+
+	}
 	
+	
+
+	
+
 }

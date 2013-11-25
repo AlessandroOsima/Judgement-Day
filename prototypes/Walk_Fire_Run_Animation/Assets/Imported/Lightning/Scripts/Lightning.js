@@ -73,7 +73,7 @@ function FixedUpdate(){
 		}
 		lights = new Transform[0];
 	}
-	particleEmitter.ClearParticles();
+	//particleEmitter.ClearParticles();
 	/*if(glow == true)
 		Glow();*/
 }

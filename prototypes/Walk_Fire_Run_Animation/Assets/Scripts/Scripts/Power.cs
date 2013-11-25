@@ -27,6 +27,6 @@ public abstract class Power : MonoBehaviour
 {
 	public string name; 
 	public int price; 
-	public float scale; 
+	//public float scale; 
 	public PowerState powerState = PowerState.Disabled;
 }

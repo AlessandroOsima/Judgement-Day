@@ -9,6 +9,7 @@ public class LevelGUI : MonoBehaviour
 	static LevelGUI _levelGUI;
 	public UIToolkit GUIToolkit;
 	public UIToolkit PowersGUIToolkit;
+	public string thisScene;
 	//Private Variables
 	List<UIButton> _powersBar;
 	Color sGreen = new Color(0.46f,0.86f,0.13f,1);
@@ -66,7 +67,7 @@ public class LevelGUI : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{	
-		levelGUI = this;
+		_levelGUI = this;
 		//UI
 		quitButton =  UIButton.create(GUIToolkit,"Close.png","Close_Over.png",0,0);
 		quitButton.onTouchUpInside += sender => Application.Quit();
@@ -74,7 +75,7 @@ public class LevelGUI : MonoBehaviour
 
 		replayButton = UIButton.create(GUIToolkit,"Replay.png","Replay_Over.png",0,0);
 		replayButton.pixelsFromTopLeft(0,(int)quitButton.width);
-		replayButton.onTouchUpInside += sender => Application.LoadLevel("Level 01_Island");
+		replayButton.onTouchUpInside += sender => Application.LoadLevel(thisScene);
 		replayButton.centerize();
 		replayButton.scale = scaleFactor;
 

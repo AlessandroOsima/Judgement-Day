@@ -7,9 +7,10 @@ using System.Collections;
 public class GlobalManager : MonoBehaviour 
 {
 	//Public variables
-	public string npcsTag = "person";
+	public static string npcsTag = "person";
 	//Private variables
 	static GlobalManager _globalManager;
+	public int initialSouls;
 	int _souls;
 	int _score;
 	int _population;
@@ -127,7 +128,7 @@ public class GlobalManager : MonoBehaviour
 	void Start() 
 	{
 		score = 0;
-		souls = 5;
+		souls = initialSouls;
 		population = GameObject.FindGameObjectsWithTag(npcsTag).Length;
 
 	}

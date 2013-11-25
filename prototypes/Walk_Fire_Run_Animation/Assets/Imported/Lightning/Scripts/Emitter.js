@@ -1,13 +1,13 @@
 #pragma strict
-var rate = 0.1;
+var rate = 0.5;
 var smooth = true;
 var spread = 0.001;
 var spark : Transform;
 var runWhileOutOfSight = false;
 var color : Color = Color.white;
-var width = 0.5;
-var dis = 5.0;
-var jump = 0.2;
+var width = 0.1;
+var dis = 1.0;
+var jump = 0.1;
 private var baseVertices : Vector3[];
 private var mesh : Mesh;
 private var run = false;
