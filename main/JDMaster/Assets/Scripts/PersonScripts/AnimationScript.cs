@@ -86,7 +86,10 @@ public class AnimationScript : MonoBehaviour
 		personStatus.stateTransition += OnStateChanged;
     }
 
-	void OnStateChanged(PersonStatus.Status prev, PersonStatus.Status current)
+	/*This is ONLY to change the animation based on state change, do NOT add code related to powers or to fear calculation, register another event for that.
+	 * 
+	 */ 
+	void OnStateChanged(PersonStatus.Status prev, PersonStatus.Status current) 
 	{
 		if (current == PersonStatus.Status.Dead)
 		{
@@ -209,7 +212,7 @@ public class AnimationScript : MonoBehaviour
     }
 
     //------------Colliding Triggers
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other) 
     {
 		AnimationScript other_anim = other.GetComponent<AnimationScript>();
 		PersonStatus otherPerson = other.GetComponent<PersonStatus>();
