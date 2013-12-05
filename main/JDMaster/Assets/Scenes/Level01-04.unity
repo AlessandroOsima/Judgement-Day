@@ -6054,7 +6054,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
       propertyPath: initialScorePoints
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
       propertyPath: initialSoulsPoints
@@ -6071,6 +6071,10 @@ Prefab:
     - target: {fileID: 11400002, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
       propertyPath: Randomness
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19500000, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
+      propertyPath: m_StoppingDistance
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
@@ -9842,7 +9846,6 @@ MonoBehaviour:
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
   State: 1
-  FearLevel: 0
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
@@ -11089,7 +11092,6 @@ MonoBehaviour:
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
   State: 1
-  FearLevel: 0
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
@@ -12788,7 +12790,6 @@ MonoBehaviour:
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
   State: 1
-  FearLevel: 0
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
@@ -12812,7 +12813,7 @@ MonoBehaviour:
   WalkingSpeed: 2
   patrolWaitTime: 3
   Type: 1
-  State: 0
+  State: 6
   Randomness: 0
   patrolWayPoints:
   - {fileID: 150637967}
@@ -12978,7 +12979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialFearLevel: 0
-  initialScorePoints: 2
+  initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
 --- !u!1 &500767456
@@ -19231,7 +19232,6 @@ MonoBehaviour:
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
   State: 1
-  FearLevel: 0
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
@@ -19390,7 +19390,7 @@ NavMeshAgent:
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -19426,7 +19426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialFearLevel: 0
-  initialScorePoints: 2
+  initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
 --- !u!1 &823941962
@@ -30932,8 +30932,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: .0459764041, y: .952842355, z: .235005423, w: -.186413765}
-  m_LocalPosition: {x: 1.550354, y: -22.6814137, z: 58.9174805}
+  m_LocalRotation: {x: -.0293886866, y: .962184012, z: .244979426, w: .115427092}
+  m_LocalPosition: {x: -38.1569061, y: -14.2379761, z: 3.49879456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -34439,7 +34439,6 @@ MonoBehaviour:
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
   State: 6
-  FearLevel: 0
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
@@ -47917,7 +47916,6 @@ MonoBehaviour:
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
   State: 1
-  FearLevel: 0
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
@@ -48074,8 +48072,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 2144880611}
   m_Enabled: 1
   m_Radius: .5
-  m_Speed: 3
-  m_Acceleration: 3
+  m_Speed: 1
+  m_Acceleration: 0
   avoidancePriority: 50
   m_AngularSpeed: 150
   m_StoppingDistance: 2
@@ -48094,7 +48092,7 @@ CharacterController:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2144880611}
   serializedVersion: 2
-  m_Height: 5
+  m_Height: 6
   m_Radius: 3
   m_SlopeLimit: 45
   m_StepOffset: .300000012
@@ -48113,7 +48111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialFearLevel: 0
-  initialScorePoints: 2
+  initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
 --- !u!1001 &2146927517

@@ -51,9 +51,18 @@ public class UnitNavigationController : MonoBehaviour
     void SetSpeed(float speed)
     {
         _nav.speed = speed;
+	
         if (speed > 0)
-            _nav.acceleration = speed;
+           	 _nav.acceleration = speed;
     }
+
+	void Stop()
+	{
+		SetSpeed(0);
+		_nav.acceleration = 10;
+	}
+
+
 
     void SetNewDestination(PatrolType Type_Patrol)
     {
@@ -85,6 +94,7 @@ public class UnitNavigationController : MonoBehaviour
         else
         {
             Random_num = rnd.Next(0, WayPoints.Length);
+
             while (Random_num == wayPointIndex)
             {
                 Random_num = rnd.Next(0, WayPoints.Length);
@@ -108,14 +118,16 @@ public class UnitNavigationController : MonoBehaviour
 
         if (_nav.remainingDistance <= _nav.stoppingDistance)
         {
+			Stop();
+
             if (Type == PatrolType.Idle)
             {
                 SetNewDestination(Type);
-                //SetSpeed(MiddleSpeed);
             }
             else if (State == PersonStatus.Status.Calm)
 			{
 				Stand = true;
+				ps.UnitStatus = PersonStatus.Status.Idle;
 			}
         }
 
@@ -127,14 +139,15 @@ public class UnitNavigationController : MonoBehaviour
                 patrolTimer -= UnityEngine.Random.value / 100f;
                 patrolTimer += UnityEngine.Random.value / 100f;
             }
-            ps.UnitStatus = PersonStatus.Status.Idle;//           _animator.ChangeState(PersonStatus.Status.Idle);
+             //_animator.ChangeState(PersonStatus.Status.Idle);
+
             if (patrolTimer >= patrolWaitTime)
             {
                 patrolTimer = 0;
                 SetNewDestination(Type);
-				ps.UnitStatus = PersonStatus.Status.Calm;
                 Stand = false;
-				//ps.UnitStatus = PersonStatus.Status.Calm
+				ps.UnitStatus = PersonStatus.Status.Calm;
+		
 			}
 		}
         else
@@ -215,7 +228,7 @@ public class UnitNavigationController : MonoBehaviour
         ps = GetComponent<PersonStatus>();
         rnd = new System.Random();
         State = ps.UnitStatus;
-		Debug.Log(ps.UnitStatus);
+		ps.refreshEvents();
         if (State == PersonStatus.Status.Calm)
         {
             if (Type == PatrolType.Patrol)
@@ -230,6 +243,7 @@ public class UnitNavigationController : MonoBehaviour
                 SetSpeed(WalkingSpeed);
             }
         }
+
         if (State == PersonStatus.Status.Concerned)
         {
             //if(Type=="Patrol"){
@@ -237,6 +251,7 @@ public class UnitNavigationController : MonoBehaviour
             SetSpeed(MiddleSpeed);
             //}
         }
+
         if (State == PersonStatus.Status.Panicked)
         {
             SetNewDestination(PatrolType.Panic);
@@ -283,8 +298,6 @@ public class UnitNavigationController : MonoBehaviour
             }
             if (State == PersonStatus.Status.Concerned)
             {
-                //SetNewDestination(Type);
-                //Debug.Log(_nav.destination);
                 SetSpeed(MiddleSpeed);
                 Patrolling();
             }

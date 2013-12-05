@@ -15,7 +15,6 @@ public class AnimationScript : MonoBehaviour
 
     //---------Atributes
     public PersonStatus.Status State;		//Current State
-    public int FearLevel;					//Determines movement behaviour ///in personstatus
     public int scorePoints = 1;				//How much points gives         ///in personstatus
     public int soulPoints = 3;				//How much souls                /// in personstatus
     public bool Adorer = false;				//If he's an adoring type
@@ -24,7 +23,7 @@ public class AnimationScript : MonoBehaviour
     private Animator _anim;					// Reference to the Animator.
     private ParticleEmitter _fireEmitter;	// Reference to the fire emitter.
     private ParticleEmitter _rageEmitter;	// Reference to the fire emitter.
-    private PersonStatus ps;
+    private PersonStatus personStatus;
 
     /*---------Variables
     private NavMeshAgent _nav;      	// Reference to the nav mesh agent.
@@ -42,12 +41,6 @@ public class AnimationScript : MonoBehaviour
 
 
     //-----------Set Procedures
-    void SetFearLevel(int Ammount)
-    {
-        FearLevel += Ammount;
-        if (FearLevel > 100) FearLevel = 100;
-        if (FearLevel < 0) FearLevel = 0;
-    }
 
     void SetSpeed(float speed)
     {
@@ -70,117 +63,71 @@ public class AnimationScript : MonoBehaviour
     void StartBurning()
     {
         Burn(true);
-        SetFearLevel(100);
-        ChangeState(PersonStatus.Status.Panicked); 
+        personStatus.Fear = 100;
+		personStatus.UnitStatus = PersonStatus.Status.Panicked;
         _burnTimer = 0;
     }
-
-
-
-
-    //-----List of States:
-    //"Dead" 		return 0;
-    //"Calm"		return 1;
-    //"Concerned" 	return 2;
-    //"Panic"		return 3;
-    //"Shocked"		return 4;
-    //"Idle"		return 5;
-
-
-    public PersonStatus.Status ReturnState()
-    {
-
-
-        if (ps.UnitStatus == PersonStatus.Status.Dead)
-            return PersonStatus.Status.Dead;
-        else if (ps.UnitStatus == PersonStatus.Status.Calm)
-            return PersonStatus.Status.Calm;
-        else if (ps.UnitStatus == PersonStatus.Status.Concerned)
-            return PersonStatus.Status.Concerned;
-        else if (ps.UnitStatus == PersonStatus.Status.Panicked)
-            return PersonStatus.Status.Panicked;
-        else if (ps.UnitStatus == PersonStatus.Status.Shocked)
-            return PersonStatus.Status.Shocked;
-        else if (ps.UnitStatus == PersonStatus.Status.Idle)
-            return PersonStatus.Status.Idle;
-        else if (ps.UnitStatus == PersonStatus.Status.Raged)
-            return PersonStatus.Status.Raged;
-        else return PersonStatus.Status.Idle;
-
-    }
-
-    public void ChangeState(PersonStatus.Status action)
-    {
-
-        if (action == PersonStatus.Status.Dead)
-        { 
-			ps.UnitStatus = action;
-            GlobalManager.globalManager.decrementPopulation(1);
-            GlobalManager.globalManager.incrementScore(scorePoints);
-            GlobalManager.globalManager.incrementSouls(soulPoints);
-			_anim.SetInteger("State",0);
-        }
-        if (action == PersonStatus.Status.Calm)
-        {
-            SetSpeed(WalkingSpeed);
-			ps.UnitStatus = action;            
-			_anim.SetInteger("State",1);
-        }
-        if (action == PersonStatus.Status.Concerned)
-        {
-            SetSpeed(MiddleSpeed);
-			ps.UnitStatus = action;
-            _anim.SetInteger("State",2);
-        }
-        if (action == PersonStatus.Status.Panicked)
-        {
-            SetSpeed(RunningSpeed);
-			ps.UnitStatus = action;
-            _anim.SetInteger("State",3);
-        }
-        if (action == PersonStatus.Status.Shocked)
-        {
-            //SetSpeed(0f);
-			ps.UnitStatus = action;
-            _anim.SetInteger("State",4);
-        }
-        if (action == PersonStatus.Status.Idle)
-        {
-            SetSpeed(0f);
-			ps.UnitStatus = action;
-            _anim.SetInteger("State",5);
-        }
-        if (action == PersonStatus.Status.Raged)
-        {
-            SetSpeed(WalkingSpeed);
-			ps.UnitStatus = action;
-            _anim.SetInteger("State",6);
-        }
-
-    }
-
-
 
     //-----------Initialization
     void Start()
     {
-        //ps = new PersonStatus();
         //Get Components
-        ps = GetComponent<PersonStatus>();
+        personStatus = GetComponent<PersonStatus>();
         _anim = GetComponent<Animator>();
         _fireEmitter = GetComponent<ParticleEmitter>();
         _rageEmitter = transform.Find("Rage").GetComponent<ParticleEmitter>();
-        if (Adorer) _anim.SetFloat("Adoring", 1f);
-		State = ps.UnitStatus;
-        ChangeState(State);
+
+        if (Adorer) 
+			_anim.SetFloat("Adoring", 1f);
+
+		State = personStatus.UnitStatus;
+		personStatus.refreshEvents();
+		//Register State events
+		personStatus.stateTransition += OnStateChanged;
     }
 
-    //------Update is called once per frame
+	void OnStateChanged(PersonStatus.Status prev, PersonStatus.Status current)
+	{
+		if (current == PersonStatus.Status.Dead)
+		{
+			_anim.SetInteger("State",0);
+		}
+		if (current == PersonStatus.Status.Calm)
+		{
+			SetSpeed(WalkingSpeed);       
+			_anim.SetInteger("State",1);
+		}
+		if (current == PersonStatus.Status.Concerned)
+		{
+			SetSpeed(MiddleSpeed);
+			_anim.SetInteger("State",2);
+		}
+		if (current == PersonStatus.Status.Panicked)
+		{
+			SetSpeed(RunningSpeed);
+			_anim.SetInteger("State",3);
+		}
+		if (current == PersonStatus.Status.Shocked)
+		{
+			SetSpeed(0f);
+			_anim.SetInteger("State",4);
+		}
+		if (current == PersonStatus.Status.Idle)
+		{
+			SetSpeed(0f);
+			_anim.SetInteger("State",5);
+		}
+		if (current == PersonStatus.Status.Raged)
+		{
+			SetSpeed(WalkingSpeed);
+			_anim.SetInteger("State",6);
+		}
+	}
 
     void Update()
     {
         dt = Time.deltaTime;
-        State = ps.UnitStatus;
+        State = personStatus.UnitStatus;
         //If it's Dead
         if (State == PersonStatus.Status.Dead)
         {
@@ -198,91 +145,62 @@ public class AnimationScript : MonoBehaviour
             //If it's Alive
             if (State == PersonStatus.Status.Idle)
             {
-                if (FearLevel >= 50) 
+                if(personStatus.Fear >= 50) 
 				{
-					ChangeState(PersonStatus.Status.Concerned);
-				}
-				else
-				{
-					_anim.SetInteger("State",5);
-					SetSpeed(0f);
+					personStatus.UnitStatus = PersonStatus.Status.Concerned;
 				}
 
-                /*if(isBurning()){
-                    StartBurning();
-                }else{
-                    //SetSpeed(0f);
-                    //SetFearLevel(20);
-                }*/
             }
             if (State == PersonStatus.Status.Calm)
             {
-                if (FearLevel >= 50) 
+                if (personStatus.Fear >= 50) 
 				{
-					ChangeState(PersonStatus.Status.Concerned);
+					personStatus.UnitStatus = PersonStatus.Status.Concerned;
 				}
-				else
-				{
-					SetSpeed(WalkingSpeed);
-					_anim.SetInteger("State",1);
-				}
-                //ChangeState(AnimState.Calm);
-                /*if(isBurning()){
-                    StartBurning();
-                }else{
-                    //SetSpeed(0f);
-                    //SetFearLevel(20);
-                }*/
+
             }
             if (State == PersonStatus.Status.Concerned)
             {
-                if (FearLevel < 50) ChangeState(PersonStatus.Status.Calm);
-                if (FearLevel >= 80) ChangeState(PersonStatus.Status.Panicked);
-                //ChangeState(AnimState.Concerned);
-                /*if(isBurning()){
-                    StartBurning();
-                }else{
-                    //SetSpeed(0f);
-                    //SetFearLevel(20);
-                }*/
+				if (personStatus.Fear < 50) 
+					personStatus.UnitStatus = PersonStatus.Status.Calm;
+
+				if (personStatus.Fear >= 80) 
+					personStatus.UnitStatus = PersonStatus.Status.Panicked;
+
             }
+
             if (State == PersonStatus.Status.Panicked)
             {
-                if (FearLevel < 80) ChangeState(PersonStatus.Status.Concerned);
+                if (personStatus.Fear < 80)
+					personStatus.UnitStatus = PersonStatus.Status.Concerned;
+
                 if (isBurning())
                 {
                     _burnTimer += dt;
                     if (_burnTimer >= DeathBurnTime)
                     {
-                        ChangeState(PersonStatus.Status.Dead);
+						personStatus.UnitStatus = PersonStatus.Status.Dead;
                     }
-                }
-                else
-                {
-                    //_burnTimer=0;
-                    //ChangeState(AnimState.Dead);
                 }
             }
 
             if (State == PersonStatus.Status.Shocked)
             {
-                //SetSpeed(0f);
                 _burnTimer += dt;
                 if (_burnTimer >= 0.5f)
                 {
                     Burn(true);
-                    ChangeState(PersonStatus.Status.Dead);
+					personStatus.UnitStatus = PersonStatus.Status.Dead;
                 }
             }
 
             if (State == PersonStatus.Status.Raged)
             {
-                //SetSpeed(0f);
                 _burnTimer += dt;
                 if (_burnTimer >= 10f)
                 {
-                    ChangeState(PersonStatus.Status.Concerned);
-                    SetFearLevel(50);
+					personStatus.UnitStatus = PersonStatus.Status.Concerned;
+                    personStatus.Fear = 50;
                     _rageEmitter.emit = false;
                 }
             }
@@ -293,7 +211,10 @@ public class AnimationScript : MonoBehaviour
     //------------Colliding Triggers
     void OnTriggerEnter(Collider other)
     {
-        if (ps.isAlive())
+		AnimationScript other_anim = other.GetComponent<AnimationScript>();
+		PersonStatus otherPerson = other.GetComponent<PersonStatus>();
+
+		if (personStatus.isAlive())
         {
             if (other.tag == "Fire")
             {
@@ -305,7 +226,7 @@ public class AnimationScript : MonoBehaviour
                 if (!isBurning())
                 {
                     _burnTimer = 0;
-                    ChangeState(PersonStatus.Status.Raged);
+					personStatus.UnitStatus = PersonStatus.Status.Raged;
                     _rageEmitter.emit = true;
                 }
             }
@@ -316,25 +237,22 @@ public class AnimationScript : MonoBehaviour
                 if (isBurning())
                 {
                     Burn(false);
-                    SetFearLevel(-50);
+                    personStatus.Fear = -50;
                 }
             }
 
             if (other.tag == "Lightning")
             {
-                ChangeState(PersonStatus.Status.Shocked);
+				personStatus.UnitStatus = PersonStatus.Status.Shocked;
             }
 
             if (other.tag == "Power")
             {
-                State = ReturnState();
+				State = personStatus.UnitStatus;
                 if (State != PersonStatus.Status.Dead && State != PersonStatus.Status.Shocked)
                 {
-                    //if(FearLevel<50) ChangeState(AnimState.Calm);
-                    //if(FearLevel>=50) ChangeState(AnimState.Concerned);
-                    //if(FearLevel>=80) ChangeState(AnimState.Panic);
                     PowerScript other_power = other.GetComponent<PowerScript>();
-                    SetFearLevel(other_power.Fear);
+                    personStatus.Fear = other_power.Fear;
                 }
             }
 
@@ -342,21 +260,14 @@ public class AnimationScript : MonoBehaviour
             {
                 if (!isBurning())
                 {
-                    AnimationScript other_anim = other.GetComponent<AnimationScript>();
                     if (other_anim.isBurning())
                     {
-                        Debug.Log("Hit a Burning person");
                         StartBurning();
                     }
-                    if (other_anim.ReturnState() == PersonStatus.Status.Raged)
+					if (otherPerson.UnitStatus == PersonStatus.Status.Raged)
                     {
-                        ChangeState(PersonStatus.Status.Dead);
+						personStatus.UnitStatus = PersonStatus.Status.Dead;
                     }
-                    /*if(State==AnimState.Raged){
-                        _rageEmitter.emit=false;	
-                        ChangeState(AnimState.Concerned);
-                        SetFearLevel(50);
-                    }*/
 
                 }
             }
