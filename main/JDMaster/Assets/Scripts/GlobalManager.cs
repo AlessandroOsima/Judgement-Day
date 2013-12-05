@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public enum EndGameState
 {
-	Victory,
+	VictoryEasy,
+	VictoryMedium,
+	VictoryHard,
+	VictoryCustom,
 	Defeat
 }
 
@@ -15,9 +19,11 @@ public class GlobalManager : MonoBehaviour
 {
 	//Public variables
 	public static string npcsTag = "Person";
+	//Victory conditions
 	public int easyVictory;
 	public int mediumVictory;
 	public int hardVictory;
+	public bool standardVictoryConditions = true;
 	//Private variables
 	static GlobalManager _globalManager;
 	public int initialSouls;
@@ -101,12 +107,34 @@ public class GlobalManager : MonoBehaviour
 
 		set
 		{
-			if(value < 0)
+			if(value <= 0)
 			{
 				if(onPopulationChanged != null)
 					onPopulationChanged(_population,0);
 
 				_population = 0;
+
+				if(score < easyVictory && standardVictoryConditions)
+				{
+					if(onEndGame != null)
+						onEndGame(EndGameState.Defeat);
+				}
+				else if(score >= easyVictory &&  standardVictoryConditions)
+				{
+					if(onEndGame != null)
+						onEndGame(EndGameState.VictoryEasy);
+				}
+				else if(score >= mediumVictory && standardVictoryConditions)
+				{
+					if(onEndGame != null)
+						onEndGame(EndGameState.VictoryMedium);
+				}
+				else if(score >= hardVictory && standardVictoryConditions)
+				{
+					if(onEndGame != null)
+						onEndGame(EndGameState.VictoryHard);
+				}
+
 			}
 			else
 			{
@@ -184,6 +212,12 @@ public class GlobalManager : MonoBehaviour
 	public void decrementScore(int x)
 	{
 		score = score - x;
+	}
+
+	public void levelIsCompleted(EndGameState state)
+	{
+		if(onEndGame != null)
+			onEndGame(state);
 	}
 
 }

@@ -274,6 +274,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 136: {fileID: 13600000}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Unit 3
   m_TagString: Person
@@ -784,6 +785,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc271753ebb74ba4bb759d022daf750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialFearLevel: 0
+  initialScorePoints: 0
+  initialSoulsPoints: 0
+  initialStatus: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

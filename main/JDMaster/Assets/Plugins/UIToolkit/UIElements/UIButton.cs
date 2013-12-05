@@ -109,7 +109,7 @@ public class UIButton : UITouchableSprite
 	// Touch handlers
 	public override void onTouchBegan( Touch touch, Vector2 touchPos )
 	{
-		if(highlighted = false && _wasHighlighted)
+		if(highlighted == false && _wasHighlighted)
 			_wasHighlighted = false;
 
 		highlighted = true;
@@ -134,19 +134,25 @@ public class UIButton : UITouchableSprite
 
 		if(!keepOn)
 		{
+			Debug.Log("FALSE");
 			highlighted = false;
 		}
 
-		if(keepOn && _wasHighlighted)
+		if(keepOn)
 		{
-			highlighted = false;
-			_wasHighlighted = false;
+			Debug.Log("K loop");
+			if( _wasHighlighted)
+			{
+				Debug.Log("FALSE " + _wasHighlighted + " " + highlighted);
+				highlighted = false;
+				_wasHighlighted = false;
+			} 
+			else
+			{
+				Debug.Log("TRUE " + _wasHighlighted + " " + highlighted);
+				_wasHighlighted = true;
+			}
 		}
-		else if (keepOn)
-		{
-			_wasHighlighted = true;
-		}
-
 
 		if (onTouchUp != null)
 			onTouchUp(this);
