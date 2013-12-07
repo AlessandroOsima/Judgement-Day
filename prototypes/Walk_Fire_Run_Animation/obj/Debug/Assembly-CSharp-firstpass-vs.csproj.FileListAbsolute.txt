@@ -1,0 +1,11 @@
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\obj\Debug\Assembly-CSharp-firstpass-vs.csprojResolveAssemblyReference.cache
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\obj\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\Marco\Documents\GitHub\Judgement-Day\prototypes\Walk_Fire_Run_Animation\obj\Debug\Assembly-CSharp-firstpass.pdb
