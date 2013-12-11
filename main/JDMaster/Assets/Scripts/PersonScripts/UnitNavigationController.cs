@@ -80,7 +80,7 @@ public class UnitNavigationController : MonoBehaviour
         else 
 		{
 			WayPoints = null;
-			Debug.Log("No waypoints array is selected, something VERY WRONG is going on");
+			//Debug.Log("No waypoints array is selected, something VERY WRONG is going on");
 		}
 
 
@@ -103,7 +103,7 @@ public class UnitNavigationController : MonoBehaviour
         }
         _nav.destination = WayPoints[wayPointIndex].position;
 
-        Debug.Log(transform.name + " going to Target: " + (WayPoints[wayPointIndex].name));
+        //Debug.Log(transform.name + " going to Target: " + (WayPoints[wayPointIndex].name));
     }
 
 

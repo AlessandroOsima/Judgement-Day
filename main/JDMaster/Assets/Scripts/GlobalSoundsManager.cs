@@ -49,7 +49,7 @@ public class GlobalSoundsManager : MonoBehaviour
 
         if (fear > 30f && fear <= 60f && audio.clip != warriedClip)
         {
-            // Debug.Log("Entro in WARRIED CLIP");
+            // Debug.Log("Entro in WORRIED CLIP");
             if (audio.isPlaying)                    // if there is audio playing
                 audio.Stop();                       // stop it
 

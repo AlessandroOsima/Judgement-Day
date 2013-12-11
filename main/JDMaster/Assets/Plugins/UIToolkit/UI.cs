@@ -76,7 +76,7 @@ public class UI : MonoBehaviour
 		
 		// setup the HD flag
 		// handle texture loading if required
-#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_WEBPLAYER || UNITY_ANDROID
+#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_WEBPLAYER || UNITY_ANDROID 
 		var deviceAllowsHD = true;
 #else
 		var deviceAllowsHD = ( allowPod4GenHD && iPhone.generation == iPhoneGeneration.iPodTouch4Gen ) || iPhone.generation != iPhoneGeneration.iPodTouch4Gen;

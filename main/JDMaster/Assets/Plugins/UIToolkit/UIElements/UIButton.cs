@@ -134,22 +134,19 @@ public class UIButton : UITouchableSprite
 
 		if(!keepOn)
 		{
-			Debug.Log("FALSE");
 			highlighted = false;
 		}
 
 		if(keepOn)
 		{
-			Debug.Log("K loop");
+
 			if( _wasHighlighted)
 			{
-				Debug.Log("FALSE " + _wasHighlighted + " " + highlighted);
 				highlighted = false;
 				_wasHighlighted = false;
 			} 
 			else
 			{
-				Debug.Log("TRUE " + _wasHighlighted + " " + highlighted);
 				_wasHighlighted = true;
 			}
 		}
