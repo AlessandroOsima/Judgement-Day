@@ -179,8 +179,8 @@ public class AnimationScript : MonoBehaviour
 
                 if (isBurning())
                 {
-                    _burnTimer += dt;
-                    if (_burnTimer >= DeathBurnTime)
+                   _burnTimer += dt;
+                   if (_burnTimer >= DeathBurnTime)
                     {
 						personStatus.UnitStatus = PersonStatus.Status.Dead;
                     }
@@ -219,9 +219,9 @@ public class AnimationScript : MonoBehaviour
 
 		if (personStatus.isAlive())
         {
-            if (other.tag == "Fire")
+            if(other.tag == "Fire")
             {
-                StartBurning();
+               StartBurning();
             }
 
             if (other.tag == "Rage")

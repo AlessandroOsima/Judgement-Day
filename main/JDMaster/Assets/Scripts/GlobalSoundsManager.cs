@@ -36,7 +36,6 @@ public class GlobalSoundsManager : MonoBehaviour
 	{
 		
 		fear = globalManager.GetComponent<GlobalManager>().globalFear;
-		Debug.Log("fear " + fear);
 
 		if (fear == 0)
 		{

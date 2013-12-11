@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerScript : Power 
+public class Calm: Power 
 {
 	public float speed = 25f;
 	public int Fear = 70;
-	public int Highness = 20;
-	public GameObject power;
+	public int Highness = 0;
+	public GameObject godRay;
+	public GameObject particleEffect;
 	bool ready = true;
 	int souls;
 	Vector3 startPosition;
 	Vector3 Location; //for the preview of the power
-	public float distance = 40;
+	public float distance = 40f;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,13 +23,13 @@ public class PowerScript : Power
 
 	void OnEnable() //The Power is activated by the power manager, initialize stuff here, do NOT use any find* function (Slooow !!)
 	{
-		power.SetActive(true);
+		godRay.SetActive(true);
 		ready = true;
 	}
 	
 	void OnDisable() //The Power is deactivated by the power manager, deinitialize stuff here, do NOT use any find* function
 	{
-		power.SetActive(false);
+		godRay.SetActive(false);
 	}
 
 
@@ -42,8 +43,9 @@ public class PowerScript : Power
 			//PREVIEW
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			Location = ray.origin + (ray.direction * distance);
+			
 			Location.y = Highness;
-			transform.position = Location;
+			godRay.transform.position = Location;
 
 
 			if(Input.GetMouseButton(0))
@@ -54,20 +56,16 @@ public class PowerScript : Power
 			}
 		}
 			
-
 		if(!ready)
 		{
-
-			transform.position = transform.position + Vector3.down*speed*Time.deltaTime;
-
-			if(transform.position.y <= -20)
+			godRay.transform.position = godRay.transform.position + Vector3.down*speed*Time.deltaTime;
+				
+			if(godRay.transform.position.y <= -20)
 			{
 					ready = true;
-					this.transform.position = Location;
+					godRay.transform.position = Location;
 					GlobalManager.globalManager.decrementSouls(price);
-
 			}
 		}
-	
 	 }
 }

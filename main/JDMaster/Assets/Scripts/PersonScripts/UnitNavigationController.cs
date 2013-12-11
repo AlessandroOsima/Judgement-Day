@@ -73,13 +73,19 @@ public class UnitNavigationController : MonoBehaviour
         {
             WayPoints = patrolWayPoints;
         }
-        else if (Type_Patrol == PatrolType.Panic || Type_Patrol == PatrolType.Idle)
+        else if ((Type_Patrol == PatrolType.Panic || Type_Patrol == PatrolType.Idle) && panicWayPoints.Length > 0)
         {
             WayPoints = panicWayPoints;
         }
         else 
 		{
-			WayPoints = null;
+			if(patrolWayPoints.Length > 0)
+				WayPoints = patrolWayPoints;
+			else
+			{
+				_nav.destination = this.transform.position;
+				return;
+			}
 			//Debug.Log("No waypoints array is selected, something VERY WRONG is going on");
 		}
 
@@ -95,13 +101,18 @@ public class UnitNavigationController : MonoBehaviour
         {
             Random_num = rnd.Next(0, WayPoints.Length);
 
-            while (Random_num == wayPointIndex)
+            while (Random_num == wayPointIndex && WayPoints.Length > 0)
             {
                 Random_num = rnd.Next(0, WayPoints.Length);
             }
+
             wayPointIndex = Random_num;
         }
-        _nav.destination = WayPoints[wayPointIndex].position;
+
+		if(WayPoints.Length == 0)
+        	_nav.destination = this.transform.position;
+		else
+			_nav.destination = WayPoints[wayPointIndex].position;
 
         //Debug.Log(transform.name + " going to Target: " + (WayPoints[wayPointIndex].name));
     }
@@ -277,7 +288,7 @@ public class UnitNavigationController : MonoBehaviour
                 if (Type == PatrolType.Patrol)
                 {
                     Patrolling();
-                }
+                } 
                 if (Type == PatrolType.Fixed)
                 {
                     Patrolling();

@@ -86,6 +86,10 @@ public class CameraControl : MonoBehaviour
 
 		movement.y = Input.GetAxis("Mouse ScrollWheel") * zoomAmount * -1;
 
+		if(movement.y == 0)
+			movement.y = Input.GetAxis("Zoom") * zoomAmount * -1;
+
+
 		if(!debugNoRaycast && movement.y != 0 && movement.y < 0 && Physics.Raycast(new Ray(transform.position,Vector3.down),rayLenght))
 		{
 			movement.y = 0;

@@ -235,7 +235,7 @@ MonoBehaviour:
   Fear: 70
   Highness: 20
   power: {fileID: 0}
-  distance: 10
+  distance: 40
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
