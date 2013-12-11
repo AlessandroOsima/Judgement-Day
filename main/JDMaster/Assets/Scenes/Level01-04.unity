@@ -16264,12 +16264,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cb92f0e31ba9b44bdf132575b5c6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultClip: {fileID: 0}
-  happyClip: {fileID: 0}
-  happyClip2: {fileID: 0}
-  scaredClip: {fileID: 0}
-  scaredClip2: {fileID: 0}
-  worriedClip: {fileID: 0}
+  defaultClip: {fileID: 8300000, guid: a6c2be92f87c6824ea35c9c2b30d35b3, type: 3}
+  happyClip: {fileID: 8300000, guid: 6c4d7317653619d46a91ec4ab2515ad7, type: 3}
+  happyClip2: {fileID: 8300000, guid: 49d17ae0e42feaf47ae210934861ceab, type: 3}
+  scaredClip: {fileID: 8300000, guid: b9916dfed9eab684c8543bb104349175, type: 3}
+  scaredClip2: {fileID: 8300000, guid: 9ac11398dabd4cd4ca09d5526808f2b2, type: 3}
+  worriedClip: {fileID: 8300000, guid: abca70b639f2b8243ab76ade432dc4c7, type: 3}
 --- !u!1 &681700617
 GameObject:
   m_ObjectHideFlags: 0
@@ -32326,8 +32326,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: .00945553649, y: .968008161, z: .248009518, w: -.036906492}
-  m_LocalPosition: {x: -6.95136833, y: -47.2867889, z: 76.602356}
+  m_LocalRotation: {x: .0176879689, y: -.00118824095, z: 2.08930014e-05, w: .999842882}
+  m_LocalPosition: {x: 116.042542, y: 21.8130608, z: 5.56793594}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

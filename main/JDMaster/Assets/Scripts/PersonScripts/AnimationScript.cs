@@ -231,6 +231,8 @@ public class AnimationScript : MonoBehaviour
                     _burnTimer = 0;
 					personStatus.UnitStatus = PersonStatus.Status.Raged;
                     _rageEmitter.emit = true;
+					PowerScript other_power = other.GetComponent<PowerScript>();
+					personStatus.Fear = other_power.Fear;
                 }
             }
 
@@ -247,6 +249,8 @@ public class AnimationScript : MonoBehaviour
             if (other.tag == "Lightning")
             {
 				personStatus.UnitStatus = PersonStatus.Status.Shocked;
+				PowerScript other_power = other.GetComponent<PowerScript>();
+				personStatus.Fear = other_power.Fear;
             }
 
             if (other.tag == "Power")
