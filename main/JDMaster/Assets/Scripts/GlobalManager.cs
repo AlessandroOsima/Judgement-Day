@@ -201,7 +201,10 @@ public class GlobalManager : MonoBehaviour
         for (numberOfPeople = 0; numberOfPeople < npcsList.Length; numberOfPeople++)
         {
            // Debug.Log("Paure singole: " + npcsList[numberOfPeople].GetComponent<PersonStatus>().Fear);
-            totalFear += npcsList[numberOfPeople].GetComponent<PersonStatus>().Fear;
+			PersonStatus status = npcsList[numberOfPeople].GetComponent<PersonStatus>();
+
+			if(status.UnitStatus != PersonStatus.Status.Dead)
+            	totalFear += status.Fear;
         }
         float averageFear = totalFear / numberOfPeople;
         return averageFear;

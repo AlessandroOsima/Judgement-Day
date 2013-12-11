@@ -5553,7 +5553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharedMaterial: {fileID: 2100000, guid: 4e1467e748fa74c64b96759b3d9713ae, type: 2}
   waterQuality: 2
-  edgeBlend: 1
+  edgeBlend: 0
 --- !u!114 &163026549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16383,7 +16383,7 @@ MonoBehaviour:
   happyClip2: {fileID: 8300000, guid: 49d17ae0e42feaf47ae210934861ceab, type: 3}
   scaredClip: {fileID: 8300000, guid: b9916dfed9eab684c8543bb104349175, type: 3}
   scaredClip2: {fileID: 8300000, guid: 9ac11398dabd4cd4ca09d5526808f2b2, type: 3}
-  worriedClip: {fileID: 8300000, guid: abca70b639f2b8243ab76ade432dc4c7, type: 3}
+  warriedClip: {fileID: 8300000, guid: abca70b639f2b8243ab76ade432dc4c7, type: 3}
 --- !u!1 &681700617
 GameObject:
   m_ObjectHideFlags: 0
@@ -20720,8 +20720,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 894919715}
-  m_LocalRotation: {x: -.382683486, y: 0, z: 0, w: .923879504}
-  m_LocalPosition: {x: -9.25141239, y: -37.674057, z: -55.5250244}
+  m_LocalRotation: {x: -.273729265, y: .114502624, z: .0328401141, w: .95440191}
+  m_LocalPosition: {x: -16.8200932, y: -57.6732254, z: -86.6142273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -31009,8 +31009,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: -.0437261686, y: .619944215, z: .0346355997, w: .782660604}
-  m_LocalPosition: {x: -104.638229, y: -20.0956059, z: -12.4091873}
+  m_LocalRotation: {x: .0414416343, y: .953298748, z: .256468952, w: -.154038459}
+  m_LocalPosition: {x: -9.27160358, y: -8.18005753, z: 63.660923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
