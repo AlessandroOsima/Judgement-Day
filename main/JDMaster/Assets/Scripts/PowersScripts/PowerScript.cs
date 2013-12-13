@@ -31,6 +31,14 @@ public class PowerScript : Power
 		power.SetActive(false);
 	}
 
+	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
+	{
+
+	}
+
+	public override void OnTriggerEnter(Collider other)
+	{
+	}
 
 	// Update is called once per frame
 	void Update () 

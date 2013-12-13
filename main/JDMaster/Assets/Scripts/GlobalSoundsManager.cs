@@ -80,7 +80,6 @@ public class GlobalSoundsManager : MonoBehaviour
 
 	void fadeOut(float fadeOutSpeed = 0.1f)
 	{
-		Debug.Log("stopping " + audio.clip);
 		if(!audio.isPlaying)
 		{
 			throw new UnityException("No audio is playing, FadeOut is NOT possible");

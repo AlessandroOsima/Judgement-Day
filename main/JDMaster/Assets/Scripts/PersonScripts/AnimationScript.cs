@@ -11,6 +11,7 @@ public class AnimationScript : MonoBehaviour
     public float RunningSpeed = 1f;			//Unit running Speed
     public float MiddleSpeed = 0.4f;		//Unit concerned Speed
     public float WalkingSpeed = 0.2f;		//Unit walking Speed
+	public GameObject powerEffect;
 
 
     //---------Atributes
@@ -20,10 +21,10 @@ public class AnimationScript : MonoBehaviour
     public bool Adorer = false;				//If he's an adoring type
 
     //---------Components
-    private Animator _anim;					// Reference to the Animator.
-    private ParticleEmitter _fireEmitter;	// Reference to the fire emitter.
-    private ParticleEmitter _rageEmitter;	// Reference to the fire emitter.
-    private PersonStatus personStatus;
+	public Animator _anim;					// Reference to the Animator.
+    public ParticleEmitter _fireEmitter;	// Reference to the fire emitter.
+	public ParticleEmitter _rageEmitter;	// Reference to the fire emitter.
+	private PersonStatus personStatus;
 
     /*---------Variables
     private NavMeshAgent _nav;      	// Reference to the nav mesh agent.
@@ -198,14 +199,7 @@ public class AnimationScript : MonoBehaviour
             }
 
             if (State == PersonStatus.Status.Raged)
-            {
-                _burnTimer += dt;
-                if (_burnTimer >= 10f)
-                {
-					personStatus.UnitStatus = PersonStatus.Status.Concerned;
-                    personStatus.Fear = 50;
-                    _rageEmitter.emit = false;
-                }
+			{
             }
 
         }
@@ -224,7 +218,9 @@ public class AnimationScript : MonoBehaviour
                StartBurning();
             }
 
-            if (other.tag == "Rage")
+            
+			/*
+			if (other.tag == "Rage")
             {
                 if (!isBurning())
                 {
@@ -235,6 +231,7 @@ public class AnimationScript : MonoBehaviour
 					personStatus.Fear = other_power.Fear;
                 }
             }
+            */
 
             if (other.tag == "Water")
             {
@@ -244,13 +241,6 @@ public class AnimationScript : MonoBehaviour
                     Burn(false);
                     personStatus.Fear = -50;
                 }
-            }
-
-            if (other.tag == "Lightning")
-            {
-				personStatus.UnitStatus = PersonStatus.Status.Shocked;
-				PowerScript other_power = other.GetComponent<PowerScript>();
-				personStatus.Fear = other_power.Fear;
             }
 
             if (other.tag == "Power")

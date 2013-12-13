@@ -34,6 +34,15 @@ public class PowerRain : Power
 		thunderRenderer.enabled = false;
 		fireRenderer.enabled = false;
 	}
+
+	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
+	{
+		
+	}
+
+	public override void OnTriggerEnter(Collider other)
+	{
+	}
 	
 	void Update () 
 	{

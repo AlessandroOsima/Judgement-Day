@@ -64,7 +64,7 @@ public class UnitNavigationController : MonoBehaviour
 
 
 
-    void SetNewDestination(PatrolType Type_Patrol)
+    public void SetNewDestination(PatrolType Type_Patrol)
     {
         int Random_num;
         Transform[] WayPoints;

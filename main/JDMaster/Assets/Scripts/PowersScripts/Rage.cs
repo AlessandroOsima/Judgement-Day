@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Calm : Power 
+public class Rage : Power 
 {
 	public float speed = 25f;
 	public int Fear = 70;
 	public int Highness = 0;
 	public GameObject godRay;
 	public GameObject particleEffect;
-	private float previousParticlePosY = 0;
 	bool ready = true;
 	int souls;
 	Vector3 startPosition;
 	Vector3 Location; //for the preview of the power
-	public float distance = 40f;
+	public float distance = 40;
+	float previousParticlePosY = 0;
 	
 	// Use this for initialization
 	void Start () {
@@ -37,43 +37,40 @@ public class Calm : Power
 
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
 	{
-		if(status.UnitStatus != PersonStatus.Status.Dead)
+		if(status.UnitStatus != PersonStatus.Status.Raged)
 		{
-			status.UnitStatus = PersonStatus.Status.Calm;
-			status.Fear = 0;
-			navigator.SetNewDestination(navigator.Type);
-
-			if(animator.powerEffect)
-				Destroy(animator.powerEffect);
-
+			animator._burnTimer = 0;
+			status.UnitStatus = PersonStatus.Status.Raged;
 			animator.powerEffect = (GameObject)Instantiate(particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0.9f,status.transform.position.z),Quaternion.identity);
 			animator.powerEffect.transform.parent = animator.transform;
-			Destroy(animator.powerEffect,5.0f);
-			status.ActivePower = null;
+			status.Fear = Fear;
+		}
+		else
+		{
+			animator._burnTimer += Time.deltaTime;
+			if (animator._burnTimer >= 10f)
+			{
+				status.UnitStatus = PersonStatus.Status.Concerned;
+				status.Fear = 0;
+				Destroy(animator.powerEffect);
+				status.ActivePower = null;
+				navigator.SetNewDestination(navigator.Type);
+			}
 		}
 	}
 
-	public override void OnTriggerEnter(Collider other) 
+	public override void OnTriggerEnter(Collider other)
 	{
 		if(other.tag == GlobalManager.npcsTag)
 		{
 			PersonStatus person = other.GetComponent<PersonStatus>();
 
-			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus != PersonStatus.Status.Raged)
+			if(person.UnitStatus != PersonStatus.Status.Dead)
 			{
 				audio.Play();
 				person.ActivePower = this;
 			}
-
-			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus == PersonStatus.Status.Raged)
-			{
-				audio.Play();
-				person.ActivePower = null;
-				person.ActivePower = this;
-			}
-
 		}
-		
 	}
 
 	// Update is called once per frame
@@ -86,28 +83,32 @@ public class Calm : Power
 			//PREVIEW
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			Location = ray.origin + (ray.direction * distance);
-			
-			Location.y = Highness;
+			Location.y = 0;
 			transform.position = Location;
 
 
 			if(Input.GetMouseButton(0))
 			{ 
+				Debug.Log("HIT for :" + this.name);
 				ready = false;
 				previousParticlePosY = particleEffect.transform.position.y;
 			}
 		}
 			
+
 		if(!ready)
 		{
+
 			particleEffect.transform.position = particleEffect.transform.position + Vector3.down*speed*Time.deltaTime;
-				
+
 			if(particleEffect.transform.position.y <= 0)
 			{
 					ready = true;
 					particleEffect.transform.position = new Vector3(Location.x,previousParticlePosY,Location.z);
 					GlobalManager.globalManager.decrementSouls(price);
+
 			}
 		}
+	
 	 }
 }

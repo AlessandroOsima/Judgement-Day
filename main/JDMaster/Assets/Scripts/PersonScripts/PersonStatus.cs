@@ -21,11 +21,15 @@ public class PersonStatus : MonoBehaviour
     private Status unitStatus;
     private int fearLevel;                  //How much fear
     private int scorePoints;				//How much points gives         
-    private int soulPoints;			    	//How much souls        
+    private int soulPoints;			    	//How much souls     
+	private Power _activePower;
+	private AnimationScript animator;
+	private UnitNavigationController navigator;
 
     public void Start()
     {
 		refreshEvents();
+		_activePower = null;
     }
 
 	/* 
@@ -39,6 +43,18 @@ public class PersonStatus : MonoBehaviour
 		Score = initialScorePoints;
 		Souls = initialSoulsPoints;
 		UnitStatus = initialStatus;
+	}
+
+	public void Update()
+	{
+		if(animator == null)
+			animator = this.GetComponent<AnimationScript>();
+
+		if(navigator == null)
+			navigator = this.GetComponent<UnitNavigationController>();
+		
+		if(_activePower != null)
+			_activePower.deliverPowerEffects(this,animator,navigator);
 	}
 
     public bool isAlive()
@@ -152,6 +168,20 @@ public class PersonStatus : MonoBehaviour
         }
     }
 
+	public Power ActivePower
+	{
+		get
+		{
+			return ActivePower;
+		}
+
+		set
+		{
+			if((_activePower == null && value != null) || (_activePower != null && value == null))
+				_activePower = value;
+		}
+	}
+
     public int Score
     {
         get
@@ -177,6 +207,13 @@ public class PersonStatus : MonoBehaviour
         }
     }
 
+	public bool isPowerActivated()
+	{
+		if(ActivePower != null)
+			return true;
+
+		return false;
+	}
 
 
 
