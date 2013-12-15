@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Rage : Power 
+public class Fire : Power 
 {
 	//Public vars
 	public float speed = 25f;
@@ -17,6 +17,7 @@ public class Rage : Power
 	Vector3 Location; //for the preview of the power
 	float previousParticlePosY = 0;
 	float timer = 0;
+	bool started = false;
 
 	
 	// Use this for initialization
@@ -42,87 +43,38 @@ public class Rage : Power
 	//UPDATE POWER EFFECTS
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
 	{
-		if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead)
+		if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead && !started)
 		{
-			timer = 0;
-			status.UnitStatus = PersonStatus.Status.Raged;
-			navigator.Stop();
+			started = true;
+			status.UnitStatus = PersonStatus.Status.Panicked;
 			animator.powerEffect = (GameObject)Instantiate(particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0.9f,status.transform.position.z),Quaternion.identity);
 			animator.powerEffect.transform.parent = animator.transform;
 			status.Fear = Fear;
 		}
-		else
+		else if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead)
 		{
 			timer += Time.deltaTime;
 			if (timer >= 10f)
 			{
-				status.UnitStatus = PersonStatus.Status.Concerned;
 				status.Fear = 0;
-				Destroy(animator.powerEffect);
-				status.ActivePower = null;
-				navigator.SetNewPatrolDestination(navigator.Type);
-				navigator.target = null;
+				status.UnitStatus = PersonStatus.Status.Dead;
+				navigator.Stop();
+				started = false;
 			}
 		}
 
 		if(status.UnitStatus == PersonStatus.Status.Dead)
 		{
-			if(animator.powerEffect != null)
-				Destroy(animator.powerEffect);
+			Destroy(animator.powerEffect,3f);
+			status.ActivePower = null;
 		}
 	}
 
 	//NAVIGATION
-	void SetTarget(GameObject current, UnitNavigationController navigator)
-	{
-		GameObject[] Persons = GameObject.FindGameObjectsWithTag(GlobalManager.npcsTag);
-		float closestDist = Mathf.Infinity;
-		int closest = -1;
-		
-		if(Persons.Length > 0)
-		{
-			for (int i = 0; i < Persons.Length; i++)
-			{
-				if (Persons[i] != current && Persons[i].GetComponent<PersonStatus>().isAlive())
-				{
-					float dist = (transform.position - Persons[i].transform.position).sqrMagnitude;
-					
-					if (dist < closestDist)
-					{
-						closestDist = dist;
-						closest = i;
-					}
-				}
-			}
-			
-			if (closest != -1)
-			{
-				Debug.Log("Recomputing target");
-				navigator.target = Persons[closest].GetComponent<PersonStatus>();
-			}
-		}
-		else
-		{
-			navigator.target = null;
-		}
-		
-	}
-	
 	public override void runNavigatorUpdate(UnitNavigationController navigator)
 	{
-		SetTarget(navigator.gameObject, navigator); 
-				
-		if(navigator.target == null)
-		{
-			navigator.SetSpeed(navigator.RunningSpeed);
-			navigator.Panicking();
-
-		}
-		else
-		{
-			navigator.SetSpeed(navigator.RunningSpeed);
-			navigator.SetNavDestination(navigator.target.transform.position);
-		}
+		navigator.Panicking();
+		navigator.SetSpeed(navigator.RunningSpeed);
 	}
 
 	//COLLISION

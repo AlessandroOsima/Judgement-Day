@@ -40,6 +40,10 @@ public class PowerScript : Power
 	{
 	}
 
+	public override void runNavigatorUpdate(UnitNavigationController navigator)
+	{
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -58,6 +62,7 @@ public class PowerScript : Power
 			{ 
 				Debug.Log("HIT for :" + this.name);
 				ready = false;
+				GlobalManager.globalManager.decrementSouls(price);
 				audio.Play();
 			}
 		}
@@ -72,7 +77,6 @@ public class PowerScript : Power
 			{
 					ready = true;
 					this.transform.position = Location;
-					GlobalManager.globalManager.decrementSouls(price);
 
 			}
 		}

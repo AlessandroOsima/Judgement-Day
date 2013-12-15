@@ -37,7 +37,9 @@ public class CameraControl : MonoBehaviour
 
 		direction.z = Input.GetAxis("Vertical") * verticalMovement;
 
-		
+		var rotation = transform.rotation;
+		transform.Rotate(new Vector3(-rotation.eulerAngles.x,0,0));
+
 		if(!debugNoRaycast && direction.x != 0 && direction.x > 0 && Physics.Raycast(new Ray(transform.position,transform.TransformDirection(Vector3.right)),rayLenght))
 		{
 			direction.x = 0;
@@ -101,6 +103,8 @@ public class CameraControl : MonoBehaviour
 		}
 
 		Vector3 destination = origin + movement;
+
+		transform.rotation = rotation;
 
 		transform.position = Vector3.MoveTowards(origin,destination,Time.deltaTime * speed);
 	}

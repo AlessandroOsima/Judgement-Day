@@ -43,7 +43,7 @@ public class AnimationScript : MonoBehaviour
 
     //-----------Set Procedures
 
-    void SetSpeed(float speed)
+    public void SetSpeed(float speed)
     {
         _anim.SetFloat("Speed", speed);
     }
@@ -132,6 +132,7 @@ public class AnimationScript : MonoBehaviour
     {
         dt = Time.deltaTime;
         State = personStatus.UnitStatus;
+
         //If it's Dead
         if (State == PersonStatus.Status.Dead)
         {
@@ -208,30 +209,13 @@ public class AnimationScript : MonoBehaviour
     //------------Colliding Triggers
     void OnTriggerEnter(Collider other) 
     {
-		AnimationScript other_anim = other.GetComponent<AnimationScript>();
-		PersonStatus otherPerson = other.GetComponent<PersonStatus>();
 
-		if (personStatus.isAlive())
+		if (personStatus.isAlive() && other != this.collider)
         {
             if(other.tag == "Fire")
             {
                StartBurning();
             }
-
-            
-			/*
-			if (other.tag == "Rage")
-            {
-                if (!isBurning())
-                {
-                    _burnTimer = 0;
-					personStatus.UnitStatus = PersonStatus.Status.Raged;
-                    _rageEmitter.emit = true;
-					PowerScript other_power = other.GetComponent<PowerScript>();
-					personStatus.Fear = other_power.Fear;
-                }
-            }
-            */
 
             if (other.tag == "Water")
             {
@@ -243,30 +227,21 @@ public class AnimationScript : MonoBehaviour
                 }
             }
 
-            if (other.tag == "Power")
-            {
-				State = personStatus.UnitStatus;
-                if (State != PersonStatus.Status.Dead && State != PersonStatus.Status.Shocked)
-                {
-                    PowerScript other_power = other.GetComponent<PowerScript>();
-                    personStatus.Fear = other_power.Fear;
-                }
-            }
-
             if (other.tag == "Person")
             {
-                if (!isBurning())
-                {
+				AnimationScript other_anim = other.GetComponent<AnimationScript>();
+				PersonStatus otherPerson = other.GetComponent<PersonStatus>();
+
                     if (other_anim.isBurning())
                     {
                         StartBurning();
                     }
+					
 					if (otherPerson.UnitStatus == PersonStatus.Status.Raged)
                     {
+						Debug.Log("Unit " + this.name + " is killed by " + otherPerson.name);
 						personStatus.UnitStatus = PersonStatus.Status.Dead;
                     }
-
-                }
             }
         }
     }

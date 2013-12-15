@@ -5,9 +5,9 @@ public class PersonStatus : MonoBehaviour
 {
 	//Public vars
     public enum Status { Idle, Dead, Concerned, Panicked, Shocked, Raged, Calm };
-	public int initialFearLevel;
-	public int initialScorePoints;
-	public int initialSoulsPoints;
+	public int initialFearLevel = 0;
+	public int initialScorePoints = 1;
+	public int initialSoulsPoints = 2;
 	public Status initialStatus;
 
 	public delegate void onStateTransition(Status previousStatus, Status newStatus);
@@ -81,11 +81,24 @@ public class PersonStatus : MonoBehaviour
 				GlobalManager.globalManager.decrementPopulation(1);
 				GlobalManager.globalManager.incrementScore(scorePoints);
 				GlobalManager.globalManager.incrementSouls(soulPoints);
+
+				unitStatus = value;
+
+				if(isPowerActivated())
+				{
+					if(animator == null)
+						animator = this.GetComponent<AnimationScript>();
+					
+					if(navigator == null)
+						navigator = this.GetComponent<UnitNavigationController>();
+
+					_activePower.deliverPowerEffects(this,animator,navigator);
+					
+					ActivePower = null;
+				}
 			}
 
-            unitStatus = value;
-
-
+			unitStatus = value;
 
             /* if (this.fearLevel == 0)
                   unitStatus = value;    //Status.Idle;
@@ -172,7 +185,7 @@ public class PersonStatus : MonoBehaviour
 	{
 		get
 		{
-			return ActivePower;
+			return _activePower;
 		}
 
 		set

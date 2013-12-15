@@ -27,7 +27,7 @@ public class GlobalManager : MonoBehaviour
     public bool standardVictoryConditions = true;
     //Private variables
     static GlobalManager _globalManager;
-    public int initialSouls;
+    public int initialSouls = 0;
     int _souls;
     int _score;
     int _population;

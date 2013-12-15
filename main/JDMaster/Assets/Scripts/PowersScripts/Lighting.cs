@@ -49,6 +49,10 @@ public class Lighting : Power
 		}
 	}
 
+	public override void runNavigatorUpdate(UnitNavigationController navigator)
+	{
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{

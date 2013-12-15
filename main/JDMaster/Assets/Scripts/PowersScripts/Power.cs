@@ -31,4 +31,5 @@ public abstract class Power : MonoBehaviour
 	public PowerState powerState = PowerState.Disabled;
 	public abstract void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator);
 	public abstract void OnTriggerEnter(Collider other);
+	public abstract void runNavigatorUpdate(UnitNavigationController navigator);
 }

@@ -4,22 +4,22 @@ using System;
 
 public class UnitNavigationController : MonoBehaviour
 {
+	public enum PatrolType
+	{
+		Patrol,
+		Fixed,
+		Idle,
+		Panic
+	}
+
     float dt;
     System.Random rnd;
-
-    public enum PatrolType
-    {
-        Patrol,
-        Fixed,
-        Idle,
-        Panic
-    }
-
     //---------Constants
     public float RunningSpeed = 5f;		//Unit running Speed
-    public float MiddleSpeed = 3.5f;	//Unit concerned Speed
-    public float WalkingSpeed = 2f;		//Unit walking Speed
-    public float patrolWaitTime = 3f;	// The amount of time to wait when the patrol way point is reached.
+	public float MiddleSpeed = 3.5f;	//Unit concerned Speed
+	public float WalkingSpeed = 2f;		//Unit walking Speed
+	public float patrolWaitTime = 3f;	// The amount of time to wait when the patrol way point is reached.
+	public PersonStatus target = null;
 
     //---------Atributes
     public PatrolType Type = PatrolType.Idle;	//Type of Unit
@@ -44,11 +44,11 @@ public class UnitNavigationController : MonoBehaviour
 
     //---------Components
     private NavMeshAgent _nav;  // Reference to the _nav mesh agent.
-    PersonStatus ps;	        // Reference to the PersonStatus Class
+    private PersonStatus ps;	        // Reference to the PersonStatus Class
 
 
     //-----------Set Procedures
-    void SetSpeed(float speed)
+    public void SetSpeed(float speed)
     {
         _nav.speed = speed;
 	
@@ -56,18 +56,28 @@ public class UnitNavigationController : MonoBehaviour
            	 _nav.acceleration = speed;
     }
 
-	void Stop()
+	public void Stop()
 	{
 		SetSpeed(0);
 		_nav.acceleration = 10;
 	}
 
 
+	public void SetNavDestination(Vector3 position)
+	{
+		_nav.destination = position;
+	}
 
-    public void SetNewDestination(PatrolType Type_Patrol)
+	public bool isAtDestination()
+	{
+		return _nav.remainingDistance <= _nav.stoppingDistance;
+	}
+
+    public void SetNewPatrolDestination(PatrolType Type_Patrol)
     {
         int Random_num;
         Transform[] WayPoints;
+		target = null; 
 
         if (Type_Patrol == PatrolType.Patrol || Type_Patrol == PatrolType.Fixed)
         {
@@ -122,10 +132,10 @@ public class UnitNavigationController : MonoBehaviour
     void Patrolling()
     {
         // If near the next waypoint or there is no destination...
-        if (_nav.destination == null)
+        if (isAtDestination())
         {
-            SetNewDestination(Type);
-        }
+			SetNewPatrolDestination(Type);
+		}
 
         if (_nav.remainingDistance <= _nav.stoppingDistance)
         {
@@ -133,7 +143,7 @@ public class UnitNavigationController : MonoBehaviour
 
             if (Type == PatrolType.Idle)
             {
-                SetNewDestination(Type);
+                SetNewPatrolDestination(Type);
             }
             else if (State == PersonStatus.Status.Calm)
 			{
@@ -155,8 +165,8 @@ public class UnitNavigationController : MonoBehaviour
             if (patrolTimer >= patrolWaitTime)
             {
                 patrolTimer = 0;
-                SetNewDestination(Type);
-                Stand = false;
+				SetNewPatrolDestination(Type);
+				Stand = false;
 				ps.UnitStatus = PersonStatus.Status.Calm;
 		
 			}
@@ -175,7 +185,7 @@ public class UnitNavigationController : MonoBehaviour
                     }
                     if (UnityEngine.Random.value > 0.999)
                     {
-                        SetNewDestination(PatrolType.Patrol);
+                        SetNewPatrolDestination(PatrolType.Patrol);
                         patrolTimer = 0;
                     }
                 }
@@ -187,50 +197,22 @@ public class UnitNavigationController : MonoBehaviour
         }
     }
 
-    void Panicking()
+    public void Panicking()
     {
         // If near the next waypoint or there is no destination...
-        if (_nav.remainingDistance == _nav.stoppingDistance)
-        {
-            //Debug.Log("Arrived to Target: " + (panicWayPoints[wayPointIndex].name));
-        }
         if (_nav.remainingDistance < _nav.stoppingDistance)
         {
-            SetNewDestination(PatrolType.Panic);
+            SetNewPatrolDestination(PatrolType.Panic);
         }
         else
         {
             if (Randomness)
             {
-                if (UnityEngine.Random.value > 0.999) SetNewDestination(PatrolType.Panic);
+                if (UnityEngine.Random.value > 0.999) SetNewPatrolDestination(PatrolType.Panic);
             }
         }
     }
-
-    void SetTarget()
-    {
-        GameObject[] Persons = GameObject.FindGameObjectsWithTag(GlobalManager.npcsTag);
-        float closestDist = Mathf.Infinity;
-        int closest = -1;
-        for (int i = 0; i < Persons.Length; i++)
-        {
-            if (Persons[i].GetComponent<PersonStatus>().isAlive())
-            {
-                float dist = (transform.position - Persons[i].transform.position).sqrMagnitude;
-
-                if (dist != 0 && dist < closestDist)
-                {
-                    closestDist = dist;
-                    closest = i;
-                }
-            }
-        }
-        if (closest != -1)
-            _nav.destination = Persons[closest].transform.position;
-    }
-
-
-
+	
     //---------Use this for initialization
     void Start()
     {
@@ -240,17 +222,18 @@ public class UnitNavigationController : MonoBehaviour
         rnd = new System.Random();
         State = ps.UnitStatus;
 		ps.refreshEvents();
+
         if (State == PersonStatus.Status.Calm)
         {
             if (Type == PatrolType.Patrol)
             {
-                SetNewDestination(Type);
+                SetNewPatrolDestination(Type);
                 SetSpeed(WalkingSpeed);
             }
             if (Type == PatrolType.Fixed)
             {
                 Randomness = false;
-                SetNewDestination(Type);
+                SetNewPatrolDestination(Type);
                 SetSpeed(WalkingSpeed);
             }
         }
@@ -258,14 +241,14 @@ public class UnitNavigationController : MonoBehaviour
         if (State == PersonStatus.Status.Concerned)
         {
             //if(Type=="Patrol"){
-            SetNewDestination(PatrolType.Patrol);
+            SetNewPatrolDestination(PatrolType.Patrol);
             SetSpeed(MiddleSpeed);
             //}
         }
 
         if (State == PersonStatus.Status.Panicked)
         {
-            SetNewDestination(PatrolType.Panic);
+            SetNewPatrolDestination(PatrolType.Panic);
             SetSpeed(RunningSpeed);
         }
     }
@@ -279,10 +262,18 @@ public class UnitNavigationController : MonoBehaviour
         if (ps.isAlive())
         {
             State = ps.UnitStatus;
+
+			if(ps.ActivePower != null)
+			{
+				ps.ActivePower.runNavigatorUpdate(this);
+				return;
+			}
+
             if (State == PersonStatus.Status.Shocked)
             {
                 SetSpeed(0f);
             }
+
             if (State == PersonStatus.Status.Idle)
             {
                 if (Type == PatrolType.Patrol)
@@ -319,13 +310,6 @@ public class UnitNavigationController : MonoBehaviour
                 SetSpeed(RunningSpeed);
                 Panicking();
             }
-
-            if (State == PersonStatus.Status.Raged)
-            {
-                SetTarget();
-                SetSpeed(MiddleSpeed);
-            }
-
         }
         else
         {
@@ -333,9 +317,4 @@ public class UnitNavigationController : MonoBehaviour
         }
 
     }
-
-
-
-
-
 }

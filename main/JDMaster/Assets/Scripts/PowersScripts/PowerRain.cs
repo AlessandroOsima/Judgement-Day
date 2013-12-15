@@ -43,6 +43,10 @@ public class PowerRain : Power
 	public override void OnTriggerEnter(Collider other)
 	{
 	}
+
+	public override void runNavigatorUpdate(UnitNavigationController navigator)
+	{
+	}
 	
 	void Update () 
 	{

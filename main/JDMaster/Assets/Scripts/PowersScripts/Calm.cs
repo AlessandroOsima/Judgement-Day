@@ -41,7 +41,7 @@ public class Calm : Power
 		{
 			status.UnitStatus = PersonStatus.Status.Calm;
 			status.Fear = 0;
-			navigator.SetNewDestination(navigator.Type);
+			navigator.SetNewPatrolDestination(navigator.Type);
 
 			if(animator.powerEffect)
 				Destroy(animator.powerEffect);
@@ -74,6 +74,10 @@ public class Calm : Power
 
 		}
 		
+	}
+
+	public override void runNavigatorUpdate(UnitNavigationController navigator)
+	{
 	}
 
 	// Update is called once per frame

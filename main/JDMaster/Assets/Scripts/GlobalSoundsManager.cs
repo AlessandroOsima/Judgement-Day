@@ -34,7 +34,7 @@ public class GlobalSoundsManager : MonoBehaviour
 	
 	void Update()
 	{
-		
+		/*
 		fear = globalManager.GetComponent<GlobalManager>().globalFear;
 
 		if (fear == 0)
@@ -60,7 +60,9 @@ public class GlobalSoundsManager : MonoBehaviour
 			else
 				fadeIn(scaredClip,10f);
 		}
+		*/
 	}
+	
 
 	void fadeIn(AudioClip audioClip, float fadeInSpeed = 0.1f)
 	{
