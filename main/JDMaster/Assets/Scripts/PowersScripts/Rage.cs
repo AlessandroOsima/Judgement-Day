@@ -39,7 +39,7 @@ public class Rage : Power
 		particleEffect.SetActive(false);
 	}
 
-	//UPDATE POWER EFFECTS
+
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
 	{
 		if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead)
@@ -64,14 +64,14 @@ public class Rage : Power
 				navigator.target = null;
 			}
 		}
-
+		
 		if(status.UnitStatus == PersonStatus.Status.Dead)
 		{
 			if(animator.powerEffect != null)
 				Destroy(animator.powerEffect);
 		}
 	}
-
+	
 	//NAVIGATION
 	void SetTarget(GameObject current, UnitNavigationController navigator)
 	{
@@ -111,12 +111,12 @@ public class Rage : Power
 	public override void runNavigatorUpdate(UnitNavigationController navigator)
 	{
 		SetTarget(navigator.gameObject, navigator); 
-				
+		
 		if(navigator.target == null)
 		{
 			navigator.SetSpeed(navigator.RunningSpeed);
 			navigator.Panicking();
-
+			
 		}
 		else
 		{
@@ -124,6 +124,7 @@ public class Rage : Power
 			navigator.SetNavDestination(navigator.target.transform.position);
 		}
 	}
+
 
 	//COLLISION
 	public override void OnTriggerEnter(Collider other)
@@ -135,7 +136,7 @@ public class Rage : Power
 			if(person.UnitStatus != PersonStatus.Status.Dead)
 			{
 				audio.Play();
-				person.ActivePower = this;
+				//person.ActivePower = this;
 			}
 		}
 	}

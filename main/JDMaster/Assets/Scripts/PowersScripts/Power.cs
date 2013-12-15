@@ -27,9 +27,11 @@ public abstract class Power : MonoBehaviour
 {
 	public string name; 
 	public int price; 
+	//private PowerEffect[] effects;
 	//public float scale; 
 	public PowerState powerState = PowerState.Disabled;
 	public abstract void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator);
 	public abstract void OnTriggerEnter(Collider other);
 	public abstract void runNavigatorUpdate(UnitNavigationController navigator);
+
 }

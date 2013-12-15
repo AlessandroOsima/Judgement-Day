@@ -1,19 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Reflection;
 
-public class Calm : Power 
+using UnityEngine;
+using System.Collections;
+
+public abstract class PowerEffect 
 {
+	protected BasePowerDealer owner;
+	public void initialize(BasePowerDealer owner)
+	{
+		this.owner = owner;
+	}
+	public abstract bool OnTriggerEnterOverride(Collider other, Power owner);
+	public abstract void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator);
+	public abstract void runNavigatorUpdate(UnitNavigationController navigator);
+}
+
+public class BasePowerDealer : Power 
+{
+	//Public vars
 	public float speed = 25f;
 	public int Fear = 70;
 	public int Highness = 0;
 	public GameObject godRay;
 	public GameObject particleEffect;
-	private float previousParticlePosY = 0;
+	public PowerEffect powerEffect;
+	public float distance = 40;
+	//Private vars
 	bool ready = true;
 	int souls;
 	Vector3 startPosition;
 	Vector3 Location; //for the preview of the power
-	public float distance = 40f;
+	float previousParticlePosY = 0;
 	
 	// Use this for initialization
 	void Start () {
@@ -37,47 +57,38 @@ public class Calm : Power
 
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
 	{
-		if(status.UnitStatus != PersonStatus.Status.Dead)
-		{
-			status.UnitStatus = PersonStatus.Status.Calm;
-			status.Fear = 0;
-			navigator.SetNewPatrolDestination(navigator.Type);
-
-			if(animator.powerEffect)
-				Destroy(animator.powerEffect);
-
-			animator.powerEffect = (GameObject)Instantiate(particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0.9f,status.transform.position.z),Quaternion.identity);
-			animator.powerEffect.transform.parent = animator.transform;
-			Destroy(animator.powerEffect,5.0f);
-			status.ActivePower = null;
-		}
-	}
-
-	public override void OnTriggerEnter(Collider other) 
-	{
-		if(other.tag == GlobalManager.npcsTag)
-		{
-			PersonStatus person = other.GetComponent<PersonStatus>();
-
-			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus != PersonStatus.Status.Raged)
-			{
-				audio.Play();
-				//person.ActivePower = this;
-			}
-
-			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus == PersonStatus.Status.Raged)
-			{
-				audio.Play();
-				//person.ActivePower = null;
-				//person.ActivePower = this;
-			}
-
-		}
-		
 	}
 
 	public override void runNavigatorUpdate(UnitNavigationController navigator)
 	{
+	}
+
+
+	//COLLISION
+	public override void OnTriggerEnter(Collider other)
+	{
+		string effectName = this.gameObject.name + "Effect";
+
+		//Type type = Type.GetType(effectName);
+		PowerEffect effect = (PowerEffect)Assembly.GetExecutingAssembly().CreateInstance(effectName);
+		effect.initialize(this);
+
+
+
+		if(!effect.OnTriggerEnterOverride(other,this))
+		{
+
+			if(other.tag == GlobalManager.npcsTag)
+			{
+				PersonStatus person = other.GetComponent<PersonStatus>();
+
+				if(person.UnitStatus != PersonStatus.Status.Dead)
+				{
+					audio.Play();
+					person.ActivePower =  effect;
+				}
+			}
+		}
 	}
 
 	// Update is called once per frame
@@ -90,28 +101,31 @@ public class Calm : Power
 			//PREVIEW
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			Location = ray.origin + (ray.direction * distance);
-			
-			Location.y = Highness;
+			Location.y = 0;
 			transform.position = Location;
 
 
 			if(Input.GetMouseButton(0))
 			{ 
+				Debug.Log("HIT for :" + this.name);
 				ready = false;
 				previousParticlePosY = particleEffect.transform.position.y;
 			}
 		}
 			
+
 		if(!ready)
 		{
+
 			particleEffect.transform.position = particleEffect.transform.position + Vector3.down*speed*Time.deltaTime;
-				
+
 			if(particleEffect.transform.position.y <= 0)
 			{
-					ready = true;
-					particleEffect.transform.position = new Vector3(Location.x,previousParticlePosY,Location.z);
-					GlobalManager.globalManager.decrementSouls(price);
+				ready = true;
+				particleEffect.transform.position = new Vector3(Location.x,previousParticlePosY,Location.z);
+				GlobalManager.globalManager.decrementSouls(price);
 			}
 		}
+	
 	 }
 }

@@ -44,8 +44,8 @@ public class Lighting : Power
 		{
 			PersonStatus person = other.GetComponent<PersonStatus>();
 
-			if(person.UnitStatus != PersonStatus.Status.Dead)
-				person.ActivePower = this;
+			//if(person.UnitStatus != PersonStatus.Status.Dead)
+				//person.ActivePower = null;
 		}
 	}
 

@@ -22,7 +22,7 @@ public class PersonStatus : MonoBehaviour
     private int fearLevel;                  //How much fear
     private int scorePoints;				//How much points gives         
     private int soulPoints;			    	//How much souls     
-	private Power _activePower;
+	private PowerEffect _activePower;
 	private AnimationScript animator;
 	private UnitNavigationController navigator;
 
@@ -181,7 +181,7 @@ public class PersonStatus : MonoBehaviour
         }
     }
 
-	public Power ActivePower
+	public PowerEffect ActivePower
 	{
 		get
 		{

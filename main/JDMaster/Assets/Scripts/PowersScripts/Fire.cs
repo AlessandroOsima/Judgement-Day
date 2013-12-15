@@ -62,21 +62,21 @@ public class Fire : Power
 				started = false;
 			}
 		}
-
+		
 		if(status.UnitStatus == PersonStatus.Status.Dead)
 		{
 			Destroy(animator.powerEffect,3f);
 			status.ActivePower = null;
 		}
 	}
-
+	
 	//NAVIGATION
 	public override void runNavigatorUpdate(UnitNavigationController navigator)
 	{
 		navigator.Panicking();
 		navigator.SetSpeed(navigator.RunningSpeed);
 	}
-
+	
 	//COLLISION
 	public override void OnTriggerEnter(Collider other)
 	{
@@ -87,7 +87,7 @@ public class Fire : Power
 			if(person.UnitStatus != PersonStatus.Status.Dead)
 			{
 				audio.Play();
-				person.ActivePower = this;
+				//person.ActivePower = this;
 			}
 		}
 	}
