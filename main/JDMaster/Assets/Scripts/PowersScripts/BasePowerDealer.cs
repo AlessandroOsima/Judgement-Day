@@ -103,7 +103,7 @@ public class BasePowerDealer : Power
 			Location = ray.origin + (ray.direction * distance);
 			Location.y = 0;
 			transform.position = Location;
-
+			particleEffect.transform.position = new Vector3(particleEffect.transform.position.x,17.5f,particleEffect.transform.position.z);
 
 			if(Input.GetMouseButton(0))
 			{ 

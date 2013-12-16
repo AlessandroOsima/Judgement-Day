@@ -4,15 +4,24 @@ using System.Collections.Generic;
 
 public class LevelGUI : MonoBehaviour 
 {
-	
+
+	struct PowerContainer
+	{
+		public UIButton powerButton;
+		public UITextInstance textInstance;
+		public Power power;
+	}
+
 	//Public Variables
 	static LevelGUI _levelGUI;
 	public UIToolkit GUIToolkit;
 	public UIToolkit PowersGUIToolkit;
 	public string thisScene;
 	//Private Variables
-	List<UIButton> _powersBar;
+	List<PowerContainer> _powersBar;
 	Color sGreen = new Color(0.46f,0.86f,0.13f,1);
+	Color sBlue = new Color(0.12f,0.70f,0.87f,1);
+	Color sRed = new Color(0.85f,0.24f,0.14f);
 	Vector3 scaleFactor = new Vector3(0.4f,0.4f,1f);
 	float textScaleFactor = 1.4f;
 	UIButton quitButton;
@@ -125,12 +134,13 @@ public class LevelGUI : MonoBehaviour
 	//Enable a Power in the powers bar
 	void changePowersEnabled(Power power)
 	{
-		foreach(var powerButton in _powersBar)
+		foreach(var powerContainer in _powersBar)
 		{
-			if(powerButton.userData == power)
+			if(powerContainer.power == power)
 			{
-				powerButton.disabled = false;
-				powerButton.color = new Color(powerButton.color.r,powerButton.color.g,powerButton.color.b,1f);
+				powerContainer.powerButton.disabled = false;
+				powerContainer.powerButton.color = new Color(powerContainer.powerButton.color.r,powerContainer.powerButton.color.g,powerContainer.powerButton.color.b,1f);
+				powerContainer.textInstance.color = new Color(sBlue.r,sBlue.g,sBlue.b,1f);
 			}
 		}
 		
@@ -139,14 +149,15 @@ public class LevelGUI : MonoBehaviour
 	//Disable a Power in the powers bar
 	void changePowersDisabled(Power power)
 	{
-		foreach(var powerButton in _powersBar)
+		foreach(var powerContainer in _powersBar)
 		{
-			if(powerButton.userData == power)
+			if(powerContainer.power == power)
 			{
-				powerButton.disabled = true;
-				powerButton.color = new Color(powerButton.color.r,powerButton.color.g,powerButton.color.b,0.5f);
+				powerContainer.powerButton.disabled = true;
+				powerContainer.powerButton.color = new Color(powerContainer.powerButton.color.r,powerContainer.powerButton.color.g,powerContainer.powerButton.color.b,0.5f);
+				powerContainer.textInstance.color = new Color(sBlue.r,sBlue.g,sBlue.b,0.5f);
 				
-				if(selectedPower != null && power == (Power)selectedPower.userData)
+				if(selectedPower != null && power == ((PowerContainer)selectedPower.userData).power)
 				{
 					selectedPower = null;
 					PowersManager.powersManager.onPowerButtonReleased(power);
@@ -178,7 +189,7 @@ public class LevelGUI : MonoBehaviour
 		if(_powersBar != null && powers.Length > 0) // the powers bar is already set up or there are no powers avaliable
 			return;
 		
-		_powersBar = new List<UIButton>();
+		_powersBar = new List<PowerContainer>();
 		
 		
 		int spacer = (int)UIRelative.yPercentFrom(UIyAnchor.Top, Screen.height, 1f/(float)powers.Length);
@@ -191,10 +202,17 @@ public class LevelGUI : MonoBehaviour
 			powerButton.scale = scaleFactor * 1.5f;
 			powerButton.pixelsFromTopLeft(lastButtonHeight,0);
 			powerButton.onTouchUpInside += onPowerButtonPressed;
-			powerButton.userData = power;
 			powerButton.color = new Color(powerButton.color.r,powerButton.color.g,powerButton.color.b,0.5f);
 			powerButton.disabled = true;
-			_powersBar.Add(powerButton);
+			PowerContainer container = new PowerContainer();
+			container.powerButton = powerButton;
+			container.textInstance = text.addTextInstance(System.Convert.ToString(power.price),0,0);
+			container.textInstance.position = new Vector3(powerButton.position.x + (powerButton.width - container.textInstance.width/2),powerButton.position.y - (powerButton.height - container.textInstance.height/2),powerButton.position.z);
+			container.textInstance.setColorForAllLetters(sBlue);
+			container.textInstance.color = new Color(sBlue.r,sBlue.g,sBlue.b,0.5f);
+			container.power = power;
+			powerButton.userData = container;
+			_powersBar.Add(container);
 			lastButtonHeight += (int)powerButton.height;
 		}
 		
@@ -207,17 +225,22 @@ public class LevelGUI : MonoBehaviour
 			if(selectedPower != sender)
 			{
 				if(selectedPower != null)
+				{
+					((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sBlue);
 					selectedPower.highlighted = false;
+				}
 				
 				selectedPower = sender;
-				
-				PowersManager.powersManager.onPowerButtonPressed((Power)sender.userData);
+
+				((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sRed);
+				PowersManager.powersManager.onPowerButtonPressed(((PowerContainer) sender.userData).power);
 			}
 		}
 		else //The power is being deactivated
 		{
+			((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sBlue);
 			selectedPower = null;
-			PowersManager.powersManager.onPowerButtonReleased((Power)sender.userData);
+			PowersManager.powersManager.onPowerButtonReleased(((PowerContainer) sender.userData).power);
 		}
 	}
 }
