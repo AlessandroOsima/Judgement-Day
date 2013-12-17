@@ -12,6 +12,14 @@ public class LevelGUI : MonoBehaviour
 		public Power power;
 	}
 
+	struct TextMessage
+	{
+		public UITextInstance text;
+		public UISprite background;
+		public float timer;
+		public float duration;
+	}
+
 	//Public Variables
 	static LevelGUI _levelGUI;
 	public UIToolkit GUIToolkit;
@@ -33,6 +41,7 @@ public class LevelGUI : MonoBehaviour
 	UITextInstance soulsText;
 	UITextInstance deathText;
 	UITextInstance populationText;
+	List<TextMessage> messages;
 	UIButton selectedPower;
 	
 	public static LevelGUI levelGUI
@@ -71,6 +80,7 @@ public class LevelGUI : MonoBehaviour
 	void Awake()
 	{
 		//Awake is used by UIToolkit for initialization, DO NOT USE THIS.
+		messages = new List<TextMessage>();
 	}
 	
 	// Use this for initialization
@@ -79,12 +89,12 @@ public class LevelGUI : MonoBehaviour
 		_levelGUI = this;
 		//UI
 		quitButton =  UIButton.create(GUIToolkit,"Close.png","Close_Over.png",0,0);
-		quitButton.onTouchUpInside += sender => Application.Quit();
+		quitButton.onTouchUpInside += sender => Application.LoadLevel("SplashScreen");
 		quitButton.scale = scaleFactor;
 		
 		replayButton = UIButton.create(GUIToolkit,"Replay.png","Replay_Over.png",0,0);
 		replayButton.pixelsFromTopLeft(0,(int)quitButton.width);
-		replayButton.onTouchUpInside += sender => Application.LoadLevel(thisScene);
+		replayButton.onTouchUpInside += sender => Application.LoadLevel(Application.loadedLevelName);
 		replayButton.centerize();
 		replayButton.scale = scaleFactor;
 		
@@ -129,7 +139,29 @@ public class LevelGUI : MonoBehaviour
 		PowersManager.powersManager.powerEnabled += changePowersEnabled;
 		PowersManager.powersManager.powerDisabled += changePowersDisabled;
 	}
-	
+
+
+	void Update()
+	{
+		/*
+		TextMessage message;
+
+		for(int i = 0; i < messages.Count; i++)
+		{
+			message = messages[i];
+
+
+
+			if(message.duration > 0)
+			{
+				message.timer += Time.deltaTime;
+				if(message.timer >= message.duration)
+					messages.Remove(message);
+			}
+		}
+		*/
+	}
+
 	//PowersManager events
 	//Enable a Power in the powers bar
 	void changePowersEnabled(Power power)
@@ -217,6 +249,29 @@ public class LevelGUI : MonoBehaviour
 		}
 		
 	}
+
+	//duration is the time in seconds needed a message will stay visible before being destroyed, if duration <= 0 the message will stay visible forever
+	public void writeMessage(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
+	{
+		TextMessage textMessage = new TextMessage();
+		text.alignMode = UITextAlignMode.Center;
+
+		textMessage.text = text.addTextInstance(message,position.x,position.y);
+		textMessage.text.alignMode = UITextAlignMode.Center;
+		textMessage.text.scale = scale;
+		textMessage.text.setColorForAllLetters(sRed);
+
+		textMessage.duration = duration;
+		textMessage.timer = 0;
+
+		if(useBackground)
+		{
+			//null
+		}
+
+		messages.Add(textMessage);
+	}
+
 	//Callback for onTouchUpInside on every button in the power bar, used to notify the PowersManager for powers activation/deactivation
 	void onPowerButtonPressed(UIButton sender)
 	{
@@ -238,7 +293,9 @@ public class LevelGUI : MonoBehaviour
 		}
 		else //The power is being deactivated
 		{
-			((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sBlue);
+			if(selectedPower != null)
+				((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sBlue);
+
 			selectedPower = null;
 			PowersManager.powersManager.onPowerButtonReleased(((PowerContainer) sender.userData).power);
 		}

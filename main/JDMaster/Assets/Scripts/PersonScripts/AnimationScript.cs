@@ -209,47 +209,37 @@ public class AnimationScript : MonoBehaviour
     //------------Colliding Triggers
     void OnTriggerEnter(Collider other) 
     {
+		if(personStatus.ActivePower != null)
+			personStatus.ActivePower.deliverOnCollisionEffect(other, personStatus);
+		else
+		{
+			if (personStatus.isAlive() && other != this.collider)
+        	{
+            	if(other.tag == "Fire")
+         	   	{
+               		StartBurning();
+           	   	}
 
-		if (personStatus.isAlive() && other != this.collider)
-        {
-            if(other.tag == "Fire")
-            {
-               StartBurning();
-            }
+           	 	/*
+           	 	if (other.tag == "Water")
+            	{
+                	Debug.Log("Hit water");
+                	if (isBurning())
+                	{
+                    	Burn(false);
+                    	personStatus.Fear = -50;
+                	}
+            	}
+            	*/
+        	}
+		}
 
-            if (other.tag == "Water")
-            {
-                Debug.Log("Hit water");
-                if (isBurning())
-                {
-                    Burn(false);
-                    personStatus.Fear = -50;
-                }
-            }
-
-			if(other.tag == "Finish")
-			{
-				GlobalManager.globalManager.decrementSouls(10);
-				GameObject.Destroy(transform.gameObject);
-			}
-
-            if (other.tag == "Person")
-            {
-				AnimationScript other_anim = other.GetComponent<AnimationScript>();
-				PersonStatus otherPerson = other.GetComponent<PersonStatus>();
-
-                    if (other_anim.isBurning())
-                    {
-                        StartBurning();
-                    }
-					
-					if (otherPerson.UnitStatus == PersonStatus.Status.Raged)
-                    {
-						Debug.Log("Unit " + this.name + " is killed by " + otherPerson.name);
-						personStatus.UnitStatus = PersonStatus.Status.Dead;
-                    }
-            }
-        }
+		if(other.tag == "Finish")
+		{
+			GlobalManager.globalManager.decrementSouls(10);
+			GlobalManager.globalManager.decrementPopulation(1);
+			GameObject.Destroy(transform.gameObject);
+		}
     }
 
 }

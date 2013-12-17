@@ -25,6 +25,7 @@ public class GlobalManager : MonoBehaviour
     public int mediumVictory;
     public int hardVictory;
     public bool standardVictoryConditions = true;
+	public bool towerDefense = true;
     //Private variables
     static GlobalManager _globalManager;
     public int initialSouls;
@@ -58,16 +59,16 @@ public class GlobalManager : MonoBehaviour
 		nextwave=rate;
         souls = initialSouls;
 		People = GameObject.FindGameObjectsWithTag(npcsTag);
+		population = People.Length;
 		count=4;
 
-
-		for(int i = 4; i < People.Length; i++)
+		if(towerDefense)
 		{
-			People[i].SetActive(false);
+			for(int i = 4; i < People.Length; i++)
+			{
+				People[i].SetActive(false);
+			}
 		}
-
-		population = GameObject.FindGameObjectsWithTag(npcsTag).Length;
-       
     }
 
     void Awake()
@@ -90,39 +91,38 @@ public class GlobalManager : MonoBehaviour
             population = population;
             firstUpdate = true;
         }
-		if(time>nextwave){
-			if(count<People.Length)
+
+		if(towerDefense)
+		{
+			if(time > nextwave)
 			{
-				for(int i =count; i <count+n;i++)
+				if(count<People.Length)
 				{
-					if(i<People.Length)
+					for(int i = count; i < count + n; i++)
 					{
-						People[i].SetActive(true);
-						GlobalManager.globalManager.incrementPopulation(1);
+						if(i < People.Length)
+						{
+							People[i].SetActive(true);
+						}
 					}
-					else
-					{
-						//Terminar Juego
-					}
+					count += n;
 				}
-				count+=n;
-			}
 
-			nextwave+=rate;
+				nextwave+=rate;
 
-			if (time>60f)
-			{
-				rate = 10f;
-				n = 5;
-			}
+				if (time > 60f)
+				{
+					rate = 10f;
+					n = 5;
+				}
 
-			if (time>120f)
-			{
-				rate = 5f;
-				n = 7;
+				if (time > 120f)
+				{
+					rate = 5f;
+					n = 7;
+				}
 			}
 		}
-
     }
 
     #region Properties
@@ -142,6 +142,12 @@ public class GlobalManager : MonoBehaviour
         }
         set
         {
+			if(value <= 0 && _souls > 0 && population > 0)
+			{
+				if (onEndGame != null)
+					onEndGame(EndGameState.Defeat);
+			}
+
             if (value < 0)
             {
                 if (onSoulsChanged != null)
@@ -200,24 +206,23 @@ public class GlobalManager : MonoBehaviour
 
                 _population = 0;
 
-                if (score < easyVictory && standardVictoryConditions)
-                {
-                    if (onEndGame != null)
+				if (score < easyVictory && standardVictoryConditions && souls == 0)
+				{
+					if (onEndGame != null)
                         onEndGame(EndGameState.Defeat);
-                }
-                else if (score >= easyVictory && standardVictoryConditions)
+                } 
+
+				if (score >= easyVictory && standardVictoryConditions)
                 {
                     if (onEndGame != null)
                         onEndGame(EndGameState.VictoryEasy);
-                }
-                else if (score >= mediumVictory && standardVictoryConditions)
-                {
-                    if (onEndGame != null)
+				} else if (score >= mediumVictory && standardVictoryConditions)
+				{
+					if (onEndGame != null)
                         onEndGame(EndGameState.VictoryMedium);
-                }
-                else if (score >= hardVictory && standardVictoryConditions)
-                {
-                    if (onEndGame != null)
+				} else if (score >= hardVictory && standardVictoryConditions)
+				{
+					if (onEndGame != null)
                         onEndGame(EndGameState.VictoryHard);
                 }
 

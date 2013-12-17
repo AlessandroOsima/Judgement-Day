@@ -53,4 +53,9 @@ public class CalmEffect : PowerEffect
 
 		return true;
 	}
+
+	public override void deliverOnCollisionEffect(Collider other, PersonStatus status)
+	{
+		
+	}
 }

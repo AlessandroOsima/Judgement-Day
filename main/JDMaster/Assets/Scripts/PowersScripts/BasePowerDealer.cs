@@ -16,6 +16,7 @@ public abstract class PowerEffect
 	public abstract bool OnTriggerEnterOverride(Collider other, Power owner);
 	public abstract void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator);
 	public abstract void runNavigatorUpdate(UnitNavigationController navigator);
+	public abstract void deliverOnCollisionEffect(Collider other, PersonStatus status);
 }
 
 public class BasePowerDealer : Power 

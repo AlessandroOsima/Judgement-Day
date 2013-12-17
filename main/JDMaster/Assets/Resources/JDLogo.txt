@@ -1,0 +1,20 @@
+{"frames": {
+
+"JD_Logo.png":
+{
+	"frame": {"x":2,"y":2,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "JDLogo.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:47a42889ab9fe2aea87ac18165d5717b:ab45de4bbf7a1dd52a7c9c8f2ce0b445:8abaf4d5548b7a19b91d98a7b3f70d05$"
+}
+}

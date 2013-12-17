@@ -104,6 +104,20 @@ public class RageEffect : PowerEffect
 		
 	}
 
+	public override void deliverOnCollisionEffect(Collider other, PersonStatus status)
+	{
+		if(other != status.gameObject.collider)
+		{
+			if (other.tag == "Person")
+			{
+				AnimationScript other_anim = other.GetComponent<AnimationScript>();
+				PersonStatus otherPerson = other.GetComponent<PersonStatus>();
+
+				otherPerson.UnitStatus = PersonStatus.Status.Dead;
+			}
+		}
+	}
+
 	public override bool OnTriggerEnterOverride(Collider other, Power owner)
 	{
 		return false;

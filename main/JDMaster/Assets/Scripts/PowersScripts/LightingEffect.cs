@@ -44,4 +44,8 @@ public class LightingEffect : PowerEffect
 		return false;
 	}
 
+	public override void deliverOnCollisionEffect(Collider other, PersonStatus status)
+	{
+		
+	}
 }

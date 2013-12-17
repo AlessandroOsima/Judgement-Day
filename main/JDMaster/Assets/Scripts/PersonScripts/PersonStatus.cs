@@ -111,11 +111,13 @@ public class PersonStatus : MonoBehaviour
 
 			if(value == Status.Dead && unitStatus != Status.Dead)
 			{
-				GlobalManager.globalManager.decrementPopulation(1);
 				GlobalManager.globalManager.incrementScore(scorePoints);
 				GlobalManager.globalManager.incrementSouls(soulPoints);
+				GlobalManager.globalManager.decrementPopulation(1);
 
 				unitStatus = value;
+
+				Destroy(powerShieldEffect);
 
 				if(isPowerActivated())
 				{

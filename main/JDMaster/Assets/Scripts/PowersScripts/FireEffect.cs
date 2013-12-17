@@ -44,6 +44,25 @@ public class FireEffect : PowerEffect
 		navigator.SetSpeed(navigator.RunningSpeed);
 	}
 
+	public override void deliverOnCollisionEffect(Collider other, PersonStatus status)
+	{
+		if(other.tag != "Person")
+			return;
+
+		if(other == status.collider)
+			return;
+
+		AnimationScript other_anim = other.GetComponent<AnimationScript>();
+		PersonStatus otherPerson = other.GetComponent<PersonStatus>();
+
+		if(otherPerson.ActivePower == null)
+		{
+			FireEffect effect = new FireEffect();
+			effect.initialize(owner);
+			otherPerson.ActivePower = effect;
+		}
+	}
+
 	public override bool OnTriggerEnterOverride(Collider other, Power owner)
 	{
 		return false;
