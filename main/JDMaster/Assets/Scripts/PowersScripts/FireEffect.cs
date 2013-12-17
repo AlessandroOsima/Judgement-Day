@@ -21,7 +21,7 @@ public class FireEffect : PowerEffect
 		else if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead)
 		{
 			timer += Time.deltaTime;
-			if (timer >= 10f)
+			if (timer >= 3f)
 			{
 				status.Fear = 0;
 				status.UnitStatus = PersonStatus.Status.Dead;

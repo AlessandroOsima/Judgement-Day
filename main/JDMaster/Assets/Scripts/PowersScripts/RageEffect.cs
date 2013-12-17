@@ -50,8 +50,35 @@ public class RageEffect : PowerEffect
 		
 		if(Persons.Length > 0)
 		{
+			/*
+			for (int c = 0; c < Persons.Length; c++)
+			{
+				Debug.Log(Persons[c]);
+			}
+			*/
+
 			for (int i = 0; i < Persons.Length; i++)
 			{
+				/*
+				if(Persons == null)
+					Debug.Log("Fuck");
+
+				if(Persons[i] == null)
+					Debug.Log("Fuck^2");
+
+				if(current == null)
+					Debug.Log("Fuck^3");
+
+				if(Persons[i].GetComponent<PersonStatus>() == null)
+				{
+					Debug.Log(Persons[i]);
+					Debug.Log("Fuck^4");
+				}
+
+				if(Persons[i].GetComponent<PersonStatus>().isAlive() == null)
+					Debug.Log("Fuck^5");
+                */
+
 				if (Persons[i] != current && Persons[i].GetComponent<PersonStatus>().isAlive())
 				{
 					float dist = (navigator.transform.position - Persons[i].transform.position).sqrMagnitude;

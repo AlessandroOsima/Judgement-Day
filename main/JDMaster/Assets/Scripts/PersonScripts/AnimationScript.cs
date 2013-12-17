@@ -192,7 +192,7 @@ public class AnimationScript : MonoBehaviour
             if (State == PersonStatus.Status.Shocked)
             {
                 _burnTimer += dt;
-                if (_burnTimer >= 0.5f)
+                if (_burnTimer >= 1f)
                 {
                     Burn(true);
 					personStatus.UnitStatus = PersonStatus.Status.Dead;
@@ -226,6 +226,12 @@ public class AnimationScript : MonoBehaviour
                     personStatus.Fear = -50;
                 }
             }
+
+			if(other.tag == "Finish")
+			{
+				GlobalManager.globalManager.decrementSouls(10);
+				GameObject.Destroy(transform.gameObject);
+			}
 
             if (other.tag == "Person")
             {

@@ -36,13 +36,13 @@ public class CalmEffect : PowerEffect
 		{
 			PersonStatus person = other.GetComponent<PersonStatus>();
 			
-			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus != PersonStatus.Status.Raged)
+			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus != PersonStatus.Status.Raged && person.IsAValidTarget)
 			{
 				owner.audio.Play();
 				person.ActivePower = this;
 			}
 			
-			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus == PersonStatus.Status.Raged)
+			if(person.UnitStatus != PersonStatus.Status.Dead && person.UnitStatus == PersonStatus.Status.Raged && person.IsAValidTarget)
 			{
 				owner.audio.Play();
 				person.ActivePower = null;

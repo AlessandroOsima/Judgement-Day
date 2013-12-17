@@ -5553,7 +5553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharedMaterial: {fileID: 2100000, guid: 4e1467e748fa74c64b96759b3d9713ae, type: 2}
   waterQuality: 2
-  edgeBlend: 0
+  edgeBlend: 1
 --- !u!114 &163026549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9845,10 +9845,14 @@ MonoBehaviour:
   RunningSpeed: 1
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
+  powerEffect: {fileID: 0}
   State: 1
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
+  _anim: {fileID: 0}
+  _fireEmitter: {fileID: 0}
+  _rageEmitter: {fileID: 0}
   _burnTimer: 0
   BurnWaitTime: 5
   DeathBurnTime: 3
@@ -9868,6 +9872,7 @@ MonoBehaviour:
   MiddleSpeed: 3.5
   WalkingSpeed: 2
   patrolWaitTime: 3
+  target: {fileID: 0}
   Type: 0
   State: 0
   Randomness: 1
@@ -10038,6 +10043,7 @@ MonoBehaviour:
   initialScorePoints: 2
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
 --- !u!1 &378863809
 GameObject:
   m_ObjectHideFlags: 0
@@ -11091,10 +11097,14 @@ MonoBehaviour:
   RunningSpeed: 1
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
+  powerEffect: {fileID: 0}
   State: 1
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
+  _anim: {fileID: 0}
+  _fireEmitter: {fileID: 0}
+  _rageEmitter: {fileID: 0}
   _burnTimer: 0
   BurnWaitTime: 5
   DeathBurnTime: 3
@@ -11114,6 +11124,7 @@ MonoBehaviour:
   MiddleSpeed: 5
   WalkingSpeed: 3
   patrolWaitTime: 3
+  target: {fileID: 0}
   Type: 1
   State: 6
   Randomness: 0
@@ -11305,6 +11316,7 @@ MonoBehaviour:
   initialScorePoints: 2
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
 --- !u!1 &425312763
 GameObject:
   m_ObjectHideFlags: 0
@@ -12789,10 +12801,14 @@ MonoBehaviour:
   RunningSpeed: 1
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
+  powerEffect: {fileID: 0}
   State: 1
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
+  _anim: {fileID: 0}
+  _fireEmitter: {fileID: 0}
+  _rageEmitter: {fileID: 0}
   _burnTimer: 0
   BurnWaitTime: 5
   DeathBurnTime: 3
@@ -12812,6 +12828,7 @@ MonoBehaviour:
   MiddleSpeed: 3.5
   WalkingSpeed: 2
   patrolWaitTime: 3
+  target: {fileID: 0}
   Type: 1
   State: 6
   Randomness: 0
@@ -12982,6 +12999,7 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
 --- !u!1 &500767456
 GameObject:
   m_ObjectHideFlags: 0
@@ -15774,7 +15792,7 @@ MonoBehaviour:
   Fear: 70
   Highness: 20
   power: {fileID: 1290082221}
-  distance: 10
+  distance: 40
 --- !u!82 &648583032
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16383,7 +16401,7 @@ MonoBehaviour:
   happyClip2: {fileID: 8300000, guid: 49d17ae0e42feaf47ae210934861ceab, type: 3}
   scaredClip: {fileID: 8300000, guid: b9916dfed9eab684c8543bb104349175, type: 3}
   scaredClip2: {fileID: 8300000, guid: 9ac11398dabd4cd4ca09d5526808f2b2, type: 3}
-  warriedClip: {fileID: 8300000, guid: abca70b639f2b8243ab76ade432dc4c7, type: 3}
+  worriedClip: {fileID: 0}
 --- !u!1 &681700617
 GameObject:
   m_ObjectHideFlags: 0
@@ -19308,10 +19326,14 @@ MonoBehaviour:
   RunningSpeed: 1
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
+  powerEffect: {fileID: 0}
   State: 1
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
+  _anim: {fileID: 0}
+  _fireEmitter: {fileID: 0}
+  _rageEmitter: {fileID: 0}
   _burnTimer: 0
   BurnWaitTime: 5
   DeathBurnTime: 3
@@ -19331,6 +19353,7 @@ MonoBehaviour:
   MiddleSpeed: 5
   WalkingSpeed: 3
   patrolWaitTime: 5
+  target: {fileID: 0}
   Type: 1
   State: 0
   Randomness: 0
@@ -19506,6 +19529,7 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
 --- !u!1 &823941962
 GameObject:
   m_ObjectHideFlags: 0
@@ -20720,8 +20744,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 894919715}
-  m_LocalRotation: {x: -.273729265, y: .114502624, z: .0328401141, w: .95440191}
-  m_LocalPosition: {x: -16.8200932, y: -57.6732254, z: -86.6142273}
+  m_LocalRotation: {x: -.382683456, y: 0, z: 0, w: .923879504}
+  m_LocalPosition: {x: -9.25141239, y: -37.674057, z: -55.5250244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -26880,7 +26904,7 @@ MonoBehaviour:
   Fear: 70
   Highness: 20
   power: {fileID: 161353253}
-  distance: 10
+  distance: 40
 --- !u!65 &1132305556
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31009,8 +31033,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: .0414416343, y: .953298748, z: .256468952, w: -.154038459}
-  m_LocalPosition: {x: -9.27160358, y: -8.18005753, z: 63.660923}
+  m_LocalRotation: {x: -.30440098, y: .0100024547, z: .00319692842, w: .952486098}
+  m_LocalPosition: {x: -12.3303165, y: -32.5411072, z: -65.2001495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -34515,10 +34539,14 @@ MonoBehaviour:
   RunningSpeed: 1
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
+  powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
+  _anim: {fileID: 0}
+  _fireEmitter: {fileID: 0}
+  _rageEmitter: {fileID: 0}
   _burnTimer: 0
   BurnWaitTime: 5
   DeathBurnTime: 3
@@ -34538,6 +34566,7 @@ MonoBehaviour:
   MiddleSpeed: 3
   WalkingSpeed: 3
   patrolWaitTime: 5
+  target: {fileID: 0}
   Type: 1
   State: 0
   Randomness: 0
@@ -34713,6 +34742,7 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
 --- !u!1 &1555686063
 GameObject:
   m_ObjectHideFlags: 0
@@ -40047,7 +40077,7 @@ MonoBehaviour:
   Fear: 70
   Highness: 20
   power: {fileID: 1692692462}
-  distance: 10
+  distance: 40
 --- !u!82 &1830955207
 AudioSource:
   m_ObjectHideFlags: 0
@@ -47996,10 +48026,14 @@ MonoBehaviour:
   RunningSpeed: 1
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
+  powerEffect: {fileID: 0}
   State: 1
   scorePoints: 1
   soulPoints: 3
   Adorer: 0
+  _anim: {fileID: 0}
+  _fireEmitter: {fileID: 0}
+  _rageEmitter: {fileID: 0}
   _burnTimer: 0
   BurnWaitTime: 5
   DeathBurnTime: 3
@@ -48019,6 +48053,7 @@ MonoBehaviour:
   MiddleSpeed: 3.5
   WalkingSpeed: 2
   patrolWaitTime: 3
+  target: {fileID: 0}
   Type: 1
   State: 0
   Randomness: 0
@@ -48195,6 +48230,7 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
 --- !u!1001 &2146927517
 Prefab:
   m_ObjectHideFlags: 0

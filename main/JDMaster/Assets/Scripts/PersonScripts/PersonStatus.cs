@@ -5,10 +5,13 @@ public class PersonStatus : MonoBehaviour
 {
 	//Public vars
     public enum Status { Idle, Dead, Concerned, Panicked, Shocked, Raged, Calm };
+	//This value can be used via the editor to set the startup values of various properties
 	public int initialFearLevel = 0;
 	public int initialScorePoints = 1;
 	public int initialSoulsPoints = 2;
 	public Status initialStatus;
+	//Power can be used on this unit.
+	public bool initialIsValidTarget = true; 
 
 	public delegate void onStateTransition(Status previousStatus, Status newStatus);
 	public event onStateTransition stateTransition;
@@ -16,6 +19,7 @@ public class PersonStatus : MonoBehaviour
 	public event onVarTransition soulsTransition;
 	public event onVarTransition fearLevelTransition;
 	public event onVarTransition scoreTransition;
+	public GameObject powerShieldEffect;
 
 	//Private Vars
     private Status unitStatus;
@@ -23,13 +27,19 @@ public class PersonStatus : MonoBehaviour
     private int scorePoints;				//How much points gives         
     private int soulPoints;			    	//How much souls     
 	private PowerEffect _activePower;
+	private bool _isAValidTarget = true;
 	private AnimationScript animator;
 	private UnitNavigationController navigator;
 
     public void Start()
     {
 		refreshEvents();
+		powerShieldEffect = (GameObject)Instantiate(powerShieldEffect,new Vector3(this.transform.position.x,this.transform.position.y + 2.5f,this.transform.position.z),Quaternion.identity);
+		powerShieldEffect.transform.parent = this.transform;
+		powerShieldEffect.SetActive(false);
+		IsAValidTarget = initialIsValidTarget;
 		_activePower = null;
+
     }
 
 	/* 
@@ -47,6 +57,7 @@ public class PersonStatus : MonoBehaviour
 
 	public void Update()
 	{
+
 		if(animator == null)
 			animator = this.GetComponent<AnimationScript>();
 
@@ -64,6 +75,28 @@ public class PersonStatus : MonoBehaviour
 
         return true;
     }
+
+	public bool IsAValidTarget
+	{
+		get
+		{
+			return _isAValidTarget;
+		}
+
+		set
+		{
+			if(value == true && _isAValidTarget == false)
+			{
+				powerShieldEffect.SetActive(false);
+			}
+			else if(value == false && _isAValidTarget == true)
+			{
+				powerShieldEffect.SetActive(true);
+			}
+
+			_isAValidTarget = value;
+		}
+	}
 
     public Status UnitStatus
     {

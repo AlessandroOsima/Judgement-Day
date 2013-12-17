@@ -27,7 +27,7 @@ public class GlobalManager : MonoBehaviour
     public bool standardVictoryConditions = true;
     //Private variables
     static GlobalManager _globalManager;
-    public int initialSouls = 0;
+    public int initialSouls;
     int _souls;
     int _score;
     int _population;
@@ -41,12 +41,33 @@ public class GlobalManager : MonoBehaviour
     public event OnVarChanged onPopulationChanged;
     public event OnVarChanged onScoreChanged;
 
+	//-------------------------------MODS
+	public float time;
+	private float dt;
+	private GameObject[] People;
+	private float rate;
+	private float nextwave;
+	private int count;
+	//-----------------------------------
+
     void Start()
     {
         score = 0;
+		time=0f;
+		rate = 20f;
+		nextwave=rate;
         souls = initialSouls;
-        population = GameObject.FindGameObjectsWithTag(npcsTag).Length;
+		People = GameObject.FindGameObjectsWithTag(npcsTag);
+		count=4;
 
+
+		for(int i = 4; i < People.Length; i++)
+		{
+			People[i].SetActive(false);
+		}
+
+		population = GameObject.FindGameObjectsWithTag(npcsTag).Length;
+       
     }
 
     void Awake()
@@ -57,6 +78,11 @@ public class GlobalManager : MonoBehaviour
 
     void Update()
     {
+		dt=Time.deltaTime;
+		time+=dt;
+		int n  = 4;
+		int j;
+
         if (!firstUpdate) //necessary to correctly set the GUI elements for the first time (forces On*Changed callbacks to be sent and the GUI to be updated)
         {
             score = score;
@@ -64,6 +90,39 @@ public class GlobalManager : MonoBehaviour
             population = population;
             firstUpdate = true;
         }
+		if(time>nextwave){
+			if(count<People.Length)
+			{
+				for(int i =count; i <count+n;i++)
+				{
+					if(i<People.Length)
+					{
+						People[i].SetActive(true);
+						GlobalManager.globalManager.incrementPopulation(1);
+					}
+					else
+					{
+						//Terminar Juego
+					}
+				}
+				count+=n;
+			}
+
+			nextwave+=rate;
+
+			if (time>60f)
+			{
+				rate = 10f;
+				n = 5;
+			}
+
+			if (time>120f)
+			{
+				rate = 5f;
+				n = 7;
+			}
+		}
+
     }
 
     #region Properties
@@ -201,10 +260,7 @@ public class GlobalManager : MonoBehaviour
         for (numberOfPeople = 0; numberOfPeople < npcsList.Length; numberOfPeople++)
         {
            // Debug.Log("Paure singole: " + npcsList[numberOfPeople].GetComponent<PersonStatus>().Fear);
-			PersonStatus status = npcsList[numberOfPeople].GetComponent<PersonStatus>();
-
-			if(status.UnitStatus != PersonStatus.Status.Dead)
-            	totalFear += status.Fear;
+            totalFear += npcsList[numberOfPeople].GetComponent<PersonStatus>().Fear;
         }
         float averageFear = totalFear / numberOfPeople;
         return averageFear;

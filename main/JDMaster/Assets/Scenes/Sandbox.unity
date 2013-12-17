@@ -6129,6 +6129,10 @@ Prefab:
       propertyPath: m_Name
       value: Geronimo
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
+      propertyPath: powerShieldEffect
+      value: 
+      objectReference: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
   m_RootGameObject: {fileID: 823073758}
@@ -10133,6 +10137,8 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 1
   initialStatus: 6
+  initialIsValidTarget: 1
+  powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
 --- !u!54 &377973739
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11429,6 +11435,8 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
+  powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
 --- !u!54 &424931567
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12398,6 +12406,10 @@ MonoBehaviour:
   hardVictory: 0
   standardVictoryConditions: 1
   initialSouls: 30
+  time: 0
+  dt: 0
+  rate: 0
+  count: 0
 --- !u!4 &478283690
 Transform:
   m_ObjectHideFlags: 0
@@ -13165,6 +13177,8 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 1
   initialStatus: 6
+  initialIsValidTarget: 1
+  powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
 --- !u!54 &500124856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14732,6 +14746,10 @@ Prefab:
       propertyPath: m_Name
       value: Beppe
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
+      propertyPath: powerShieldEffect
+      value: 
+      objectReference: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0426cc44b7d7b864c996e2db2f3d62cb, type: 2}
   m_RootGameObject: {fileID: 1552336431}
@@ -16685,7 +16703,7 @@ MonoBehaviour:
   happyClip2: {fileID: 8300000, guid: 49d17ae0e42feaf47ae210934861ceab, type: 3}
   scaredClip: {fileID: 8300000, guid: b9916dfed9eab684c8543bb104349175, type: 3}
   scaredClip2: {fileID: 8300000, guid: 9ac11398dabd4cd4ca09d5526808f2b2, type: 3}
-  worriedClip: {fileID: 8300000, guid: abca70b639f2b8243ab76ade432dc4c7, type: 3}
+  warriedClip: {fileID: 0}
 --- !u!1 &681700617
 GameObject:
   m_ObjectHideFlags: 0
@@ -19798,6 +19816,8 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
+  powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
 --- !u!54 &823073770
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21027,7 +21047,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 894919715}
-  m_LocalRotation: {x: -.382683486, y: 0, z: 0, w: .923879504}
+  m_LocalRotation: {x: -.382683456, y: 0, z: 0, w: .923879504}
   m_LocalPosition: {x: -9.25141239, y: -37.674057, z: -55.5250244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -23057,6 +23077,10 @@ Prefab:
       propertyPath: initialStatus
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: a73aaf4da501a9e40a998c5767f90fcf, type: 2}
+      propertyPath: powerShieldEffect
+      value: 
+      objectReference: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a73aaf4da501a9e40a998c5767f90fcf, type: 2}
   m_RootGameObject: {fileID: 424931555}
@@ -31513,8 +31537,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: .141312093, y: .707160592, z: .147634581, w: -.67687434}
-  m_LocalPosition: {x: 79.8338242, y: -34.9406929, z: -5.52979898}
+  m_LocalRotation: {x: -.126570538, y: .854759634, z: .438852668, w: .246524289}
+  m_LocalPosition: {x: -34.3446693, y: -33.4076309, z: 23.9519978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -35532,6 +35556,8 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 6
+  initialIsValidTarget: 1
+  powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
 --- !u!54 &1552336443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -51097,6 +51123,8 @@ MonoBehaviour:
   initialScorePoints: 1
   initialSoulsPoints: 1
   initialStatus: 6
+  initialIsValidTarget: 0
+  powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
 --- !u!54 &2144880623
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -82,7 +82,7 @@ public class BasePowerDealer : Power
 			{
 				PersonStatus person = other.GetComponent<PersonStatus>();
 
-				if(person.UnitStatus != PersonStatus.Status.Dead)
+				if(person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget)
 				{
 					audio.Play();
 					person.ActivePower =  effect;
