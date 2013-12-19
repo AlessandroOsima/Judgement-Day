@@ -103,9 +103,9 @@ public class BasePowerDealer : Power
             //PREVIEW
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            Location.x = ray.origin.x + (ray.direction.x * 40);
+            Location.x = ray.origin.x + (ray.direction.x * distance);
             Location.y = 0;
-            Location.z = ray.origin.z + (ray.direction.z * 40);
+            Location.z = ray.origin.z + (ray.direction.z * distance);
             transform.position = Location;
             particleEffect.transform.position = new Vector3(particleEffect.transform.position.x, 17.5f, particleEffect.transform.position.z);
 
