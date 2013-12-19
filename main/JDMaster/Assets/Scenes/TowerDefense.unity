@@ -3541,6 +3541,10 @@ Prefab:
       propertyPath: m_Name
       value: zio tom
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1451607824}
@@ -5646,7 +5650,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: b627e3b10ed104ddca995f772be012ee, type: 2}
   m_PrefabInternal: {fileID: 405410287}
   m_GameObject: {fileID: 105149505}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: .707106888, z: 0, w: .707106769}
   m_LocalPosition: {x: 86.1234283, y: 21.4740944, z: 1.63600659}
   m_LocalScale: {x: 180.937851, y: 49.8543129, z: 1}
   m_Children: []
@@ -10265,6 +10269,10 @@ Prefab:
       propertyPath: m_Name
       value: zio tom
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 2074684536}
@@ -14666,7 +14674,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -16535,7 +16543,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -22452,6 +22460,10 @@ Prefab:
       propertyPath: m_Name
       value: zio tom
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1481887618}
@@ -22615,7 +22627,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -23128,7 +23140,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -23330,6 +23342,7 @@ GameObject:
   - 114: {fileID: 478283689}
   - 114: {fileID: 478283688}
   - 114: {fileID: 478283691}
+  - 114: {fileID: 478283692}
   m_Layer: 8
   m_Name: Global
   m_TagString: GameController
@@ -23397,6 +23410,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36158b61c319b4eb886d2d87e8b2ea3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &478283692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 478283687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7224a940b1e99394792e4097ac4ecab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalCursor: {fileID: 2800000, guid: cbf139598a66041429c322ec6aee0c30, type: 3}
+  cursorSizeX: 50
+  cursorSizeY: 50
 --- !u!1 &480533839
 GameObject:
   m_ObjectHideFlags: 0
@@ -27959,7 +27986,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: e486f176806ae1444b433dd08c04537e, type: 2}
   m_PrefabInternal: {fileID: 1608950838}
   m_GameObject: {fileID: 600605681}
-  m_LocalRotation: {x: -1.54518958e-08, y: -.707217753, z: 1.54567346e-08, w: -.706995785}
+  m_LocalRotation: {x: -1.54518975e-08, y: -.707217813, z: 1.54567363e-08, w: -.706995845}
   m_LocalPosition: {x: -23.8080215, y: 0, z: -9.23525906}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -28364,7 +28391,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -29504,6 +29531,10 @@ Prefab:
     - target: {fileID: 100056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_Name
       value: zio tom
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -31704,6 +31735,10 @@ Prefab:
     - target: {fileID: 100056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_Name
       value: zio tom
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -37844,6 +37879,10 @@ Prefab:
       propertyPath: m_Name
       value: zio tom
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 2076403875}
@@ -40331,8 +40370,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 894919715}
-  m_LocalRotation: {x: -.382683486, y: 0, z: 0, w: .923879504}
-  m_LocalPosition: {x: -9.25141239, y: -37.674057, z: -55.5250244}
+  m_LocalRotation: {x: -.303351998, y: .500057518, z: .19251585, w: .787945271}
+  m_LocalPosition: {x: -130.320755, y: -228.141937, z: -132.478729}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41288,7 +41327,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: b627e3b10ed104ddca995f772be012ee, type: 2}
   m_PrefabInternal: {fileID: 939134795}
   m_GameObject: {fileID: 916398842}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: -1.41799164, y: 45.1349792, z: .947330415}
   m_LocalScale: {x: 180.937851, y: 185.250641, z: 1}
   m_Children: []
@@ -43483,6 +43522,10 @@ Prefab:
     - target: {fileID: 100056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_Name
       value: zio tom
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -47587,6 +47630,10 @@ Prefab:
       propertyPath: m_Name
       value: zio tom
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1712261932}
@@ -51423,6 +51470,10 @@ Prefab:
     - target: {fileID: 100056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_Name
       value: zio tom
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -57646,7 +57697,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: b627e3b10ed104ddca995f772be012ee, type: 2}
   m_PrefabInternal: {fileID: 738263328}
   m_GameObject: {fileID: 1233325697}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: .707106888, z: 0, w: .707106769}
   m_LocalPosition: {x: -90.1261902, y: 21.4740944, z: 1.63602757}
   m_LocalScale: {x: 180.937851, y: 49.8543129, z: 1}
   m_Children: []
@@ -61081,8 +61132,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: .113120668, y: .710711241, z: .117483497, w: -.684317827}
-  m_LocalPosition: {x: 61.2248688, y: -17.8621979, z: 24.4592209}
+  m_LocalRotation: {x: -.232521087, y: .400316328, z: .105768517, w: .880053282}
+  m_LocalPosition: {x: 94.0498657, y: -8.55248642, z: 3.07377815}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62593,7 +62644,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -66330,7 +66381,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -67291,7 +67342,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -68746,7 +68797,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -70754,7 +70805,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 2212600897978064885fa77de6db3304, type: 2}
   m_PrefabInternal: {fileID: 461580983}
   m_GameObject: {fileID: 1532044805}
-  m_LocalRotation: {x: -1.09418341e-08, y: -.833510339, z: -1.89195042e-08, w: .552503765}
+  m_LocalRotation: {x: -1.0941835e-08, y: -.833510458, z: -1.8919506e-08, w: .552503824}
   m_LocalPosition: {x: 37.378746, y: 0, z: 23.6185551}
   m_LocalScale: {x: .281423867, y: .281423867, z: .281423867}
   m_Children:
@@ -78748,7 +78799,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -82470,6 +82521,10 @@ Prefab:
       propertyPath: m_Name
       value: zio tom
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 312215595}
@@ -85369,7 +85424,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: b627e3b10ed104ddca995f772be012ee, type: 2}
   m_PrefabInternal: {fileID: 1273417536}
   m_GameObject: {fileID: 1867671544}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 1.44242096, y: 4.65834236, z: .947327793}
   m_LocalScale: {x: 210.151199, y: 185.162735, z: 1}
   m_Children: []
@@ -88755,7 +88810,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400006, guid: 1e7a0348cdf85d44b81c2f88e90bc6fa, type: 2}
   m_PrefabInternal: {fileID: 1028562593}
   m_GameObject: {fileID: 1938653922}
-  m_LocalRotation: {x: 1.57905387e-08, y: -.691381097, z: 1.51106061e-08, w: .722490251}
+  m_LocalRotation: {x: 1.57905404e-08, y: -.691381156, z: 1.51106079e-08, w: .722490311}
   m_LocalPosition: {x: -21.6641407, y: 0, z: -21.6040382}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -88888,7 +88943,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 72083ca298a39dd4791671a8e4ce3b03, type: 2}
   m_PrefabInternal: {fileID: 347769539}
   m_GameObject: {fileID: 1941480921}
-  m_LocalRotation: {x: -.116141506, y: .0647412688, z: .991036832, w: .0128713679}
+  m_LocalRotation: {x: -.116141513, y: .0647412762, z: .991036892, w: .0128713688}
   m_LocalPosition: {x: 54.1018562, y: 5.83929443, z: 45.4574509}
   m_LocalScale: {x: 3.23024702, y: 3.23024702, z: 3.23024702}
   m_Children: []
@@ -92665,6 +92720,10 @@ Prefab:
       propertyPath: m_Name
       value: zio tom
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1341731334}
@@ -95448,7 +95507,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -95770,7 +95829,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -97538,6 +97597,10 @@ Prefab:
     - target: {fileID: 100056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_Name
       value: zio tom
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: soulPoints
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
