@@ -160,6 +160,58 @@ public class LevelGUI : MonoBehaviour
 			}
 		}
 		*/
+		if(Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			simulatePowerButtonPress(0);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			simulatePowerButtonPress(1);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			simulatePowerButtonPress(2);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			simulatePowerButtonPress(3);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha5))
+		{
+			simulatePowerButtonPress(4);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha6))
+		{
+			simulatePowerButtonPress(5);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha7))
+		{
+			simulatePowerButtonPress(6);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha8))
+		{
+			simulatePowerButtonPress(7);
+		}
+		if(Input.GetKeyDown(KeyCode.Alpha9))
+		{
+			simulatePowerButtonPress(8);
+		}
+	}
+
+	void simulatePowerButtonPress(int buttonNumber)
+	{
+		if(buttonNumber < 0 || buttonNumber > (_powersBar.Count - 1))
+			return; 
+
+		if(_powersBar[buttonNumber].powerButton.disabled)
+			return;
+
+		if(_powersBar[buttonNumber].powerButton.highlighted == true)
+			_powersBar[buttonNumber].powerButton.highlighted = false;
+		else
+			_powersBar[buttonNumber].powerButton.highlighted = true;
+		
+		onPowerButtonPressed(_powersBar[buttonNumber].powerButton);
 	}
 
 	//PowersManager events

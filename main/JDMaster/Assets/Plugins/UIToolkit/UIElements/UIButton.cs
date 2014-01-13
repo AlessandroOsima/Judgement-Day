@@ -32,6 +32,10 @@ public class UIButton : UITouchableSprite
 		{
 			return _wasHighlighted;
 		}
+		set
+		{
+			_wasHighlighted = value;
+		}
 	}
 
 	#region Constructors/Destructor

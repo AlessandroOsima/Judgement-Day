@@ -26473,7 +26473,7 @@ MonoBehaviour:
   Highness: 20
   godRay: {fileID: 161056402}
   particleEffect: {fileID: 911994444}
-  distance: 40
+  cameraZoomScaleFactor: 1
 --- !u!82 &648583032
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27484,6 +27484,7 @@ MonoBehaviour:
   rayLenght: 1.5
   debugDraw: 1
   debugNoRaycast: 0
+  zoomLevel: 40
 --- !u!81 &675988138
 AudioListener:
   m_ObjectHideFlags: 0
@@ -46767,7 +46768,7 @@ MonoBehaviour:
   Highness: 0
   godRay: {fileID: 1321780193}
   particleEffect: {fileID: 82205933}
-  distance: 40
+  cameraZoomScaleFactor: 1
 --- !u!4 &1132305557
 Transform:
   m_ObjectHideFlags: 0
@@ -53327,8 +53328,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: .269791037, y: .468846291, z: .152942196, w: -.827045798}
-  m_LocalPosition: {x: 21.2723427, y: -20.5684223, z: -14.4158678}
+  m_LocalRotation: {x: .0078265965, y: .00122105388, z: 9.43217219e-06, w: -.999968648}
+  m_LocalPosition: {x: -9.20980167, y: -37.9407692, z: -72.5623245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -61278,7 +61279,7 @@ MonoBehaviour:
   Highness: 20
   godRay: {fileID: 18397159}
   particleEffect: {fileID: 1555368745}
-  distance: 40
+  cameraZoomScaleFactor: 1
 --- !u!65 &1543847515
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -72799,7 +72800,7 @@ MonoBehaviour:
   Highness: 20
   godRay: {fileID: 631315628}
   particleEffect: {fileID: 2078325969}
-  distance: 40
+  cameraZoomScaleFactor: 1
 --- !u!82 &1830955207
 AudioSource:
   m_ObjectHideFlags: 0

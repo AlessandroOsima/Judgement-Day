@@ -25,7 +25,9 @@ public class BasePowerDealer : Power
     public GameObject godRay;
     public GameObject particleEffect;
     public PowerEffect powerEffect;
-    public float distance = 40;
+	public float cameraZoomScaleFactor = 1.0f;
+	float distance = 0;
+	CameraControl cameraControl;
     //Private vars
     private bool ready = true;
     private int souls;
@@ -44,7 +46,20 @@ public class BasePowerDealer : Power
 
     void OnEnable() //The Power is activated by the power manager, initialize stuff here, do NOT use any find* function (Slooow !!)
     {
-        MouseCursorManager.mouseManager.ShowCursor = false;
+		if(cameraControl == null)
+			cameraControl = Camera.main.GetComponent<CameraControl>();
+
+		if(MouseCursorManager.mouseManager != null)
+        	MouseCursorManager.mouseManager.ShowCursor = false;
+
+		//set the correct god ray/particle effect position before the ray is visible
+		var zoomLevel = cameraControl.zoomLevel;
+		distance = ((zoomLevel) * cameraZoomScaleFactor);
+		Location.x = ray.origin.x + (ray.direction.x * distance);
+		Location.y = 0;
+		Location.z = ray.origin.z + (ray.direction.z * distance);
+		transform.position = Location;
+
         godRay.SetActive(true);
         particleEffect.SetActive(true);
         ready = true;
@@ -54,7 +69,9 @@ public class BasePowerDealer : Power
     {
         godRay.SetActive(false);
         particleEffect.SetActive(false);
-        MouseCursorManager.mouseManager.ShowCursor = true;
+
+		if(MouseCursorManager.mouseManager != null)
+			MouseCursorManager.mouseManager.ShowCursor = false;
     }
 
     public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
@@ -97,19 +114,22 @@ public class BasePowerDealer : Power
     void OnGUI()
     {
         //souls = GlobalManager.globalManager.souls;
-
         if (ready)
         {
             //PREVIEW
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2,0));
 
-            Location.x = ray.origin.x + (ray.direction.x * distance);
-            Location.y = 0;
-            Location.z = ray.origin.z + (ray.direction.z * distance);
-            transform.position = Location;
-            particleEffect.transform.position = new Vector3(particleEffect.transform.position.x, 17.5f, particleEffect.transform.position.z);
+			var zoomLevel = cameraControl.zoomLevel;
+		    distance = ((zoomLevel) * cameraZoomScaleFactor);
+	
+			Location.x = ray.origin.x + (ray.direction.x * distance);
+			Location.y = 0;
+			Location.z = ray.origin.z + (ray.direction.z * distance);
+			transform.position = Location;
 
-            if (Input.GetMouseButton(0))
+			particleEffect.transform.position = new Vector3(particleEffect.transform.position.x, 17.5f, particleEffect.transform.position.z);
+
+			if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
             {
                 Debug.Log("HIT for :" + this.name);
                 ready = false;

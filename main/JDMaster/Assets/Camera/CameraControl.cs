@@ -14,6 +14,7 @@ public class CameraControl : MonoBehaviour
 	public float rayLenght = 1.5f;
 	public bool debugDraw = false;
 	public bool debugNoRaycast = false;
+	public float zoomLevel = 40;
 	float distFromMin;
 	float distFromMax;
 
@@ -102,11 +103,17 @@ public class CameraControl : MonoBehaviour
 			movement.y = 0;
 		}
 
+
+
 		Vector3 destination = origin + movement;
 
 		transform.rotation = rotation;
 
 		transform.position = Vector3.MoveTowards(origin,destination,Time.deltaTime * speed);
+
+		if(transform.position.y != origin.y)
+			zoomLevel = zoomLevel + ((transform.position.y - origin.y)  * 1.15f);
+
 	}
 	
 	void Rotate()
