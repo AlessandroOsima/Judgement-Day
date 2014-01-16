@@ -13,6 +13,9 @@ public class LightingEffect : PowerEffect
 	{
 		if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead && !started)
 		{
+			if(animator.powerEffect)
+				Object.Destroy(animator.powerEffect);
+
 			started = true;
 			status.UnitStatus = PersonStatus.Status.Panicked;
 			BasePowerDealer fireDealer = (BasePowerDealer) GameObject.Find("Fire").GetComponent<BasePowerDealer>();
@@ -28,8 +31,6 @@ public class LightingEffect : PowerEffect
 			Object.Destroy(animator.powerEffect,1f);
 			status.ActivePower = null;
 		}
-
-		Debug.Log(animator.powerEffect.transform.position);
 	}
 
 	public override void runNavigatorUpdate(UnitNavigationController navigator)
@@ -41,7 +42,25 @@ public class LightingEffect : PowerEffect
 	//NAVIGATION
 	public override bool OnTriggerEnterOverride(Collider other, Power owner)
 	{
-		return false;
+		if(other.tag == GlobalManager.npcsTag)
+		{
+			PersonStatus person = other.GetComponent<PersonStatus>();
+			
+			if(person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget)
+			{
+				owner.audio.Play();
+				
+				if(person.ActivePower != null && person.ActivePower.effectName == "calma")
+				{
+					person.ActivePower = null;
+				}
+				
+				person.ActivePower = this;
+			}
+			
+		}
+		
+		return true;
 	}
 
 	public override void deliverOnCollisionEffect(Collider other, PersonStatus status)

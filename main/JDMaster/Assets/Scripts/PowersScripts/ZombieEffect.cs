@@ -1,46 +1,72 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RageEffect : PowerEffect 
+public class ZombieEffect : PowerEffect 
 {
 	
 	float timer = 0;
 	bool started = false;
 	bool overrideOnTriggerEnter = false;
+	float aliveTime = 20f;
+	float speed = 4.0f;
+	float halfSpeed;
+	float thirdSpeed;
 
 	//UPDATE POWER EFFECTS
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
 	{
-		if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead)
+		if(timer == 0)
 		{
 			if(animator.powerEffect)
 				Object.Destroy(animator.powerEffect);
 
-			timer = 0;
-			status.UnitStatus = PersonStatus.Status.Raged;
+			var renderers = status.gameObject.transform.GetComponentsInChildren<SkinnedMeshRenderer>();
+
+			foreach(var renderer in renderers)
+			{
+				if(renderer.gameObject.name == "Character01")
+				{
+					renderer.material.mainTexture = (Texture2D)Resources.Load("Character01Zombie",typeof(Texture2D));
+				}
+			}
+
+			status.UnitStatus = PersonStatus.Status.Zombie;
 			navigator.Stop();
+			halfSpeed = speed/2;
+			thirdSpeed = speed/3;
 			animator.powerEffect = (GameObject) Object.Instantiate(owner.particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0.9f,status.transform.position.z),Quaternion.identity);
 			animator.powerEffect.transform.parent = animator.transform;
 			status.Fear = owner.Fear;
 		}
-		else
+
+		timer += Time.deltaTime;
+
+		if(timer >= (aliveTime * 0.25f) && timer <= (aliveTime * 0.75f))
 		{
-			timer += Time.deltaTime;
-			if (timer >= 10f)
-			{
-				status.UnitStatus = PersonStatus.Status.Concerned;
-				status.Fear = 0;
-				Object.Destroy(animator.powerEffect);
-				status.ActivePower = null;
-				navigator.SetNewPatrolDestination(navigator.Type);
-				navigator.target = null;
-			}
+			Debug.Log(speed);
+			speed = halfSpeed;
 		}
-		
-		if(status.UnitStatus == PersonStatus.Status.Dead)
+
+		/*
+		if(timer >= (aliveTime * 0.5f) && timer <= (aliveTime * 0.75f))
 		{
-			if(animator.powerEffect != null)
-				Object.Destroy(animator.powerEffect);
+			Debug.Log(speed);
+			speed = speed / 2;
+		}
+		*/
+
+		if(timer >= (aliveTime * 0.75f))
+		{
+			Debug.Log(speed);
+			speed = thirdSpeed;
+			animator.SetSpeed(0.5f);
+		}
+
+		if (timer >= aliveTime)
+		{
+			status.UnitStatus = PersonStatus.Status.Dead;
+			status.Fear = 0;
+			Object.Destroy(animator.powerEffect);
 		}
 	}
 	
@@ -62,27 +88,9 @@ public class RageEffect : PowerEffect
 
 			for (int i = 0; i < Persons.Length; i++)
 			{
-				/*
-				if(Persons == null)
-					Debug.Log("Fuck");
+				PersonStatus status = Persons[i].GetComponent<PersonStatus>();
 
-				if(Persons[i] == null)
-					Debug.Log("Fuck^2");
-
-				if(current == null)
-					Debug.Log("Fuck^3");
-
-				if(Persons[i].GetComponent<PersonStatus>() == null)
-				{
-					Debug.Log(Persons[i]);
-					Debug.Log("Fuck^4");
-				}
-
-				if(Persons[i].GetComponent<PersonStatus>().isAlive() == null)
-					Debug.Log("Fuck^5");
-                */
-
-				if (Persons[i] != current && Persons[i].GetComponent<PersonStatus>().isAlive())
+				if (Persons[i] != current && status.isAlive() && status.UnitStatus != PersonStatus.Status.Zombie)
 				{
 					float dist = (navigator.transform.position - Persons[i].transform.position).sqrMagnitude;
 					
@@ -116,8 +124,13 @@ public class RageEffect : PowerEffect
 				AnimationScript other_anim = other.GetComponent<AnimationScript>();
 				PersonStatus otherPerson = other.GetComponent<PersonStatus>();
 
-				otherPerson.UnitStatus = PersonStatus.Status.Dead;
+				if(!otherPerson.isAlive() || otherPerson.UnitStatus == PersonStatus.Status.Zombie)
+					return;
 
+				otherPerson.ActivePower = null;
+				ZombieEffect effect = new ZombieEffect();
+				effect.initialize(owner);
+				otherPerson.ActivePower = effect;
 			}
 		}
 	}
@@ -128,7 +141,7 @@ public class RageEffect : PowerEffect
 		{
 			PersonStatus person = other.GetComponent<PersonStatus>();
 			
-			if(person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget)
+			if(person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget && person.UnitStatus != PersonStatus.Status.Zombie)
 			{
 				owner.audio.Play();
 				
@@ -150,15 +163,16 @@ public class RageEffect : PowerEffect
 		
 		if(navigator.target == null)
 		{
-			navigator.SetSpeed(navigator.RunningSpeed);
-			navigator.Panicking();
-			
+			navigator.SetSpeed(0);
+			navigator.gameObject.GetComponent<AnimationScript>().SetSpeed(0);
 		}
 		else
 		{
-			navigator.SetSpeed(navigator.RunningSpeed);
 			navigator.SetNavDestination(navigator.target.transform.position);
 		}
+
+		navigator.SetSpeed(speed);
+
 	}
 
 }

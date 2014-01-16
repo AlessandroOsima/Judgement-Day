@@ -10,6 +10,7 @@ public class VictoryConditions : MonoBehaviour {
 	void Start () 
 	{
 		GlobalManager.globalManager.onEndGame += endGame;
+		LevelGUI.levelGUI.writeMessage("JD ",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),2f);
 	}
 
 	void endGame(EndGameState endGameState)

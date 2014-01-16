@@ -10,18 +10,28 @@ public class CalmEffect : PowerEffect
 
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
 	{
-		if(status.UnitStatus != PersonStatus.Status.Dead)
+
+		if(status.UnitStatus != PersonStatus.Status.Dead && timer == 0)
 		{
-			status.UnitStatus = PersonStatus.Status.Calm;
 			status.Fear = 0;
-			navigator.SetNewPatrolDestination(navigator.Type);
-			
+			navigator.Stop();
+			status.UnitStatus = PersonStatus.Status.Idle;
+
 			if(animator.powerEffect)
 				Object.Destroy(animator.powerEffect);
 			
-			animator.powerEffect =(GameObject) Object.Instantiate(owner.particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0.9f,status.transform.position.z),Quaternion.identity);
+			animator.powerEffect =(GameObject) Object.Instantiate(owner.particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0f,status.transform.position.z),Quaternion.identity);
 			animator.powerEffect.transform.parent = animator.transform;
-			Object.Destroy(animator.powerEffect,5.0f);
+		
+		}
+
+		timer += Time.deltaTime;
+
+		if(timer >= 10)
+		{
+			Object.Destroy(animator.powerEffect);
+			status.UnitStatus = PersonStatus.Status.Calm;
+			navigator.SetNewPatrolDestination(navigator.Type);
 			status.ActivePower = null;
 		}
 	}

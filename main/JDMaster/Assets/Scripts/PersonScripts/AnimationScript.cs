@@ -11,6 +11,7 @@ public class AnimationScript : MonoBehaviour
     public float RunningSpeed = 1f;			//Unit running Speed
     public float MiddleSpeed = 0.4f;		//Unit concerned Speed
     public float WalkingSpeed = 0.2f;		//Unit walking Speed
+	public float ShamblingSpeed = 0.05f;
 	public GameObject powerEffect;
 
 
@@ -95,7 +96,15 @@ public class AnimationScript : MonoBehaviour
 		if (current == PersonStatus.Status.Dead)
 		{
 			_anim.SetInteger("State",0);
+		    Destroy(this.powerEffect);
 		}
+
+		if (current == PersonStatus.Status.Zombie)
+		{
+			SetSpeed(WalkingSpeed);
+			_anim.SetInteger("State",6);
+		}
+
 		if (current == PersonStatus.Status.Calm)
 		{
 			SetSpeed(WalkingSpeed);       
@@ -123,7 +132,7 @@ public class AnimationScript : MonoBehaviour
 		}
 		if (current == PersonStatus.Status.Raged)
 		{
-			SetSpeed(WalkingSpeed);
+			SetSpeed(ShamblingSpeed);
 			_anim.SetInteger("State",6);
 		}
 	}
@@ -236,8 +245,11 @@ public class AnimationScript : MonoBehaviour
 
 		if(other.tag == "Finish")
 		{
-			GlobalManager.globalManager.decrementSouls(10);
+			if(!personStatus.ShouldNotBeKilled)
+				GlobalManager.globalManager.decrementSouls(10);
+
 			GlobalManager.globalManager.decrementPopulation(1);
+
 			GameObject.Destroy(transform.gameObject);
 		}
     }

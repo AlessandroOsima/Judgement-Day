@@ -12,6 +12,9 @@ public class FireEffect : PowerEffect
 	{
 		if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead && !started)
 		{
+			if(animator.powerEffect)
+				Object.Destroy(animator.powerEffect);
+
 			started = true;
 			status.UnitStatus = PersonStatus.Status.Panicked;
 			animator.powerEffect = (GameObject) Object.Instantiate(owner.particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0.9f,status.transform.position.z),Quaternion.identity);
@@ -65,6 +68,24 @@ public class FireEffect : PowerEffect
 
 	public override bool OnTriggerEnterOverride(Collider other, Power owner)
 	{
-		return false;
+		if(other.tag == GlobalManager.npcsTag)
+		{
+			PersonStatus person = other.GetComponent<PersonStatus>();
+
+			if(person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget)
+			{
+				owner.audio.Play();
+
+				if(person.ActivePower != null && person.ActivePower.effectName == "calma")
+				{
+					person.ActivePower = null;
+				}
+
+				person.ActivePower = this;
+			}
+			
+		}
+		
+		return true;
 	}
 }

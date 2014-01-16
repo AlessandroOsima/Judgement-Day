@@ -6,6 +6,15 @@ using System.Reflection;
 public abstract class PowerEffect
 {
     protected BasePowerDealer owner;
+
+	public String effectName
+	{
+		get
+		{
+			return owner.name;
+		}
+	}
+
     public void initialize(BasePowerDealer owner)
     {
         this.owner = owner;

@@ -17,6 +17,7 @@ public class UnitNavigationController : MonoBehaviour
     //---------Constants
     public float RunningSpeed = 5f;		//Unit running Speed
 	public float MiddleSpeed = 3.5f;	//Unit concerned Speed
+	public float JoggingSpeed = 3f;	
 	public float WalkingSpeed = 2f;		//Unit walking Speed
 	public float patrolWaitTime = 3f;	// The amount of time to wait when the patrol way point is reached.
 	public PersonStatus target = null;
@@ -43,7 +44,7 @@ public class UnitNavigationController : MonoBehaviour
 
 
     //---------Components
-    private NavMeshAgent _nav;  // Reference to the _nav mesh agent.
+    public NavMeshAgent _nav;  // Reference to the _nav mesh agent.
     private PersonStatus ps;	        // Reference to the PersonStatus Class
 
 

@@ -12,7 +12,7 @@ public class LevelGUI : MonoBehaviour
 		public Power power;
 	}
 
-	struct TextMessage
+	class TextMessage
 	{
 		public UITextInstance text;
 		public UISprite background;
@@ -143,23 +143,20 @@ public class LevelGUI : MonoBehaviour
 
 	void Update()
 	{
-		/*
-		TextMessage message;
-
 		for(int i = 0; i < messages.Count; i++)
 		{
-			message = messages[i];
-
-
-
-			if(message.duration > 0)
+			if(messages[i].duration > 0)
 			{
-				message.timer += Time.deltaTime;
-				if(message.timer >= message.duration)
-					messages.Remove(message);
+				messages[i].timer += Time.deltaTime;
+				if(messages[i].timer >= messages[i].duration)
+				{
+					messages[i].text.clear();
+					messages.Remove(messages[i]);
+				}
+
 			}
 		}
-		*/
+
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			simulatePowerButtonPress(0);

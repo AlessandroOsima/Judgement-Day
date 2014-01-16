@@ -29,9 +29,11 @@ public class GlobalManager : MonoBehaviour
     //Private variables
     static GlobalManager _globalManager;
     public int initialSouls;
+
     int _souls;
     int _score;
     int _population;
+	int _notKillablePopulation; // the population WITHOUT the npc with ShouldNotBeKilled == true
     float _globalFear;
     bool firstUpdate = false;
     //Events
@@ -43,7 +45,7 @@ public class GlobalManager : MonoBehaviour
     public event OnVarChanged onScoreChanged;
 
 	//-------------------------------MODS
-	public float time;
+	private float time;
 	private float dt;
 	private GameObject[] People;
 	private float rate;
@@ -54,9 +56,10 @@ public class GlobalManager : MonoBehaviour
     void Start()
     {
         score = 0;
-		time=0f;
+		time = 0f;
 		rate = 20f;
-		nextwave=rate;
+		nextwave = rate;
+
         souls = initialSouls;
 		People = GameObject.FindGameObjectsWithTag(npcsTag);
 		population = People.Length;
@@ -71,6 +74,20 @@ public class GlobalManager : MonoBehaviour
 		}
     }
 
+	void isPersonNotKillable(bool prev, bool next)
+	{
+		if(next)
+		{
+			_notKillablePopulation += 1;
+		}
+		else
+		{
+			_notKillablePopulation -= 1;
+		}
+
+		Debug.Log("not killable = " + _notKillablePopulation);
+	}
+
     void Awake()
     {
         if (globalManager == null) //this way you cannot create more than one Player_Score instance
@@ -79,36 +96,55 @@ public class GlobalManager : MonoBehaviour
 
     void Update()
     {
-		dt=Time.deltaTime;
-		time+=dt;
-		int n  = 4;
+		dt = Time.deltaTime;
+		time += dt;
+		int n = 4;
 		int j;
 
-        if (!firstUpdate) //necessary to correctly set the GUI elements for the first time (forces On*Changed callbacks to be sent and the GUI to be updated)
+        if (!firstUpdate) //necessary to correctly set the GUI elements for the first time (forces On*Csshanged callbacks to be sent and the GUI to be updated)
         {
             score = score;
             souls = souls;
+
             population = population;
+
+			foreach(var npc in People)
+			{
+				PersonStatus status = npc.GetComponent<PersonStatus>();
+
+				status.shouldNotBeKilledTransition += isPersonNotKillable;
+
+				if(npc.GetComponent<PersonStatus>().ShouldNotBeKilled)
+					_notKillablePopulation++; 
+			}
+			
+			Debug.Log("not killable = " + _notKillablePopulation);
+
             firstUpdate = true;
+
         }
 
 		if(towerDefense)
 		{
 			if(time > nextwave)
 			{
-				if(count<People.Length)
+				if(count < People.Length)
 				{
 					for(int i = count; i < count + n; i++)
 					{
 						if(i < People.Length)
 						{
 							People[i].SetActive(true);
+
+							if(i == (int)Random.Range(count, count + n))
+								People[i].GetComponent<PersonStatus>().ShouldNotBeKilled = true;
 						}
 					}
+
 					count += n;
 				}
 
-				nextwave+=rate;
+				nextwave += rate;
 
 				if (time > 60f)
 				{
@@ -206,26 +242,32 @@ public class GlobalManager : MonoBehaviour
 
                 _population = 0;
 
-				if (score < easyVictory && standardVictoryConditions && souls == 0)
+				if(standardVictoryConditions)
 				{
-					if (onEndGame != null)
-                        onEndGame(EndGameState.Defeat);
-                } 
-
-				if (score >= easyVictory && standardVictoryConditions)
-                {
-                    if (onEndGame != null)
-                        onEndGame(EndGameState.VictoryEasy);
-				} else if (score >= mediumVictory && standardVictoryConditions)
-				{
-					if (onEndGame != null)
-                        onEndGame(EndGameState.VictoryMedium);
-				} else if (score >= hardVictory && standardVictoryConditions)
-				{
-					if (onEndGame != null)
-                        onEndGame(EndGameState.VictoryHard);
-                }
-
+					if (score < easyVictory && souls == 0)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.Defeat);
+					} 
+					
+					if (score >= easyVictory && score < mediumVictory)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.VictoryEasy);
+					} 
+					
+					if (score >= mediumVictory  && score < hardVictory)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.VictoryMedium);
+					}  
+					
+					if (score >= hardVictory)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.VictoryHard);
+					}
+				}
             }
             else
             {
@@ -233,6 +275,35 @@ public class GlobalManager : MonoBehaviour
                     onPopulationChanged(_population, value);
 
                 _population = value;
+
+				if((_population - _notKillablePopulation )  <= 0 && standardVictoryConditions)
+				{
+					_population -= _notKillablePopulation;
+					
+					if (score < easyVictory && souls == 0)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.Defeat);
+					} 
+					
+					if (score >= easyVictory && score < mediumVictory)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.VictoryEasy);
+					} 
+
+					if (score >= mediumVictory && score < hardVictory)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.VictoryMedium);
+					}  
+
+					if (score >= hardVictory)
+					{
+						if (onEndGame != null)
+							onEndGame(EndGameState.VictoryHard);
+					}
+				}
             }
         }
     }

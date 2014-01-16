@@ -4,7 +4,7 @@ using System.Collections;
 public class PersonStatus : MonoBehaviour
 {
 	//Public vars
-    public enum Status { Idle, Dead, Concerned, Panicked, Shocked, Raged, Calm };
+    public enum Status { Idle, Dead, Zombie, Concerned, Panicked, Shocked, Raged, Calm };
 	//This value can be used via the editor to set the startup values of various properties
 	public int initialFearLevel = 0;
 	public int initialScorePoints = 1;
@@ -12,14 +12,19 @@ public class PersonStatus : MonoBehaviour
 	public Status initialStatus;
 	//Power can be used on this unit.
 	public bool initialIsValidTarget = true; 
+	public bool initialShouldNotBeKilled = false;
 
 	public delegate void onStateTransition(Status previousStatus, Status newStatus);
 	public event onStateTransition stateTransition;
 	public delegate void onVarTransition(int previousVar, int nextVar);
+	public delegate void onBoolVarTransition(bool previousVar, bool nextVar);
 	public event onVarTransition soulsTransition;
 	public event onVarTransition fearLevelTransition;
 	public event onVarTransition scoreTransition;
+	public event onBoolVarTransition isAValidTargetTransition;
+	public event onBoolVarTransition shouldNotBeKilledTransition;
 	public GameObject powerShieldEffect;
+	public GameObject shouldNotBeKilledEffect;
 
 	//Private Vars
     private Status unitStatus;
@@ -28,16 +33,24 @@ public class PersonStatus : MonoBehaviour
     private int soulPoints;			    	//How much souls     
 	private PowerEffect _activePower;
 	private bool _isAValidTarget = true;
+	private bool _shouldNotBeKilled = false;
 	private AnimationScript animator;
 	private UnitNavigationController navigator;
 
     public void Start()
     {
 		refreshEvents();
+
 		powerShieldEffect = (GameObject)Instantiate(powerShieldEffect,new Vector3(this.transform.position.x,this.transform.position.y + 2.5f,this.transform.position.z),Quaternion.identity);
 		powerShieldEffect.transform.parent = this.transform;
 		powerShieldEffect.SetActive(false);
+
+		shouldNotBeKilledEffect = (GameObject)Instantiate(shouldNotBeKilledEffect,new Vector3(this.transform.position.x,this.transform.position.y + 2.5f,this.transform.position.z),Quaternion.identity);
+		shouldNotBeKilledEffect.transform.parent = this.transform;
+		shouldNotBeKilledEffect.SetActive(false);
+
 		IsAValidTarget = initialIsValidTarget;
+		ShouldNotBeKilled = initialShouldNotBeKilled;
 		_activePower = null;
 
     }
@@ -57,15 +70,14 @@ public class PersonStatus : MonoBehaviour
 
 	public void Update()
 	{
+		if(_activePower != null)
+			_activePower.deliverPowerEffects(this,animator,navigator);
 
 		if(animator == null)
 			animator = this.GetComponent<AnimationScript>();
 
 		if(navigator == null)
 			navigator = this.GetComponent<UnitNavigationController>();
-		
-		if(_activePower != null)
-			_activePower.deliverPowerEffects(this,animator,navigator);
 	}
 
     public bool isAlive()
@@ -88,13 +100,55 @@ public class PersonStatus : MonoBehaviour
 			if(value == true && _isAValidTarget == false)
 			{
 				powerShieldEffect.SetActive(false);
+
+				if(isAValidTargetTransition != null)
+					isAValidTargetTransition(false,true);
 			}
 			else if(value == false && _isAValidTarget == true)
 			{
+				if(ShouldNotBeKilled)
+					ShouldNotBeKilled = false;
+
 				powerShieldEffect.SetActive(true);
+
+				if(isAValidTargetTransition != null)
+					isAValidTargetTransition(true,false);
 			}
 
 			_isAValidTarget = value;
+		}
+	}
+
+	public bool ShouldNotBeKilled
+	{
+		get
+		{
+			return _shouldNotBeKilled;
+		}
+
+		set
+		{
+			if(value == true && _shouldNotBeKilled == false)
+			{
+				if(!IsAValidTarget)
+					IsAValidTarget = true;
+
+				shouldNotBeKilledEffect.SetActive(true);
+
+				if(shouldNotBeKilledTransition != null)
+					shouldNotBeKilledTransition(false,true);
+
+			}
+
+			if(value == false && _shouldNotBeKilled == true)
+			{
+				shouldNotBeKilledEffect.SetActive(false);
+
+				if(shouldNotBeKilledTransition != null)
+					shouldNotBeKilledTransition(true,false);
+			}
+
+			_shouldNotBeKilled = value;
 		}
 	}
 
@@ -111,26 +165,39 @@ public class PersonStatus : MonoBehaviour
 
 			if(value == Status.Dead && unitStatus != Status.Dead)
 			{
-				GlobalManager.globalManager.incrementScore(scorePoints);
-				GlobalManager.globalManager.incrementSouls(soulPoints);
-				GlobalManager.globalManager.decrementPopulation(1);
+				if(ShouldNotBeKilled)
+				{
+					//GlobalManager.globalManager.incrementScore(scorePoints);
+					GlobalManager.globalManager.incrementSouls(- 2 * soulPoints);
+					GlobalManager.globalManager.decrementPopulation(1);
+				}
+				else
+				{
+					GlobalManager.globalManager.incrementScore(scorePoints);
+					GlobalManager.globalManager.incrementSouls(soulPoints);
+					GlobalManager.globalManager.decrementPopulation(1);
+				}
 
 				unitStatus = value;
 
-				Destroy(powerShieldEffect);
-
 				if(isPowerActivated())
 				{
+					_activePower.deliverPowerEffects(this,animator,navigator);
+
 					if(animator == null)
 						animator = this.GetComponent<AnimationScript>();
 					
 					if(navigator == null)
 						navigator = this.GetComponent<UnitNavigationController>();
-
-					_activePower.deliverPowerEffects(this,animator,navigator);
 					
 					ActivePower = null;
 				}
+
+				//fire off the two properties transition events (so that listerners know they are going away), and destroy their effects
+				ShouldNotBeKilled = false; 
+				IsAValidTarget = false;
+				Destroy(powerShieldEffect);
+				Destroy(powerShieldEffect);
 			}
 
 			unitStatus = value;

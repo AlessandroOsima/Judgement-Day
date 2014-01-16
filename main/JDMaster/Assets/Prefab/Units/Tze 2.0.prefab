@@ -3803,6 +3803,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _nav: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3819,7 +3820,10 @@ MonoBehaviour:
   initialSoulsPoints: 3
   initialStatus: 6
   initialIsValidTarget: 1
+  initialShouldNotBeKilled: 0
   powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
+  shouldNotBeKilledEffect: {fileID: 100002, guid: fbc73896d63bc41869d7311fccf8480a,
+    type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
