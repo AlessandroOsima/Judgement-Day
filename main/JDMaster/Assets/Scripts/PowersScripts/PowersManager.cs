@@ -14,6 +14,14 @@ public class PowersManager : MonoBehaviour
 	public event onPowerEnabled powerEnabled;
 	public event onPowerDisabled powerDisabled;
 
+	public Power SelectedPower
+	{
+		get
+		{
+			return selected;
+		}
+	}
+
 	public static PowersManager powersManager
 	{
 		get

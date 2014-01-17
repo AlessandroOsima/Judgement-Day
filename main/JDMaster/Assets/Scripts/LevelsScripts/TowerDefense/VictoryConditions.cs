@@ -3,14 +3,13 @@ using System.Collections;
 
 public class VictoryConditions : MonoBehaviour {
 
-	string nextLevel = "Sandbox";
+	string nextLevel = "TowerDefense";
 	bool startCounting = false;
 	float timer = 0;
 	// Use this for initialization
 	void Start () 
 	{
 		GlobalManager.globalManager.onEndGame += endGame;
-		LevelGUI.levelGUI.writeMessage("JD ",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),2f);
 	}
 
 	void endGame(EndGameState endGameState)
@@ -18,17 +17,17 @@ public class VictoryConditions : MonoBehaviour {
 		if(endGameState == EndGameState.Defeat)
 		{
 			Debug.Log(endGameState);
-			LevelGUI.levelGUI.writeMessage("DEFEAT ",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f);
+			LevelGUI.levelGUI.writeMessage("DEFEAT ",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
 		}
 		else
 		{
 			Debug.Log(endGameState);
-			LevelGUI.levelGUI.writeMessage("VICTORY",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f);
+			LevelGUI.levelGUI.writeMessage("VICTORY",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
 		}
 
 		startCounting = true;
 
-		if(Application.loadedLevelName == "Sandbox")
+		if(Application.loadedLevelName == "TowerDefense")
 			nextLevel = "SplashScreen";
 	}
 

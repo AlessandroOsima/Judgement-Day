@@ -101,7 +101,7 @@ public class AnimationScript : MonoBehaviour
 
 		if (current == PersonStatus.Status.Zombie)
 		{
-			SetSpeed(WalkingSpeed);
+			SetSpeed(RunningSpeed);
 			_anim.SetInteger("State",6);
 		}
 
@@ -132,7 +132,7 @@ public class AnimationScript : MonoBehaviour
 		}
 		if (current == PersonStatus.Status.Raged)
 		{
-			SetSpeed(ShamblingSpeed);
+			SetSpeed(MiddleSpeed);
 			_anim.SetInteger("State",6);
 		}
 	}

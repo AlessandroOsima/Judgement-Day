@@ -19,6 +19,7 @@ public abstract class PowerEffect
     {
         this.owner = owner;
     }
+
     public abstract bool OnTriggerEnterOverride(Collider other, Power owner);
     public abstract void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator);
     public abstract void runNavigatorUpdate(UnitNavigationController navigator);
@@ -35,6 +36,7 @@ public class BasePowerDealer : Power
     public GameObject particleEffect;
     public PowerEffect powerEffect;
 	public float cameraZoomScaleFactor = 1.0f;
+	public bool enableUse = true;
 	float distance = 0;
 	CameraControl cameraControl;
     //Private vars
@@ -138,7 +140,7 @@ public class BasePowerDealer : Power
 
 			particleEffect.transform.position = new Vector3(particleEffect.transform.position.x, 17.5f, particleEffect.transform.position.z);
 
-			if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
+			if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space) && enableUse)
             {
                 Debug.Log("HIT for :" + this.name);
                 ready = false;

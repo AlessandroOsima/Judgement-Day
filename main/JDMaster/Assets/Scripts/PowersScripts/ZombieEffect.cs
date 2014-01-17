@@ -11,6 +11,7 @@ public class ZombieEffect : PowerEffect
 	float speed = 4.0f;
 	float halfSpeed;
 	float thirdSpeed;
+	bool stop = false;
 
 	//UPDATE POWER EFFECTS
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
@@ -41,10 +42,11 @@ public class ZombieEffect : PowerEffect
 
 		timer += Time.deltaTime;
 
-		if(timer >= (aliveTime * 0.25f) && timer <= (aliveTime * 0.75f))
+		if(timer >= (aliveTime * 0.25f) && timer <= (aliveTime * 0.75f) && !stop)
 		{
 			Debug.Log(speed);
 			speed = halfSpeed;
+			animator.SetSpeed(animator.MiddleSpeed);
 		}
 
 		/*
@@ -55,11 +57,17 @@ public class ZombieEffect : PowerEffect
 		}
 		*/
 
-		if(timer >= (aliveTime * 0.75f))
+		if(timer >= (aliveTime * 0.75f) && !stop)
 		{
 			Debug.Log(speed);
 			speed = thirdSpeed;
 			animator.SetSpeed(0.5f);
+			animator.SetSpeed(animator.WalkingSpeed);
+		}
+
+		if(stop)
+		{
+			animator.SetSpeed(0);
 		}
 
 		if (timer >= aliveTime)
@@ -163,14 +171,15 @@ public class ZombieEffect : PowerEffect
 		
 		if(navigator.target == null)
 		{
-			navigator.SetSpeed(0);
-			navigator.gameObject.GetComponent<AnimationScript>().SetSpeed(0);
+			navigator.Stop();
+			stop = true;
 		}
 		else
 		{
 			navigator.SetNavDestination(navigator.target.transform.position);
 		}
 
+		if(!stop)
 		navigator.SetSpeed(speed);
 
 	}

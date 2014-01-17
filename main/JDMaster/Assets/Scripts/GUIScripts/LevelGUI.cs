@@ -80,13 +80,20 @@ public class LevelGUI : MonoBehaviour
 	void Awake()
 	{
 		//Awake is used by UIToolkit for initialization, DO NOT USE THIS.
-		messages = new List<TextMessage>();
+
 	}
 	
 	// Use this for initialization
 	void Start () 
-	{        
+	{       
+
+		messages = new List<TextMessage>();
+		TextMessage fakeTextMessage = new TextMessage();
+		fakeTextMessage.duration = 0;
+		messages.Add(fakeTextMessage);
+
 		_levelGUI = this;
+
 		//UI
 		quitButton =  UIButton.create(GUIToolkit,"Close.png","Close_Over.png",0,0);
 		quitButton.onTouchUpInside += sender => Application.LoadLevel("SplashScreen");
@@ -115,6 +122,7 @@ public class LevelGUI : MonoBehaviour
 		
 		//Load the fonts and initialize the text instances
 		text = new UIText(GUIToolkit, "Smilage", "Smilage_0.png" );
+		text.forceLowAscii = true;
 		
 		soulsText = text.addTextInstance(System.Convert.ToString(0),0,0);
 		soulsText.textScale =  textScaleFactor;
@@ -143,17 +151,20 @@ public class LevelGUI : MonoBehaviour
 
 	void Update()
 	{
-		for(int i = 0; i < messages.Count; i++)
+		if(messages != null)
 		{
-			if(messages[i].duration > 0)
+			for(int i = 0; i < messages.Count; i++)
 			{
-				messages[i].timer += Time.deltaTime;
-				if(messages[i].timer >= messages[i].duration)
+				if(messages[i].duration > 0)
 				{
-					messages[i].text.clear();
-					messages.Remove(messages[i]);
-				}
+					messages[i].timer += Time.deltaTime;
+					if(messages[i].timer >= messages[i].duration)
+					{
+						messages[i].text.clear();
+						messages.Remove(messages[i]);
+					}
 
+				}
 			}
 		}
 
@@ -302,11 +313,20 @@ public class LevelGUI : MonoBehaviour
 	//duration is the time in seconds needed a message will stay visible before being destroyed, if duration <= 0 the message will stay visible forever
 	public void writeMessage(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
 	{
+		if(messages == null)
+		{
+			messages = new List<TextMessage>();
+			TextMessage fakeTextMessage = new TextMessage();
+			fakeTextMessage.duration = 0;
+			messages.Add(fakeTextMessage);
+		}
+
 		TextMessage textMessage = new TextMessage();
-		text.alignMode = UITextAlignMode.Center;
 
 		textMessage.text = text.addTextInstance(message,position.x,position.y);
 		textMessage.text.alignMode = UITextAlignMode.Center;
+		textMessage.text.xPos = position.x;
+		textMessage.text.yPos = position.y;
 		textMessage.text.scale = scale;
 		textMessage.text.setColorForAllLetters(sRed);
 
@@ -319,6 +339,12 @@ public class LevelGUI : MonoBehaviour
 		}
 
 		messages.Add(textMessage);
+	}
+
+	public bool isDisplayingMessages()
+	{
+	
+		return messages.Count > 1;
 	}
 
 	//Callback for onTouchUpInside on every button in the power bar, used to notify the PowersManager for powers activation/deactivation

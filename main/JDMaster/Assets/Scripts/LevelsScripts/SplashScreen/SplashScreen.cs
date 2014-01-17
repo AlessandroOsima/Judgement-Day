@@ -18,15 +18,21 @@ public class SplashScreen : MonoBehaviour {
 	void Update () 
 	{
 		if(Input.GetKey(KeyCode.Space))
-			Application.LoadLevel("TowerDefense");
+			Application.LoadLevel("TutorialStart");
 
 		if(Input.GetKey(KeyCode.KeypadEnter))
-			Application.LoadLevel("TowerDefense");
-	
-		if(Input.GetKey(KeyCode.Alpha0))
-			Application.LoadLevel("TowerDefense");
+			Application.LoadLevel("TutorialStart");
 
 		if(Input.GetKey(KeyCode.Alpha1))
+			Application.LoadLevel("TutorialStart");
+
+		if(Input.GetKey(KeyCode.Alpha2))
+			Application.LoadLevel("TutorialRage");
+	
+		if(Input.GetKey(KeyCode.Alpha3))
 			Application.LoadLevel("Sandbox");
+
+		if(Input.GetKey(KeyCode.Alpha4))
+			Application.LoadLevel("TowerDefense");
 	}
 }
