@@ -72,15 +72,15 @@ public class TutorialScript : MonoBehaviour
 
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==1)
 		{
-			WriteMessage("Look at them just laughing over there",0.75f,0.5f,5f);
-			WriteMessage("Zoom on them by pressing Q",0.85f,0.5f,5f);
+			WriteMessage("Look at them just laughing.",0.75f,0.5f,5f);
+			WriteMessage("To zoom press Q.",0.85f,0.5f,5f);
 			messageCount++;
 		}
 
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 2 && Camera.main.transform.position.y < originalCamPosition.y)
 		{
-			WriteMessage("Good, you can zoom back with E",0.75f,0.5f,7f);
-			WriteMessage("You should use your powers to teach them who's the boss",0.85f,0.5f,7f);
+			WriteMessage("Good, you can zoom back with E.",0.75f,0.5f,7f);
+			WriteMessage("You should use your powers to teach them who's the boss.",0.85f,0.5f,7f);
 			messageCount++;
 		}
 
@@ -98,7 +98,7 @@ public class TutorialScript : MonoBehaviour
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==4)
 		{
 			WriteMessage("Press 1 to select FIRE!",0.75f,0.5f,8f);
-			WriteMessage("Use the arrows to move the god ray to your target",0.85f,0.5f,8f);
+			WriteMessage("Use the arrows to move the god ray to your target.",0.85f,0.5f,8f);
 			messageCount = 6;
 		}
 
@@ -106,8 +106,8 @@ public class TutorialScript : MonoBehaviour
 		{
 			messageCount = 8;
 			((BasePowerDealer)firePower).enableUse = true;
-			WriteMessage("Good! Now burn the unworthy",0.75f,0.5f,6f);
-			WriteMessage("Press SPACE to use your Power",0.85f,0.5f,6f);
+			WriteMessage("Good! Now burn the unworthy.",0.75f,0.5f,6f);
+			WriteMessage("Press SPACE to use your Power.",0.85f,0.5f,6f);
 		}
 
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 8 && GlobalManager.globalManager.population <= 1)
