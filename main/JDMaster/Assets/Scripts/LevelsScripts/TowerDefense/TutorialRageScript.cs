@@ -117,13 +117,13 @@ public class TutorialRageScript : MonoBehaviour
 			GlobalManager.globalManager.incrementSouls(10);
 			WriteMessage("Ok, I just gave you 10 souls, use them as you wish.",0.75f,0.25f,9f);
 			WriteMessage("To win this battle you have to kill everyone except the red shielded man.",0.85f,0.25f,9f);
-			WriteMessage("If you lose all your souls you will die.",1.05f,0.25f,9f);
+			WriteMessage("If you lose all your souls you will die.",0.95f,0.25f,9f);
 			messageCount++;
 		}
 
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 7)
 		{
-			WriteMessage("Enough chit chat, let's get this genocide started",0.75f,0.25f,7f);
+			WriteMessage("Enough chit chat, let's get this genocide started",0.75f,0.25f,5f);
 			messageCount++;
 		}
 
