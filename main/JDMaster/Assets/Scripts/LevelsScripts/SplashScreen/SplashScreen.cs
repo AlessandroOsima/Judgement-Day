@@ -18,10 +18,10 @@ public class SplashScreen : MonoBehaviour {
 	void Update () 
 	{
 		if(Input.GetKey(KeyCode.Space))
-			Application.LoadLevel("TutorialStart");
+			Application.LoadLevel("LevelSelectionMenu");
 
 		if(Input.GetKey(KeyCode.KeypadEnter))
-			Application.LoadLevel("TutorialStart");
+			Application.LoadLevel("LevelSelectionMenu");
 
 		if(Input.GetKey(KeyCode.Alpha1))
 			Application.LoadLevel("TutorialStart");

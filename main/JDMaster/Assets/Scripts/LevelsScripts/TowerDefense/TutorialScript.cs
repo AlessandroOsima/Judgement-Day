@@ -131,7 +131,7 @@ public class TutorialScript : MonoBehaviour
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==9 && GlobalManager.globalManager.population == 2 || (!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==16 && GlobalManager.globalManager.souls<=7 && GlobalManager.globalManager.population > 0))
 		{
 			WriteMessage("Do not worry. You can Redo the level any time",0.75f,0.25f,6f);
-			WriteMessage("Press the Redo button up in the left",0.75f,0.25f,0f);
+			WriteMessage("Press the Redo button up in the left",0.85f,0.25f,0f);
 			messageCount+=10;
 		}
 
@@ -188,7 +188,7 @@ public class TutorialScript : MonoBehaviour
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 15 && GlobalManager.globalManager.population > 0 && GlobalManager.globalManager.souls < 5)
 		{
 			WriteMessage("Looks like you are out of souls. Do not worry, you can Redo the level any time",0.75f,0.25f,7f);
-			WriteMessage("Just press the Redo button up in the left",0.75f,0.25f,0f);
+			WriteMessage("Just press the Redo button up in the left",0.85f,0.25f,0f);
 		}
 
 		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==16 && GlobalManager.globalManager.population <= 0)
