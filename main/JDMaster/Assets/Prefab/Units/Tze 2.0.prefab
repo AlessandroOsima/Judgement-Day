@@ -484,6 +484,9 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
+  - 54: {fileID: 5400002}
+  - 82: {fileID: 8200000}
+  - 54: {fileID: 5400004}
   m_Layer: 0
   m_Name: Tze 2.0
   m_TagString: Person
@@ -1521,7 +1524,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 19.3826294, y: 59.9389496, z: -50.9990616}
+  m_LocalPosition: {x: 44.1909561, y: 59.9389496, z: -52.4859924}
   m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children:
   - {fileID: 400078}
@@ -3739,6 +3742,94 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100056}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &5400004
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100056}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100056}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 30
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -3766,11 +3857,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunningSpeed: 5
   MiddleSpeed: 3.5
+  JoggingSpeed: 3
   WalkingSpeed: 2
   patrolWaitTime: 3
   target: {fileID: 0}
   Type: 1
-  State: 6
+  State: 7
   Randomness: 0
   patrolWayPoints:
   - {fileID: 0}
@@ -3818,12 +3910,18 @@ MonoBehaviour:
   initialFearLevel: 20
   initialScorePoints: 1
   initialSoulsPoints: 3
-  initialStatus: 6
+  initialStatus: 7
   initialIsValidTarget: 1
   initialShouldNotBeKilled: 0
   powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
   shouldNotBeKilledEffect: {fileID: 100002, guid: fbc73896d63bc41869d7311fccf8480a,
     type: 2}
+  talkingtClip: {fileID: 8300000, guid: e41173a768b81d948b39e009e5b3c422, type: 3}
+  laughingClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
+  screamingClip2: {fileID: 8300000, guid: 061f75834545f9542bb3982462d373bc, type: 3}
+  screamingClip: {fileID: 8300000, guid: 9ff53c9ebf1bf2f498f84432a3e53c15, type: 3}
+  dyingClip: {fileID: 8300000, guid: 338574b63d5121c4f9398d81447f96b5, type: 3}
+  singingClip: {fileID: 8300000, guid: f69d9931cb4cab04f984acbf2166650d, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3838,10 +3936,11 @@ MonoBehaviour:
   RunningSpeed: 1
   MiddleSpeed: .400000006
   WalkingSpeed: .200000003
+  ShamblingSpeed: .0500000007
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 3
+  soulPoints: 5
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
