@@ -114,7 +114,7 @@ public class BasePowerDealer : Power
 
                 if (person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget)
                 {
-                    audio.Play();
+                    //audio.Play();
                     person.ActivePower = effect;
                 }
             }

@@ -38,6 +38,21 @@ public class AnimationScript : MonoBehaviour
     public float BurnWaitTime = 5f;	//Time that it last burning at all
     public float DeathBurnTime = 3f;	//Time that it last burning until dying
 
+	//Sounds
+	public AudioClip talkingClipFirst;
+	public AudioClip talkingClipSecond;
+	public AudioClip talkingClipThird;
+	public AudioClip laughingClip;
+	public AudioClip screamingClipFifth;
+	public AudioClip screamingClipFourth;
+	public AudioClip screamingClipThird;
+	public AudioClip screamingClipSecond;
+	public AudioClip screamingClip;
+	public AudioClip dyingClip;
+	public AudioClip singingClip;
+	int lastClip = 0;
+	int currentClip = 0;
+	bool isDyingClipPlayed = false;
 
 
 
@@ -83,10 +98,10 @@ public class AnimationScript : MonoBehaviour
 			_anim.SetFloat("Adoring", 1f);
 
 		State = personStatus.UnitStatus;
-		personStatus.refreshEvents();
 		//Register State events
 		personStatus.stateTransition += OnStateChanged;
-    }
+		personStatus.refreshEvents();
+	}
 
 	/*This is ONLY to change the animation based on state change, do NOT add code related to powers or to fear calculation, register another event for that.
 	 * 
@@ -95,45 +110,139 @@ public class AnimationScript : MonoBehaviour
 	{
 		if (current == PersonStatus.Status.Dead)
 		{
+			audio.Stop();
 			_anim.SetInteger("State",0);
 		    Destroy(this.powerEffect);
 		}
 
 		if (current == PersonStatus.Status.Zombie)
 		{
+			audio.Stop();
 			SetSpeed(RunningSpeed);
 			_anim.SetInteger("State",6);
 		}
-
 		if (current == PersonStatus.Status.Calm)
 		{
+			audio.Stop();
 			SetSpeed(WalkingSpeed);       
 			_anim.SetInteger("State",1);
 		}
 		if (current == PersonStatus.Status.Concerned)
 		{
+			audio.Stop();
 			SetSpeed(MiddleSpeed);
 			_anim.SetInteger("State",2);
 		}
 		if (current == PersonStatus.Status.Panicked)
 		{
+			audio.Stop();
 			SetSpeed(RunningSpeed);
 			_anim.SetInteger("State",3);
 		}
 		if (current == PersonStatus.Status.Shocked)
 		{
+			audio.Stop();
 			SetSpeed(0f);
 			_anim.SetInteger("State",4);
 		}
 		if (current == PersonStatus.Status.Idle)
 		{
+			audio.Stop();
 			SetSpeed(0f);
 			_anim.SetInteger("State",5);
 		}
 		if (current == PersonStatus.Status.Raged)
 		{
+			audio.Stop();
 			SetSpeed(MiddleSpeed);
 			_anim.SetInteger("State",6);
+		}
+	}
+
+	void playTalkLoop(bool singAndLaugh)
+	{
+		if(!audio.isPlaying)
+		{
+			currentClip = UnityEngine.Random.Range(0,3);
+
+			if(lastClip == currentClip)
+				currentClip++;
+
+			if(!singAndLaugh && currentClip == 1)
+				++currentClip;
+
+			if(currentClip > 3)
+				currentClip = 0;
+		
+
+			switch(currentClip)
+			{
+			case 0:
+				audio.clip = talkingClipFirst;
+				break;
+			case 1:
+			{
+				if(UnityEngine.Random.Range(0,10) >= 8)
+				{
+					audio.clip = laughingClip;
+				}
+				else
+				{
+					audio.clip = singingClip;
+				}
+
+				break;
+			}
+			case 2:
+				audio.clip = talkingClipSecond;
+				break;
+			case 3:
+				audio.clip = talkingClipThird;
+				break;
+			}
+
+			lastClip = currentClip;
+			audio.Play();
+		}
+	}
+
+	void playScreamLoop()
+	{
+		
+		if(!audio.isPlaying)
+		{
+			currentClip = UnityEngine.Random.Range(0,5);
+			
+			if(lastClip == currentClip)
+				currentClip = lastClip + 1;
+			
+			if(currentClip > 5)
+				currentClip = 0;
+
+			switch(currentClip)
+			{
+			case 0:
+				audio.clip = screamingClip;
+				break;
+			case 1:
+				audio.clip = screamingClipSecond;
+				break;
+			case 2:
+				audio.clip = screamingClipThird;
+				break;
+			case 3:
+				audio.clip = screamingClipFourth;
+				break;
+			case 4:
+				audio.clip = screamingClipFifth;
+				break;
+			case 5:
+				audio.clip = dyingClip;
+				break;
+			}
+
+			lastClip = currentClip;
+			audio.Play();
 		}
 	}
 
@@ -159,6 +268,8 @@ public class AnimationScript : MonoBehaviour
             //If it's Alive
             if (State == PersonStatus.Status.Idle)
             {
+				playTalkLoop(true);
+
                 if(personStatus.Fear >= 50) 
 				{
 					personStatus.UnitStatus = PersonStatus.Status.Concerned;
@@ -167,6 +278,8 @@ public class AnimationScript : MonoBehaviour
             }
             if (State == PersonStatus.Status.Calm)
             {
+				playTalkLoop(true);
+
                 if (personStatus.Fear >= 50) 
 				{
 					personStatus.UnitStatus = PersonStatus.Status.Concerned;
@@ -175,6 +288,8 @@ public class AnimationScript : MonoBehaviour
             }
             if (State == PersonStatus.Status.Concerned)
             {
+				playTalkLoop(false);
+
 				if (personStatus.Fear < 50) 
 					personStatus.UnitStatus = PersonStatus.Status.Calm;
 
@@ -185,6 +300,8 @@ public class AnimationScript : MonoBehaviour
 
             if (State == PersonStatus.Status.Panicked)
             {
+				playScreamLoop();
+
                 if (personStatus.Fear < 80)
 					personStatus.UnitStatus = PersonStatus.Status.Concerned;
 
@@ -200,6 +317,8 @@ public class AnimationScript : MonoBehaviour
 
             if (State == PersonStatus.Status.Shocked)
             {
+				playScreamLoop();
+				
                 _burnTimer += dt;
                 if (_burnTimer >= 1f)
                 {
@@ -210,7 +329,13 @@ public class AnimationScript : MonoBehaviour
 
             if (State == PersonStatus.Status.Raged)
 			{
+				playScreamLoop();
             }
+
+			if (State == PersonStatus.Status.Zombie)
+			{
+				playScreamLoop();
+			}
 
         }
     }

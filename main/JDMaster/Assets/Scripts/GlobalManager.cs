@@ -330,6 +330,10 @@ public class GlobalManager : MonoBehaviour
         // Find all game objects with tag Person
         GameObject[] npcsList;
         npcsList = GameObject.FindGameObjectsWithTag(npcsTag);
+
+		if(npcsList.Length == 0)
+			return 0;
+
         int totalFear = 0;
         int numberOfPeople;
         // Iterate through them and find the total fear and number of people

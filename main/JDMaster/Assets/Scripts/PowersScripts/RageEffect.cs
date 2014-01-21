@@ -130,7 +130,7 @@ public class RageEffect : PowerEffect
 			
 			if(person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget)
 			{
-				owner.audio.Play();
+				//owner.audio.Play();
 				
 				if(person.ActivePower != null && person.ActivePower.effectName == "calma")
 				{

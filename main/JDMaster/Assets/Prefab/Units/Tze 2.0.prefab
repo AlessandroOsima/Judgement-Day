@@ -484,9 +484,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
-  - 54: {fileID: 5400002}
   - 82: {fileID: 8200000}
-  - 54: {fileID: 5400004}
   m_Layer: 0
   m_Name: Tze 2.0
   m_TagString: Person
@@ -1523,9 +1521,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 44.1909561, y: 59.9389496, z: -52.4859924}
-  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
+  m_LocalRotation: {x: 0, y: .989216268, z: 0, w: -.146462515}
+  m_LocalPosition: {x: 15.3220263, y: .0289392471, z: 18.1407852}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 400078}
   - {fileID: 400100}
@@ -3742,36 +3740,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!54 &5400002
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100056}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5400004
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100056}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -3780,18 +3748,18 @@ AudioSource:
   m_GameObject: {fileID: 100056}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 30
+  MaxDistance: 900
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -3799,14 +3767,59 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
+      value: .421794891
+      inSlope: -56.272377
+      outSlope: -56.272377
+      tangentMode: 0
+    - time: .00111111114
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -900.358032
+      outSlope: -900.358032
+      tangentMode: 0
+    - time: .00222222228
+      value: .5
+      inSlope: -225.089508
+      outSlope: -225.089508
+      tangentMode: 0
+    - time: .00505011762
+      value: .304487169
+      inSlope: -5.54177999
+      outSlope: -5.54177999
+      tangentMode: 0
+    - time: .0120196193
+      value: .157371789
+      inSlope: -3.51702356
+      outSlope: -3.51702356
+      tangentMode: 0
+    - time: .0259586293
+      value: .072275646
+      inSlope: -.879255891
+      outSlope: -.879255891
+      tangentMode: 0
+    - time: .05383664
+      value: .015625
+      inSlope: -.219813973
+      outSlope: -.219813973
+      tangentMode: 0
+    - time: .142222226
+      value: .0078125
+      inSlope: -.0549534932
+      outSlope: -.0549534932
+      tangentMode: 0
+    - time: .284444451
+      value: .00390625
+      inSlope: -.0137383733
+      outSlope: -.0137383733
+      tangentMode: 0
+    - time: .568888903
+      value: .001953125
+      inSlope: -.00343459332
+      outSlope: -.00343459332
       tangentMode: 0
     - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: .00111111114
+      inSlope: -.00111155468
+      outSlope: -.00111155468
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -3824,7 +3837,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3855,6 +3868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5980844cb5861848b396854636661ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableStanding: 1
   RunningSpeed: 5
   MiddleSpeed: 3.5
   JoggingSpeed: 3
@@ -3862,34 +3876,15 @@ MonoBehaviour:
   patrolWaitTime: 3
   target: {fileID: 0}
   Type: 1
-  State: 7
+  State: 6
   Randomness: 0
   patrolWayPoints:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   panicWayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -3907,7 +3902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc271753ebb74ba4bb759d022daf750d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialFearLevel: 20
+  initialFearLevel: 0
   initialScorePoints: 1
   initialSoulsPoints: 3
   initialStatus: 7
@@ -3916,12 +3911,6 @@ MonoBehaviour:
   powerShieldEffect: {fileID: 100002, guid: ef9bafed9af794221a723f6b6a3cc456, type: 2}
   shouldNotBeKilledEffect: {fileID: 100002, guid: fbc73896d63bc41869d7311fccf8480a,
     type: 2}
-  talkingtClip: {fileID: 8300000, guid: e41173a768b81d948b39e009e5b3c422, type: 3}
-  laughingClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
-  screamingClip2: {fileID: 8300000, guid: 061f75834545f9542bb3982462d373bc, type: 3}
-  screamingClip: {fileID: 8300000, guid: 9ff53c9ebf1bf2f498f84432a3e53c15, type: 3}
-  dyingClip: {fileID: 8300000, guid: 338574b63d5121c4f9398d81447f96b5, type: 3}
-  singingClip: {fileID: 8300000, guid: f69d9931cb4cab04f984acbf2166650d, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3940,7 +3929,7 @@ MonoBehaviour:
   powerEffect: {fileID: 0}
   State: 6
   scorePoints: 1
-  soulPoints: 5
+  soulPoints: 3
   Adorer: 0
   _anim: {fileID: 0}
   _fireEmitter: {fileID: 0}
@@ -3948,6 +3937,17 @@ MonoBehaviour:
   _burnTimer: 0
   BurnWaitTime: 8
   DeathBurnTime: 5
+  talkingClipFirst: {fileID: 8300000, guid: e41173a768b81d948b39e009e5b3c422, type: 3}
+  talkingClipSecond: {fileID: 8300000, guid: 06cf74041d5ce7642ab53efdb3e89c3c, type: 3}
+  talkingClipThird: {fileID: 8300000, guid: 0aaa9d236e1ff814abfaaf97d4639d55, type: 3}
+  laughingClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
+  screamingClipFifth: {fileID: 8300000, guid: 67fe537de098e434d90e3214efec18dd, type: 3}
+  screamingClipFourth: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  screamingClipThird: {fileID: 8300000, guid: 8c76010d6e96c644696ef17c2e6507e0, type: 3}
+  screamingClipSecond: {fileID: 8300000, guid: 061f75834545f9542bb3982462d373bc, type: 3}
+  screamingClip: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  dyingClip: {fileID: 8300000, guid: 338574b63d5121c4f9398d81447f96b5, type: 3}
+  singingClip: {fileID: 8300000, guid: f69d9931cb4cab04f984acbf2166650d, type: 3}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -26,6 +26,7 @@ public class CalmEffect : PowerEffect
 		}
 
 		timer += Time.deltaTime;
+		status.Fear = 0;
 
 		if(timer >= 10)
 		{

@@ -787,7 +787,7 @@ public class VertexPainter2 : EditorWindow {
 
 					myWindow.checkForCollider();
 
-					Vector3[] vertices = myWindow.lockedMesh.vertices;  ///////////////////////////////////////<---------------------
+					Vector3[] vertices = myWindow.lockedMesh.vertices; 
 					Color[] colors = new Color[vertices.Length];
 						
 					Event e = Event.current;
@@ -868,14 +868,23 @@ public class VertexPainter2 : EditorWindow {
 
 								colors = myWindow.lockedMesh.colors;
 
+								Debug.Log(relativePoint);
+
+								relativePoint = new Vector3(relativePoint.x,relativePoint.y,relativePoint.z);
+
 								float sqrRadius = myWindow.radius * myWindow.radius;
+
+								Debug.Log(vertices.Length);
+
 
 								for (int i = 0; i < vertices.Length; i++) {
 
 									vertices[i] = lockedObjectMatrix.MultiplyPoint(vertices[i]);
 									float sqrMagnitude = (vertices[i] - relativePoint).sqrMagnitude;
 
-									if (sqrMagnitude < sqrRadius) {
+									
+									if (sqrMagnitude < sqrRadius) 
+									{
 
 										float distance = Mathf.Sqrt(sqrMagnitude);
 
@@ -883,11 +892,14 @@ public class VertexPainter2 : EditorWindow {
 
 										float colorAdd = falloff * myWindow.strength;
 																				
-										if (myWindow.strength == .25) {
+										if (myWindow.strength == .25) 
+										{
 
 											colors[i] = myWindow.vertexColor;
 
-										} else {
+										} 
+										else 
+										{
 
 											colors[i] = Color.Lerp(colors[i], myWindow.vertexColor, colorAdd);
 

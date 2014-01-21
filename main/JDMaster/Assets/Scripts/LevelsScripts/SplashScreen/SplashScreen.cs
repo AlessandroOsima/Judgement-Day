@@ -24,15 +24,18 @@ public class SplashScreen : MonoBehaviour {
 			Application.LoadLevel("LevelSelectionMenu");
 
 		if(Input.GetKey(KeyCode.Alpha1))
-			Application.LoadLevel("TutorialStart");
+			Application.LoadLevel("TutorialFire");
 
 		if(Input.GetKey(KeyCode.Alpha2))
 			Application.LoadLevel("TutorialRage");
 	
 		if(Input.GetKey(KeyCode.Alpha3))
-			Application.LoadLevel("Sandbox");
+			Application.LoadLevel("City");
 
 		if(Input.GetKey(KeyCode.Alpha4))
+			Application.LoadLevel("Stonehenge");
+
+		if(Input.GetKey(KeyCode.Alpha5))
 			Application.LoadLevel("TowerDefense");
 	}
 }

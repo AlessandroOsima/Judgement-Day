@@ -15,6 +15,7 @@ public class CameraControl : MonoBehaviour
 	public bool debugDraw = false;
 	public bool debugNoRaycast = false;
 	public float zoomLevel = 40;
+	public bool rotationEnabled = true;
 	float distFromMin;
 	float distFromMax;
 

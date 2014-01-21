@@ -151,7 +151,7 @@ public class ZombieEffect : PowerEffect
 			
 			if(person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget && person.UnitStatus != PersonStatus.Status.Zombie)
 			{
-				owner.audio.Play();
+				//owner.audio.Play();
 				
 				if(person.ActivePower != null && person.ActivePower.effectName == "calma")
 				{

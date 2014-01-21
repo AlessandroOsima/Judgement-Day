@@ -43,7 +43,11 @@ public class PowersManager : MonoBehaviour
 			power.enabled = false;
 		}
 
-		LevelGUI.levelGUI.setUpPowersBar(powers);
+		if(powers.Length > 0)
+		{
+			LevelGUI.levelGUI.setUpPowersBar(powers);
+		}
+
 		GlobalManager.globalManager.onSoulsChanged += onSoulsChanged;
 	}
 

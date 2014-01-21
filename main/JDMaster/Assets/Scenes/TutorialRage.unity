@@ -879,6 +879,14 @@ Prefab:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .300000012
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 209449472}
@@ -2150,6 +2158,7 @@ GameObject:
   - 198: {fileID: 50007079}
   - 199: {fileID: 50007078}
   - 114: {fileID: 50007077}
+  - 65: {fileID: 50007081}
   - 65: {fileID: 50007080}
   m_Layer: 0
   m_Name: PS_Zombie
@@ -3253,6 +3262,19 @@ BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 50007075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &50007081
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 4aa8fabbebb924f7bb47b603115032a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 194677440}
   m_GameObject: {fileID: 50007075}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -9250,6 +9272,7 @@ GameObject:
   - 114: {fileID: 209449476}
   - 114: {fileID: 209449475}
   - 54: {fileID: 209449474}
+  - 82: {fileID: 209449485}
   m_Layer: 0
   m_Name: Tze 2.0
   m_TagString: Person
@@ -9298,6 +9321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5980844cb5861848b396854636661ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableStanding: 1
   RunningSpeed: 5
   MiddleSpeed: 3.5
   JoggingSpeed: 3
@@ -9366,6 +9390,17 @@ MonoBehaviour:
   _burnTimer: 0
   BurnWaitTime: 8
   DeathBurnTime: 5
+  talkingClipFirst: {fileID: 8300000, guid: e41173a768b81d948b39e009e5b3c422, type: 3}
+  talkingClipSecond: {fileID: 8300000, guid: 06cf74041d5ce7642ab53efdb3e89c3c, type: 3}
+  talkingClipThird: {fileID: 8300000, guid: 0aaa9d236e1ff814abfaaf97d4639d55, type: 3}
+  laughingClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
+  screamingClipFifth: {fileID: 8300000, guid: 67fe537de098e434d90e3214efec18dd, type: 3}
+  screamingClipFourth: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  screamingClipThird: {fileID: 8300000, guid: 8c76010d6e96c644696ef17c2e6507e0, type: 3}
+  screamingClipSecond: {fileID: 8300000, guid: 061f75834545f9542bb3982462d373bc, type: 3}
+  screamingClip: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  dyingClip: {fileID: 8300000, guid: 338574b63d5121c4f9398d81447f96b5, type: 3}
+  singingClip: {fileID: 8300000, guid: f69d9931cb4cab04f984acbf2166650d, type: 3}
 --- !u!136 &209449478
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9522,6 +9557,110 @@ CharacterController:
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!82 &209449485
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 38296ccc546d8d44aaaa17818236a763,
+    type: 2}
+  m_PrefabInternal: {fileID: 11519777}
+  m_GameObject: {fileID: 209449472}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 900
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: .421794891
+      inSlope: -56.272377
+      outSlope: -56.272377
+      tangentMode: 0
+    - time: .00111111114
+      value: 1
+      inSlope: -900.358032
+      outSlope: -900.358032
+      tangentMode: 0
+    - time: .00222222228
+      value: .5
+      inSlope: -225.089508
+      outSlope: -225.089508
+      tangentMode: 0
+    - time: .00505011762
+      value: .304487169
+      inSlope: -5.54177999
+      outSlope: -5.54177999
+      tangentMode: 0
+    - time: .0120196193
+      value: .157371789
+      inSlope: -3.51702356
+      outSlope: -3.51702356
+      tangentMode: 0
+    - time: .0259586293
+      value: .072275646
+      inSlope: -.879255891
+      outSlope: -.879255891
+      tangentMode: 0
+    - time: .05383664
+      value: .015625
+      inSlope: -.219813973
+      outSlope: -.219813973
+      tangentMode: 0
+    - time: .142222226
+      value: .0078125
+      inSlope: -.0549534932
+      outSlope: -.0549534932
+      tangentMode: 0
+    - time: .284444451
+      value: .00390625
+      inSlope: -.0137383733
+      outSlope: -.0137383733
+      tangentMode: 0
+    - time: .568888903
+      value: .001953125
+      inSlope: -.00343459332
+      outSlope: -.00343459332
+      tangentMode: 0
+    - time: 1
+      value: .00111111114
+      inSlope: -.00111155468
+      outSlope: -.00111155468
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1001 &209968552
 Prefab:
   m_ObjectHideFlags: 0
@@ -20980,6 +21119,7 @@ MonoBehaviour:
   debugDraw: 1
   debugNoRaycast: 0
   zoomLevel: 40
+  rotationEnabled: 1
 --- !u!81 &675988138
 AudioListener:
   m_ObjectHideFlags: 0
@@ -23953,6 +24093,14 @@ Prefab:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .300000012
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1714910912}
@@ -26365,8 +26513,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 894919715}
-  m_LocalRotation: {x: -.382683486, y: 0, z: 0, w: .923879504}
-  m_LocalPosition: {x: -9.25141239, y: -37.674057, z: -73.1405869}
+  m_LocalRotation: {x: .249341384, y: .0504733101, z: .0130136413, w: -.967011929}
+  m_LocalPosition: {x: -11.3202229, y: -44.4813385, z: -84.1998596}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -28820,6 +28968,14 @@ Prefab:
     - target: {fileID: 11400002, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: initialShouldNotBeKilled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .300000012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -35998,6 +36154,7 @@ GameObject:
   - 114: {fileID: 1235675227}
   - 114: {fileID: 1235675226}
   - 54: {fileID: 1235675225}
+  - 82: {fileID: 1235675236}
   m_Layer: 0
   m_Name: Tze 2.0
   m_TagString: Person
@@ -36046,6 +36203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5980844cb5861848b396854636661ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableStanding: 1
   RunningSpeed: 5
   MiddleSpeed: 3.5
   JoggingSpeed: 3
@@ -36114,6 +36272,17 @@ MonoBehaviour:
   _burnTimer: 0
   BurnWaitTime: 8
   DeathBurnTime: 5
+  talkingClipFirst: {fileID: 8300000, guid: e41173a768b81d948b39e009e5b3c422, type: 3}
+  talkingClipSecond: {fileID: 8300000, guid: 06cf74041d5ce7642ab53efdb3e89c3c, type: 3}
+  talkingClipThird: {fileID: 8300000, guid: 0aaa9d236e1ff814abfaaf97d4639d55, type: 3}
+  laughingClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
+  screamingClipFifth: {fileID: 8300000, guid: 67fe537de098e434d90e3214efec18dd, type: 3}
+  screamingClipFourth: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  screamingClipThird: {fileID: 8300000, guid: 8c76010d6e96c644696ef17c2e6507e0, type: 3}
+  screamingClipSecond: {fileID: 8300000, guid: 061f75834545f9542bb3982462d373bc, type: 3}
+  screamingClip: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  dyingClip: {fileID: 8300000, guid: 338574b63d5121c4f9398d81447f96b5, type: 3}
+  singingClip: {fileID: 8300000, guid: f69d9931cb4cab04f984acbf2166650d, type: 3}
 --- !u!136 &1235675229
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -36270,6 +36439,110 @@ CharacterController:
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!82 &1235675236
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 38296ccc546d8d44aaaa17818236a763,
+    type: 2}
+  m_PrefabInternal: {fileID: 974559999}
+  m_GameObject: {fileID: 1235675223}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 900
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: .421794891
+      inSlope: -56.272377
+      outSlope: -56.272377
+      tangentMode: 0
+    - time: .00111111114
+      value: 1
+      inSlope: -900.358032
+      outSlope: -900.358032
+      tangentMode: 0
+    - time: .00222222228
+      value: .5
+      inSlope: -225.089508
+      outSlope: -225.089508
+      tangentMode: 0
+    - time: .00505011762
+      value: .304487169
+      inSlope: -5.54177999
+      outSlope: -5.54177999
+      tangentMode: 0
+    - time: .0120196193
+      value: .157371789
+      inSlope: -3.51702356
+      outSlope: -3.51702356
+      tangentMode: 0
+    - time: .0259586293
+      value: .072275646
+      inSlope: -.879255891
+      outSlope: -.879255891
+      tangentMode: 0
+    - time: .05383664
+      value: .015625
+      inSlope: -.219813973
+      outSlope: -.219813973
+      tangentMode: 0
+    - time: .142222226
+      value: .0078125
+      inSlope: -.0549534932
+      outSlope: -.0549534932
+      tangentMode: 0
+    - time: .284444451
+      value: .00390625
+      inSlope: -.0137383733
+      outSlope: -.0137383733
+      tangentMode: 0
+    - time: .568888903
+      value: .001953125
+      inSlope: -.00343459332
+      outSlope: -.00343459332
+      tangentMode: 0
+    - time: 1
+      value: .00111111114
+      inSlope: -.00111155468
+      outSlope: -.00111155468
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1237057037
 GameObject:
   m_ObjectHideFlags: 0
@@ -38647,8 +38920,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: -.193672061, y: .269454479, z: .0554164909, w: .941708267}
-  m_LocalPosition: {x: -55.0662155, y: -55.9072456, z: -83.4146729}
+  m_LocalRotation: {x: .290685266, y: .200106576, z: .0623054467, w: -.93358314}
+  m_LocalPosition: {x: 29.8182259, y: -56.225544, z: -111.700043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -46626,6 +46899,7 @@ GameObject:
   - 114: {fileID: 1714910916}
   - 114: {fileID: 1714910915}
   - 54: {fileID: 1714910914}
+  - 82: {fileID: 1714910925}
   m_Layer: 0
   m_Name: Tze 2.0
   m_TagString: Person
@@ -46674,6 +46948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5980844cb5861848b396854636661ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableStanding: 1
   RunningSpeed: 5
   MiddleSpeed: 3.5
   JoggingSpeed: 3
@@ -46748,6 +47023,17 @@ MonoBehaviour:
   _burnTimer: 0
   BurnWaitTime: 8
   DeathBurnTime: 5
+  talkingClipFirst: {fileID: 8300000, guid: e41173a768b81d948b39e009e5b3c422, type: 3}
+  talkingClipSecond: {fileID: 8300000, guid: 06cf74041d5ce7642ab53efdb3e89c3c, type: 3}
+  talkingClipThird: {fileID: 8300000, guid: 0aaa9d236e1ff814abfaaf97d4639d55, type: 3}
+  laughingClip: {fileID: 8300000, guid: df9ce27d5701d6844a43f806845f2c7f, type: 3}
+  screamingClipFifth: {fileID: 8300000, guid: 67fe537de098e434d90e3214efec18dd, type: 3}
+  screamingClipFourth: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  screamingClipThird: {fileID: 8300000, guid: 8c76010d6e96c644696ef17c2e6507e0, type: 3}
+  screamingClipSecond: {fileID: 8300000, guid: 061f75834545f9542bb3982462d373bc, type: 3}
+  screamingClip: {fileID: 8300000, guid: f86af97d0d90d5540adb54e534cc0a47, type: 3}
+  dyingClip: {fileID: 8300000, guid: 338574b63d5121c4f9398d81447f96b5, type: 3}
+  singingClip: {fileID: 8300000, guid: f69d9931cb4cab04f984acbf2166650d, type: 3}
 --- !u!136 &1714910918
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -46904,6 +47190,110 @@ CharacterController:
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!82 &1714910925
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 38296ccc546d8d44aaaa17818236a763,
+    type: 2}
+  m_PrefabInternal: {fileID: 789592041}
+  m_GameObject: {fileID: 1714910912}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 900
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: .421794891
+      inSlope: -56.272377
+      outSlope: -56.272377
+      tangentMode: 0
+    - time: .00111111114
+      value: 1
+      inSlope: -900.358032
+      outSlope: -900.358032
+      tangentMode: 0
+    - time: .00222222228
+      value: .5
+      inSlope: -225.089508
+      outSlope: -225.089508
+      tangentMode: 0
+    - time: .00505011762
+      value: .304487169
+      inSlope: -5.54177999
+      outSlope: -5.54177999
+      tangentMode: 0
+    - time: .0120196193
+      value: .157371789
+      inSlope: -3.51702356
+      outSlope: -3.51702356
+      tangentMode: 0
+    - time: .0259586293
+      value: .072275646
+      inSlope: -.879255891
+      outSlope: -.879255891
+      tangentMode: 0
+    - time: .05383664
+      value: .015625
+      inSlope: -.219813973
+      outSlope: -.219813973
+      tangentMode: 0
+    - time: .142222226
+      value: .0078125
+      inSlope: -.0549534932
+      outSlope: -.0549534932
+      tangentMode: 0
+    - time: .284444451
+      value: .00390625
+      inSlope: -.0137383733
+      outSlope: -.0137383733
+      tangentMode: 0
+    - time: .568888903
+      value: .001953125
+      inSlope: -.00343459332
+      outSlope: -.00343459332
+      tangentMode: 0
+    - time: 1
+      value: .00111111114
+      inSlope: -.00111155468
+      outSlope: -.00111155468
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1715303222
 GameObject:
   m_ObjectHideFlags: 0
@@ -47197,7 +47587,7 @@ MonoBehaviour:
   price: 5
   powerState: 1
   speed: 25
-  Fear: 70
+  Fear: 80
   Highness: 20
   godRay: {fileID: 3922054}
   particleEffect: {fileID: 612099280}

@@ -122,8 +122,8 @@ MonoBehaviour:
   layer: 0
   autoTextureSelectionForHD: 0
   allowPod4GenHD: 0
-  maxWidthOrHeightForSD: 2048
-  maxWidthOrHeightForHD: 4048
+  maxWidthOrHeightForSD: 960
+  maxWidthOrHeightForHD: 2048
   hdExtension: 2x
 --- !u!1 &1405739778
 GameObject:
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texturePackerConfigName: JDLogo
-  material: {fileID: 2100000, guid: 23dae040ec6e2429d97dfd5b21b5830b, type: 2}
+  material: {fileID: 2100000, guid: 7998a82f67be84cae8e0585ffb074eaa, type: 2}
   layer: 0
   textureSize: {x: 0, y: 0}
   displayTouchDebugAreas: 0
@@ -300,7 +300,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 6c4d7317653619d46a91ec4ab2515ad7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .504999995
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -450,11 +450,12 @@ MonoBehaviour:
   price: 5
   powerState: 1
   speed: 25
-  Fear: 70
+  Fear: 80
   Highness: 20
   godRay: {fileID: 100000}
   particleEffect: {fileID: 100004}
-  distance: 40
+  cameraZoomScaleFactor: 1
+  enableUse: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -15,6 +15,7 @@ public class UnitNavigationController : MonoBehaviour
     float dt;
     System.Random rnd;
     //---------Constants
+	public bool enableStanding = true;
     public float RunningSpeed = 5f;		//Unit running Speed
 	public float MiddleSpeed = 3.5f;	//Unit concerned Speed
 	public float JoggingSpeed = 3f;	
@@ -25,7 +26,7 @@ public class UnitNavigationController : MonoBehaviour
     //---------Atributes
     public PatrolType Type = PatrolType.Idle;	//Type of Unit
     public PersonStatus.Status State;						//Current State
-    public bool Randomness = true;
+    public bool Randomness = false;
     public Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
     public Transform[] panicWayPoints;                     	// An array of transforms for the running route.
     //public Vector3 Target; 			//Actual target of the person
@@ -97,7 +98,6 @@ public class UnitNavigationController : MonoBehaviour
 				_nav.destination = this.transform.position;
 				return;
 			}
-			//Debug.Log("No waypoints array is selected, something VERY WRONG is going on");
 		}
 
 
@@ -132,24 +132,18 @@ public class UnitNavigationController : MonoBehaviour
 
     void Patrolling()
     {
-        // If near the next waypoint or there is no destination...
-        if (isAtDestination())
-        {
-			SetNewPatrolDestination(Type);
-		}
 
-        if (_nav.remainingDistance <= _nav.stoppingDistance)
+        if (isAtDestination() && !Stand)
         {
-			Stop();
-
-            if (Type == PatrolType.Idle)
-            {
-                SetNewPatrolDestination(Type);
-            }
-            else if (State == PersonStatus.Status.Calm)
+            if (State == PersonStatus.Status.Calm && enableStanding)
 			{
 				Stand = true;
 				ps.UnitStatus = PersonStatus.Status.Idle;
+			}
+			else if(State == PersonStatus.Status.Calm)
+			{
+				SetNewPatrolDestination(Type);
+				return;
 			}
         }
 
@@ -194,8 +188,9 @@ public class UnitNavigationController : MonoBehaviour
             else
             {
                 patrolTimer = 0;
-            }
+			}
         }
+
     }
 
     public void Panicking()
@@ -277,28 +272,19 @@ public class UnitNavigationController : MonoBehaviour
 
             if (State == PersonStatus.Status.Idle)
             {
-                if (Type == PatrolType.Patrol)
-                {
-                    Patrolling();
-                } 
-                if (Type == PatrolType.Fixed)
-                {
-                    Patrolling();
-                }
+				Stop();
+				Patrolling();
             }
+
             if (State == PersonStatus.Status.Calm)
             {
-                if (Type == PatrolType.Patrol)
-                {
-                    SetSpeed(WalkingSpeed);
-                    Patrolling();
-                }
-                if (Type == PatrolType.Fixed)
+                if (Type == PatrolType.Patrol || Type == PatrolType.Fixed)
                 {
                     SetSpeed(WalkingSpeed);
                     Patrolling();
                 }
             }
+
             if (State == PersonStatus.Status.Concerned)
             {
                 SetSpeed(MiddleSpeed);

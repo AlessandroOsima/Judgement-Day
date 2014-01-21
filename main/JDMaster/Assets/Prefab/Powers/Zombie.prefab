@@ -11,6 +11,7 @@ GameObject:
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
   - 114: {fileID: 11400000}
+  - 65: {fileID: 6500000}
   m_Layer: 0
   m_Name: PS_Zombie
   m_TagString: Untagged
@@ -202,6 +203,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -319,6 +332,7 @@ MonoBehaviour:
   godRay: {fileID: 100008}
   particleEffect: {fileID: 100000}
   cameraZoomScaleFactor: 1
+  enableUse: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

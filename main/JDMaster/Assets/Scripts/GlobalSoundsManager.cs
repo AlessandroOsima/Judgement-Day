@@ -20,9 +20,11 @@ public class GlobalSoundsManager : MonoBehaviour
 	bool fadeOutOver = true;
 	int population;
 	float audioVolume = 0f;
+	float maxVolume;
 	
 	void Start()
     {
+		maxVolume = audio.volume;
         globalManager = GameObject.Find("Global").GetComponent<GlobalManager>();
 		population = GlobalManager.globalManager.population;
 
@@ -115,7 +117,7 @@ public class GlobalSoundsManager : MonoBehaviour
 				if (audio.isPlaying && audio.clip != worriedClip)                    // if there is audio playing
 					fadeOut(10f);  
 				else
-					fadeIn(worriedClip,10f);
+					fadeIn(worriedClip,10.0f);
 			}
 			
 			if (fear > 60f)
@@ -123,7 +125,7 @@ public class GlobalSoundsManager : MonoBehaviour
 				if (audio.isPlaying && audio.clip != scaredClip)                    // if there is audio playing
 					fadeOut(10f);  
 				else
-					fadeIn(scaredClip,10f);
+					fadeIn(scaredClip,10.0f);
 			}
 		}
 	}
@@ -137,7 +139,7 @@ public class GlobalSoundsManager : MonoBehaviour
 			audio.Play();
 		}
 		
-		if(audio.volume < 1f)
+		if(audio.volume < maxVolume)
 		{
 			audioVolume = audioVolume + (fadeInSpeed * Time.deltaTime);
 			audio.volume = audioVolume;
