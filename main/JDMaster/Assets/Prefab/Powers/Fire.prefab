@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657e22bb1de8d42c4b2ed02cd06902fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: benzina
+  name: fuoco
   price: 5
   powerState: 1
   speed: 25

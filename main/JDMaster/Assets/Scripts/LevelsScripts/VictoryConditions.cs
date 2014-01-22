@@ -3,9 +3,11 @@ using System.Collections;
 
 public class VictoryConditions : MonoBehaviour {
 
-	string nextLevel = "Stonehenge";
+	public string nextLevel = "Stonehenge";
+	bool reload;
 	bool startCounting = false;
 	float timer = 0;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -17,18 +19,17 @@ public class VictoryConditions : MonoBehaviour {
 		if(endGameState == EndGameState.Defeat)
 		{
 			Debug.Log(endGameState);
-			LevelGUI.levelGUI.writeMessage("DEFEAT ",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
+			LevelGUI.levelGUI.writeWord("DEFEAT ",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
+			reload = true;
 		}
 		else
 		{
 			Debug.Log(endGameState);
-			LevelGUI.levelGUI.writeMessage("VICTORY",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
+			LevelGUI.levelGUI.writeWord("VICTORY",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
+			reload = false;
 		}
 
 		startCounting = true;
-
-		if(Application.loadedLevelName == "Stonehenge")
-			nextLevel = "TowerDefense";
 	}
 
 	// Update is called once per frame
@@ -39,7 +40,10 @@ public class VictoryConditions : MonoBehaviour {
 			timer += Time.deltaTime;
 			if(timer >= 10f)
 			{
-				Application.LoadLevel(nextLevel);
+				if(reload)
+					Application.LoadLevel(Application.loadedLevelName);
+				else
+					Application.LoadLevel(nextLevel);
 			}
 		}
 	}

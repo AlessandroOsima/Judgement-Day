@@ -310,8 +310,34 @@ public class LevelGUI : MonoBehaviour
 		
 	}
 
+	public void WriteMessage(string s, float h,float w, float d)
+	{
+		float height = Screen.height/2;
+		float width = Screen.width/2;
+		
+		Debug.Log(Screen.width);
+		Debug.Log(Screen.height);
+		
+		int i = 0;
+		int j = 0;
+		float space = (w * width);
+		string word;
+		
+		while ((j = s.IndexOf(" ", i)) != -1)
+		{
+			word = s.Substring(i,(j-i));
+			LevelGUI.levelGUI.writeWord(word, new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
+			space += (word.Length + 2) * 14;
+			j++;
+			i = j;
+		}
+		
+		word = s.Substring(i);
+		LevelGUI.levelGUI.writeWord(word,new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
+	}
+
 	//duration is the time in seconds needed a message will stay visible before being destroyed, if duration <= 0 the message will stay visible forever
-	public void writeMessage(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
+	public void writeWord(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
 	{
 		if(messages == null)
 		{

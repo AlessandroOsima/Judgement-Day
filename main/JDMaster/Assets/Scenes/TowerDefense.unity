@@ -23970,6 +23970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36158b61c319b4eb886d2d87e8b2ea3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevel: Stonehenge
 --- !u!114 &478283693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30910,7 +30911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657e22bb1de8d42c4b2ed02cd06902fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: benzina
+  name: fuoco
   price: 7
   powerState: 1
   speed: 25
@@ -63166,8 +63167,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306866485}
-  m_LocalRotation: {x: .290685266, y: .200106576, z: .0623054467, w: -.93358314}
-  m_LocalPosition: {x: 29.8182259, y: -56.225544, z: -111.700043}
+  m_LocalRotation: {x: -.299776614, y: .045500502, z: .014315689, w: .952816248}
+  m_LocalPosition: {x: -34.2929382, y: -81.9954529, z: -146.20993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

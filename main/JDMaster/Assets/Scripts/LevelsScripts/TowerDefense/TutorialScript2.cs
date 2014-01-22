@@ -22,13 +22,13 @@ public class TutorialScript2 : MonoBehaviour {
 		string word;
 		while ((j = s.IndexOf(" ", i)) != -1){
 			word = s.Substring(i,(j-i));
-			LevelGUI.levelGUI.writeMessage(word,new Vector3(space, (h*height),0f), new Vector3(1.4f,1.4f,1),d,true);
+			LevelGUI.levelGUI.writeWord(word,new Vector3(space, (h*height),0f), new Vector3(1.4f,1.4f,1),d,true);
 			space+=(word.Length+2)*charS;
 			j++;
 			i=j;
 		}
 		word = s.Substring(i);
-		LevelGUI.levelGUI.writeMessage(word,new Vector3(space, (h*height),0f), new Vector3(1.4f,1.4f,1),d,true);
+		LevelGUI.levelGUI.writeWord(word,new Vector3(space, (h*height),0f), new Vector3(1.4f,1.4f,1),d,true);
 	}
 	
 	// Update is called once per frame
@@ -148,7 +148,7 @@ public class TutorialScript2 : MonoBehaviour {
 			}
 		}
 		if(time>103f && messageCount==16 && GlobalManager.globalManager.population<=0){
-			LevelGUI.levelGUI.writeMessage("VICTORY",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),10f,false);
+			LevelGUI.levelGUI.writeWord("VICTORY",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),10f,false);
 			messageCount++;
 		}
 		if(time>110f && messageCount==17){

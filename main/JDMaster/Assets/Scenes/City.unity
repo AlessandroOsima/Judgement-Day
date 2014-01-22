@@ -21124,6 +21124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36158b61c319b4eb886d2d87e8b2ea3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevel: EasterIsland
 --- !u!114 &478283692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26644,7 +26645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657e22bb1de8d42c4b2ed02cd06902fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: benzina
+  name: fuoco
   price: 5
   powerState: 1
   speed: 25
@@ -42651,7 +42652,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 0c3c12fefdd45e2458aee6cfab2c3d06, type: 2}
 --- !u!95 &1018725062
 Animator:

@@ -152,7 +152,7 @@ public class BasePowerDealer : Power
 
             particleEffect.transform.position = particleEffect.transform.position + Vector3.down * speed * Time.deltaTime;
 
-            if (particleEffect.transform.position.y <= 0)
+            if (particleEffect.transform.position.y <= -10f)
             {
                 ready = true;
                 particleEffect.transform.position = new Vector3(Location.x, previousParticlePosY, Location.z);
