@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TutorialScript : MonoBehaviour 
 {
-	private static int charS = 14;
+	private static int charS = 13;
 	private float time = 0f;
 	private float dt;
 	private int messageCount=0;
@@ -12,6 +12,7 @@ public class TutorialScript : MonoBehaviour
 	private LevelGUI gui;
 	private PersonStatus firstTze;
 	private PersonStatus secondTze;
+	public float messagePass=0.5f;
 
 	// Use this for initialization
 	void Start () 
@@ -23,7 +24,8 @@ public class TutorialScript : MonoBehaviour
 		secondTze = persons[1].GetComponent<PersonStatus>();
 		GlobalManager.globalManager.standardVictoryConditions = false;
 
-		WriteMessage("Welcome to Judgement Day!",0.75f,0.25f,6f);
+		WriteMessage("Welcome to Judgement Day!",1.7f,0.25f,0f);
+		WriteMessage("Press Enter to Continue",1.8f,0.25f,0f);
 
 		firePower = GlobalManager.globalManager.gameObject.transform.FindChild("Fire").GetComponent<BasePowerDealer>();
 	}
@@ -32,10 +34,7 @@ public class TutorialScript : MonoBehaviour
 	{
 		float height = Screen.height/2;
 		float width = Screen.width/2;
-		
-		Debug.Log(Screen.width);
-		Debug.Log(Screen.height);
-		
+
 		int i = 0;
 		int j = 0;
 		float space = (w * width);
@@ -61,146 +60,258 @@ public class TutorialScript : MonoBehaviour
 
 		time+=dt;
 
-		LevelGUI.levelGUI.isDisplayingMessages();
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 0   )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("You are a GOD!!!",1.7f,0.25f,0f);
+				WriteMessage("but these people are not adoring you",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 0)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 1   )
 		{
-			WriteMessage("You are a GOD!!!",0.75f,0.25f,6f);
-			WriteMessage("but these people are not adoring you",0.85f,0.25f,6f);
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Look at them just laughing.",1.7f,0.25f,0f);
+				WriteMessage("To zoom press Q.",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==1)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey("q")) && messageCount == 2  )
 		{
-			WriteMessage("Look at them just laughing.",0.75f,0.25f,5f);
-			WriteMessage("To zoom press Q.",0.85f,0.25f,5f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 2 && Camera.main.transform.position.y < originalCamPosition.y)
-		{
-			WriteMessage("Good, you can zoom back with E.",0.75f,0.25f,7f);
-			WriteMessage("You should use your powers to teach them who's the boss.",0.85f,0.25f,7f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==3)
-		{
-			WriteMessage("Let's try a little FIRE!!",0.75f,0.25f,5f);
-
-			firePower.powerState = PowerState.Disabled;
-			PowersManager.powersManager.refreshPowersStates(GlobalManager.globalManager.souls);
-			((BasePowerDealer)firePower).enableUse = false;
-
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==4)
-		{
-			WriteMessage("Press 1 to select FIRE!",0.75f,0.25f,8f);
-			WriteMessage("Use the arrows to move the god ray to your target.",0.85f,0.25f,8f);
-			messageCount = 6;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==6 && PowersManager.powersManager.SelectedPower == firePower)
-		{
-			messageCount = 8;
-			((BasePowerDealer)firePower).enableUse = true;
-			WriteMessage("Good! Now burn the unworthy.",0.75f,0.25f,6f);
-			WriteMessage("Press SPACE to use your Power.",0.85f,0.25f,6f);
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 8 && GlobalManager.globalManager.population <= 1)
-		{
-			WriteMessage("JAJAJAJAJAJAJAJAJA...",0.75f,0.25f,4f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() &&  messageCount == 8 && GlobalManager.globalManager.souls < 5 && GlobalManager.globalManager.population > 1 && firstTze.ActivePower == null && secondTze.ActivePower == null)
-		{
-			WriteMessage("You missed. Did you not?",0.75f,0.25f,6f);
-			messageCount = 9;
-		}
-		
-		
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==9 && GlobalManager.globalManager.population < 2){
-			WriteMessage("Sorry, I got carried away",0.75f,0.25f,6f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==9 && GlobalManager.globalManager.population == 2 || (!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==16 && GlobalManager.globalManager.souls<=7 && GlobalManager.globalManager.population > 0))
-		{
-			WriteMessage("Do not worry. You can Redo the level any time",0.75f,0.25f,6f);
-			WriteMessage("Press the Redo button up in the left",0.85f,0.25f,0f);
-			messageCount+=10;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 10)
-		{
-			((BasePowerDealer)firePower).enableUse = false;
-			WriteMessage("However be aware! When you use your powers you use SOULS",0.75f,0.25f,8f);
-			WriteMessage("The number of SOULS you own is up there with the crosses",0.85f,0.25f,8f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==11){
-			WriteMessage("You have a limited number of SOULS",0.75f,0.25f,8f);
-			WriteMessage("But with each infidel dead you get his sins weight in SOULS",0.85f,0.25f,8f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==12)
-		{
-			WriteMessage("Some will be worth more of your time, some less",0.75f,0.25f,8f);
-			WriteMessage("It depends on their actions, and Yours",0.85f,0.25f,8f);
-			WriteMessage("This guys will give you 3 souls each",0.95f,0.25f,8f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==13){
-			WriteMessage("The cost of the Powers is stated next to it",0.75f,0.25f,8f);
-			WriteMessage("You can use some extra SOULS this time",0.85f,0.25f,8f);
-			GlobalManager.globalManager.incrementSouls(8);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==14)
-		{
-			if(GlobalManager.globalManager.population > 0)
+			if(time>=messagePass)
 			{
+				if(LevelGUI.levelGUI.isDisplayingMessages())
+				{
+					LevelGUI.levelGUI.clearMessages();
+				}
+
+				WriteMessage("Good, you can zoom back with E.",1.7f,0.25f,0f);
+				WriteMessage("You should use your powers to teach them who's the boss.",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey("e")) && messageCount == 3  )
+		{
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Ok, let's try a little FIRE!!",1.7f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 4  )
+		{
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				firePower.powerState = PowerState.Disabled;
+				PowersManager.powersManager.refreshPowersStates(GlobalManager.globalManager.souls);
+				((BasePowerDealer)firePower).enableUse = false;
+				WriteMessage("Press Number 1 to select FIRE!",1.7f,0.25f,0f);
+				WriteMessage("Use the arrows to move the god ray to your target.",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+
+
+		if((Input.GetKey(KeyCode.Keypad1) || Input.GetKey("1")) && messageCount == 5 
+		   							&& PowersManager.powersManager.SelectedPower == firePower)
+		{
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
 				((BasePowerDealer)firePower).enableUse = true;
-				WriteMessage("Now, Do me a favor and kill that other infidel too.",0.75f,0.25f,7f);
+				WriteMessage("Good! Now burn the unworthy.",1.7f,0.25f,0f);
+				WriteMessage("Press SPACE to use your Power.",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+		if(messageCount == 6 && GlobalManager.globalManager.population <= 1){
+			messageCount++;
+		}
+		if(messageCount == 7)
+		{
+			if(LevelGUI.levelGUI.isDisplayingMessages()){
+				LevelGUI.levelGUI.clearMessages();
+			}
+			WriteMessage("HAHAHAHAHHAHAHAHAHAHAHA...",1.7f,0.25f,0f);
+			messageCount++;
+		}
+
+		if(messageCount == 6 && GlobalManager.globalManager.souls < 5 && GlobalManager.globalManager.population > 1 && firstTze.ActivePower == null && secondTze.ActivePower == null)
+		{
+			if(LevelGUI.levelGUI.isDisplayingMessages()){
+				LevelGUI.levelGUI.clearMessages();
+			}
+			WriteMessage("You missed. Did you not?",1.7f,0.25f,0f);
+			messageCount = 20;
+			time=0;
+		}
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 8  )
+		{
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Sorry, I got carried away",1.7f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+		if(messageCount==20 && GlobalManager.globalManager.population >= 1 && GlobalManager.globalManager.souls<=7)
+		{
+			if(time>=5f){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Do not worry. You can Redo the level any time",1.7f,0.25f,0f);
+				WriteMessage("Press the Redo button up in the left",1.8f,0.25f,0f);
 				messageCount++;
 			}
-			else
-			{
-				WriteMessage("Nice!! you got 2 for 1",0.75f,0.25f,8f);
-				messageCount+=2;
+		}
+
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 9)
+		{
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				((BasePowerDealer)firePower).enableUse = false;
+				WriteMessage("However be aware! When you use your powers you use SOULS",1.7f,0.25f,0f);
+				WriteMessage("The number of SOULS you own is up there with the crosses",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
 			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 15 && GlobalManager.globalManager.population == 0)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 10  )
 		{
-			WriteMessage("Good Job!!!",0.75f,0.25f,4f);
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("You have a limited number of SOULS",1.7f,0.25f,0f);
+				WriteMessage("But with each infidel dead you get his sins weight in SOULS",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 15 && GlobalManager.globalManager.population > 0 && GlobalManager.globalManager.souls < 5)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 11  )
 		{
-			WriteMessage("Looks like you are out of souls. Do not worry, you can Redo the level any time",0.75f,0.25f,7f);
-			WriteMessage("Just press the Redo button up in the left",0.85f,0.25f,0f);
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Some will be worth more of your time, some less",1.7f,0.25f,0f);
+				WriteMessage("It depends on their actions, and Yours. These guys worth 3 souls each",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==16 && GlobalManager.globalManager.population <= 0)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 12  )
 		{
-			WriteMessage("Great Work !!! You managed to kill all the infidels.",0.75f,0.25f,10f);
-			WriteMessage("Now, let's go kill some more people",0.85f,0.25f,10f);
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("The cost of the Powers is stated next to it",1.7f,0.25f,0f);
+				WriteMessage("You can use some extra SOULS this time",1.8f,0.25f,0f);
+				GlobalManager.globalManager.incrementSouls(8);
+				messageCount++;
+				time=0;
+			}
+		}
+	
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 13  )
+		{
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				if(GlobalManager.globalManager.population > 0)
+				{
+					((BasePowerDealer)firePower).enableUse = true;
+					WriteMessage("Now, Do me a favor and kill that other infidel too.",1.7f,0.25f,0f);
+					messageCount++;
+				}
+				else
+				{
+					WriteMessage("Nice!! you got 2 for 1",1.7f,0.25f,0f);
+					messageCount+=2;
+				}
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount==17 && GlobalManager.globalManager.population <= 0)
-		{
+		if(GlobalManager.globalManager.population == 0 && messageCount == 14  )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Good Job!!!",1.7f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+		if(messageCount == 14  && GlobalManager.globalManager.population > 0 && GlobalManager.globalManager.souls < 5)
+		{	
+			if(time>=5f){
+				messageCount=20;
+				time=0;
+			}
+		}
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 15  )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Great Work !!! You managed to kill all the infidels.",1.7f,0.25f,0f);
+				WriteMessage("Now, let's go kill some more people",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 16  )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
 			Application.LoadLevel("TutorialRage");
+			}
 		}
 	}
 }

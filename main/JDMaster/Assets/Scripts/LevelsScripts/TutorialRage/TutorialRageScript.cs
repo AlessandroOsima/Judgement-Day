@@ -3,8 +3,6 @@ using System.Collections;
 
 public class TutorialRageScript : MonoBehaviour 
 {
-	private static float height = Screen.height/10;
-	private static float width = Screen.width/10;
 	private static int charS = 13;
 	private float time = 0f;
 	private float dt;
@@ -14,16 +12,24 @@ public class TutorialRageScript : MonoBehaviour
 	private LevelGUI gui;
 	private PersonStatus firstTze;
 	private PersonStatus secondTze;
+	private PersonStatus thirdTze;
+	public float messagePass=0.5f;
+
 	// Use this for initialization
 	void Start () 
 	{
 		originalCamPosition = Camera.main.transform.position;
 		GlobalManager.globalManager.standardVictoryConditions = false;
+		var persons = GameObject.FindGameObjectsWithTag("Person");
+
+		firstTze = persons[0].GetComponent<PersonStatus>();
+		secondTze = persons[1].GetComponent<PersonStatus>();
+		thirdTze = persons[2].GetComponent<PersonStatus>();
 
 		GlobalManager.globalManager.onEndGame += endGame;
 
-		WriteMessage("Welcome to the next step almighty god!",0.75f,0.25f,7f);
-		WriteMessage("This time we will take a look at some new cool powers !!",0.85f,0.25f,7f);
+		WriteMessage("Welcome to the next step almighty god!",1.7f,0.25f,0f);
+		WriteMessage("This time we will take a look at some new cool powers !!",1.8f,0.25f,0f);
 
 
 		ragePower = GlobalManager.globalManager.gameObject.transform.FindChild("Rage").GetComponent<BasePowerDealer>();
@@ -62,84 +68,194 @@ public class TutorialRageScript : MonoBehaviour
 
 		time+=dt;
 
-		LevelGUI.levelGUI.isDisplayingMessages();
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 0   )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("But first take a look at the people.",1.7f,0.25f,9f);
+				WriteMessage("Have you noticed the red and blue balls hovering over their useless bodies ?",1.8f,0.25f,9f);	
+				messageCount++;
+				time=0;
+			}
+		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 0)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 1   )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("This means that they are worshipping another god.",1.7f,0.25f,9f);
+				WriteMessage("It is obvious that you must kill them, but is not gonna be so easy",1.8f,0.25f,9f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 2  )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("You cannot hurt the man marked by the blue sphere.",1.7f,0.25f,9f);
+				WriteMessage("And if you kill the man with the red ball you will lose 6 souls.",1.8f,0.25f,9f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 3  )
+		{	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("You still can kill them using your indirect powers.",1.7f,0.25f,9f);
+				WriteMessage("With Rage you can use a human to kill others without killing him.",1.8f,0.25f,9f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 4  )
 		{
-			WriteMessage("But first take a look at them.",0.75f,0.25f,9f);
-			WriteMessage("Have you noticed the red and blue balls hovering over their useless bodies ?",0.85f,0.25f,9f);	
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				ragePower.powerState = PowerState.Disabled;
+				PowersManager.powersManager.refreshPowersStates(GlobalManager.globalManager.souls);
+				((BasePowerDealer)ragePower).enableUse = false;
+				WriteMessage("Press Number 4 to select RAGE!",1.7f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+		
+		
+
+		if((Input.GetKey(KeyCode.Keypad4) || Input.GetKey("4")) && messageCount == 5 
+		   && PowersManager.powersManager.SelectedPower == ragePower)
+		{
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				((BasePowerDealer)ragePower).enableUse = true;
+				WriteMessage("Target the one with the red orb",1.7f,0.25f,0f);
+				WriteMessage("Press SPACE to use your Power.",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
+		}
+
+		if(messageCount == 6 && GlobalManager.globalManager.population <= 2){
+			messageCount++;
+		}
+		if(messageCount == 7)
+		{
+			if(LevelGUI.levelGUI.isDisplayingMessages()){
+				LevelGUI.levelGUI.clearMessages();
+			}
+			WriteMessage("Perfect!! Let the RAGE flow through you",1.7f,0.25f,0f);
 			messageCount++;
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 1)
+		if(messageCount==20 && GlobalManager.globalManager.population >= 1 && GlobalManager.globalManager.souls<=5)
 		{
-			WriteMessage("This means that they are worshipping another god.",0.75f,0.25f,9f);
-			WriteMessage("It's obvious that you must kill them.",0.85f,0.25f,9f);
-			WriteMessage("Sadly, it's not gonna be so easy......",0.95f,0.25f,9f);
-			messageCount++;
+			if(time>=10f){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Do not worry. You can Redo the level any time",1.7f,0.25f,0f);
+				WriteMessage("Press the Redo button up in the left",1.8f,0.25f,0f);
+				messageCount++;
+			}
+		}
+		
+		if(messageCount == 6 && GlobalManager.globalManager.souls < 5 && GlobalManager.globalManager.population > 2 && firstTze.ActivePower == null && secondTze.ActivePower == null)
+		{
+			if(LevelGUI.levelGUI.isDisplayingMessages()){
+				LevelGUI.levelGUI.clearMessages();
+			}
+			WriteMessage("You missed. Did you not?",1.7f,0.25f,0f);
+			messageCount = 20;
+			time=0;
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 2)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 8  )
 		{
-			WriteMessage("You cannot hurt the man marked by the blue sphere.",0.75f,0.25f,9f);
-			WriteMessage("And if you kill the man with the red ball you will lose 6 souls.",0.85f,0.25f,9f);
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("Now, to the other powers",1.7f,0.25f,0f);
+				WriteMessage("Lightning (2) will kill inmediately with an electric shock",1.8f,0.25f,10f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 3)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 9 )
 		{
-			WriteMessage("But do not despair my vengeful friend.",0.75f,0.25f,10f);
-			WriteMessage("You still can kill them using your indirect powers.",0.85f,0.25f,10f);
-			WriteMessage("If you use one of this two powers (rage and zombie) on an unshielded human",0.95f,0.25f,10f);
-			WriteMessage("he will try to kill all the nearest humans",1.05f,0.25f,10f);
-
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("ZOMBIE (3) will create a shiny new zombie.",1.7f,0.25f,0f);
+				WriteMessage("Be aware though that zombie decay and die very fast with no food",1.8f,0.25f,10f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 4)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 10 )
 		{
-			WriteMessage("Shielded ones included.......",0.75f,0.25f,6f);
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				WriteMessage("CALM (5) make people stay still.",1.7f,0.25f,0f);
+				WriteMessage("It is a support power, it takes Rage away",1.8f,0.25f,10f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 5)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 11 )
 		{
-			WriteMessage("Now, these are the powers at your disposal :",0.75f,0.25f,10f);
-			WriteMessage("Zombie will create a shiny new zombie.",0.85f,0.25f,10f);
-			WriteMessage("Remember though that zombie decay and die very fast",0.95f,0.25f,10f);
-			WriteMessage("Rage will transform an human into the perfect serial killer.",1.05f,0.25f,10f);
-			WriteMessage("Calm removes rage and stops a character for sometime.",1.15f,0.25f,10f);
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				GlobalManager.globalManager.incrementSouls(10);
+				WriteMessage("Ok, now you got 10 extra souls.",1.7f,0.25f,0f);
+				WriteMessage("Judge everyone, will ya",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 6)
+		if(messageCount == 12 && GlobalManager.globalManager.population == 0)
 		{
-			GlobalManager.globalManager.incrementSouls(10);
-			WriteMessage("Ok, I just gave you 10 souls, use them as you wish.",0.75f,0.25f,9f);
-			WriteMessage("To win this battle you have to kill everyone except the red shielded man.",0.85f,0.25f,9f);
-			WriteMessage("If you lose all your souls you will die.",0.95f,0.25f,9f);
-			messageCount++;
+			if(time>=messagePass){
+				if(LevelGUI.levelGUI.isDisplayingMessages()){
+					LevelGUI.levelGUI.clearMessages();
+				}
+				GlobalManager.globalManager.incrementSouls(10);
+				WriteMessage("You have killed them all",1.7f,0.25f,0f);
+				WriteMessage("Very good, I think you'll like what's coming next",1.8f,0.25f,0f);
+				messageCount++;
+				time=0;
+			}
 		}
 
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 7)
+		if((Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return)) && messageCount == 13 )
 		{
-			WriteMessage("Enough chit chat, let's get this genocide started",0.75f,0.25f,5f);
-			messageCount++;
-		}
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 8 && GlobalManager.globalManager.population == 0)
-		{
-			WriteMessage("You have killed them all",0.75f,0.25f,9f);
-			WriteMessage("Very good, I think you'll like what's coming next",0.85f,0.25f,9f);
-			messageCount++;
-		}
-
-
-
-
-		if(!LevelGUI.levelGUI.isDisplayingMessages() && messageCount == 9)
-		{
-			Application.LoadLevel("Sandbox");
+			Application.LoadLevel("City");
 		}
 	}
 
@@ -147,13 +263,19 @@ public class TutorialRageScript : MonoBehaviour
 	{
 		if(endGameState == EndGameState.Defeat)
 		{
-			WriteMessage("Looks like you are going to have to try again",0.75f,0.25f,9f);
-			WriteMessage("Just press the Redo button up in the left",0.85f,0.25f,0f);
+			if(LevelGUI.levelGUI.isDisplayingMessages()){
+				LevelGUI.levelGUI.clearMessages();
+			}
+			WriteMessage("Looks like you are going to have to try again",1.7f,0.25f,0f);
+			WriteMessage("Just press the Redo button up in the left",1.8f,0.25f,0f);
 		}
 		else
 		{
-			WriteMessage("You have killed them all",0.75f,0.25f,9f);
-			WriteMessage("Very good, I think you'll like what's coming next",0.85f,0.25f,9f);
+			if(LevelGUI.levelGUI.isDisplayingMessages()){
+				LevelGUI.levelGUI.clearMessages();
+			}
+			WriteMessage("You have killed them all",1.7f,0.25f,0f);
+			WriteMessage("Very good, I think you'll like what's coming next",1.8f,0.25f,0f);
 			messageCount++;
 		}
 		

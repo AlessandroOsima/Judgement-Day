@@ -257,6 +257,20 @@ public class LevelGUI : MonoBehaviour
 			}
 		}
 	}
+
+	public void clearMessages()
+	{
+		if(messages.Count >= 1)
+		{
+			int messagesSize = messages.Count;
+			for(int i = messagesSize - 1 ; i > 0; i--)
+			{
+				messages[i].text.clear();
+				messages[i].text.destroy();
+				messages.Remove(messages[i]);
+			}
+		}
+	}
 	
 	//GlobalManager events
 	//change the population
