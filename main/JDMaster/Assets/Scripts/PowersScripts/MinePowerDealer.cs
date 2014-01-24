@@ -15,7 +15,8 @@ public class MinePowerDealer : BasePowerDealer
     public override void OnTriggerEnter(Collider other)
     {
 
-		otherCollision++;
+		if(other.tag != "ShieldEffect" && other.tag != GlobalManager.npcsTag)
+			otherCollision++;
 
   		if(other.name == "Terrain" && otherCollision <= 2)
 		{

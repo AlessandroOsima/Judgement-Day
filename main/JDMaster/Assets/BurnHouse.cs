@@ -108,6 +108,53 @@ public class BurnHouse : MonoBehaviour
 			gameObject.transform.GetChild(1).gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
 			gameObject.transform.GetChild(2).gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
 		}
+
+		if(this.name == "HouseA01Base")
+		{
+			gameObject.transform.FindChild("HouseA01Roof").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseA01Wall").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseA01Wood").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+		}
+
+		if(this.name == "HouseA02Base")
+		{
+			gameObject.transform.FindChild("HouseA02Roof").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseA02Wall").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseA02Wood").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+		}
+
+		if(this.name == "HouseB01Base")
+		{
+			gameObject.transform.FindChild("HouseB01Roof").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseB01Wall").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseB01Wood").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+		}
+
+		if(this.name == "HouseB02Base")
+		{
+			gameObject.transform.FindChild("HouseB02Roof").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseB02Wall").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseB02Wood").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+		}
+
+		if(this.name == "HouseStone01Base")
+		{
+			gameObject.transform.FindChild("HouseStone01Door").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseStone01Roof").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+		}
+
+		if(this.name == "HouseStoneBase")
+		{
+			gameObject.transform.FindChild("HouseStone01Door").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseStone02Roof").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+		}
+
+		if(this.name == "EasterHouse")
+		{
+			gameObject.transform.FindChild("HouseCeiling06").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+			gameObject.transform.FindChild("HouseWood06").gameObject.renderer.materials[0].SetFloat("_Burn",burnLevel);
+		}
+
 	}
 
 	void burnPerson(PersonStatus status)

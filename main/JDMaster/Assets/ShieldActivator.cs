@@ -7,6 +7,7 @@ public class ShieldActivator : MonoBehaviour {
 	public float expasionDelta = 0;
 	public bool expand = false;
 	public float expansionRate = 0;
+	public float maxExpansion = 100;
 	float lastStep = 0;
 	// Use this for initialization
 	void Start () 
@@ -17,9 +18,8 @@ public class ShieldActivator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(expand && Time.timeSinceLevelLoad > lastStep + expasionDelta)
+		if(expand && Time.timeSinceLevelLoad > lastStep + expasionDelta && transform.localScale.x <= maxExpansion)
 		{
-			Debug.Log("expanding");
 			lastStep = Time.timeSinceLevelLoad;
 			transform.localScale = new Vector3(transform.localScale.x + expansionRate, transform.localScale.y, transform.localScale.z + expansionRate);
 		}

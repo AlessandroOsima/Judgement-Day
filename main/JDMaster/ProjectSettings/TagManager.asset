@@ -13,6 +13,10 @@ TagManager:
   - Lightning
   - Calm
   - Terrain
+  - ShieldEffect
+  - ClickLayer
+  - Mine
+  - fire
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8370c2a0ccbfb44f3a8a7e287ff3656c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texturePackerConfigName: JDLogo
+  texturePackerConfigName: SplashAtlas
   material: {fileID: 2100000, guid: 7998a82f67be84cae8e0585ffb074eaa, type: 2}
   layer: 0
   textureSize: {x: 0, y: 0}
@@ -259,7 +259,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -298,11 +298,11 @@ AudioSource:
   m_GameObject: {fileID: 1759698101}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 6c4d7317653619d46a91ec4ab2515ad7, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 52110adc8c3c14b15ada15a06a33ac2f, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: .504999995
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Priority: 128
   DopplerLevel: 1

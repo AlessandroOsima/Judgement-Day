@@ -6,17 +6,28 @@ public class SplashScreen : MonoBehaviour {
 	public UIToolkit SplashScreenToolkit;
 	UISprite JDLogo;
 	float timer = 0;
+	bool started = false;
 
 	// Use this for initialization
 	void Start () 
 	{
-		JDLogo = SplashScreenToolkit.addSprite("JD_Logo.png",0,0);
+		JDLogo = SplashScreenToolkit.addSprite("PolimiGameCollective.png",0,0);
 		JDLogo.positionCenter();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		if(Time.timeSinceLevelLoad > 6.0f && !started)
+		{
+			JDLogo.destroy();
+			Camera.main.backgroundColor = Color.white;
+			JDLogo = SplashScreenToolkit.addSprite("JD_Logo.png",0,0);
+			JDLogo.positionCenter();
+			Camera.main.audio.Play();
+			started = true;
+		}
+	
 		if(Input.GetKey(KeyCode.Space))
 			Application.LoadLevel("LevelSelectionMenu");
 
@@ -37,5 +48,11 @@ public class SplashScreen : MonoBehaviour {
 
 		if(Input.GetKey(KeyCode.Alpha5))
 			Application.LoadLevel("TowerDefense");
+
+		if(Input.GetKey(KeyCode.Alpha6))
+			Application.LoadLevel("EasterIsland");
+
+		if(!Camera.main.audio.isPlaying && started)
+			Application.LoadLevel("LevelSelectionMenu");
 	}
 }

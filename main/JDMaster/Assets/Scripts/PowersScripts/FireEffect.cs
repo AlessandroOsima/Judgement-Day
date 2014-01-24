@@ -6,6 +6,7 @@ public class FireEffect : PowerEffect
 
 	float timer = 0;
 	bool started = false;
+	float burnTime = 7f;
 
 	//UPDATE POWER EFFECTS
 	public override void deliverPowerEffects(PersonStatus status, AnimationScript animator, UnitNavigationController navigator)
@@ -15,6 +16,8 @@ public class FireEffect : PowerEffect
 			if(animator.powerEffect)
 				Object.Destroy(animator.powerEffect);
 
+			if(Application.loadedLevelName == "TowerDefense")
+				burnTime = 3f;
 			started = true;
 			status.UnitStatus = PersonStatus.Status.Panicked;
 			animator.powerEffect = (GameObject) Object.Instantiate(owner.particleEffect, new Vector3(status.transform.position.x,status.transform.position.y + 0.9f,status.transform.position.z),Quaternion.identity);
@@ -24,7 +27,8 @@ public class FireEffect : PowerEffect
 		else if(status.UnitStatus != PersonStatus.Status.Raged && status.UnitStatus != PersonStatus.Status.Dead)
 		{
 			timer += Time.deltaTime;
-			if (timer >= 7f)
+
+			if (timer >= burnTime)
 			{
 				status.Fear = 0;
 				status.UnitStatus = PersonStatus.Status.Dead;

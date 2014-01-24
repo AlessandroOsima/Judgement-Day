@@ -96,7 +96,7 @@ public class LevelGUI : MonoBehaviour
 
 		//UI
 		quitButton =  UIButton.create(GUIToolkit,"Close.png","Close_Over.png",0,0);
-		quitButton.onTouchUpInside += sender => Application.LoadLevel("SplashScreen");
+		quitButton.onTouchUpInside += sender => Application.LoadLevel("LevelSelectionMenu");
 		quitButton.scale = scaleFactor;
 		
 		replayButton = UIButton.create(GUIToolkit,"Replay.png","Replay_Over.png",0,0);

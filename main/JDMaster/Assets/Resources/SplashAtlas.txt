@@ -1,0 +1,28 @@
+{"frames": {
+
+"JD_Logo.png":
+{
+	"frame": {"x":2,"y":2,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+"PolimiGameCollective.png":
+{
+	"frame": {"x":2,"y":516,"w":974,"h":390},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":974,"h":390},
+	"sourceSize": {"w":974,"h":390}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "SplashAtlas.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:45171eb4b3b1e0ccb2b63b30ba92fea0:211b1417678bb4c047cb6aa87a5d5743:95643fae84c682841cee6862fdd4e8fa$"
+}
+}

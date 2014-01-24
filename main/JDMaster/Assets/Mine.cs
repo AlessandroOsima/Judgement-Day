@@ -26,6 +26,10 @@ public class Mine : MonoBehaviour
 		if(other.tag == GlobalManager.npcsTag)
 		{
 			PersonStatus person = other.GetComponent<PersonStatus>();
+
+			if(!person.isAlive())
+				return;
+
 			particleExplosion.SetActive(true);
 			person.UnitStatus = PersonStatus.Status.Dead;
 			GameObject.Destroy(this.transform.parent.gameObject,particleExplosion.particleSystem.duration);

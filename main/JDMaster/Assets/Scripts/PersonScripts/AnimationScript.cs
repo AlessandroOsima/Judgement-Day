@@ -334,7 +334,6 @@ public class AnimationScript : MonoBehaviour
 
 			if (State == PersonStatus.Status.Zombie)
 			{
-				playScreamLoop();
 			}
 
         }

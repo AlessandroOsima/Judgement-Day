@@ -1,0 +1,4 @@
+Per fare una nuova scritta da una già esistente:
+Utilizzare il file "Scritta base.blend".
+Modificare la scritta già creata facendo click col tasto destro del mouse sulla scritta e premendo tab.
+Una volta apportate tutte le modifiche desiderate premere "ALT + c" e trasformare il testo in una Mesh.
