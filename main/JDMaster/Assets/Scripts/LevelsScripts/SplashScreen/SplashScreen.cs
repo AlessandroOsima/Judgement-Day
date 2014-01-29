@@ -7,6 +7,7 @@ public class SplashScreen : MonoBehaviour {
 	UISprite JDLogo;
 	float timer = 0;
 	bool started = false;
+	bool artskillLogo = false;
 
 	// Use this for initialization
 	void Start () 
@@ -18,7 +19,7 @@ public class SplashScreen : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Time.timeSinceLevelLoad > 6.0f && !started)
+		if(Time.timeSinceLevelLoad > 12.0f && !started)
 		{
 			JDLogo.destroy();
 			Camera.main.backgroundColor = Color.white;
@@ -26,6 +27,15 @@ public class SplashScreen : MonoBehaviour {
 			JDLogo.positionCenter();
 			Camera.main.audio.Play();
 			started = true;
+		}
+
+		if(Time.timeSinceLevelLoad > 6.0f && Time.timeSinceLevelLoad < 12.0f && !artskillLogo)
+		{
+			JDLogo.destroy();
+			Camera.main.backgroundColor = Color.white;
+			JDLogo = SplashScreenToolkit.addSprite("artskillz_logo.png",0,0);
+			JDLogo.positionCenter();
+			artskillLogo = true;
 		}
 	
 		if(Input.GetKey(KeyCode.Space))

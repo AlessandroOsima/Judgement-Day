@@ -15,14 +15,22 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":974,"h":390},
 	"sourceSize": {"w":974,"h":390}
+},
+"artskillz_logo.png":
+{
+	"frame": {"x":2,"y":908,"w":737,"h":737},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":737,"h":737},
+	"sourceSize": {"w":737,"h":737}
 }},
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker ",
 	"version": "1.0",
 	"image": "SplashAtlas.png",
 	"format": "RGBA8888",
-	"size": {"w":1024,"h":1024},
+	"size": {"w":1024,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:45171eb4b3b1e0ccb2b63b30ba92fea0:211b1417678bb4c047cb6aa87a5d5743:95643fae84c682841cee6862fdd4e8fa$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f1ad0388279232107a38e4437c287764:1/1$"
 }
 }

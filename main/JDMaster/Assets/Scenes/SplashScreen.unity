@@ -122,7 +122,7 @@ MonoBehaviour:
   layer: 0
   autoTextureSelectionForHD: 0
   allowPod4GenHD: 0
-  maxWidthOrHeightForSD: 960
+  maxWidthOrHeightForSD: 2048
   maxWidthOrHeightForHD: 2048
   hdExtension: 2x
 --- !u!1 &1405739778
