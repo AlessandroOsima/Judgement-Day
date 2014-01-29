@@ -6570,6 +6570,7 @@ MonoBehaviour:
   expasionDelta: 10
   expand: 0
   expansionRate: 20
+  maxExpansion: 100
 --- !u!1 &157172361
 GameObject:
   m_ObjectHideFlags: 0
@@ -10405,7 +10406,15 @@ Prefab:
       objectReference: {fileID: 780753004}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.x
-      value: .399999946
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -11500,6 +11509,18 @@ Prefab:
     - target: {fileID: 8200000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[10].outSlope
       value: -.00111155468
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -13220,13 +13241,11 @@ MonoBehaviour:
   - {fileID: 1610004170}
   - {fileID: 962076968}
   - {fileID: 465605295}
-  - {fileID: 780753004}
   panicWayPoints:
   - {fileID: 1947934281}
   - {fileID: 1610004170}
   - {fileID: 962076968}
   - {fileID: 465605295}
-  - {fileID: 780753004}
   _nav: {fileID: 0}
 --- !u!114 &325699596
 MonoBehaviour:
@@ -19239,6 +19258,18 @@ Prefab:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[10].outSlope
       value: -.00111155468
       objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1273445169}
@@ -19973,7 +20004,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.x
-      value: .400000036
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.y
@@ -19981,7 +20012,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.z
-      value: .400000036
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 19500000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_AutoRepath
@@ -27430,6 +27461,18 @@ Prefab:
       propertyPath: panicWayPoints.Array.data[4]
       value: 
       objectReference: {fileID: 1947934281}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 676134306}
@@ -31214,6 +31257,7 @@ MonoBehaviour:
   expasionDelta: 0
   expand: 0
   expansionRate: 0
+  maxExpansion: 100
 --- !u!1 &751952455
 GameObject:
   m_ObjectHideFlags: 0
@@ -36843,7 +36887,7 @@ Transform:
   m_GameObject: {fileID: 873690552}
   m_LocalRotation: {x: 0, y: .989216268, z: 0, w: -.146462515}
   m_LocalPosition: {x: -32.7043228, y: .0289392471, z: -19.4878674}
-  m_LocalScale: {x: .399999917, y: .400000006, z: .400000006}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 681092569}
   - {fileID: 2016793757}
@@ -45522,7 +45566,7 @@ Transform:
   m_GameObject: {fileID: 1077892770}
   m_LocalRotation: {x: 0, y: .989216268, z: 0, w: -.146462515}
   m_LocalPosition: {x: -2.02063775, y: .0289392471, z: 29.2229195}
-  m_LocalScale: {x: .399999946, y: .400000006, z: .400000006}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 1741663695}
   - {fileID: 366624398}
@@ -49842,7 +49886,7 @@ Transform:
   m_GameObject: {fileID: 1197197722}
   m_LocalRotation: {x: 0, y: .989216268, z: 0, w: -.146462515}
   m_LocalPosition: {x: -27.6997623, y: .0289392471, z: 36.9974022}
-  m_LocalScale: {x: .399999946, y: .400000006, z: .400000006}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 208888572}
   - {fileID: 1865002351}
@@ -50308,7 +50352,7 @@ Transform:
   m_GameObject: {fileID: 1199044804}
   m_LocalRotation: {x: 0, y: .989216268, z: 0, w: -.146462515}
   m_LocalPosition: {x: -21.3353062, y: .0289392471, z: 35.0705299}
-  m_LocalScale: {x: .399999976, y: .400000006, z: .400000006}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 35763791}
   - {fileID: 458910846}
@@ -53244,13 +53288,11 @@ MonoBehaviour:
   - {fileID: 477157864}
   - {fileID: 1137432579}
   - {fileID: 940591054}
-  - {fileID: 1037354753}
   panicWayPoints:
   - {fileID: 593979495}
   - {fileID: 477157864}
   - {fileID: 1137432579}
   - {fileID: 940591054}
-  - {fileID: 1037354753}
   _nav: {fileID: 0}
 --- !u!114 &1273445173
 MonoBehaviour:
@@ -58759,7 +58801,7 @@ Transform:
   m_GameObject: {fileID: 1417447378}
   m_LocalRotation: {x: 0, y: .139768839, z: 0, w: .990184247}
   m_LocalPosition: {x: 18.5741329, y: .0289392471, z: -4.28640366}
-  m_LocalScale: {x: .400000036, y: .400000006, z: .400000036}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 2143416109}
   - {fileID: 2005191312}
@@ -59475,6 +59517,18 @@ Prefab:
       propertyPath: panicWayPoints.Array.data[4]
       value: 
       objectReference: {fileID: 780753004}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 325699592}
@@ -65424,7 +65478,7 @@ Prefab:
       objectReference: {fileID: 297179908}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.x
-      value: .399999917
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: panicWayPoints.Array.data[5]
@@ -65486,6 +65540,14 @@ Prefab:
       propertyPath: panicWayPoints.Array.data[19]
       value: 
       objectReference: {fileID: 297179908}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1881209193}
@@ -66428,7 +66490,7 @@ Prefab:
       objectReference: {fileID: 1151530895}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.x
-      value: .399999946
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: panicWayPoints.Array.data[5]
@@ -66490,6 +66552,14 @@ Prefab:
       propertyPath: panicWayPoints.Array.data[19]
       value: 
       objectReference: {fileID: 1151530895}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1077892770}
@@ -69837,6 +69907,18 @@ Prefab:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[10].outSlope
       value: -.00111155468
       objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1549418386}
@@ -70105,7 +70187,15 @@ Prefab:
       objectReference: {fileID: 780753004}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.x
-      value: .399999976
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
@@ -77007,6 +77097,18 @@ Prefab:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[10].outSlope
       value: -.00111155468
       objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 1705266807}
@@ -77985,7 +78087,7 @@ Transform:
   m_GameObject: {fileID: 1881209193}
   m_LocalRotation: {x: 0, y: .989216268, z: 0, w: -.146462515}
   m_LocalPosition: {x: -22.9484501, y: .0289392471, z: 2.23639917}
-  m_LocalScale: {x: .399999917, y: .400000006, z: .400000006}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 2003619496}
   - {fileID: 1446032204}
@@ -84405,7 +84507,7 @@ Prefab:
       objectReference: {fileID: 297179908}
     - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: m_LocalScale.x
-      value: .399999917
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
       propertyPath: panicWayPoints.Array.data[5]
@@ -84467,6 +84569,14 @@ Prefab:
       propertyPath: panicWayPoints.Array.data[19]
       value: 
       objectReference: {fileID: 297179908}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400056, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38296ccc546d8d44aaaa17818236a763, type: 2}
   m_RootGameObject: {fileID: 873690552}

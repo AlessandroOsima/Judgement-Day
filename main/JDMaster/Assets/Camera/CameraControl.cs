@@ -26,7 +26,9 @@ public class CameraControl : MonoBehaviour
 	void Update () 
 	{
 		Move();
-		Rotate();
+
+		if(rotationEnabled)
+			Rotate();
 
 	}
 	

@@ -135,7 +135,7 @@ GameObject:
   - 65: {fileID: 6500000}
   m_Layer: 0
   m_Name: EasterHouse
-  m_TagString: Untagged
+  m_TagString: House
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,10 +167,10 @@ GameObject:
   - 4: {fileID: 400018}
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
-  - 65: {fileID: 6500002}
+  - 64: {fileID: 6400000}
   m_Layer: 0
   m_Name: HouseCeiling06
-  m_TagString: Untagged
+  m_TagString: House
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -646,7 +646,7 @@ Renderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 1
-  m_LightmapTilingOffset: {x: .0537109375, y: .0537109375, z: .0437355042, w: .407016754}
+  m_LightmapTilingOffset: {x: .0537109375, y: .0537109375, z: .872837067, w: .182407379}
   m_Materials:
   - {fileID: 2100000, guid: 55f0e145335f1074787132154907edc5, type: 2}
   m_SubsetIndices: 
@@ -667,7 +667,7 @@ Renderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 1
-  m_LightmapTilingOffset: {x: .12109375, y: .12109375, z: .485855103, w: .12159729}
+  m_LightmapTilingOffset: {x: .12109375, y: .12109375, z: .243667603, w: -.000473022461}
   m_Materials:
   - {fileID: 2100000, guid: 269b6f29a00435a4496bdef4caa651ef, type: 2}
   m_SubsetIndices: 
@@ -878,6 +878,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_Mesh: {fileID: 4301758, guid: 264122873d0c12940b321cd12feaad4a, type: 3}
+--- !u!64 &6400000
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 1
+  m_Mesh: {fileID: 4301758, guid: 264122873d0c12940b321cd12feaad4a, type: 3}
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -890,18 +903,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12, y: 5, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6500002
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100018}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.99670172, y: 7.99670362, z: 4.25220871}
-  m_Center: {x: 0, y: 0, z: 2.12610435}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1

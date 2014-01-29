@@ -16,7 +16,9 @@ TagManager:
   - ShieldEffect
   - ClickLayer
   - Mine
-  - fire
+  - House
+  - 
+  - water
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

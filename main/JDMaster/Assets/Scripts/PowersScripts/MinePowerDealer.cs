@@ -15,8 +15,20 @@ public class MinePowerDealer : BasePowerDealer
     public override void OnTriggerEnter(Collider other)
     {
 
-		if(other.tag != "ShieldEffect" && other.tag != GlobalManager.npcsTag)
-			otherCollision++;
+		otherCollision++;
+
+
+		/*
+		if((other.GetType() == typeof(BoxCollider) && other.tag == "House"))
+			otherCollision--;
+
+		if((other.GetType() == typeof(MeshCollider) && other.tag == "House"))
+			otherCollision += 2;
+		*/
+
+		if(other.tag == "ShieldEffect" || other.tag == GlobalManager.npcsTag || other.tag != "Boundaries")
+			otherCollision--;
+
 
   		if(other.name == "Terrain" && otherCollision <= 2)
 		{
