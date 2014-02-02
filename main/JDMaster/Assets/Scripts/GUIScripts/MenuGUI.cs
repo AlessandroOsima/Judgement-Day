@@ -34,7 +34,7 @@ public class MenuGUI : MonoBehaviour
 	{   
 		//UI
 		quitButton =  UIButton.create(GUIToolkit,"Close.png","Close_Over.png",0,0);
-		quitButton.onTouchUpInside += sender => Application.Quit();
+		quitButton.onTouchUpInside += sender => Application.LoadLevel("Abouts");
 		quitButton.scale = scaleFactor;
 	}
 }
