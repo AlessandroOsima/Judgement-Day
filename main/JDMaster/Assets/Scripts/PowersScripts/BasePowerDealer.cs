@@ -97,6 +97,8 @@ public class BasePowerDealer : Power
     //COLLISION
     public override void OnTriggerEnter(Collider other)
     {
+
+
 				string effectName = this.gameObject.name + "Effect";
 
 				//Type type = Type.GetType(effectName);

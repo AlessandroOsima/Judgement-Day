@@ -1801,6 +1801,8 @@ GameObject:
   - 23: {fileID: 38499009}
   - 95: {fileID: 38499008}
   - 114: {fileID: 38499007}
+  - 65: {fileID: 38499012}
+  - 114: {fileID: 38499011}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -1883,6 +1885,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1294629447}
   m_GameObject: {fileID: 38499005}
   m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+--- !u!114 &38499011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 4aa8fabbebb924f7bb47b603115032a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1294629447}
+  m_GameObject: {fileID: 38499005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &38499012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 4aa8fabbebb924f7bb47b603115032a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1294629447}
+  m_GameObject: {fileID: 38499005}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
+  m_Center: {x: 0, y: .596628189, z: 0}
 --- !u!1 &40225141
 GameObject:
   m_ObjectHideFlags: 0
@@ -27918,6 +27945,8 @@ GameObject:
   - 23: {fileID: 704969489}
   - 95: {fileID: 704969488}
   - 114: {fileID: 704969487}
+  - 65: {fileID: 704969492}
+  - 114: {fileID: 704969491}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -28000,6 +28029,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 777139965}
   m_GameObject: {fileID: 704969485}
   m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+--- !u!114 &704969491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 8af1b18fc19cb4313a08d089ec268202,
+    type: 2}
+  m_PrefabInternal: {fileID: 777139965}
+  m_GameObject: {fileID: 704969485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &704969492
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500004, guid: 8af1b18fc19cb4313a08d089ec268202,
+    type: 2}
+  m_PrefabInternal: {fileID: 777139965}
+  m_GameObject: {fileID: 704969485}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
+  m_Center: {x: 0, y: .596628189, z: 0}
 --- !u!1001 &706181796
 Prefab:
   m_ObjectHideFlags: 0
@@ -56199,10 +56253,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1342959905}
-  - 65: {fileID: 1342959909}
   - 114: {fileID: 1342959906}
   - 82: {fileID: 1342959908}
-  - 54: {fileID: 1342959907}
   m_Layer: 2
   m_Name: Lighting
   m_TagString: Lightning
@@ -56245,22 +56297,6 @@ MonoBehaviour:
   particleEffect: {fileID: 719106718}
   cameraZoomScaleFactor: 1
   enableUse: 1
---- !u!54 &1342959907
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400000, guid: 503e810b1e52f467791bc05fd86d368a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1716488794}
-  m_GameObject: {fileID: 1342959904}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!82 &1342959908
 AudioSource:
   m_ObjectHideFlags: 0
@@ -56320,19 +56356,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!65 &1342959909
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500000, guid: 503e810b1e52f467791bc05fd86d368a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1716488794}
-  m_GameObject: {fileID: 1342959904}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1344224876
 GameObject:
   m_ObjectHideFlags: 0
@@ -59302,6 +59325,8 @@ GameObject:
   - 23: {fileID: 1421183655}
   - 95: {fileID: 1421183654}
   - 114: {fileID: 1421183653}
+  - 114: {fileID: 1421183658}
+  - 65: {fileID: 1421183657}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -59384,6 +59409,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 481616548}
   m_GameObject: {fileID: 1421183651}
   m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+--- !u!65 &1421183657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 83137bb7087f14e8db8ad3b7679f9ac3,
+    type: 2}
+  m_PrefabInternal: {fileID: 481616548}
+  m_GameObject: {fileID: 1421183651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
+  m_Center: {x: 0, y: .596628189, z: 0}
+--- !u!114 &1421183658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 83137bb7087f14e8db8ad3b7679f9ac3,
+    type: 2}
+  m_PrefabInternal: {fileID: 481616548}
+  m_GameObject: {fileID: 1421183651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1421507472
 GameObject:
   m_ObjectHideFlags: 0
@@ -77970,6 +78020,8 @@ GameObject:
   - 23: {fileID: 1879736989}
   - 95: {fileID: 1879736988}
   - 114: {fileID: 1879736987}
+  - 65: {fileID: 1879736992}
+  - 114: {fileID: 1879736991}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -78052,6 +78104,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1716488794}
   m_GameObject: {fileID: 1879736985}
   m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+--- !u!114 &1879736991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 503e810b1e52f467791bc05fd86d368a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1716488794}
+  m_GameObject: {fileID: 1879736985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1879736992
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500004, guid: 503e810b1e52f467791bc05fd86d368a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1716488794}
+  m_GameObject: {fileID: 1879736985}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
+  m_Center: {x: 0, y: .596628189, z: 0}
 --- !u!1 &1881209193
 GameObject:
   m_ObjectHideFlags: 0
@@ -87581,6 +87658,8 @@ GameObject:
   - 23: {fileID: 2103165706}
   - 95: {fileID: 2103165705}
   - 114: {fileID: 2103165704}
+  - 114: {fileID: 2103165709}
+  - 65: {fileID: 2103165708}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -87663,6 +87742,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1531022304}
   m_GameObject: {fileID: 2103165702}
   m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+--- !u!65 &2103165708
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 3931801d516ab4b849577e876ebf1826,
+    type: 2}
+  m_PrefabInternal: {fileID: 1531022304}
+  m_GameObject: {fileID: 2103165702}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.1932565, z: .169841424}
+  m_Center: {x: 0, y: .596628249, z: 0}
+--- !u!114 &2103165709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 3931801d516ab4b849577e876ebf1826,
+    type: 2}
+  m_PrefabInternal: {fileID: 1531022304}
+  m_GameObject: {fileID: 2103165702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2105746514
 GameObject:
   m_ObjectHideFlags: 0

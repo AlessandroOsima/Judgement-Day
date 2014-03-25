@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GodRayCollider : MonoBehaviour 
 {
@@ -10,6 +11,7 @@ public class GodRayCollider : MonoBehaviour
 	private Material hitMaterial;
 	private Material normalMaterial;
 	private int npcsInside = 0;
+	private List<PersonStatus> personsInside;
 
 	// Use this for initialization
 	void Start () 
@@ -18,12 +20,25 @@ public class GodRayCollider : MonoBehaviour
 		normalColor = new Color (0.29f, 0.50f, 1f); //75,243,255
 		hitColor = new Color (1f, 0.15f, 0.09f);
 		normalMaterial = this.renderer.sharedMaterial;
+		personsInside = new List<PersonStatus>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-	
+		if (personsInside.Count > 0) 
+		{
+			for(int i = 0; i < personsInside.Count; i++)
+			{
+				if(!personsInside[i].isAlive() || !personsInside[i].IsAValidTarget)
+				{
+					npcsInside -= 1;
+					personsInside.Remove(personsInside[i]);
+				}
+			}
+
+			removeFromGodRayCollider();
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -31,17 +46,24 @@ public class GodRayCollider : MonoBehaviour
 
 		if (other.tag == GlobalManager.npcsTag) 
 		{
-			npcsInside += 1;
-			if(hitMaterial == null)
+			PersonStatus ps = other.GetComponent<PersonStatus>();
+
+			if(ps.isAlive() && ps.IsAValidTarget)
 			{
-				this.renderer.material.color = hitColor;
-				hitMaterial = this.renderer.material;
-				disc.renderer.material = hitMaterial;
-			}
-	        else
-			{
-				this.renderer.material = hitMaterial;
-				disc.renderer.material = hitMaterial;
+				npcsInside += 1;
+				personsInside.Add(ps);
+
+				if(hitMaterial == null)
+				{
+					this.renderer.material.color = hitColor;
+					hitMaterial = this.renderer.material;
+					disc.renderer.material = hitMaterial;
+				}
+	        	else
+				{
+					this.renderer.material = hitMaterial;
+					disc.renderer.material = hitMaterial;
+				}
 			}
 		}
 	}
@@ -50,13 +72,26 @@ public class GodRayCollider : MonoBehaviour
 	{
 		if (other.tag == GlobalManager.npcsTag) 
 		{
-			npcsInside -= 1;
-
-			if(npcsInside == 0)
+			PersonStatus ps = other.GetComponent<PersonStatus>();
+			
+			if(ps.isAlive() && ps.IsAValidTarget)
 			{
-				this.renderer.material = normalMaterial;
-				disc.renderer.material = normalMaterial;
+				if(npcsInside > 0)
+					npcsInside -= 1;
+
+				personsInside.Remove(ps);
+
+				removeFromGodRayCollider();
 			}
+		}
+	}
+
+	void removeFromGodRayCollider()
+	{
+		if(npcsInside == 0)
+		{
+			this.renderer.material = normalMaterial;
+			disc.renderer.material = normalMaterial;
 		}
 	}
 
