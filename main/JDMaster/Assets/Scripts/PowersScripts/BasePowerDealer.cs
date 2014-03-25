@@ -97,30 +97,24 @@ public class BasePowerDealer : Power
     //COLLISION
     public override void OnTriggerEnter(Collider other)
     {
-        string effectName = this.gameObject.name + "Effect";
+				string effectName = this.gameObject.name + "Effect";
 
-        //Type type = Type.GetType(effectName);
-        PowerEffect effect = (PowerEffect)Assembly.GetExecutingAssembly().CreateInstance(effectName);
-        effect.initialize(this);
+				//Type type = Type.GetType(effectName);
+				PowerEffect effect = (PowerEffect)Assembly.GetExecutingAssembly ().CreateInstance (effectName);
+				effect.initialize (this);
 
+				if (!effect.OnTriggerEnterOverride (other, this)) {
 
+						if (other.tag == GlobalManager.npcsTag) {
+								PersonStatus person = other.GetComponent<PersonStatus> ();
 
-        if (!effect.OnTriggerEnterOverride(other, this))
-        {
-
-            if (other.tag == GlobalManager.npcsTag)
-            {
-                PersonStatus person = other.GetComponent<PersonStatus>();
-
-                if (person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget)
-                {
-                    //audio.Play();
-                    person.ActivePower = effect;
-                }
-            }
-        }
-    }
-
+								if (person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget) 
+								{
+										person.ActivePower = effect;
+								}
+						}
+				}
+	}
 
     void OnGUI()
     {
