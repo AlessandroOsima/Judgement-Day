@@ -97,25 +97,25 @@ public class BasePowerDealer : Power
     //COLLISION
     public override void OnTriggerEnter(Collider other)
     {
+		string effectName = this.gameObject.name + "Effect";
 
+		//Type type = Type.GetType(effectName);
+		PowerEffect effect = (PowerEffect)Assembly.GetExecutingAssembly ().CreateInstance (effectName);
+		effect.initialize (this);
 
-				string effectName = this.gameObject.name + "Effect";
+		if (!effect.OnTriggerEnterOverride (other, this)) 
+		{
+			if (other.tag == GlobalManager.npcsTag) 
+			{
+			
+				PersonStatus person = other.GetComponent<PersonStatus> ();
 
-				//Type type = Type.GetType(effectName);
-				PowerEffect effect = (PowerEffect)Assembly.GetExecutingAssembly ().CreateInstance (effectName);
-				effect.initialize (this);
-
-				if (!effect.OnTriggerEnterOverride (other, this)) {
-
-						if (other.tag == GlobalManager.npcsTag) {
-								PersonStatus person = other.GetComponent<PersonStatus> ();
-
-								if (person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget) 
-								{
-										person.ActivePower = effect;
-								}
-						}
+				if (person.UnitStatus != PersonStatus.Status.Dead && person.IsAValidTarget) 
+				{
+					person.ActivePower = effect;
 				}
+			}
+		}
 	}
 
     void OnGUI()
@@ -138,7 +138,7 @@ public class BasePowerDealer : Power
 
 			if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space) && enableUse)
             {
-                Debug.Log("HIT for :" + this.name);
+                //Debug.Log("HIT for :" + this.name);
                 ready = false;
                 previousParticlePosY = particleEffect.transform.position.y;
             }

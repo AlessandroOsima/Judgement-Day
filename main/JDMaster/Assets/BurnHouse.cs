@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BurnHouse : MonoBehaviour 
+public class BurnHouse : ValidTarget 
 {
 
 	// Use this for initialization
@@ -21,6 +21,11 @@ public class BurnHouse : MonoBehaviour
 	{
 		if(isBurning)
 		{
+			if(canBeTargeted)
+			{
+				canBeTargeted = false;
+			}
+
 			burnAmount += (Time.deltaTime * burnSpeed);
 
 			timer += Time.deltaTime;

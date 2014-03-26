@@ -1368,6 +1368,7 @@ GameObject:
   - 114: {fileID: 18397161}
   - 65: {fileID: 18397166}
   - 114: {fileID: 18397165}
+  - 54: {fileID: 18397167}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -1475,6 +1476,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
   m_Center: {x: 0, y: .596628189, z: 0}
+--- !u!54 &18397167
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 503e810b1e52f467791bc05fd86d368a,
+    type: 2}
+  m_PrefabInternal: {fileID: 737546594}
+  m_GameObject: {fileID: 18397159}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &18669634
 GameObject:
   m_ObjectHideFlags: 0
@@ -10025,6 +10042,7 @@ GameObject:
   - 114: {fileID: 161056404}
   - 65: {fileID: 161056409}
   - 114: {fileID: 161056408}
+  - 54: {fileID: 161056410}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -10132,6 +10150,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
   m_Center: {x: 0, y: .596628189, z: 0}
+--- !u!54 &161056410
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400002, guid: 8af1b18fc19cb4313a08d089ec268202,
+    type: 2}
+  m_PrefabInternal: {fileID: 56716932}
+  m_GameObject: {fileID: 161056402}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &161088257
 GameObject:
   m_ObjectHideFlags: 0
@@ -32258,6 +32292,7 @@ GameObject:
   - 114: {fileID: 631315630}
   - 114: {fileID: 631315635}
   - 65: {fileID: 631315634}
+  - 54: {fileID: 631315636}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -32365,6 +32400,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &631315636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 83137bb7087f14e8db8ad3b7679f9ac3,
+    type: 2}
+  m_PrefabInternal: {fileID: 262703962}
+  m_GameObject: {fileID: 631315628}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &632580406
 GameObject:
   m_ObjectHideFlags: 0
@@ -68559,6 +68610,7 @@ GameObject:
   - 114: {fileID: 1321780195}
   - 65: {fileID: 1321780200}
   - 114: {fileID: 1321780199}
+  - 54: {fileID: 1321780201}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -68666,6 +68718,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
   m_Center: {x: 0, y: .596628189, z: 0}
+--- !u!54 &1321780201
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 4aa8fabbebb924f7bb47b603115032a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 194677440}
+  m_GameObject: {fileID: 1321780193}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1323632106
 GameObject:
   m_ObjectHideFlags: 0
@@ -71599,6 +71667,7 @@ GameObject:
   - 114: {fileID: 1387441070}
   - 114: {fileID: 1387441075}
   - 65: {fileID: 1387441074}
+  - 54: {fileID: 1387441076}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -71706,6 +71775,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1387441076
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 3931801d516ab4b849577e876ebf1826,
+    type: 2}
+  m_PrefabInternal: {fileID: 126990361}
+  m_GameObject: {fileID: 1387441068}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1388758105
 GameObject:
   m_ObjectHideFlags: 0
@@ -77968,6 +78053,7 @@ GameObject:
   - 4: {fileID: 1543847516}
   - 114: {fileID: 1543847514}
   - 82: {fileID: 1543847513}
+  - 65: {fileID: 1543847515}
   m_Layer: 2
   m_Name: Lighting
   m_TagString: Lightning
@@ -78056,6 +78142,19 @@ MonoBehaviour:
   particleEffect: {fileID: 1555368745}
   cameraZoomScaleFactor: 1
   enableUse: 1
+--- !u!65 &1543847515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 503e810b1e52f467791bc05fd86d368a,
+    type: 2}
+  m_PrefabInternal: {fileID: 737546594}
+  m_GameObject: {fileID: 1543847512}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1543847516
 Transform:
   m_ObjectHideFlags: 0

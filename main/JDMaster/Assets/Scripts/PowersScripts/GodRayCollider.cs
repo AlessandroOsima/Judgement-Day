@@ -10,8 +10,8 @@ public class GodRayCollider : MonoBehaviour
 	private Color hitColor;
 	private Material hitMaterial;
 	private Material normalMaterial;
-	private int npcsInside = 0;
-	private List<PersonStatus> personsInside;
+	private int numTargetsInside = 0;
+	private List<ValidTarget> targetsInside;
 
 	// Use this for initialization
 	void Start () 
@@ -20,80 +20,78 @@ public class GodRayCollider : MonoBehaviour
 		normalColor = new Color (0.29f, 0.50f, 1f); //75,243,255
 		hitColor = new Color (1f, 0.15f, 0.09f);
 		normalMaterial = this.renderer.sharedMaterial;
-		personsInside = new List<PersonStatus>();
+		targetsInside = new List<ValidTarget>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if (personsInside.Count > 0) 
+		if (targetsInside.Count > 0) 
 		{
-			for(int i = 0; i < personsInside.Count; i++)
+			for(int i = 0; i < targetsInside.Count; i++)
 			{
-				if(!personsInside[i].isAlive() || !personsInside[i].IsAValidTarget)
+				if(!targetsInside[i].canBeTargeted)
 				{
-					npcsInside -= 1;
-					personsInside.Remove(personsInside[i]);
+					numTargetsInside -= 1;
+					targetsInside.Remove(targetsInside[i]);
 				}
 			}
 
-			removeFromGodRayCollider();
+			if(numTargetsInside == 0)
+			{
+				this.renderer.material = normalMaterial;
+				disc.renderer.material = normalMaterial;
+			}
 		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
 
-		if (other.tag == GlobalManager.npcsTag) 
+		ValidTarget tg = other.gameObject.GetComponent<ValidTarget>();
+
+		if (tg != null && tg.canBeTargeted)
 		{
-			PersonStatus ps = other.GetComponent<PersonStatus>();
+			numTargetsInside += 1;
+			targetsInside.Add(tg);
+		} 
 
-			if(ps.isAlive() && ps.IsAValidTarget)
+		if (numTargetsInside > 0) 
+		{
+			if (hitMaterial == null)
 			{
-				npcsInside += 1;
-				personsInside.Add(ps);
-
-				if(hitMaterial == null)
-				{
-					this.renderer.material.color = hitColor;
-					hitMaterial = this.renderer.material;
-					disc.renderer.material = hitMaterial;
-				}
-	        	else
-				{
-					this.renderer.material = hitMaterial;
-					disc.renderer.material = hitMaterial;
-				}
+				this.renderer.material.color = hitColor;
+				hitMaterial = this.renderer.material;
+				disc.renderer.material = hitMaterial;
+			} 
+			else
+			{
+				this.renderer.material = hitMaterial;
+				disc.renderer.material = hitMaterial;
 			}
 		}
 	}
-
+	
+	
 	void OnTriggerExit(Collider other)
 	{
-		if (other.tag == GlobalManager.npcsTag) 
+
+		ValidTarget tg = other.gameObject.GetComponent<ValidTarget>();
+		
+		if (tg != null && tg.canBeTargeted)
 		{
-			PersonStatus ps = other.GetComponent<PersonStatus>();
-			
-			if(ps.isAlive() && ps.IsAValidTarget)
-			{
-				if(npcsInside > 0)
-					npcsInside -= 1;
+			numTargetsInside -= 1;
+			targetsInside.Remove(tg);
+		} 
 
-				personsInside.Remove(ps);
-
-				removeFromGodRayCollider();
-			}
-		}
-	}
-
-	void removeFromGodRayCollider()
-	{
-		if(npcsInside == 0)
+		if(numTargetsInside == 0)
 		{
 			this.renderer.material = normalMaterial;
 			disc.renderer.material = normalMaterial;
 		}
 	}
+
+
 
 	void OnDestory()
 	{

@@ -20,6 +20,7 @@ public class GlobalManager : MonoBehaviour
 {
     //Public variables
     public static string npcsTag = "Person";
+	public static string houseTag = "House";
     //Victory conditions
     public int easyVictory;
     public int mediumVictory;

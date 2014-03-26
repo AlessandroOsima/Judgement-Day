@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PersonStatus : MonoBehaviour
+public class PersonStatus : ValidTarget
 {
 	//Public vars
     public enum Status { Idle, Dead, Zombie, Concerned, Panicked, Shocked, Raged, Calm };
@@ -104,6 +104,8 @@ public class PersonStatus : MonoBehaviour
 
 				if(isAValidTargetTransition != null)
 					isAValidTargetTransition(false,true);
+
+				canBeTargeted = true;
 			}
 			else if(value == false && _isAValidTarget == true)
 			{
@@ -114,6 +116,8 @@ public class PersonStatus : MonoBehaviour
 
 				if(isAValidTargetTransition != null)
 					isAValidTargetTransition(true,false);
+
+				canBeTargeted = false;
 			}
 
 			_isAValidTarget = value;
@@ -166,6 +170,8 @@ public class PersonStatus : MonoBehaviour
 
 			if(value == Status.Dead && unitStatus != Status.Dead)
 			{
+				canBeTargeted = false;
+
 				if(ShouldNotBeKilled)
 				{
 					//GlobalManager.globalManager.incrementScore(scorePoints);

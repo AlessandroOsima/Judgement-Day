@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectBurn : MonoBehaviour {
+public class ObjectBurn : ValidTarget {
 
 	// Use this for initialization
 	void Start () {
