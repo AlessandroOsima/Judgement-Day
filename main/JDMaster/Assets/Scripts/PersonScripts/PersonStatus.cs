@@ -170,7 +170,6 @@ public class PersonStatus : ValidTarget
 
 			if(value == Status.Dead && unitStatus != Status.Dead)
 			{
-				canBeTargeted = false;
 
 				if(ShouldNotBeKilled)
 				{
@@ -209,7 +208,11 @@ public class PersonStatus : ValidTarget
 
 			unitStatus = value;
 
-            /* if (this.fearLevel == 0)
+
+			if(value == Status.Dead && canBeTargeted)
+				canBeTargeted = false;
+
+			/* if (this.fearLevel == 0)
                   unitStatus = value;    //Status.Idle;
              else if (this.fearLevel <= 10)
                  unitStatus = value;     //Status.Calm;
@@ -301,6 +304,13 @@ public class PersonStatus : ValidTarget
 		{
 			if((_activePower == null && value != null) || (_activePower != null && value == null))
 				_activePower = value;
+
+			if(_activePower == null)
+				canBeTargeted = true;
+			else 
+				canBeTargeted = false;
+
+			
 		}
 	}
 

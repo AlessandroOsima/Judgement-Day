@@ -14,7 +14,7 @@ public class GodRayCollider : MonoBehaviour
 	private List<ValidTarget> targetsInside;
 
 	// Use this for initialization
-	void Start () 
+	void Awake() 
 	{
 		disc = this.transform.Find ("Disc").gameObject;
 		normalColor = new Color (0.29f, 0.50f, 1f); //75,243,255
@@ -50,29 +50,35 @@ public class GodRayCollider : MonoBehaviour
 
 		ValidTarget tg = other.gameObject.GetComponent<ValidTarget>();
 
-		if (tg != null && tg.canBeTargeted)
+		if (tg != null && tg.canBeTargeted) 
 		{
-			numTargetsInside += 1;
-			targetsInside.Add(tg);
-		} 
+		    numTargetsInside += 1;
+			targetsInside.Add (tg);
 
-		if (numTargetsInside > 0) 
-		{
-			if (hitMaterial == null)
+		    if (numTargetsInside > 0) 
 			{
-				this.renderer.material.color = hitColor;
-				hitMaterial = this.renderer.material;
-				disc.renderer.material = hitMaterial;
-			} 
-			else
-			{
-				this.renderer.material = hitMaterial;
-				disc.renderer.material = hitMaterial;
+			    if (hitMaterial == null) 
+				{
+					this.renderer.material.color = hitColor;
+					hitMaterial = this.renderer.material;
+					disc.renderer.material = hitMaterial;
+				} 
+				else 
+				{
+					this.renderer.material = hitMaterial;
+				    disc.renderer.material = hitMaterial;
+				}
 			}
-		}
+	   }
 	}
-	
-	
+
+	void OnEnable()
+	{
+		numTargetsInside = 0;
+		this.renderer.material = normalMaterial;
+		disc.renderer.material = normalMaterial;
+	}
+
 	void OnTriggerExit(Collider other)
 	{
 

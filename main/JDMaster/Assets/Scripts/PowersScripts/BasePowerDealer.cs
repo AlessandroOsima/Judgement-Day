@@ -11,7 +11,7 @@ public abstract class PowerEffect
 	{
 		get
 		{
-			return owner.name;
+			return owner.gameObject.name;
 		}
 	}
 
