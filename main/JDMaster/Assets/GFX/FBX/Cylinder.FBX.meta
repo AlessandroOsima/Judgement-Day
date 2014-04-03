@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: caef78fbfe46a7e45a89c21b60944d24
+guid: e941606415f224251b8a37bcfcaadcdc
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
@@ -10,7 +10,7 @@ ModelImporter:
     4300000: Cylinder
     9500000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -60,4 +60,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  additionalBone: 0
   userData: 

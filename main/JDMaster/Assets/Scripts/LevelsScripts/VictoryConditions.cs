@@ -19,13 +19,15 @@ public class VictoryConditions : MonoBehaviour {
 		if(endGameState == EndGameState.Defeat)
 		{
 			Debug.Log(endGameState);
-			LevelGUI.levelGUI.writeWord("DEFEAT ",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
+			LevelGUI.levelGUI.WriteMessage("GAME OVER ",Screen.width/2f, Screen.height/2f,0f,LevelGUI.sRed,true,80);
+			GameObject.Find("RTSCameraSoundtrack").GetComponent<CameraControl>().enabled = false;
 			reload = true;
 		}
 		else
 		{
 			Debug.Log(endGameState);
-			LevelGUI.levelGUI.writeWord("VICTORY",new Vector3(Screen.width/2, Screen.height/2,0f), new Vector3(1.4f,1.4f,1),0f,false);
+			LevelGUI.levelGUI.WriteMessage("YOU ARE A GOD !!",Screen.width/2f, Screen.height/2f,0f,LevelGUI.sBlue,true,80);
+			GameObject.Find("RTSCameraSoundtrack").GetComponent<CameraControl>().enabled = false;
 			reload = false;
 		}
 

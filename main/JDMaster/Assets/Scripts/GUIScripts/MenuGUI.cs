@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MenuGUI : MonoBehaviour 
 {
+	/*
 	//Public Variables
 	public UIToolkit GUIToolkit;
 	//Private Variables
@@ -37,5 +38,6 @@ public class MenuGUI : MonoBehaviour
 		quitButton.onTouchUpInside += sender => Application.LoadLevel("Abouts");
 		quitButton.scale = scaleFactor;
 	}
+	*/
 }
 	

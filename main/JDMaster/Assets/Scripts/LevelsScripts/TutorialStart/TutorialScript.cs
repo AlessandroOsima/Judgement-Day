@@ -24,35 +24,13 @@ public class TutorialScript : MonoBehaviour
 		secondTze = persons[1].GetComponent<PersonStatus>();
 		GlobalManager.globalManager.standardVictoryConditions = false;
 
-		WriteMessage("Welcome to Judgement Day!",1.7f,0.25f,0f);
-		WriteMessage("Press Enter to Continue",1.8f,0.25f,0f);
+		LevelGUI.levelGUI.WriteMessage("Welcome to Judgement Day!",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+		LevelGUI.levelGUI.WriteMessage("Press Enter to Continue",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 
 		firePower = GlobalManager.globalManager.gameObject.transform.FindChild("Fire").GetComponent<BasePowerDealer>();
 	}
-
-	void WriteMessage(string s, float h,float w, float d)
-	{
-		float height = Screen.height/2;
-		float width = Screen.width/2;
-
-		int i = 0;
-		int j = 0;
-		float space = (w * width);
-		string word;
-		
-		while ((j = s.IndexOf(" ", i)) != -1)
-		{
-			word = s.Substring(i,(j-i));
-			LevelGUI.levelGUI.writeWord(word, new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
-			space += (word.Length + 2) * charS;
-			j++;
-			i = j;
-		}
-		
-		word = s.Substring(i);
-		LevelGUI.levelGUI.writeWord(word,new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
-	}
 	
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -66,8 +44,8 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("You are a GOD!!!",1.7f,0.25f,0f);
-				WriteMessage("but these people are not adoring you",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("You are a GOD!!!",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("but these people are not adoring you",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -79,8 +57,8 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("Look at them just laughing.",1.7f,0.25f,0f);
-				WriteMessage("To zoom press Q.",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Look at them just laughing.",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("To zoom press Q.",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -95,8 +73,8 @@ public class TutorialScript : MonoBehaviour
 					LevelGUI.levelGUI.clearMessages();
 				}
 
-				WriteMessage("Good, you can zoom back with E.",1.7f,0.25f,0f);
-				WriteMessage("You should use your powers to teach them who's the boss.",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Good, you can zoom back with E.",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("You should use your powers to teach them who's the boss.",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -109,7 +87,7 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("Ok, let's try a little FIRE!!",1.7f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Ok, let's try a little FIRE!!",1.7f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -125,8 +103,8 @@ public class TutorialScript : MonoBehaviour
 				firePower.powerState = PowerState.Disabled;
 				PowersManager.powersManager.refreshPowersStates(GlobalManager.globalManager.souls);
 				((BasePowerDealer)firePower).enableUse = false;
-				WriteMessage("Press Number 1 to select FIRE!",1.7f,0.25f,0f);
-				WriteMessage("Use the arrows to move the god ray to your target.",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Press Number 1 to select FIRE!",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("Use the arrows to move the god ray to your target.",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -142,8 +120,8 @@ public class TutorialScript : MonoBehaviour
 					LevelGUI.levelGUI.clearMessages();
 				}
 				((BasePowerDealer)firePower).enableUse = true;
-				WriteMessage("Good! Now burn the unworthy.",1.7f,0.25f,0f);
-				WriteMessage("Press SPACE to use your Power.",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Good! Now burn the unworthy.",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("Press SPACE to use your Power.",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -156,7 +134,7 @@ public class TutorialScript : MonoBehaviour
 			if(LevelGUI.levelGUI.isDisplayingMessages()){
 				LevelGUI.levelGUI.clearMessages();
 			}
-			WriteMessage("HAHAHAHAHHAHAHAHAHAHAHA...",1.7f,0.25f,0f);
+			LevelGUI.levelGUI.WriteMessage("HAHAHAHAHHAHAHAHAHAHAHA...",1.7f,0.25f,0f,LevelGUI.sBlue,true);
 			messageCount++;
 		}
 
@@ -165,7 +143,7 @@ public class TutorialScript : MonoBehaviour
 			if(LevelGUI.levelGUI.isDisplayingMessages()){
 				LevelGUI.levelGUI.clearMessages();
 			}
-			WriteMessage("You missed. Did you not?",1.7f,0.25f,0f);
+			LevelGUI.levelGUI.WriteMessage("You missed. Did you not?",1.7f,0.25f,0f,LevelGUI.sBlue,true);
 			messageCount = 20;
 			time=0;
 		}
@@ -176,7 +154,7 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("Sorry, I got carried away",1.7f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Sorry, I got carried away",1.7f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -188,8 +166,8 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("Do not worry. You can Redo the level any time",1.7f,0.25f,0f);
-				WriteMessage("Press the Redo button up in the left",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Do not worry. You can Redo the level any time",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("Press the Redo button up in the left",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 			}
 		}
@@ -202,8 +180,8 @@ public class TutorialScript : MonoBehaviour
 					LevelGUI.levelGUI.clearMessages();
 				}
 				((BasePowerDealer)firePower).enableUse = false;
-				WriteMessage("However be aware! When you use your powers you use SOULS",1.7f,0.25f,0f);
-				WriteMessage("The number of SOULS you own is up there with the crosses",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("However be aware! When you use your powers you use SOULS",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("The number of SOULS you own is up there with the crosses",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -215,8 +193,8 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("You have a limited number of SOULS",1.7f,0.25f,0f);
-				WriteMessage("But with each infidel dead you get his sins weight in SOULS",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("You have a limited number of SOULS",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("But with each infidel dead you get his sins weight in SOULS",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -228,8 +206,8 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("Some will be worth more of your time, some less",1.7f,0.25f,0f);
-				WriteMessage("It depends on their actions, and Yours. These guys worth 3 souls each",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Some will be worth more of your time, some less",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("It depends on their actions, and Yours. These guys worth 3 souls each",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -241,8 +219,8 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("The cost of the Powers is stated next to it",1.7f,0.25f,0f);
-				WriteMessage("You can use some extra SOULS this time",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("The cost of the Powers is stated next to it",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("You can use some extra SOULS this time",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				GlobalManager.globalManager.incrementSouls(8);
 				messageCount++;
 				time=0;
@@ -258,12 +236,12 @@ public class TutorialScript : MonoBehaviour
 				if(GlobalManager.globalManager.population > 0)
 				{
 					((BasePowerDealer)firePower).enableUse = true;
-					WriteMessage("Now, Do me a favor and kill that other infidel too.",1.7f,0.25f,0f);
+					LevelGUI.levelGUI.WriteMessage("Now, Do me a favor and kill that other infidel too.",1.7f,0.25f,0f,LevelGUI.sBlue,true);
 					messageCount++;
 				}
 				else
 				{
-					WriteMessage("Nice!! you got 2 for 1",1.7f,0.25f,0f);
+					LevelGUI.levelGUI.WriteMessage("Nice!! you got 2 for 1",1.7f,0.25f,0f,LevelGUI.sBlue,true);
 					messageCount+=2;
 				}
 				time=0;
@@ -276,7 +254,7 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("Good Job!!!",1.7f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Good Job!!!",1.7f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}
@@ -296,8 +274,8 @@ public class TutorialScript : MonoBehaviour
 				if(LevelGUI.levelGUI.isDisplayingMessages()){
 					LevelGUI.levelGUI.clearMessages();
 				}
-				WriteMessage("Great Work !!! You managed to kill all the infidels.",1.7f,0.25f,0f);
-				WriteMessage("Now, let's go kill some more people",1.8f,0.25f,0f);
+				LevelGUI.levelGUI.WriteMessage("Great Work !!! You managed to kill all the infidels.",1.7f,0.25f,0f,LevelGUI.sBlue,true);
+				LevelGUI.levelGUI.WriteMessage("Now, let's go kill some more people",1.8f,0.25f,0f,LevelGUI.sBlue,true);
 				messageCount++;
 				time=0;
 			}

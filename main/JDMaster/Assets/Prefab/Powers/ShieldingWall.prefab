@@ -28,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.3214798, y: -16.6108036, z: -5.8940239}
-  m_LocalScale: {x: 198.749542, y: 24.2143402, z: 182.691406}
+  m_LocalPosition: {x: 15.4543495, y: -16.6108036, z: -4.51124287}
+  m_LocalScale: {x: 300.749512, y: 24.2143402, z: 300.691406}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!23 &2300000
@@ -59,7 +59,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e941606415f224251b8a37bcfcaadcdc, type: 3}
 --- !u!64 &6400000
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -72,7 +72,7 @@ MeshCollider:
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
   m_Convex: 1
-  m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e941606415f224251b8a37bcfcaadcdc, type: 3}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expasionDelta: 10
-  expand: 1
+  expand: 0
   expansionRate: 20
+  maxExpansion: 100
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -381,6 +381,9 @@ GameObject:
   - 23: {fileID: 3922058}
   - 95: {fileID: 3922057}
   - 114: {fileID: 3922056}
+  - 114: {fileID: 3922062}
+  - 65: {fileID: 3922061}
+  - 54: {fileID: 3922060}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -462,7 +465,48 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 1545841623}
   m_GameObject: {fileID: 3922054}
-  m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e941606415f224251b8a37bcfcaadcdc, type: 3}
+--- !u!54 &3922060
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 83137bb7087f14e8db8ad3b7679f9ac3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1545841623}
+  m_GameObject: {fileID: 3922054}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &3922061
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 83137bb7087f14e8db8ad3b7679f9ac3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1545841623}
+  m_GameObject: {fileID: 3922054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
+  m_Center: {x: 0, y: .596628189, z: 0}
+--- !u!114 &3922062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 83137bb7087f14e8db8ad3b7679f9ac3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1545841623}
+  m_GameObject: {fileID: 3922054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4300768
 GameObject:
   m_ObjectHideFlags: 0
@@ -16835,9 +16879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657e8e257b0004629b67695b180b8bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIToolkit: {fileID: 486761439}
-  PowersGUIToolkit: {fileID: 405151240}
-  thisScene: Level01-04
+  powerButton: {fileID: 0}
+  soulsText: {fileID: 0}
+  deathText: {fileID: 0}
+  populationText: {fileID: 0}
+  messageLabel: {fileID: 0}
 --- !u!1 &372748322
 GameObject:
   m_ObjectHideFlags: 0
@@ -17751,12 +17797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8370c2a0ccbfb44f3a8a7e287ff3656c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texturePackerConfigName: JDPowersGUI
-  material: {fileID: 2100000, guid: 7998a82f67be84cae8e0585ffb074eaa, type: 2}
-  layer: 0
-  textureSize: {x: 0, y: 0}
-  displayTouchDebugAreas: 0
-  useOutsideTouchControl: 0
 --- !u!1001 &405410287
 Prefab:
   m_ObjectHideFlags: 0
@@ -20214,12 +20254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8370c2a0ccbfb44f3a8a7e287ff3656c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texturePackerConfigName: JDGuiAtlas
-  material: {fileID: 2100000, guid: 23dae040ec6e2429d97dfd5b21b5830b, type: 2}
-  layer: 0
-  textureSize: {x: 0, y: 0}
-  displayTouchDebugAreas: 0
-  useOutsideTouchControl: 0
 --- !u!1001 &487728374
 Prefab:
   m_ObjectHideFlags: 0
@@ -21725,6 +21759,9 @@ GameObject:
   - 23: {fileID: 529119429}
   - 95: {fileID: 529119428}
   - 114: {fileID: 529119427}
+  - 65: {fileID: 529119432}
+  - 114: {fileID: 529119431}
+  - 54: {fileID: 605462735}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -21806,7 +21843,32 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 1643464958}
   m_GameObject: {fileID: 529119425}
-  m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e941606415f224251b8a37bcfcaadcdc, type: 3}
+--- !u!114 &529119431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 503e810b1e52f467791bc05fd86d368a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1643464958}
+  m_GameObject: {fileID: 529119425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &529119432
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500004, guid: 503e810b1e52f467791bc05fd86d368a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1643464958}
+  m_GameObject: {fileID: 529119425}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
+  m_Center: {x: 0, y: .596628189, z: 0}
 --- !u!1 &529299587
 GameObject:
   m_ObjectHideFlags: 0
@@ -23642,10 +23704,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 605462733}
-  - 65: {fileID: 605462737}
   - 114: {fileID: 605462734}
   - 82: {fileID: 605462736}
-  - 54: {fileID: 605462735}
+  - 65: {fileID: 605462737}
   m_Layer: 2
   m_Name: Lighting
   m_TagString: Lightning
@@ -23694,7 +23755,7 @@ Rigidbody:
   m_PrefabParentObject: {fileID: 5400000, guid: 503e810b1e52f467791bc05fd86d368a,
     type: 2}
   m_PrefabInternal: {fileID: 1643464958}
-  m_GameObject: {fileID: 605462732}
+  m_GameObject: {fileID: 529119425}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -23774,7 +23835,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 10, y: 1, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &610547696
 GameObject:
@@ -41241,16 +41302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d611c99677b264c2081776e53f769d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawDepth: 100
-  UILayer:
-    serializedVersion: 2
-    m_Bits: 256
-  layer: 0
-  autoTextureSelectionForHD: 0
-  allowPod4GenHD: 0
-  maxWidthOrHeightForSD: 960
-  maxWidthOrHeightForHD: 2048
-  hdExtension: 2x
 --- !u!4 &1048242324
 Transform:
   m_ObjectHideFlags: 0
@@ -51251,6 +51302,9 @@ GameObject:
   - 23: {fileID: 1302761794}
   - 95: {fileID: 1302761793}
   - 114: {fileID: 1302761792}
+  - 114: {fileID: 1302761798}
+  - 65: {fileID: 1302761797}
+  - 54: {fileID: 1302761796}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -51332,7 +51386,48 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 357356644}
   m_GameObject: {fileID: 1302761790}
-  m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e941606415f224251b8a37bcfcaadcdc, type: 3}
+--- !u!54 &1302761796
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 3931801d516ab4b849577e876ebf1826,
+    type: 2}
+  m_PrefabInternal: {fileID: 357356644}
+  m_GameObject: {fileID: 1302761790}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1302761797
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 3931801d516ab4b849577e876ebf1826,
+    type: 2}
+  m_PrefabInternal: {fileID: 357356644}
+  m_GameObject: {fileID: 1302761790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.1932565, z: .169841424}
+  m_Center: {x: 0, y: .596628249, z: 0}
+--- !u!114 &1302761798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 3931801d516ab4b849577e876ebf1826,
+    type: 2}
+  m_PrefabInternal: {fileID: 357356644}
+  m_GameObject: {fileID: 1302761790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1303703706
 GameObject:
   m_ObjectHideFlags: 0
@@ -52116,6 +52211,9 @@ GameObject:
   - 23: {fileID: 1321780197}
   - 95: {fileID: 1321780196}
   - 114: {fileID: 1321780195}
+  - 65: {fileID: 1321780201}
+  - 114: {fileID: 1321780200}
+  - 54: {fileID: 1321780199}
   m_Layer: 2
   m_Name: GodRay
   m_TagString: Untagged
@@ -52197,7 +52295,48 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 194677440}
   m_GameObject: {fileID: 1321780193}
-  m_Mesh: {fileID: 4300000, guid: caef78fbfe46a7e45a89c21b60944d24, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e941606415f224251b8a37bcfcaadcdc, type: 3}
+--- !u!54 &1321780199
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 4aa8fabbebb924f7bb47b603115032a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 194677440}
+  m_GameObject: {fileID: 1321780193}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1321780200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 4aa8fabbebb924f7bb47b603115032a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 194677440}
+  m_GameObject: {fileID: 1321780193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0622b408fb4767b43db942f4dcc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1321780201
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 4aa8fabbebb924f7bb47b603115032a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 194677440}
+  m_GameObject: {fileID: 1321780193}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .169841424, y: 1.19325638, z: .169841424}
+  m_Center: {x: 0, y: .596628189, z: 0}
 --- !u!1 &1337155802
 GameObject:
   m_ObjectHideFlags: 0

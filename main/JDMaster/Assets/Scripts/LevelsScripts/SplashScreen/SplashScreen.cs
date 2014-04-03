@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SplashScreen : MonoBehaviour {
-
+public class SplashScreen : MonoBehaviour 
+{
+	/*
 	public UIToolkit SplashScreenToolkit;
 	UISprite JDLogo;
 	float timer = 0;
@@ -55,4 +56,5 @@ public class SplashScreen : MonoBehaviour {
 		if(!Camera.main.audio.isPlaying && started)
 			Application.LoadLevel("LevelSelectionMenu");
 	}
+	*/
 }
