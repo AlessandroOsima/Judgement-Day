@@ -3,29 +3,35 @@ using System.Collections;
 
 public class SplashScreen : MonoBehaviour 
 {
-	/*
-	public UIToolkit SplashScreenToolkit;
-	UISprite JDLogo;
+
+	public UISprite foregroundSpritePolimi;
+	public UISprite foregroundSpriteJD;
+	public UITexture backgrounSprite;
+	public Camera uiCamera;
 	float timer = 0;
 	bool started = false;
+
 
 	// Use this for initialization
 	void Start () 
 	{
-		JDLogo = SplashScreenToolkit.addSprite("PolimiGameCollective.png",0,0);
-		JDLogo.positionCenter();
+		//this.GetComponent<UIRoot>().manualHeight = Screen.height;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		foregroundSpriteJD.ResetAnchors();
+		foregroundSpritePolimi.ResetAnchors();
+		foregroundSpriteJD.UpdateAnchors();
+		foregroundSpritePolimi.UpdateAnchors();
+
 		if(Time.timeSinceLevelLoad > 6.0f && !started)
 		{
-			JDLogo.destroy();
-			Camera.main.backgroundColor = Color.white;
-			JDLogo = SplashScreenToolkit.addSprite("JD_Logo.png",0,0);
-			JDLogo.positionCenter();
-			Camera.main.audio.Play();
+			backgrounSprite.color = Color.white;
+			foregroundSpritePolimi.alpha = 0f;
+			foregroundSpriteJD.alpha = 1f;
+			uiCamera.audio.Play();
 			started = true;
 		}
 	
@@ -53,8 +59,7 @@ public class SplashScreen : MonoBehaviour
 		if(Input.GetKey(KeyCode.Alpha6))
 			Application.LoadLevel("EasterIsland");
 
-		if(!Camera.main.audio.isPlaying && started)
+		if(!uiCamera.audio.isPlaying && started)
 			Application.LoadLevel("LevelSelectionMenu");
 	}
-	*/
 }
