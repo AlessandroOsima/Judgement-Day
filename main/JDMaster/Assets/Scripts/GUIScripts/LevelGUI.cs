@@ -22,12 +22,13 @@ public class LevelGUI : MonoBehaviour
 
 	//Public Variables
 	static LevelGUI _levelGUI;
-	//public UIToolkit GUIToolkit;
-	//public UIToolkit PowersGUIToolkit;
 	public GameObject powerButton;
 	public UILabel soulsText;
 	public UILabel deathText;
 	public UILabel populationText;
+	public UILabel soulsVar;
+	public UILabel populationVar;
+	public UILabel deathsVar;
 	public GameObject messageLabel;
 	public static Color sGreen = new Color(0.46f,0.86f,0.13f,1);
 	public static Color sBlue = new Color(0.12f,0.70f,0.87f,1);
@@ -36,6 +37,12 @@ public class LevelGUI : MonoBehaviour
 	//Private Variables
 	List<PowerContainer> _powersBar;
 	Dictionary<int,int> _powerBarMappings;
+	TweenPosition tweenPositionSouls;
+	TweenPosition tweenPositionPopulation;
+	TweenPosition tweenPositionDeaths;
+	TweenAlpha tweenAlphaSouls;
+	TweenAlpha tweenAlphaPopulation;
+	TweenAlpha tweenAlphaDeaths;
 
 	UIRoot root;
 	Vector3 scaleFactor = new Vector3(0.4f,0.4f,1f);
@@ -81,8 +88,9 @@ public class LevelGUI : MonoBehaviour
 	void Awake()
 	{
 		//Awake is used by UIToolkit for initialization, DO NOT USE THIS.
+
 	}
-	
+
 	// Use this for initialization
 	void Start () 
 	{     
@@ -103,6 +111,8 @@ public class LevelGUI : MonoBehaviour
 		
 		PowersManager.powersManager.powerEnabled += changePowersEnabled;
 		PowersManager.powersManager.powerDisabled += changePowersDisabled;
+
+
 	}
 
 
@@ -240,16 +250,100 @@ public class LevelGUI : MonoBehaviour
 	//change the population
 	void changePopulation(int pastPopulation, int newPopulation)
 	{
+		if(pastPopulation == newPopulation)
+		{
+			population = newPopulation;
+			return;
+		}
+
+		int populationDifference = newPopulation - pastPopulation;
+
+		applyTweenEvents(populationVar,populationDifference,tweenPositionPopulation,tweenAlphaPopulation,populationText,sGreen,sGreen);
+
 		population = newPopulation;
 	}
+
 	//change the souls
 	void changeSouls(int pastSouls, int newSouls)
 	{
+		if(pastSouls == newSouls)
+		{
+			souls = newSouls;
+			return;
+		}
+
+		int soulsDifference  = newSouls - pastSouls;
+
+		applyTweenEvents(soulsVar,soulsDifference,tweenPositionSouls, tweenAlphaSouls, soulsText,sGreen,sRed);
+
 		souls = newSouls;
 	}
+
+	void applyTweenEvents(UILabel label, int difference, TweenPosition positionTween, TweenAlpha alphaTween, UILabel destinationLabel, Color positveColor, Color negativeColor,float duration = 2.5f)
+	{
+		
+		if(difference > 0)
+			label.text = "+ " + difference.ToString();
+		else
+			label.text = difference.ToString();
+
+		positionTween = label.GetComponent<TweenPosition>();
+		alphaTween = label.GetComponent<TweenAlpha>();
+
+		if(positionTween == null)
+		{
+			positionTween = label.gameObject.AddMissingComponent<TweenPosition>();
+			positionTween.from = new Vector3(label.transform.localPosition.x ,label.transform.localPosition.y,0);
+			positionTween.to = new Vector3(label.transform.localPosition.x ,(root.activeHeight/2) - (destinationLabel.height/2),0);
+			positionTween.duration = duration;
+			positionTween.style = UITweener.Style.Once;
+			positionTween.Play();
+		}
+		else
+		{
+			positionTween.ResetToBeginning();
+			positionTween.Play();
+		}
+		
+		//tweenPosition.onFinished.Add(EventDelegate(this.OnTweenFinished));
+		
+		if(difference > 0)
+			label.color = positveColor;
+		else
+			label.color = negativeColor;
+
+
+		if(alphaTween == null)
+		{
+			alphaTween = label.gameObject.AddMissingComponent<TweenAlpha>();
+			alphaTween.from = 1f;
+			alphaTween.to = 0f;
+			alphaTween.duration = duration;
+			alphaTween.style = UITweener.Style.Once;
+			alphaTween.Play();
+		}
+		else
+		{
+			alphaTween.ResetToBeginning();
+			alphaTween.Play();
+		}
+	
+
+	}
+
 	//change the deaths
 	void changeDeath(int pastDeaths, int newDeaths)
 	{
+		if(pastDeaths == newDeaths)
+		{
+			death = newDeaths;
+			return;
+		}
+
+		int deathsDifference = newDeaths - pastDeaths;
+
+		applyTweenEvents(deathsVar,deathsDifference,tweenPositionDeaths,tweenAlphaDeaths,deathText,sGreen,sRed);
+
 		death = newDeaths;
 	}
 	
@@ -336,91 +430,12 @@ public class LevelGUI : MonoBehaviour
 		textMessage.timer = 0;
 
 		messages.Add(textMessage);
-		
-		/*
-		textMessage.text = text.addTextInstance(message,position.x,position.y);
-		textMessage.text.alignMode = UITextAlignMode.Center;
-		textMessage.text.xPos = position.x;
-		textMessage.text.yPos = position.y;
-		textMessage.text.scale = scale;
-		textMessage.text.setColorForAllLetters(sBlue);
 
-		textMessage.duration = duration;
-		textMessage.timer = 0;
-
-		if(useBackground)
-		{
-			//null
-		}
-
-		messages.Add(textMessage);
-		*/
 	}
 
 	public void writeWord(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
 	{
 	}
-
-	/*
-	public void WriteMessage(string s, float h,float w, float d)
-	{
-		float height = Screen.height/2;
-		float width = Screen.width/2;
-		
-		Debug.Log(Screen.width);
-		Debug.Log(Screen.height);
-		
-		int i = 0;
-		int j = 0;
-		float space = (w * width);
-		string word;
-		
-		while ((j = s.IndexOf(" ", i)) != -1)
-		{
-			word = s.Substring(i,(j-i));
-			LevelGUI.levelGUI.writeWord(word, new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
-			space += (word.Length + 2) * 14;
-			j++;
-			i = j;
-		}
-		
-		word = s.Substring(i);
-		LevelGUI.levelGUI.writeWord(word,new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
-	}
-
-	//duration is the time in seconds needed a message will stay visible before being destroyed, if duration <= 0 the message will stay visible forever
-	public void writeWord(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
-	{
-		if(messages == null)
-		{
-			messages = new List<TextMessage>();
-			TextMessage fakeTextMessage = new TextMessage();
-			fakeTextMessage.duration = 0;
-			messages.Add(fakeTextMessage);
-		}
-
-		TextMessage textMessage = new TextMessage();
-
-		/*
-		textMessage.text = text.addTextInstance(message,position.x,position.y);
-		textMessage.text.alignMode = UITextAlignMode.Center;
-		textMessage.text.xPos = position.x;
-		textMessage.text.yPos = position.y;
-		textMessage.text.scale = scale;
-		textMessage.text.setColorForAllLetters(sBlue);
-
-		textMessage.duration = duration;
-		textMessage.timer = 0;
-
-		if(useBackground)
-		{
-			//null
-		}
-
-		messages.Add(textMessage);
-
-	}
-   */
 
 	public bool isDisplayingMessages()
 	{
