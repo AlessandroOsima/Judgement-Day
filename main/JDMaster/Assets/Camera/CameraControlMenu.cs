@@ -9,6 +9,7 @@ public class CameraControlMenu : MonoBehaviour
 	public float tweenDuration = 1f;
 	public List<Vector3> positions;
 	public List<GameObject> islands;
+	public List<GameObject> selectors;
 	
 	float distFromMin;
 	float distFromMax;
@@ -29,6 +30,7 @@ public class CameraControlMenu : MonoBehaviour
 	void Start()
 	{
 		this.transform.position = new Vector3(islands[0].transform.position.x,this.transform.position.y,islands[0].transform.position.z);
+		selectors[0].SetActive(true);
 		tweenPos = camera.GetComponent<TweenPosition>();
 		tweenPos.ignoreTimeScale = true;
 		tweenPos.duration = tweenDuration;
@@ -44,13 +46,15 @@ public class CameraControlMenu : MonoBehaviour
 		
 		direction = new Vector3(0, 0, 0);
 		origin = transform.position;
-		
+
 		float movement = Input.GetAxis("Horizontal");
 		Debug.Log(movement);
 		
-		if (movement == 0) return;
+		if (movement == 0) 
+			return;
 		else if (movement > 0)
 		{
+			selectors[selectedIsland].SetActive(false);
 			++selectedIsland;
 			
 			if (selectedIsland > numberOfIsles - 1)
@@ -61,6 +65,7 @@ public class CameraControlMenu : MonoBehaviour
 		}
 		else if (movement < 0)
 		{
+			selectors[selectedIsland].SetActive(false);
 			--selectedIsland;
 			
 			if (selectedIsland < 0) selectedIsland = 0;
@@ -77,6 +82,7 @@ public class CameraControlMenu : MonoBehaviour
 	
 	void OnTweenFinished()
 	{
+		selectors[selectedIsland].SetActive(true);
 		running = false;
 	}
 	

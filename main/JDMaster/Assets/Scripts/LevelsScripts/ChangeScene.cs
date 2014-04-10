@@ -46,7 +46,7 @@ public class ChangeScene : MonoBehaviour
 			
 		}
 	}
-	
+
 	void Update()
 	{
 		if (running) 
