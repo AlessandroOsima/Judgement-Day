@@ -31,30 +31,36 @@ public class ChangeScene : MonoBehaviour
 	{
 		if (Input.GetMouseButton(0) && !menuCamera.isRunning)
 		{
-			menuCamera.isRunning = true;
-			islandsPositions = CameraControlMenu.IslandsPositions;
-			selectedIsland = menuCamera.SelectedIsle;
-			tweenPos.duration = zoomDuration;
-			tweenPos.ignoreTimeScale = true;
-			tweenPos.method = UITweener.Method.EaseIn;
-			tweenPos.from = menuCamera.transform.position;
-			tweenPos.to = new Vector3(islandsPositions[selectedIsland].transform.position.x,25,islandsPositions[selectedIsland].transform.position.z);
-			tweenPos.ResetToBeginning();
-			tweenPos.onFinished.Clear();
-			EventDelegate.Add(tweenPos.onFinished, OnTweenFinished);
-			tweenPos.PlayForward();
-			
+			ChangeLevel();
 		}
 	}
 
-	void Update()
+	void ChangeLevel()
 	{
+		menuCamera.isRunning = true;
+		islandsPositions = CameraControlMenu.IslandsPositions;
+		selectedIsland = menuCamera.SelectedIsle;
+		tweenPos.duration = zoomDuration;
+		tweenPos.ignoreTimeScale = true;
+		tweenPos.method = UITweener.Method.EaseIn;
+		tweenPos.from = menuCamera.transform.position;
+		tweenPos.to = new Vector3(islandsPositions[selectedIsland].transform.position.x,25,islandsPositions[selectedIsland].transform.position.z);
+		tweenPos.ResetToBeginning();
+		tweenPos.onFinished.Clear();
+		EventDelegate.Add(tweenPos.onFinished, OnTweenFinished);
+		tweenPos.PlayForward();
+	}
+
+	void Update()   
+	{
+		if (Input.GetKey(KeyCode.Space) && !menuCamera.isRunning)
+			ChangeLevel();
+
 		if (running) 
 			return;
 		
 		try
 		{
-			
 			//Pass the filepath and filename to the StreamWriter Constructor
 			StreamWriter sw = new StreamWriter(path, false);
 			

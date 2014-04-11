@@ -48,13 +48,11 @@ public class CameraControlMenu : MonoBehaviour
 		origin = transform.position;
 
 		float movement = Input.GetAxis("Horizontal");
-		Debug.Log(movement);
 		
 		if (movement == 0) 
 			return;
 		else if (movement > 0)
 		{
-			selectors[selectedIsland].SetActive(false);
 			++selectedIsland;
 			
 			if (selectedIsland > numberOfIsles - 1)
@@ -62,14 +60,23 @@ public class CameraControlMenu : MonoBehaviour
 				selectedIsland--;
 				return;
 			}
+
+			selectors[selectedIsland - 1].SetActive(false);
 		}
 		else if (movement < 0)
 		{
-			selectors[selectedIsland].SetActive(false);
 			--selectedIsland;
 			
-			if (selectedIsland < 0) selectedIsland = 0;
+			if (selectedIsland < 0) 
+			{
+				selectedIsland = 0;
+				return;
+			}
+
+			selectors[selectedIsland + 1].SetActive(false);
+
 		}
+
 		running = true;
 		tweenPos.from = origin;
 		tweenPos.to = new Vector3(islands[selectedIsland].transform.position.x,origin.y,islands[selectedIsland].transform.position.z);
