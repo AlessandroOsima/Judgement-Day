@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class CameraControlMenu : MonoBehaviour
 {
+	public enum LevelCorner
+	{
+		Left,
+		Right,
+		None
+	}
 	public float speed = 90;
 	public float horizontalMovement = 100;
 	public float rayLenght = 1.5f;
@@ -16,9 +22,21 @@ public class CameraControlMenu : MonoBehaviour
 	
 	static TweenPosition tweenPos;
 	static int selectedIsland = 0;
+	LevelCorner corner = LevelCorner.None;
 	int numberOfIsles = 0;
 	bool running = false;
 	public static List<GameObject> staticPositions;
+
+	IslandDescriptor currentIsland;
+	IslandDescriptor previousIsland;
+
+	public delegate void onIslandTransition(IslandDescriptor previousLevel, IslandDescriptor newLevel, LevelCorner corner);
+	public delegate void onLevelSelected(IslandDescriptor level);
+
+	public event onLevelSelected levelSelected;
+	public event onIslandTransition islandTransitionStart;
+	public event onIslandTransition islandTransitionEnd;
+
 
 	Vector3 direction;
 	Vector3 origin;
@@ -38,6 +56,11 @@ public class CameraControlMenu : MonoBehaviour
 		tweenPos.method = UITweener.Method.EaseInOut;
 		numberOfIsles = positions.Count;
 		staticPositions = islands;
+		currentIsland = islands[selectedIsland].GetComponent<IslandDescriptor>();
+		previousIsland = null;
+
+		if(islandTransitionEnd != null)
+			islandTransitionEnd(previousIsland,currentIsland,LevelCorner.Left);
 	}
 	
 	void Update()
@@ -48,6 +71,7 @@ public class CameraControlMenu : MonoBehaviour
 		origin = transform.position;
 
 		float movement = Input.GetAxis("Horizontal");
+
 		
 		if (movement == 0) 
 			return;
@@ -65,8 +89,9 @@ public class CameraControlMenu : MonoBehaviour
 		}
 		else if (movement < 0)
 		{
+			selectors[selectedIsland].SetActive(false);
 			--selectedIsland;
-			
+
 			if (selectedIsland < 0) 
 			{
 				selectedIsland = 0;
@@ -74,14 +99,28 @@ public class CameraControlMenu : MonoBehaviour
 			}
 
 			selectors[selectedIsland + 1].SetActive(false);
-
 		}
 
+		if(selectedIsland == 0)
+			corner = LevelCorner.Left;
+		else if(selectedIsland == numberOfIsles -1 )
+			corner = LevelCorner.Right;
+		else
+			corner = LevelCorner.None;
+		
 		running = true;
 		tweenPos.from = origin;
 		tweenPos.to = new Vector3(islands[selectedIsland].transform.position.x,origin.y,islands[selectedIsland].transform.position.z);
 		tweenPos.ResetToBeginning();
 		tweenPos.onFinished.Clear();
+
+		previousIsland = currentIsland;
+		currentIsland = islands[selectedIsland].GetComponent<IslandDescriptor>();
+
+
+		if(islandTransitionStart != null)
+			islandTransitionStart(previousIsland,currentIsland,corner);
+
 		EventDelegate.Add(tweenPos.onFinished, OnTweenFinished);
 		tweenPos.PlayForward();
 		
@@ -91,6 +130,9 @@ public class CameraControlMenu : MonoBehaviour
 	{
 		selectors[selectedIsland].SetActive(true);
 		running = false;
+
+		if(islandTransitionEnd != null)
+		 islandTransitionEnd(previousIsland,currentIsland,corner);
 	}
 	
 	#region Properties
@@ -130,6 +172,12 @@ public class CameraControlMenu : MonoBehaviour
 		{
 			return selectedIsland;
 		}
+	}
+
+	//To be Called when a level is selected only by ChangeSecen, a bit hacky, will have to replace this
+	public void notifyLevelSelected()
+	{
+		levelSelected(currentIsland);
 	}
 
 	#endregion

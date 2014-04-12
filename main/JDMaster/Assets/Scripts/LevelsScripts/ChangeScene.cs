@@ -20,7 +20,7 @@ public class ChangeScene : MonoBehaviour
 	
 	private List<GameObject> islandsPositions;
 	private int selectedIsland = 0;
-
+	
 	void Start()
 	{
 		menuCamera = FindObjectOfType<CameraControlMenu>();
@@ -34,9 +34,10 @@ public class ChangeScene : MonoBehaviour
 			ChangeLevel();
 		}
 	}
-
+	
 	void ChangeLevel()
 	{
+		menuCamera.notifyLevelSelected();
 		menuCamera.isRunning = true;
 		islandsPositions = CameraControlMenu.IslandsPositions;
 		selectedIsland = menuCamera.SelectedIsle;
@@ -50,12 +51,12 @@ public class ChangeScene : MonoBehaviour
 		EventDelegate.Add(tweenPos.onFinished, OnTweenFinished);
 		tweenPos.PlayForward();
 	}
-
+	
 	void Update()   
 	{
 		if (Input.GetKey(KeyCode.Space) && !menuCamera.isRunning)
 			ChangeLevel();
-
+		
 		if (running) 
 			return;
 		
