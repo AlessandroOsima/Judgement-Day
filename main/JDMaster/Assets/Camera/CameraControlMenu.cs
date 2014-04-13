@@ -47,6 +47,7 @@ public class CameraControlMenu : MonoBehaviour
 	
 	void Start()
 	{
+		selectedIsland = 0;
 		this.transform.position = new Vector3(islands[0].transform.position.x,this.transform.position.y,islands[0].transform.position.z);
 		selectors[0].SetActive(true);
 		tweenPos = camera.GetComponent<TweenPosition>();
