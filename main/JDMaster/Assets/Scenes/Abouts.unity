@@ -321,13 +321,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .850980401, b: .172549024, a: 1}
   mPivot: 4
-  mWidth: 1550
+  mWidth: 959
   mHeight: 958
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.61795402
+  aspectRatio: 1.0010438
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fac657df348554b0ea124aef4f076042, type: 2}
@@ -364,7 +364,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 831994700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -119, z: 0}
+  m_LocalPosition: {x: -.290359497, y: -119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1863093415}
@@ -445,7 +445,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591487423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.290359497, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 106116999}
@@ -479,13 +479,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1550
+  mWidth: 959
   mHeight: 720
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.15277767
+  aspectRatio: 1.33194447
   mAtlas: {fileID: 11400000, guid: 384e94b8a6b54490e81f881172125bf9, type: 2}
   mSpriteName: white
   mType: 0
@@ -537,7 +537,7 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 831994702}
     relative: 0
-    absolute: -818
+    absolute: -816
   topAnchor:
     target: {fileID: 831994702}
     relative: 0
@@ -545,13 +545,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1192
-  mHeight: 818
+  mWidth: 960
+  mHeight: 816
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.45721269
+  aspectRatio: 1.17647064
   mAtlas: {fileID: 11400000, guid: 384e94b8a6b54490e81f881172125bf9, type: 2}
   mSpriteName: Team_Logo
   mType: 0
@@ -572,7 +572,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1863093413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -888, z: 0}
+  m_LocalPosition: {x: 2, y: -887, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 831994702}
