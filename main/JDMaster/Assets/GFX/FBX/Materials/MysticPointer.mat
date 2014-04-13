@@ -19,7 +19,7 @@ Material:
         second:
           m_Texture: {fileID: 2800000, guid: a3bc2586b61067f4f8ea8a99614e84df, type: 3}
           m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 6.30533314}
+          m_Offset: {x: 0, y: .775422513}
       data:
         first:
           name: _Texture1
