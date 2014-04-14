@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f166c680ad6634bbbfa87fd6666583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
-  zoomDuration: 4
+  sceneName: TutorialRage
+  zoomDuration: 2
   vectorZoom: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:

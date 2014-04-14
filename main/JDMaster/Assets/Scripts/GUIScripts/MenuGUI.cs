@@ -8,5 +8,11 @@ public class MenuGUI : MonoBehaviour
 	{
 		Application.LoadLevel("Abouts");
 	}
+
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Escape))
+			Application.LoadLevel("Abouts");
+	}
 }
 	

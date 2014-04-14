@@ -54,7 +54,7 @@ public class ChangeScene : MonoBehaviour
 	
 	void Update()   
 	{
-		if (Input.GetKey(KeyCode.Space) && !menuCamera.isRunning)
+		if ((Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.Space)) && !menuCamera.isRunning)
 			ChangeLevel();
 		
 		if (running) 
