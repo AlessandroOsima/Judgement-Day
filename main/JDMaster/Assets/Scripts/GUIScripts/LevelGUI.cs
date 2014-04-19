@@ -210,7 +210,7 @@ public class LevelGUI : MonoBehaviour
 		
 		var mappedButtonNumber = _powerBarMappings[buttonNumber];
 		
-		Debug.Log (" bn " + buttonNumber + ", mbn " + mappedButtonNumber);
+		//Debug.Log (" bn " + buttonNumber + ", mbn " + mappedButtonNumber);
 		
 		if(!_powersBar[mappedButtonNumber].powerButton.enabled)
 			return;
@@ -428,6 +428,14 @@ public class LevelGUI : MonoBehaviour
 			else
 			{
 				startYPos += powerButton.GetComponent<UISprite> ().height;
+			}
+
+			if(power.powerState == PowerState.Disabled || power.powerState == PowerState.ForceDisabled)
+			{
+				container.powerButton.value = false;
+				container.powerButton.enabled = false;
+				container.powerSprite.color = new Color(container.powerSprite.color.r,container.powerSprite.color.g,container.powerSprite.color.b,0.5f);
+				container.cost.color = new Color(sBlue.r,sBlue.g,sBlue.b,0.5f);
 			}
 		}
 	}

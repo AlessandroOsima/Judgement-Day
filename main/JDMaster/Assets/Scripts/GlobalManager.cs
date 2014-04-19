@@ -52,6 +52,7 @@ public class GlobalManager : MonoBehaviour
 	private float rate;
 	private float nextwave;
 	private int count;
+	private int activatedPowers = 0;
 	//-----------------------------------
 
     void Start()
@@ -65,6 +66,12 @@ public class GlobalManager : MonoBehaviour
 		People = GameObject.FindGameObjectsWithTag(npcsTag);
 		population = People.Length;
 		count=4;
+
+		foreach(var people in People)
+		{
+			people.GetComponent<PersonStatus>().powerActive += powerActivated;
+			people.GetComponent<PersonStatus>().powerDeActivation += powerDeActivated;
+		}
 
 		if(towerDefense)
 		{
@@ -119,7 +126,7 @@ public class GlobalManager : MonoBehaviour
 					_notKillablePopulation++; 
 			}
 			
-			Debug.Log("not killable = " + _notKillablePopulation);
+			//Debug.Log("not killable = " + _notKillablePopulation);
 
             firstUpdate = true;
 
@@ -162,6 +169,22 @@ public class GlobalManager : MonoBehaviour
 		}
     }
 
+	void powerActivated(PersonStatus person, PowerEffect effect)
+	{
+		activatedPowers++;
+		//Debug.Log(activatedPowers);
+	}
+	
+	void powerDeActivated(PersonStatus person)
+	{
+		activatedPowers--;
+
+		if(activatedPowers <= 0)
+			souls = souls; // will update souls number and cause the gamestate to be set to defeat
+
+		//Debug.Log(activatedPowers);
+	}
+
     #region Properties
     public static GlobalManager globalManager
     {
@@ -179,7 +202,7 @@ public class GlobalManager : MonoBehaviour
         }
         set
         {
-			if(value <= 0 && _souls > 0 && population > 0)
+			if(value <= 0 && _souls > 0 && population > 0 && activatedPowers == 0)
 			{
 				if (onEndGame != null)
 					onEndGame(EndGameState.Defeat);

@@ -14,6 +14,10 @@ public class PersonStatus : ValidTarget
 	public bool initialIsValidTarget = true; 
 	public bool initialShouldNotBeKilled = false;
 
+	public delegate void onPowerActivation(PersonStatus person, PowerEffect activePower);
+	public event onPowerActivation powerActive;
+	public delegate void onPowerDeActivation(PersonStatus person);
+	public event onPowerDeActivation powerDeActivation;
 	public delegate void onStateTransition(Status previousStatus, Status newStatus);
 	public event onStateTransition stateTransition;
 	public delegate void onVarTransition(int previousVar, int nextVar);
@@ -303,14 +307,31 @@ public class PersonStatus : ValidTarget
 		set
 		{
 			if((_activePower == null && value != null) || (_activePower != null && value == null))
+			{
 				_activePower = value;
 
-			if(_activePower == null)
-				canBeTargeted = true;
-			else 
-				canBeTargeted = false;
+				if(_activePower != null)
+				{
+					if(powerActive != null)
+						powerActive(this,_activePower);
+				}
+				else
+				{
+					if(powerDeActivation != null)
+						powerDeActivation(this);
+				}
 
-			
+			}
+
+
+			if(_activePower == null)
+			{
+				canBeTargeted = true;
+			}
+			else 
+			{
+				canBeTargeted = false;
+			}
 		}
 	}
 

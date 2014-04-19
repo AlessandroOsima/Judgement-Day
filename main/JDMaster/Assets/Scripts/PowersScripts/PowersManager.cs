@@ -48,15 +48,22 @@ public class PowersManager : MonoBehaviour
 		{
 			LevelGUI.levelGUI.setUpPowersBar(powers);
 		}
-		length=powers.Length;
+
+		length = powers.Length;
 		
 		GlobalManager.globalManager.onSoulsChanged += onSoulsChanged;
+	}
+
+	void Update()
+	{
+		refreshPowersStates(GlobalManager.globalManager.souls);
 	}
 	
 	void onSoulsChanged(int pastSouls, int newSouls)
 	{
 		refreshPowersStates(newSouls);
 	}
+
 	//Set the powers state based on the number of souls, powerEnabled and powerDisabled events are called when a power changes state to enabled or disabled
 	public void refreshPowersStates(int newSouls)
 	{

@@ -96,7 +96,7 @@ public class RageEffect : PowerEffect
 			
 			if (closest != -1)
 			{
-				Debug.Log("Recomputing target");
+				//Debug.Log("Recomputing target");
 				navigator.target = Persons[closest].GetComponent<PersonStatus>();
 			}
 		}
