@@ -102,9 +102,8 @@ public abstract class UITweener : MonoBehaviour
 	// Deprecated functionality, kept for backwards compatibility
 	[HideInInspector] public GameObject eventReceiver;
 	[HideInInspector] public string callWhenFinished;
-	
-	 
-    bool mStarted = false;
+
+	bool mStarted = false;
 	float mStartTime = 0f;
 	float mDuration = 0f;
 	float mAmountPerDelta = 1000f;
@@ -212,30 +211,33 @@ public abstract class UITweener : MonoBehaviour
 			if (duration == 0f || (mFactor == 1f && mAmountPerDelta > 0f || mFactor == 0f && mAmountPerDelta < 0f))
 				enabled = false;
 
-			current = this;
-
-			if (onFinished != null)
+			if (current == null)
 			{
-				mTemp = onFinished;
-				onFinished = new List<EventDelegate>();
+				current = this;
 
-				// Notify the listener delegates
-				EventDelegate.Execute(mTemp);
-
-				// Re-add the previous persistent delegates
-				for (int i = 0; i < mTemp.Count; ++i)
+				if (onFinished != null)
 				{
-					EventDelegate ed = mTemp[i];
-					if (ed != null) EventDelegate.Add(onFinished, ed, ed.oneShot);
+					mTemp = onFinished;
+					onFinished = new List<EventDelegate>();
+
+					// Notify the listener delegates
+					EventDelegate.Execute(mTemp);
+
+					// Re-add the previous persistent delegates
+					for (int i = 0; i < mTemp.Count; ++i)
+					{
+						EventDelegate ed = mTemp[i];
+						if (ed != null) EventDelegate.Add(onFinished, ed, ed.oneShot);
+					}
+					mTemp = null;
 				}
-				mTemp = null;
+
+				// Deprecated legacy functionality support
+				if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
+					eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
+
+				current = null;
 			}
-
-			// Deprecated legacy functionality support
-			if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
-				eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
-
-			current = null;
 		}
 		else Sample(mFactor, false);
 	}

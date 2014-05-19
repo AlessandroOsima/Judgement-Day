@@ -47,6 +47,13 @@ public class UIInput : MonoBehaviour
 		EmailAddress = 7,
 	}
 
+	public enum OnReturnKey
+	{
+		Default,
+		Submit,
+		NewLine,
+	}
+
 	public delegate char OnValidate (string text, int charIndex, char addedChar);
 
 	/// <summary>
@@ -74,6 +81,12 @@ public class UIInput : MonoBehaviour
 	public InputType inputType = InputType.Standard;
 
 	/// <summary>
+	/// What to do when the Return key is pressed on the keyboard.
+	/// </summary>
+
+	public OnReturnKey onReturnKey = OnReturnKey.Default;
+
+	/// <summary>
 	/// Keyboard type applies to mobile keyboards that get shown.
 	/// </summary>
 
@@ -89,7 +102,7 @@ public class UIInput : MonoBehaviour
 	/// Maximum number of characters allowed before input no longer works.
 	/// </summary>
 
-	public int characterLimit = 0; 
+	public int characterLimit = 0;
 
 	/// <summary>
 	/// Field in player prefs used to automatically save the value.
@@ -150,6 +163,7 @@ public class UIInput : MonoBehaviour
 	protected float mPosition = 0f;
 	protected bool mDoInit = true;
 	protected UIWidget.Pivot mPivot = UIWidget.Pivot.TopLeft;
+	protected bool mLoadSavedValue = true;
 
 	static protected int mDrawStart = 0;
 
@@ -227,6 +241,7 @@ public class UIInput : MonoBehaviour
 			if (mValue != value)
 			{
 				mValue = value;
+				mLoadSavedValue = false;
 				if (!isSelected) SaveToPlayerPrefs(value);
 				UpdateLabel();
 				ExecuteOnChange();
@@ -235,6 +250,7 @@ public class UIInput : MonoBehaviour
 			if (mValue != value)
 			{
 				mValue = value;
+				mLoadSavedValue = false;
 
 				if (isSelected)
 				{
@@ -296,6 +312,12 @@ public class UIInput : MonoBehaviour
 	/// </summary>
 
 	public int selectionEnd { get { return value.Length; } set {} }
+
+	/// <summary>
+	/// Caret, in case it's needed.
+	/// </summary>
+
+	public UITexture caret { get { return null; } }
 #else
 	/// <summary>
 	/// Current position of the cursor.
@@ -356,6 +378,12 @@ public class UIInput : MonoBehaviour
 			}
 		}
 	}
+
+	/// <summary>
+	/// Caret, in case it's needed.
+	/// </summary>
+
+	public UITexture caret { get { return mCaret; } }
 #endif
 
 	/// <summary>
@@ -387,11 +415,7 @@ public class UIInput : MonoBehaviour
 
 	void Start ()
 	{
-		if (string.IsNullOrEmpty(mValue))
-		{
-			if (!string.IsNullOrEmpty(savedAs) && PlayerPrefs.HasKey(savedAs))
-				value = PlayerPrefs.GetString(savedAs);
-		}
+		if (mLoadSavedValue && !string.IsNullOrEmpty(savedAs)) LoadValue();
 		else value = mValue.Replace("\\n", "\n");
 	}
 
@@ -518,7 +542,7 @@ public class UIInput : MonoBehaviour
 			Input.imeCompositionMode = IMECompositionMode.Auto;
 			RestoreLabelPivot();
 		}
-		
+
 		selection = null;
 		UpdateLabel();
 	}
@@ -542,7 +566,7 @@ public class UIInput : MonoBehaviour
 				value = text;
 			}
 
-			if (mKeyboard.done)
+			if (mKeyboard.done || !mKeyboard.active)
 			{
 #if !UNITY_3_5
 				if (!mKeyboard.wasCanceled)
@@ -632,7 +656,7 @@ public class UIInput : MonoBehaviour
 	/// Handle the specified event.
 	/// </summary>
 
-	bool ProcessEvent (Event ev)
+	protected virtual bool ProcessEvent (Event ev)
 	{
 		if (label == null) return false;
 
@@ -839,8 +863,14 @@ public class UIInput : MonoBehaviour
 			case KeyCode.KeypadEnter:
 			{
 				ev.Use();
-				
-				if (label.multiLine && !ctrl && label.overflowMethod != UILabel.Overflow.ClampContent)
+
+				bool newLine = (onReturnKey == OnReturnKey.NewLine) ||
+					(onReturnKey == OnReturnKey.Default &&
+					label.multiLine && !ctrl &&
+					label.overflowMethod != UILabel.Overflow.ClampContent &&
+					validation == Validation.None);
+
+				if (newLine)
 				{
 					Insert("\n");
 				}
@@ -1013,11 +1043,15 @@ public class UIInput : MonoBehaviour
 	{
 		if (NGUITools.GetActive(this))
 		{
-			current = this;
 			mValue = value;
-			EventDelegate.Execute(onSubmit);
+
+			if (current == null)
+			{
+				current = this;
+				EventDelegate.Execute(onSubmit);
+				current = null;
+			}
 			SaveToPlayerPrefs(mValue);
-			current = null;
 		}
 	}
 
@@ -1046,7 +1080,13 @@ public class UIInput : MonoBehaviour
 				if (inputType == InputType.Password)
 				{
 					processed = "";
-					for (int i = 0, imax = fullText.Length; i < imax; ++i) processed += "*";
+
+					string asterisk = "*";
+
+					if (label.bitmapFont != null && label.bitmapFont.bmFont != null &&
+						label.bitmapFont.bmFont.GetGlyph('*') == null) asterisk = "x";
+
+					for (int i = 0, imax = fullText.Length; i < imax; ++i) processed += asterisk;
 				}
 				else processed = fullText;
 
@@ -1284,11 +1324,33 @@ public class UIInput : MonoBehaviour
 
 	protected void ExecuteOnChange ()
 	{
-		if (EventDelegate.IsValid(onChange))
+		if (current == null && EventDelegate.IsValid(onChange))
 		{
 			current = this;
 			EventDelegate.Execute(onChange);
 			current = null;
 		}
+	}
+
+	/// <summary>
+	/// Convenience function to be used as a callback that will clear the input field's focus.
+	/// </summary>
+
+	public void RemoveFocus () { isSelected = false; }
+
+	/// <summary>
+	/// Convenience function that can be used as a callback for On Change notification.
+	/// </summary>
+
+	public void SaveValue () { SaveToPlayerPrefs(mValue); }
+
+	/// <summary>
+	/// Convenience function that can forcefully reset the input field's value to what was saved earlier.
+	/// </summary>
+
+	public void LoadValue ()
+	{
+		if (!string.IsNullOrEmpty(savedAs) && PlayerPrefs.HasKey(savedAs))
+			value = PlayerPrefs.GetString(savedAs);
 	}
 }
