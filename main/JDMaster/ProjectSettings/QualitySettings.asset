@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 3
+  m_CurrentQuality: 4
   m_QualitySettings:
   - serializedVersion: 2
     name: Fastest
@@ -64,6 +64,25 @@ QualitySettings:
     particleRaycastBudget: 64
     excludedTargetPlatforms: []
   - serializedVersion: 2
+    name: Average
+    pixelLightCount: 1
+    shadows: 2
+    shadowResolution: 1
+    shadowProjection: 1
+    shadowCascades: 2
+    shadowDistance: 40
+    blendWeights: 2
+    textureQuality: 0
+    anisotropicTextures: 1
+    antiAliasing: 0
+    softParticles: 0
+    softVegetation: 1
+    vSyncCount: 1
+    lodBias: 1
+    maximumLODLevel: 0
+    particleRaycastBudget: 256
+    excludedTargetPlatforms: []
+  - serializedVersion: 2
     name: Good
     pixelLightCount: 2
     shadows: 2
@@ -120,4 +139,11 @@ QualitySettings:
     maximumLODLevel: 0
     particleRaycastBudget: 4096
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality: {}
+  m_PerPlatformDefaultQuality:
+    Android: 3
+    BlackBerry: 4
+    Standalone: 4
+    WP8: 4
+    Web: 4
+    Windows Store Apps: 4
+    iPhone: 4

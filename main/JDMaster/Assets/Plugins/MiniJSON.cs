@@ -590,6 +590,7 @@ s += Char.ConvertFromUtf32((int)codePoint);
 	
 	protected static bool serializeValue( object value, StringBuilder builder )
 	{
+#if !UNITY_WINRT
 		// Type t = value.GetType();
 		// Debug.Log("type: " + t.ToString() + " isArray: " + t.IsArray);
 
@@ -637,13 +638,14 @@ s += Char.ConvertFromUtf32((int)codePoint);
 		{
 			return false;
 		}
-
+#endif
 		return true;
 	}
 
 	
 	protected static void serializeString( string aString, StringBuilder builder )
 	{
+#if !UNITY_WINRT
 		builder.Append( "\"" );
 
 		char[] charArray = aString.ToCharArray();
@@ -693,6 +695,7 @@ s += Char.ConvertFromUtf32((int)codePoint);
 		}
 
 		builder.Append( "\"" );
+#endif
 	}
 
 	

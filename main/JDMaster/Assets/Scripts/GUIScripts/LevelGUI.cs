@@ -4,45 +4,54 @@ using System.Collections.Generic;
 
 public class LevelGUI : MonoBehaviour 
 {
-
 	struct PowerContainer
 	{
-		public UIButton powerButton;
-		public UITextInstance textInstance;
+		public UISprite powerSprite;
+		public UIToggle powerButton;
+		public UILabel cost;
 		public Power power;
 	}
-
+	
 	class TextMessage
 	{
-		public UITextInstance text;
+		public UILabel text;
 		public UISprite background;
 		public float timer;
 		public float duration;
 	}
-
+	
 	//Public Variables
 	static LevelGUI _levelGUI;
-	public UIToolkit GUIToolkit;
-	public UIToolkit PowersGUIToolkit;
-	public string thisScene;
+	public GameObject powerButton;
+	public UILabel soulsText;
+	public UILabel deathText;
+	public UILabel populationText;
+	public UILabel soulsVar;
+	public UILabel populationVar;
+	public UILabel deathsVar;
+	public GameObject messageLabel;
+	public static Color sGreen = new Color(0.46f,0.86f,0.13f,1);
+	public static Color sBlue = new Color(0.12f,0.70f,0.87f,1);
+	public static Color sRed = new Color(0.85f,0.24f,0.14f);
+	
 	//Private Variables
 	List<PowerContainer> _powersBar;
-	Color sGreen = new Color(0.46f,0.86f,0.13f,1);
-	Color sBlue = new Color(0.12f,0.70f,0.87f,1);
-	Color sRed = new Color(0.85f,0.24f,0.14f);
+	Dictionary<int,int> _powerBarMappings;
+	TweenPosition tweenPositionSouls;
+	TweenPosition tweenPositionPopulation;
+	TweenPosition tweenPositionDeaths;
+	TweenAlpha tweenAlphaSouls;
+	TweenAlpha tweenAlphaPopulation;
+	TweenAlpha tweenAlphaDeaths;
+	
+	UIRoot root;
 	Vector3 scaleFactor = new Vector3(0.4f,0.4f,1f);
 	float textScaleFactor = 1.4f;
-	UIButton quitButton;
-	UIButton replayButton;
-	UISprite soulsNumber;
-	UISprite deathNumber;
-	UISprite populationNumber;
-	UIText text;
-	UITextInstance soulsText;
-	UITextInstance deathText;
-	UITextInstance populationText;
+	int powerJoy;
+	
+	
 	List<TextMessage> messages;
-	UIButton selectedPower;
+	UIToggle selectedPower = null;
 	
 	public static LevelGUI levelGUI
 	{
@@ -56,7 +65,7 @@ public class LevelGUI : MonoBehaviour
 	{
 		set
 		{
-			soulsText.text = value.ToString();
+			soulsText.text  = value.ToString();
 		}
 	}
 	
@@ -80,64 +89,22 @@ public class LevelGUI : MonoBehaviour
 	void Awake()
 	{
 		//Awake is used by UIToolkit for initialization, DO NOT USE THIS.
-
+		
 	}
 	
 	// Use this for initialization
 	void Start () 
-	{       
-
+	{     
+		this.GetComponent<UIRoot>().manualHeight = Screen.height;
+		root = this.GetComponent<UIRoot>();
+		
 		messages = new List<TextMessage>();
 		TextMessage fakeTextMessage = new TextMessage();
 		fakeTextMessage.duration = 0;
 		messages.Add(fakeTextMessage);
-
+		powerJoy=-1;
+		
 		_levelGUI = this;
-
-		//UI
-		quitButton =  UIButton.create(GUIToolkit,"Close.png","Close_Over.png",0,0);
-		quitButton.onTouchUpInside += sender => Application.LoadLevel("LevelSelectionMenu");
-		quitButton.scale = scaleFactor;
-		
-		replayButton = UIButton.create(GUIToolkit,"Replay.png","Replay_Over.png",0,0);
-		replayButton.pixelsFromTopLeft(0,(int)quitButton.width);
-		replayButton.onTouchUpInside += sender => Application.LoadLevel(Application.loadedLevelName);
-		replayButton.centerize();
-		replayButton.scale = scaleFactor;
-		
-		soulsNumber = GUIToolkit.addSprite("Souls.png",0,0);
-		soulsNumber.positionFromTopRight(0,0);
-		soulsNumber.centerize();
-		soulsNumber.scale = scaleFactor;
-		
-		deathNumber = GUIToolkit.addSprite("Deaths.png",0,0);
-		deathNumber.pixelsFromTopRight(0,(int)soulsNumber.width);
-		deathNumber.centerize();
-		deathNumber.scale = scaleFactor;
-		
-		populationNumber = GUIToolkit.addSprite("Population.png",0,0);
-		populationNumber.pixelsFromTopRight(0,(int)(soulsNumber.width + deathNumber.width));
-		populationNumber.centerize();
-		populationNumber.scale = scaleFactor;
-		
-		//Load the fonts and initialize the text instances
-		text = new UIText(GUIToolkit, "Smilage", "Smilage_0.png" );
-		text.forceLowAscii = true;
-		
-		soulsText = text.addTextInstance(System.Convert.ToString(0),0,0);
-		soulsText.textScale =  textScaleFactor;
-		soulsText.pixelsFromTopRight((int)(soulsNumber.height / 6),(int)(soulsNumber.width / 1.7f));
-		soulsText.setColorForAllLetters(sGreen);
-		
-		deathText = text.addTextInstance(System.Convert.ToString(0),0,0);
-		deathText.textScale = textScaleFactor;
-		deathText.pixelsFromTopRight((int)(deathNumber.height / 6),(int)(deathNumber.width / 1.7f + soulsNumber.width));
-		deathText.setColorForAllLetters(sGreen);
-		
-		populationText = text.addTextInstance(System.Convert.ToString(0),0,0);
-		populationText.textScale = textScaleFactor;
-		populationText.pixelsFromTopRight((int)(populationNumber.height / 6),(int)(populationNumber.width / 1.7f + populationNumber.width + soulsNumber.width));
-		populationText.setColorForAllLetters(sGreen);
 		
 		//Register for global vars and powers events
 		GlobalManager.globalManager.onPopulationChanged += changePopulation;
@@ -146,9 +113,11 @@ public class LevelGUI : MonoBehaviour
 		
 		PowersManager.powersManager.powerEnabled += changePowersEnabled;
 		PowersManager.powersManager.powerDisabled += changePowersDisabled;
+		
+		
 	}
-
-
+	
+	
 	void Update()
 	{
 		if(messages != null)
@@ -160,68 +129,100 @@ public class LevelGUI : MonoBehaviour
 					messages[i].timer += Time.deltaTime;
 					if(messages[i].timer >= messages[i].duration)
 					{
-						messages[i].text.clear();
+						messages[i].text.text = "";
 						messages.Remove(messages[i]);
 					}
-
+					
 				}
 			}
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha1))
+		//Joystick Controls
+		if(InputMapping.GetAction(Actions.PowerNext) == 1f)
+		{
+			simulatePowerButtonPress(powerJoy);
+			powerJoy++;
+			if(powerJoy>=PowersManager.length){
+				powerJoy=0;
+			}
+			simulatePowerButtonPress(powerJoy);
+		}
+		
+		if(InputMapping.GetAction(Actions.PowerPrev) == 1f)
+		{
+			simulatePowerButtonPress(powerJoy);
+			powerJoy--;
+			if(powerJoy<0){
+				powerJoy=PowersManager.length-1;
+			}
+			simulatePowerButtonPress(powerJoy);
+		}
+
+		if(InputMapping.GetAction(Actions.Retry) > 0)
+			Application.LoadLevel(Application.loadedLevel);
+
+		if(InputMapping.GetAction(Actions.Quit) > 0)
+			Application.LoadLevel("LevelSelectionMenu");
+		
+		if(InputMapping.GetAction(Actions.Power0) > 0)
 		{
 			simulatePowerButtonPress(0);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha2))
+		if(InputMapping.GetAction(Actions.Power1) > 0)
 		{
 			simulatePowerButtonPress(1);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha3))
+		if(InputMapping.GetAction(Actions.Power2) > 0)
 		{
 			simulatePowerButtonPress(2);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha4))
+		if(InputMapping.GetAction(Actions.Power3) > 0)
 		{
 			simulatePowerButtonPress(3);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha5))
+		if(InputMapping.GetAction(Actions.Power4) > 0)
 		{
 			simulatePowerButtonPress(4);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha6))
+		if(InputMapping.GetAction(Actions.Power5) > 0)
 		{
 			simulatePowerButtonPress(5);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha7))
+		if(InputMapping.GetAction(Actions.Power6) > 0)
 		{
 			simulatePowerButtonPress(6);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha8))
+		if(InputMapping.GetAction(Actions.Power7) > 0)
 		{
 			simulatePowerButtonPress(7);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha9))
+		if(InputMapping.GetAction(Actions.Power8) > 0)
 		{
 			simulatePowerButtonPress(8);
 		}
 	}
-
+	
 	void simulatePowerButtonPress(int buttonNumber)
 	{
+		
 		if(buttonNumber < 0 || buttonNumber > (_powersBar.Count - 1))
 			return; 
-
-		if(_powersBar[buttonNumber].powerButton.disabled)
-			return;
-
-		if(_powersBar[buttonNumber].powerButton.highlighted == true)
-			_powersBar[buttonNumber].powerButton.highlighted = false;
-		else
-			_powersBar[buttonNumber].powerButton.highlighted = true;
 		
-		onPowerButtonPressed(_powersBar[buttonNumber].powerButton);
+		var mappedButtonNumber = _powerBarMappings[buttonNumber];
+		
+		//Debug.Log (" bn " + buttonNumber + ", mbn " + mappedButtonNumber);
+		
+		if(!_powersBar[mappedButtonNumber].powerButton.enabled)
+			return;
+		
+		if(_powersBar[mappedButtonNumber].powerButton.value == true)
+			_powersBar[mappedButtonNumber].powerButton.value = false;
+		else
+			_powersBar[mappedButtonNumber].powerButton.value = true;
+		
+		onPowerButtonPressed(_powersBar[mappedButtonNumber].powerButton);
 	}
-
+	
 	//PowersManager events
 	//Enable a Power in the powers bar
 	void changePowersEnabled(Power power)
@@ -230,9 +231,9 @@ public class LevelGUI : MonoBehaviour
 		{
 			if(powerContainer.power == power)
 			{
-				powerContainer.powerButton.disabled = false;
-				powerContainer.powerButton.color = new Color(powerContainer.powerButton.color.r,powerContainer.powerButton.color.g,powerContainer.powerButton.color.b,1f);
-				powerContainer.textInstance.color = new Color(sBlue.r,sBlue.g,sBlue.b,1f);
+				powerContainer.powerButton.enabled = true;
+				powerContainer.powerSprite.color = new Color(powerContainer.powerSprite.color.r,powerContainer.powerSprite.color.g,powerContainer.powerSprite.color.b,1f);
+				powerContainer.cost.color = new Color(sBlue.r,sBlue.g,sBlue.b,1f);
 			}
 		}
 		
@@ -245,11 +246,13 @@ public class LevelGUI : MonoBehaviour
 		{
 			if(powerContainer.power == power)
 			{
-				powerContainer.powerButton.disabled = true;
-				powerContainer.powerButton.color = new Color(powerContainer.powerButton.color.r,powerContainer.powerButton.color.g,powerContainer.powerButton.color.b,0.5f);
-				powerContainer.textInstance.color = new Color(sBlue.r,sBlue.g,sBlue.b,0.5f);
 				
-				if(selectedPower != null && power == ((PowerContainer)selectedPower.userData).power)
+				powerContainer.powerButton.value = false;
+				powerContainer.powerButton.enabled = false;
+				powerContainer.powerSprite.color = new Color(powerContainer.powerSprite.color.r,powerContainer.powerSprite.color.g,powerContainer.powerSprite.color.b,0.5f);
+				powerContainer.cost.color = new Color(sBlue.r,sBlue.g,sBlue.b,0.5f);
+				
+				if(selectedPower != null && power == ((PowerContainer)selectedPower.UserData).power)
 				{
 					selectedPower = null;
 					PowersManager.powersManager.onPowerButtonReleased(power);
@@ -257,7 +260,7 @@ public class LevelGUI : MonoBehaviour
 			}
 		}
 	}
-
+	
 	public void clearMessages()
 	{
 		if(messages.Count >= 1)
@@ -265,8 +268,8 @@ public class LevelGUI : MonoBehaviour
 			int messagesSize = messages.Count;
 			for(int i = messagesSize - 1 ; i > 0; i--)
 			{
-				messages[i].text.clear();
-				messages[i].text.destroy();
+				messages[i].text.text = "";
+				Destroy(messages[i].text);
 				messages.Remove(messages[i]);
 			}
 		}
@@ -276,16 +279,100 @@ public class LevelGUI : MonoBehaviour
 	//change the population
 	void changePopulation(int pastPopulation, int newPopulation)
 	{
+		if(pastPopulation == newPopulation)
+		{
+			population = newPopulation;
+			return;
+		}
+		
+		int populationDifference = newPopulation - pastPopulation;
+		
+		applyTweenEvents(populationVar,populationDifference,tweenPositionPopulation,tweenAlphaPopulation,populationText,sGreen,sGreen);
+		
 		population = newPopulation;
 	}
+	
 	//change the souls
 	void changeSouls(int pastSouls, int newSouls)
 	{
+		if(pastSouls == newSouls)
+		{
+			souls = newSouls;
+			return;
+		}
+		
+		int soulsDifference  = newSouls - pastSouls;
+		
+		applyTweenEvents(soulsVar,soulsDifference,tweenPositionSouls, tweenAlphaSouls, soulsText,sGreen,sRed);
+		
 		souls = newSouls;
 	}
+	
+	void applyTweenEvents(UILabel label, int difference, TweenPosition positionTween, TweenAlpha alphaTween, UILabel destinationLabel, Color positveColor, Color negativeColor,float duration = 2.5f)
+	{
+		
+		if(difference > 0)
+			label.text = "+ " + difference.ToString();
+		else
+			label.text = difference.ToString();
+		
+		positionTween = label.GetComponent<TweenPosition>();
+		alphaTween = label.GetComponent<TweenAlpha>();
+		
+		if(positionTween == null)
+		{
+			positionTween = label.gameObject.AddMissingComponent<TweenPosition>();
+			positionTween.from = new Vector3(label.transform.localPosition.x ,label.transform.localPosition.y,0);
+			positionTween.to = new Vector3(label.transform.localPosition.x ,(root.activeHeight/2) - (destinationLabel.height/2),0);
+			positionTween.duration = duration;
+			positionTween.style = UITweener.Style.Once;
+			positionTween.Play();
+		}
+		else
+		{
+			positionTween.ResetToBeginning();
+			positionTween.Play();
+		}
+		
+		//tweenPosition.onFinished.Add(EventDelegate(this.OnTweenFinished));
+		
+		if(difference > 0)
+			label.color = positveColor;
+		else
+			label.color = negativeColor;
+		
+		
+		if(alphaTween == null)
+		{
+			alphaTween = label.gameObject.AddMissingComponent<TweenAlpha>();
+			alphaTween.from = 1f;
+			alphaTween.to = 0f;
+			alphaTween.duration = duration;
+			alphaTween.style = UITweener.Style.Once;
+			alphaTween.Play();
+		}
+		else
+		{
+			alphaTween.ResetToBeginning();
+			alphaTween.Play();
+		}
+		
+		
+	}
+	
 	//change the deaths
 	void changeDeath(int pastDeaths, int newDeaths)
 	{
+		if(pastDeaths == newDeaths)
+		{
+			death = newDeaths;
+			return;
+		}
+		
+		int deathsDifference = newDeaths - pastDeaths;
+		
+		applyTweenEvents(deathsVar,deathsDifference,tweenPositionDeaths,tweenAlphaDeaths,deathText,sGreen,sRed);
+		
 		death = newDeaths;
 	}
 	
@@ -296,62 +383,64 @@ public class LevelGUI : MonoBehaviour
 			return;
 		
 		_powersBar = new List<PowerContainer>();
+		_powerBarMappings = new Dictionary<int, int>();
+		
+		var xPos = (-Screen.width/2  + powerButton.GetComponent<UISprite>().width/2) * root.pixelSizeAdjustment;
+		int  halfSpacer = powers.Length/2;
+		var startYPos = 0;
+		int posCounter = 1;
 		
 		
-		int spacer = (int)UIRelative.yPercentFrom(UIyAnchor.Top, Screen.height, 1f/(float)powers.Length);
-		int lastButtonHeight = + spacer;
 		
 		foreach(var power in powers)
 		{
-			UIButton powerButton = UIButton.create(PowersGUIToolkit,power.name + ".png",power.name + "_Over.png",0,0);
-			powerButton.keepOn = true;
-			powerButton.scale = scaleFactor * 1.5f;
-			powerButton.pixelsFromTopLeft(lastButtonHeight,0);
-			powerButton.onTouchUpInside += onPowerButtonPressed;
-			powerButton.color = new Color(powerButton.color.r,powerButton.color.g,powerButton.color.b,0.5f);
-			powerButton.disabled = true;
+			GameObject newButton = NGUITools.AddChild(this.gameObject,powerButton);
+			
+			UIToggle nbScript = newButton.GetComponent<UIToggle>();
+			UILabel nbLabel = newButton.GetComponentInChildren<UILabel>();
+			nbLabel.text = ((Power)power).price.ToString();
+			
+			newButton.transform.localPosition = new Vector3(xPos,startYPos * root.pixelSizeAdjustment,0);
+			newButton.GetComponent<UISprite>().spriteName = power.name;
+			newButton.transform.FindChild("Selected").GetComponent<UISprite>().spriteName = power.name + "_Over";
+			
 			PowerContainer container = new PowerContainer();
-			container.powerButton = powerButton;
-			container.textInstance = text.addTextInstance(System.Convert.ToString(power.price),0,0);
-			container.textInstance.position = new Vector3(powerButton.position.x + (powerButton.width - container.textInstance.width/2),powerButton.position.y - (powerButton.height - container.textInstance.height/2),powerButton.position.z);
-			container.textInstance.setColorForAllLetters(sBlue);
-			container.textInstance.color = new Color(sBlue.r,sBlue.g,sBlue.b,0.5f);
+			container.powerSprite = newButton.GetComponent<UISprite>();
+			container.powerButton = nbScript;
+			container.cost = nbLabel;
 			container.power = power;
-			powerButton.userData = container;
+			nbScript.UserData = container;
 			_powersBar.Add(container);
-			lastButtonHeight += (int)powerButton.height;
-		}
-		
-	}
+			
+			if(posCounter <= halfSpacer)
+				_powerBarMappings.Add(posCounter - 1,halfSpacer - posCounter);
+			
+			posCounter++; 
+			
+			if(posCounter == halfSpacer + 1)
+				startYPos = 0;
+			
+			if(posCounter > halfSpacer)
+			{
+				startYPos -= powerButton.GetComponent<UISprite> ().height;
+				_powerBarMappings.Add(posCounter - 1,posCounter - 1);
+			}
+			else
+			{
+				startYPos += powerButton.GetComponent<UISprite> ().height;
+			}
 
-	public void WriteMessage(string s, float h,float w, float d)
-	{
-		float height = Screen.height/2;
-		float width = Screen.width/2;
-		
-		Debug.Log(Screen.width);
-		Debug.Log(Screen.height);
-		
-		int i = 0;
-		int j = 0;
-		float space = (w * width);
-		string word;
-		
-		while ((j = s.IndexOf(" ", i)) != -1)
-		{
-			word = s.Substring(i,(j-i));
-			LevelGUI.levelGUI.writeWord(word, new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
-			space += (word.Length + 2) * 14;
-			j++;
-			i = j;
+			if(power.powerState == PowerState.Disabled || power.powerState == PowerState.ForceDisabled)
+			{
+				container.powerButton.value = false;
+				container.powerButton.enabled = false;
+				container.powerSprite.color = new Color(container.powerSprite.color.r,container.powerSprite.color.g,container.powerSprite.color.b,0.5f);
+				container.cost.color = new Color(sBlue.r,sBlue.g,sBlue.b,0.5f);
+			}
 		}
-		
-		word = s.Substring(i);
-		LevelGUI.levelGUI.writeWord(word,new Vector3(space, (h * height), 0f), new Vector3(1.2f,1.2f,1),d,true);
 	}
-
-	//duration is the time in seconds needed a message will stay visible before being destroyed, if duration <= 0 the message will stay visible forever
-	public void writeWord(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
+	
+	public void WriteMessage(string s, float h,float w, float d, Color textColor,bool outline = false, int fontSize = 50)
 	{
 		if(messages == null)
 		{
@@ -360,59 +449,77 @@ public class LevelGUI : MonoBehaviour
 			fakeTextMessage.duration = 0;
 			messages.Add(fakeTextMessage);
 		}
-
+		
 		TextMessage textMessage = new TextMessage();
-
-		textMessage.text = text.addTextInstance(message,position.x,position.y);
-		textMessage.text.alignMode = UITextAlignMode.Center;
-		textMessage.text.xPos = position.x;
-		textMessage.text.yPos = position.y;
-		textMessage.text.scale = scale;
-		textMessage.text.setColorForAllLetters(sBlue);
-
-		textMessage.duration = duration;
+		GameObject message = NGUITools.AddChild (this.gameObject, messageLabel);
+		
+		textMessage.text = message.GetComponent<UILabel>();
+		textMessage.text.text = s;
+		
+		if(outline)
+			textMessage.text.effectStyle = UILabel.Effect.Outline;
+		
+		if (fontSize > 0)
+			textMessage.text.fontSize = fontSize;
+		
+		textMessage.text.color = textColor;
+		textMessage.duration = 0;
 		textMessage.timer = 0;
-
-		if(useBackground)
-		{
-			//null
-		}
-
+		
 		messages.Add(textMessage);
+		
 	}
-
+	
+	public void writeWord(string message, Vector3 position, Vector3 scale, float duration, bool useBackground = true)
+	{
+	}
+	
 	public bool isDisplayingMessages()
 	{
-	
+		
 		return messages.Count > 1;
 	}
-
+	
 	//Callback for onTouchUpInside on every button in the power bar, used to notify the PowersManager for powers activation/deactivation
-	void onPowerButtonPressed(UIButton sender)
+	
+	public void onPowerButtonPressed(UIToggle sender)
 	{
-		if(sender.highlighted) //The power is being activated
+		if (sender.value) 
 		{
 			if(selectedPower != sender)
 			{
 				if(selectedPower != null)
 				{
-					((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sBlue);
-					selectedPower.highlighted = false;
+					((PowerContainer)selectedPower.UserData).cost.color = sBlue;
+					selectedPower.value = false;
 				}
 				
 				selectedPower = sender;
-
-				((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sRed);
-				PowersManager.powersManager.onPowerButtonPressed(((PowerContainer) sender.userData).power);
+				
+				((PowerContainer)selectedPower.UserData).cost.color = sRed;
+				PowersManager.powersManager.onPowerButtonPressed(((PowerContainer) sender.UserData).power);
 			}
-		}
-		else //The power is being deactivated
+		} 
+		else 
 		{
 			if(selectedPower != null)
-				((PowerContainer)selectedPower.userData).textInstance.setColorForAllLetters(sBlue);
-
-			selectedPower = null;
-			PowersManager.powersManager.onPowerButtonReleased(((PowerContainer) sender.userData).power);
+			{
+				((PowerContainer)selectedPower.UserData).cost.color = sBlue;
+				selectedPower = null;
+				PowersManager.powersManager.onPowerButtonReleased(((PowerContainer) sender.UserData).power);
+			}
 		}
 	}
+	
+	
+	public void OnQuitButtonPress()
+	{
+		Application.LoadLevel ("LevelSelectionMenu");
+	}
+	
+	public void OnReplayButtonPress()
+	{
+		Application.LoadLevel (Application.loadedLevelName);
+	}
+	
 }

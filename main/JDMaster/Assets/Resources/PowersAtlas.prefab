@@ -1,0 +1,838 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: PowersAtlas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: aba20304944574e55b43f5080e6c02f9, type: 2}
+  mSprites:
+  - name: acido
+    x: 558
+    y: 171
+    width: 74
+    height: 109
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 50
+    paddingRight: 50
+    paddingTop: 21
+    paddingBottom: 22
+  - name: acido_Over
+    x: 558
+    y: 281
+    width: 74
+    height: 109
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 50
+    paddingRight: 50
+    paddingTop: 21
+    paddingBottom: 22
+  - name: animal-attack
+    x: 137
+    y: 688
+    width: 115
+    height: 105
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 30
+    paddingTop: 23
+    paddingBottom: 24
+  - name: animal-attack_Over
+    x: 857
+    y: 800
+    width: 115
+    height: 105
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 30
+    paddingTop: 23
+    paddingBottom: 24
+  - name: attacco-di-cuore
+    x: 374
+    y: 606
+    width: 112
+    height: 90
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 31
+    paddingRight: 31
+    paddingTop: 31
+    paddingBottom: 31
+  - name: attacco-di-cuore_Over
+    x: 253
+    y: 12
+    width: 112
+    height: 90
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 31
+    paddingRight: 31
+    paddingTop: 31
+    paddingBottom: 31
+  - name: attira
+    x: 137
+    y: 375
+    width: 114
+    height: 98
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 30
+    paddingRight: 30
+    paddingTop: 27
+    paddingBottom: 27
+  - name: attira_Over
+    x: 137
+    y: 276
+    width: 114
+    height: 98
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 30
+    paddingRight: 30
+    paddingTop: 27
+    paddingBottom: 27
+  - name: benzina
+    x: 625
+    y: 698
+    width: 119
+    height: 95
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 28
+    paddingTop: 28
+    paddingBottom: 29
+  - name: benzina_Over
+    x: 505
+    y: 698
+    width: 119
+    height: 95
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 28
+    paddingTop: 28
+    paddingBottom: 29
+  - name: bomb-man
+    x: 508
+    y: 908
+    width: 120
+    height: 116
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 27
+    paddingTop: 18
+    paddingBottom: 18
+  - name: bomb-man_Over
+    x: 629
+    y: 908
+    width: 120
+    height: 116
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 27
+    paddingTop: 18
+    paddingBottom: 18
+  - name: boom
+    x: 257
+    y: 794
+    width: 119
+    height: 111
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 28
+    paddingTop: 20
+    paddingBottom: 21
+  - name: boom_Over
+    x: 137
+    y: 794
+    width: 119
+    height: 111
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 28
+    paddingTop: 20
+    paddingBottom: 21
+  - name: buco-nella-terra
+    x: 0
+    y: 702
+    width: 136
+    height: 101
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 19
+    paddingRight: 19
+    paddingTop: 25
+    paddingBottom: 26
+  - name: buco-nella-terra_Over
+    x: 0
+    y: 804
+    width: 136
+    height: 101
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 19
+    paddingRight: 19
+    paddingTop: 25
+    paddingBottom: 26
+  - name: calma
+    x: 0
+    y: 2
+    width: 118
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 28
+    paddingRight: 28
+    paddingTop: 45
+    paddingBottom: 46
+  - name: calma_Over
+    x: 487
+    y: 635
+    width: 118
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 28
+    paddingRight: 28
+    paddingTop: 45
+    paddingBottom: 46
+  - name: cecita
+    x: 374
+    y: 67
+    width: 90
+    height: 106
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 42
+    paddingRight: 42
+    paddingTop: 23
+    paddingBottom: 23
+  - name: cecita_Over
+    x: 472
+    y: 499
+    width: 90
+    height: 106
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 42
+    paddingRight: 42
+    paddingTop: 23
+    paddingBottom: 23
+  - name: crollo
+    x: 379
+    y: 697
+    width: 125
+    height: 96
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 24
+    paddingRight: 25
+    paddingTop: 28
+    paddingBottom: 28
+  - name: crollo_Over
+    x: 253
+    y: 697
+    width: 125
+    height: 96
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 24
+    paddingRight: 25
+    paddingTop: 28
+    paddingBottom: 28
+  - name: droga
+    x: 253
+    y: 103
+    width: 116
+    height: 97
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 29
+    paddingTop: 27
+    paddingBottom: 28
+  - name: droga_Over
+    x: 253
+    y: 201
+    width: 116
+    height: 97
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 29
+    paddingTop: 27
+    paddingBottom: 28
+  - name: fulmine
+    x: 0
+    y: 906
+    width: 121
+    height: 118
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 26
+    paddingRight: 27
+    paddingTop: 17
+    paddingBottom: 17
+  - name: fulmine_Over
+    x: 122
+    y: 906
+    width: 121
+    height: 118
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 26
+    paddingRight: 27
+    paddingTop: 17
+    paddingBottom: 17
+  - name: fuoco
+    x: 882
+    y: 919
+    width: 131
+    height: 105
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 21
+    paddingRight: 22
+    paddingTop: 23
+    paddingBottom: 24
+  - name: fuoco_Over
+    x: 750
+    y: 919
+    width: 131
+    height: 105
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 21
+    paddingRight: 22
+    paddingTop: 23
+    paddingBottom: 24
+  - name: innondazione
+    x: 0
+    y: 64
+    width: 135
+    height: 98
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 19
+    paddingRight: 20
+    paddingTop: 27
+    paddingBottom: 27
+  - name: innondazione_Over
+    x: 0
+    y: 163
+    width: 135
+    height: 98
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 19
+    paddingRight: 20
+    paddingTop: 27
+    paddingBottom: 27
+  - name: meteora
+    x: 253
+    y: 299
+    width: 117
+    height: 98
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 28
+    paddingRight: 29
+    paddingTop: 27
+    paddingBottom: 27
+  - name: meteora_Over
+    x: 253
+    y: 398
+    width: 117
+    height: 98
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 28
+    paddingRight: 29
+    paddingTop: 27
+    paddingBottom: 27
+  - name: mina
+    x: 881
+    y: 713
+    width: 135
+    height: 80
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 19
+    paddingRight: 20
+    paddingTop: 36
+    paddingBottom: 36
+  - name: mina_Over
+    x: 745
+    y: 713
+    width: 135
+    height: 80
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 19
+    paddingRight: 20
+    paddingTop: 36
+    paddingBottom: 36
+  - name: nuclear-bomb
+    x: 472
+    y: 161
+    width: 77
+    height: 111
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 48
+    paddingRight: 49
+    paddingTop: 20
+    paddingBottom: 21
+  - name: nuclear-bomb_Over
+    x: 472
+    y: 49
+    width: 77
+    height: 111
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 48
+    paddingRight: 49
+    paddingTop: 20
+    paddingBottom: 21
+  - name: obesita
+    x: 646
+    y: 391
+    width: 87
+    height: 107
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 43
+    paddingRight: 44
+    paddingTop: 22
+    paddingBottom: 23
+  - name: obesita_Over
+    x: 558
+    y: 391
+    width: 87
+    height: 107
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 43
+    paddingRight: 44
+    paddingTop: 22
+    paddingBottom: 23
+  - name: pazzia
+    x: 374
+    y: 402
+    width: 97
+    height: 101
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 38
+    paddingRight: 39
+    paddingTop: 25
+    paddingBottom: 26
+  - name: pazzia_Over
+    x: 374
+    y: 504
+    width: 97
+    height: 101
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 38
+    paddingRight: 39
+    paddingTop: 25
+    paddingBottom: 26
+  - name: peste
+    x: 0
+    y: 262
+    width: 124
+    height: 108
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 25
+    paddingRight: 25
+    paddingTop: 22
+    paddingBottom: 22
+  - name: peste_Over
+    x: 0
+    y: 371
+    width: 124
+    height: 108
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 25
+    paddingRight: 25
+    paddingTop: 22
+    paddingBottom: 22
+  - name: piaga
+    x: 374
+    y: 174
+    width: 86
+    height: 113
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 44
+    paddingRight: 44
+    paddingTop: 19
+    paddingBottom: 20
+  - name: piaga_Over
+    x: 374
+    y: 288
+    width: 86
+    height: 113
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 44
+    paddingRight: 44
+    paddingTop: 19
+    paddingBottom: 20
+  - name: piuma
+    x: 137
+    y: 581
+    width: 109
+    height: 106
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 32
+    paddingRight: 33
+    paddingTop: 23
+    paddingBottom: 23
+  - name: piuma_Over
+    x: 137
+    y: 474
+    width: 109
+    height: 106
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 32
+    paddingRight: 33
+    paddingTop: 23
+    paddingBottom: 23
+  - name: possiedi
+    x: 253
+    y: 497
+    width: 120
+    height: 99
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 27
+    paddingTop: 26
+    paddingBottom: 27
+  - name: possiedi_Over
+    x: 253
+    y: 597
+    width: 120
+    height: 99
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 27
+    paddingRight: 27
+    paddingTop: 26
+    paddingBottom: 27
+  - name: prete
+    x: 0
+    y: 591
+    width: 123
+    height: 110
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 25
+    paddingRight: 26
+    paddingTop: 21
+    paddingBottom: 21
+  - name: prete_Over
+    x: 0
+    y: 480
+    width: 123
+    height: 110
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 25
+    paddingRight: 26
+    paddingTop: 21
+    paddingBottom: 21
+  - name: rabbia
+    x: 377
+    y: 803
+    width: 124
+    height: 102
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 25
+    paddingRight: 25
+    paddingTop: 25
+    paddingBottom: 25
+  - name: rabbia_Over
+    x: 502
+    y: 803
+    width: 124
+    height: 102
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 25
+    paddingRight: 25
+    paddingTop: 25
+    paddingBottom: 25
+  - name: sunshine
+    x: 742
+    y: 796
+    width: 114
+    height: 109
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 30
+    paddingRight: 30
+    paddingTop: 21
+    paddingBottom: 22
+  - name: sunshine_Over
+    x: 627
+    y: 796
+    width: 114
+    height: 109
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 30
+    paddingRight: 30
+    paddingTop: 21
+    paddingBottom: 22
+  - name: terremoto
+    x: 244
+    y: 917
+    width: 131
+    height: 107
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 21
+    paddingRight: 22
+    paddingTop: 22
+    paddingBottom: 23
+  - name: terremoto_Over
+    x: 376
+    y: 917
+    width: 131
+    height: 107
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 21
+    paddingRight: 22
+    paddingTop: 22
+    paddingBottom: 23
+  - name: tornado
+    x: 137
+    y: 164
+    width: 96
+    height: 111
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 39
+    paddingRight: 39
+    paddingTop: 20
+    paddingBottom: 21
+  - name: tornado_Over
+    x: 137
+    y: 52
+    width: 96
+    height: 111
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 39
+    paddingRight: 39
+    paddingTop: 20
+    paddingBottom: 21
+  - name: zombie
+    x: 472
+    y: 273
+    width: 85
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 44
+    paddingRight: 45
+    paddingTop: 20
+    paddingBottom: 20
+  - name: zombie_Over
+    x: 472
+    y: 386
+    width: 85
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 44
+    paddingRight: 45
+    paddingTop: 20
+    paddingBottom: 20
+  mPixelSize: 1
+  mReplacement: {fileID: 0}
+  mCoordinates: 0
+  sprites: []
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

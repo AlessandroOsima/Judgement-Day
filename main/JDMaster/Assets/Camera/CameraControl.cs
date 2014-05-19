@@ -37,9 +37,9 @@ public class CameraControl : MonoBehaviour
 		Vector3 direction = new Vector3(0,0,0);
 		Vector3 origin = transform.position;
 		
-		direction.x = Input.GetAxis("Horizontal") * horizontalMovement;
+		direction.x = InputMapping.GetAction (Actions.Horizontal) * horizontalMovement;
 
-		direction.z = Input.GetAxis("Vertical") * verticalMovement;
+		direction.z = InputMapping.GetAction (Actions.Vertical) * verticalMovement;
 
 		var rotation = transform.rotation;
 		transform.Rotate(new Vector3(-rotation.eulerAngles.x,0,0));
@@ -90,10 +90,11 @@ public class CameraControl : MonoBehaviour
 
 		Vector3 movement = transform.TransformDirection(direction);
 
-		movement.y = Input.GetAxis("Mouse ScrollWheel") * zoomAmount * -1;
+		//movement.y = Input.GetAxis("Mouse ScrollWheel") * zoomAmount * -1;
 
-		if(movement.y == 0)
-			movement.y = Input.GetAxis("Zoom") * zoomAmount * -1;
+		//if(movement.y == 0)
+
+		movement.y = InputMapping.GetAction(Actions.Zoom) * zoomAmount * -1;
 
 
 		if(!debugNoRaycast && movement.y != 0 && movement.y < 0 && Physics.Raycast(new Ray(transform.position,Vector3.down),rayLenght))
@@ -122,10 +123,11 @@ public class CameraControl : MonoBehaviour
 	void Rotate()
 	{
 		Vector3 rotation = new Vector3(0,0,0);
-		if(Input.GetAxis("Rotate enabled") > 0)
+
+		if(InputMapping.GetAction(Actions.RotateEnabled) > 0)
 		{
-			rotation.x -= Input.GetAxis("Mouse Y") * rotationAngle;
-			rotation.y += Input.GetAxis("Mouse X") * rotationAngle;
+			rotation.x -= InputMapping.GetAction(Actions.RotateHorizontal) * rotationAngle;
+			rotation.y += InputMapping.GetAction(Actions.RotateVertical) * rotationAngle;
 			rotation.z = 0;
 
 			

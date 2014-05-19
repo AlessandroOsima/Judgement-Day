@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Grass01
-  m_Shader: {fileID: 4800000, guid: 598ce875e583e534297098ce97e7feb4, type: 3}
+  m_Shader: {fileID: 4800000, guid: afbee9ac44cf53f4d8b07def34d9d3a7, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -22,17 +22,17 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Detail
-        second:
-          m_Texture: {fileID: 2800000, guid: 50d2b29c4de5e9b4895565ceae0d3e79, type: 3}
-          m_Scale: {x: 2, y: 2}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _LightMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BurnTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 50d2b29c4de5e9b4895565ceae0d3e79, type: 3}
+          m_Scale: {x: 2, y: 2}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -85,6 +85,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _Texture3
+        second:
+          m_Texture: {fileID: 2800000, guid: e8aa3545ac30ba54893c7764aaf0ed29, type: 3}
+          m_Scale: {x: 20, y: 20}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _BumpMap1
         second:
           m_Texture: {fileID: 0}
@@ -111,27 +118,6 @@ Material:
           m_Texture: {fileID: 2800000, guid: 9dbf85806ccbcdb4faac7f573203db97, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _PathTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9dbf85806ccbcdb4faac7f573203db97, type: 3}
-          m_Scale: {x: 25, y: 25}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Texture3
-        second:
-          m_Texture: {fileID: 2800000, guid: 76ff7be94905a2a4f925eebf29fe5749, type: 3}
-          m_Scale: {x: 25, y: 25}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _BlendMap
-        second:
-          m_Texture: {fileID: 2800000, guid: 59c882269a90b464f9eb3be7159ee026, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -149,10 +135,6 @@ Material:
         first:
           name: _Blend
         second: .839285731
-      data:
-        first:
-          name: _Tile
-        second: 1
     m_Colors:
       data:
         first:
@@ -162,7 +144,3 @@ Material:
         first:
           name: _SpecColor
         second: {r: .5, g: .5, b: .5, a: 0}
-      data:
-        first:
-          name: _Emission
-        second: {r: 0, g: 0, b: 0, a: 0}

@@ -5,6 +5,7 @@ public class PowersManager : MonoBehaviour
 {
 	//Public Variables
 	public Power[] powers;
+	public static int length;
 	//Private Variables
 	static PowersManager _powersManager;
 	Power selected;
@@ -13,7 +14,7 @@ public class PowersManager : MonoBehaviour
 	public delegate void onPowerDisabled(Power power);
 	public event onPowerEnabled powerEnabled;
 	public event onPowerDisabled powerDisabled;
-
+	
 	public Power SelectedPower
 	{
 		get
@@ -21,7 +22,7 @@ public class PowersManager : MonoBehaviour
 			return selected;
 		}
 	}
-
+	
 	public static PowersManager powersManager
 	{
 		get
@@ -42,19 +43,27 @@ public class PowersManager : MonoBehaviour
 		{
 			power.enabled = false;
 		}
-
+		
 		if(powers.Length > 0)
 		{
 			LevelGUI.levelGUI.setUpPowersBar(powers);
 		}
 
+		length = powers.Length;
+		
 		GlobalManager.globalManager.onSoulsChanged += onSoulsChanged;
 	}
 
+	void Update()
+	{
+		refreshPowersStates(GlobalManager.globalManager.souls);
+	}
+	
 	void onSoulsChanged(int pastSouls, int newSouls)
 	{
 		refreshPowersStates(newSouls);
 	}
+
 	//Set the powers state based on the number of souls, powerEnabled and powerDisabled events are called when a power changes state to enabled or disabled
 	public void refreshPowersStates(int newSouls)
 	{
@@ -65,18 +74,18 @@ public class PowersManager : MonoBehaviour
 				power.powerState = PowerState.Enabled;
 				powerEnabled(power);
 			}
-
+			
 			if(power.powerState == PowerState.ForceDisabled && powerDisabled != null)
 			{
 				powerDisabled(power);
 			}
-
+			
 			if(power.price > newSouls && power.powerState == PowerState.Active && powerDisabled != null)
 			{
 				power.powerState = PowerState.Disabled;
 				powerDisabled(power);
 			}
-
+			
 			if (power.price > newSouls && power.powerState == PowerState.Enabled && powerDisabled != null)
 			{
 				power.powerState = PowerState.Disabled;
@@ -84,7 +93,7 @@ public class PowersManager : MonoBehaviour
 			}
 		}
 	}
-
+	
 	//Same as refreshPowersStates but with only one power
 	public void refreshPowerState(Power power, int newSouls)
 	{
@@ -115,7 +124,7 @@ public class PowersManager : MonoBehaviour
 	//Used by the GUILevel script, DO NOT call this from other scripts 
 	public void onPowerButtonPressed(Power power) 
 	{
-
+		
 		if(selected == null)
 		{
 			power.enabled = true;
@@ -125,13 +134,13 @@ public class PowersManager : MonoBehaviour
 		{
 			selected.enabled = false;
 			selected.powerState = PowerState.Enabled;
-		    selected = power;
+			selected = power;
 			power.powerState = PowerState.Active;
 			selected.enabled = true;
 		}
-
+		
 	}
-
+	
 	//Used by the GUILevel script, DO NOT use this from other scripts 
 	public void onPowerButtonReleased(Power power) 
 	{

@@ -51,7 +51,6 @@ public class GlobalSoundsManager : MonoBehaviour
 
 			if(currentPopulation <= population/2 && currentPopulation > population/3)
 			{
-				Debug.Log(population);
 
 				if (audio.isPlaying && audio.clip != worriedClip)                    // if there is audio playing
 					fadeOut(0.5f);  
@@ -61,7 +60,6 @@ public class GlobalSoundsManager : MonoBehaviour
 
 			if(currentPopulation <= population/3 && currentPopulation > 0)
 			{
-				Debug.Log(population);
 
 				if (audio.isPlaying && audio.clip != scaredClip)                    // if there is audio playing
 					fadeOut(0.5f);  

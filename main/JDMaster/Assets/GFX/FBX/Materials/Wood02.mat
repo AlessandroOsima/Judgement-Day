@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Wood02
-  m_Shader: {fileID: 4800000, guid: 2a769f3fc308f437b8fa3d8b128c1a1b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8ae3bd5cd00cde64182b40a612b9b714, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -41,10 +41,35 @@ Material:
           m_Texture: {fileID: 2800000, guid: fa5c32976ead543b2a871521e18c1ea8, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MainTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 5a19ab79befafc24788cdb194a471c34, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BurningTexture
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BurnTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: fa5c32976ead543b2a871521e18c1ea8, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _Burn
+        second: 0
+      data:
+        first:
+          name: _Burning
         second: 0
     m_Colors:
       data:
@@ -55,3 +80,7 @@ Material:
         first:
           name: _MainColor
         second: {r: .75686276, g: .509803951, b: .384313732, a: 1}
+      data:
+        first:
+          name: _node_30
+        second: {r: 1, g: 1, b: 1, a: 1}

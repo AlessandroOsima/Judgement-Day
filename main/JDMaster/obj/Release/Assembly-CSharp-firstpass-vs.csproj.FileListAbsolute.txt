@@ -1,0 +1,11 @@
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\Assembly-CSharp-firstpass.dll
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\Assembly-CSharp-firstpass.pdb
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\UnityEditor.dll
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\UnityEngine.dll
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\Mono.Cecil.dll
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\nunit.framework.dll
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\Unity.DataContract.dll
+C:\Users\alexo\Documents\JDMaster\Temp\bin\Release\ICSharpCode.NRefactory.dll
+C:\Users\alexo\Documents\JDMaster\obj\Release\Assembly-CSharp-firstpass-vs.csprojResolveAssemblyReference.cache
+C:\Users\alexo\Documents\JDMaster\obj\Release\Assembly-CSharp-firstpass.dll
+C:\Users\alexo\Documents\JDMaster\obj\Release\Assembly-CSharp-firstpass.pdb

@@ -44,7 +44,7 @@ public class ZombieEffect : PowerEffect
 
 		if(timer >= (aliveTime * 0.25f) && timer <= (aliveTime * 0.75f) && !stop)
 		{
-			Debug.Log(speed);
+			//Debug.Log(speed);
 			speed = halfSpeed;
 			animator.SetSpeed(animator.MiddleSpeed);
 		}
@@ -59,7 +59,7 @@ public class ZombieEffect : PowerEffect
 
 		if(timer >= (aliveTime * 0.75f) && !stop)
 		{
-			Debug.Log(speed);
+			//Debug.Log(speed);
 			speed = thirdSpeed;
 			animator.SetSpeed(0.5f);
 			animator.SetSpeed(animator.WalkingSpeed);
@@ -112,7 +112,7 @@ public class ZombieEffect : PowerEffect
 			
 			if (closest != -1)
 			{
-				Debug.Log("Recomputing target");
+				//Debug.Log("Recomputing target");
 				navigator.target = Persons[closest].GetComponent<PersonStatus>();
 			}
 		}
