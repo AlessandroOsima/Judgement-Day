@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Boundary
   m_TagString: Boundaries
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}

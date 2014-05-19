@@ -15714,7 +15714,7 @@ GameObject:
   - 33: {fileID: 342933705}
   - 65: {fileID: 342933704}
   - 23: {fileID: 342933703}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Front_Boundary
   m_TagString: Boundaries
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -17086,7 +17086,7 @@ GameObject:
   - 33: {fileID: 382833118}
   - 65: {fileID: 382833117}
   - 23: {fileID: 382833116}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left_Boundary
   m_TagString: Boundaries
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -19172,7 +19172,7 @@ GameObject:
   - 33: {fileID: 427452285}
   - 65: {fileID: 427452284}
   - 23: {fileID: 427452283}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Top_Boundary
   m_TagString: Boundaries
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -25468,7 +25468,7 @@ GameObject:
   - 33: {fileID: 574105839}
   - 65: {fileID: 574105838}
   - 23: {fileID: 574105837}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right_Boundary
   m_TagString: Boundaries
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -39526,6 +39526,30 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: .123449557
       objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 307f9731f9c9201479251cbff2fd101e, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 307f9731f9c9201479251cbff2fd101e, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 307f9731f9c9201479251cbff2fd101e, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 307f9731f9c9201479251cbff2fd101e, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 307f9731f9c9201479251cbff2fd101e, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 307f9731f9c9201479251cbff2fd101e, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 307f9731f9c9201479251cbff2fd101e, type: 2}
   m_RootGameObject: {fileID: 1635380893}
@@ -45582,7 +45606,7 @@ GameObject:
   - 33: {fileID: 978574360}
   - 65: {fileID: 978574359}
   - 23: {fileID: 978574358}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Back_Boundary
   m_TagString: Boundaries
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
@@ -69843,7 +69867,7 @@ GameObject:
   - 33: {fileID: 1557820571}
   - 65: {fileID: 1557820570}
   - 23: {fileID: 1557820569}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bottom_Boundary
   m_TagString: Boundaries
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}

@@ -1,7 +1,0 @@
-fileFormatVersion: 2
-guid: 2a769f3fc308f437b8fa3d8b128c1a1b
-ShaderImporter:
-  defaultTextures:
-  - _Texture: {instanceID: 0}
-  - _BurnMap: {fileID: 2800000, guid: fa5c32976ead543b2a871521e18c1ea8, type: 3}
-  userData: 
