@@ -157,7 +157,7 @@ PlayerSettings:
   spritePackerPolicy: 
   scriptingDefineSymbols: {}
   metroPackageName: JudgementDay
-  metroPackageLogo: 
+  metroPackageLogo: C:/Users/alexo/Documents/screens/50x50.png
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
@@ -165,9 +165,9 @@ PlayerSettings:
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Judgement Day
-  metroTileLogo: 
-  metroTileWideLogo: 
-  metroTileSmallLogo: 
+  metroTileLogo: C:/Users/alexo/Documents/screens/150x150Logo.png
+  metroTileWideLogo: C:/Users/alexo/Downloads/Microsoft.SkypeApp_kzf8qxf38zg5c!App/Icon_310_150.png
+  metroTileSmallLogo: C:/Users/alexo/Downloads/Microsoft.SkypeApp_kzf8qxf38zg5c!App/Icon_30_30.png
   metroTileShortName: Judgement Day
   metroCommandLineArgsFile: 
   metroTileShowName: 0

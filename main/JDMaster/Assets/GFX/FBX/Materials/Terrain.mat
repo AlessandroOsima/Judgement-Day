@@ -36,6 +36,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _Texture3
+        second:
+          m_Texture: {fileID: 2800000, guid: e8aa3545ac30ba54893c7764aaf0ed29, type: 3}
+          m_Scale: {x: 14, y: 14}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _MainTex1
         second:
           m_Texture: {fileID: 2800000, guid: 0dd6d68cc3243524fad9225e4f79308c, type: 3}
@@ -54,20 +61,6 @@ Material:
         second:
           m_Texture: {fileID: 2800000, guid: e36213305a0042a4bbf5f81b5256bccc, type: 3}
           m_Scale: {x: 20, y: 20}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _MainTex4
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Texture3
-        second:
-          m_Texture: {fileID: 2800000, guid: e8aa3545ac30ba54893c7764aaf0ed29, type: 3}
-          m_Scale: {x: 14, y: 14}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}
     m_Colors:

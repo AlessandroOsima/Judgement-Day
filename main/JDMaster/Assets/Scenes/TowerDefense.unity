@@ -4537,7 +4537,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 68596230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 881.267578, y: 258.999939, z: 0}
+  m_LocalPosition: {x: 880.168945, y: 258.999939, z: 0}
   m_LocalScale: {x: 1.00007999, y: 1.00007999, z: 1.00007999}
   m_Children: []
   m_Father: {fileID: 989702145}
@@ -10277,7 +10277,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 181823354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 633.263306, y: 325, z: 0}
+  m_LocalPosition: {x: 632.164673, y: 325, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children:
   - {fileID: 1192623775}
@@ -10320,19 +10320,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Population
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Population
+  mFillCenter: 1
 --- !u!1 &182521868
 GameObject:
   m_ObjectHideFlags: 0
@@ -16037,7 +16037,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 279562478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 764.267273, y: 325, z: 0}
+  m_LocalPosition: {x: 763.16864, y: 325, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children:
   - {fileID: 273479397}
@@ -16080,19 +16080,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Deaths
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Deaths
+  mFillCenter: 1
 --- !u!1001 &280588362
 Prefab:
   m_ObjectHideFlags: 0
@@ -18793,7 +18793,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 334307239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 894.268494, y: 325, z: 0}
+  m_LocalPosition: {x: 893.169861, y: 325, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1395062818}
@@ -18836,19 +18836,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Souls
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Souls
+  mFillCenter: 1
 --- !u!1 &334454223
 GameObject:
   m_ObjectHideFlags: 0
@@ -33172,7 +33172,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 574785018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 620.761963, y: 259.000061, z: 0}
+  m_LocalPosition: {x: 619.66333, y: 259.000061, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children: []
   m_Father: {fileID: 989702145}
@@ -36055,7 +36055,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 624305070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 752.765686, y: 259.000061, z: 0}
+  m_LocalPosition: {x: 751.667053, y: 259.000061, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children: []
   m_Father: {fileID: 989702145}
@@ -55873,7 +55873,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3002
+  startingRenderQueue: 3000
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -110930,35 +110930,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 881.267578
+      value: 880.168945
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 633.263306
+      value: 632.164673
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 764.267273
+      value: 763.16864
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 894.268494
+      value: 893.169861
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 620.761963
+      value: 619.66333
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 752.765686
+      value: 751.667053
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -864.269714
+      value: -863.171082
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -924.268494
+      value: -923.169861
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
@@ -114684,7 +114684,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 1982431334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -864.269714, y: 330, z: 0}
+  m_LocalPosition: {x: -863.171082, y: 330, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children: []
   m_Father: {fileID: 989702145}
@@ -114705,12 +114705,15 @@ MonoBehaviour:
   onPress:
   - mTarget: {fileID: 989702146}
     mMethodName: OnReplayButtonPress
+    mParameters: []
     oneShot: 0
   onRelease: []
   onSelect: []
   onDeselect: []
   onClick: []
   onDoubleClick: []
+  onDragOver: []
+  onDragOut: []
 --- !u!65 &1982431337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114785,19 +114788,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Replay
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Replay
+  mFillCenter: 1
 --- !u!1 &1983064665
 GameObject:
   m_ObjectHideFlags: 0
@@ -126051,7 +126054,7 @@ Transform:
   m_PrefabInternal: {fileID: 1922808468}
   m_GameObject: {fileID: 2147325188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -924.268494, y: 330, z: 0}
+  m_LocalPosition: {x: -923.169861, y: 330, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 989702145}
@@ -126072,12 +126075,15 @@ MonoBehaviour:
   onPress:
   - mTarget: {fileID: 989702146}
     mMethodName: OnQuitButtonPress
+    mParameters: []
     oneShot: 0
   onRelease: []
   onSelect: []
   onDeselect: []
   onClick: []
   onDoubleClick: []
+  onDragOver: []
+  onDragOut: []
 --- !u!65 &2147325191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126152,16 +126158,16 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Close
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Close
+  mFillCenter: 1

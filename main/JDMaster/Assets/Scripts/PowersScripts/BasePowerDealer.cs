@@ -4,7 +4,6 @@ using System;
 
 #if !UNITY_WINRT || (UNITY_WINRT && UNITY_EDITOR)
     using System.Reflection;
-    using UnityEngine.Windows;
 #endif
 
 #if UNITY_WINRT && !UNITY_EDITOR
