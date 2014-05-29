@@ -9395,7 +9395,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 209639103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 620.761963, y: 259.000061, z: 0}
+  m_LocalPosition: {x: 630.638672, y: 259.000061, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children: []
   m_Father: {fileID: 612079125}
@@ -10034,7 +10034,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 224862457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -864.269714, y: 330, z: 0}
+  m_LocalPosition: {x: -874.146423, y: 330, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children: []
   m_Father: {fileID: 612079125}
@@ -10055,12 +10055,15 @@ MonoBehaviour:
   onPress:
   - mTarget: {fileID: 612079129}
     mMethodName: OnReplayButtonPress
+    mParameters: []
     oneShot: 0
   onRelease: []
   onSelect: []
   onDeselect: []
   onClick: []
   onDoubleClick: []
+  onDragOver: []
+  onDragOut: []
 --- !u!65 &224862460
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10135,19 +10138,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Replay
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Replay
+  mFillCenter: 1
 --- !u!1001 &225459348
 Prefab:
   m_ObjectHideFlags: 0
@@ -23859,7 +23862,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 532049353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 633.263306, y: 325, z: 0}
+  m_LocalPosition: {x: 643.140015, y: 325, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children:
   - {fileID: 1702202058}
@@ -23902,19 +23905,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Population
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Population
+  mFillCenter: 1
 --- !u!1 &535435645
 GameObject:
   m_ObjectHideFlags: 0
@@ -34678,7 +34681,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 764391030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 752.765686, y: 259.000061, z: 0}
+  m_LocalPosition: {x: 762.642395, y: 259.000061, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children: []
   m_Father: {fileID: 612079125}
@@ -52707,7 +52710,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 1146353527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 894.268494, y: 325, z: 0}
+  m_LocalPosition: {x: 904.145203, y: 325, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 940093291}
@@ -52750,19 +52753,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Souls
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Souls
+  mFillCenter: 1
 --- !u!1 &1147481512
 GameObject:
   m_ObjectHideFlags: 0
@@ -53713,7 +53716,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 1171855796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -924.268494, y: 330, z: 0}
+  m_LocalPosition: {x: -934.145203, y: 330, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 612079125}
@@ -53755,19 +53758,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Close
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Close
+  mFillCenter: 1
 --- !u!114 &1171855799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53821,12 +53824,15 @@ MonoBehaviour:
   onPress:
   - mTarget: {fileID: 612079129}
     mMethodName: OnQuitButtonPress
+    mParameters: []
     oneShot: 0
   onRelease: []
   onSelect: []
   onDeselect: []
   onClick: []
   onDoubleClick: []
+  onDragOver: []
+  onDragOut: []
 --- !u!1 &1176200486
 GameObject:
   m_ObjectHideFlags: 0
@@ -56571,35 +56577,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -864.269714
+      value: -874.146423
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 633.263306
+      value: 643.140015
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 894.268494
+      value: 904.145203
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -924.268494
+      value: -934.145203
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 764.267273
+      value: 774.143982
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 620.761963
+      value: 630.638672
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 752.765686
+      value: 762.642395
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 881.267578
+      value: 891.144287
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 809aa49d2a16b4b7e9d28a32fc1262c7, type: 2}
@@ -71612,7 +71618,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 1572730652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 764.267273, y: 325, z: 0}
+  m_LocalPosition: {x: 774.143982, y: 325, z: 0}
   m_LocalScale: {x: 1.00007558, y: 1.00007558, z: 1.00007558}
   m_Children:
   - {fileID: 1163219651}
@@ -71655,19 +71661,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Deaths
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Deaths
+  mFillCenter: 1
 --- !u!1 &1572899498
 GameObject:
   m_ObjectHideFlags: 0
@@ -88499,7 +88505,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228081627}
   m_GameObject: {fileID: 1939680902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 881.267578, y: 258.999939, z: 0}
+  m_LocalPosition: {x: 891.144287, y: 258.999939, z: 0}
   m_LocalScale: {x: 1.00007999, y: 1.00007999, z: 1.00007999}
   m_Children: []
   m_Father: {fileID: 612079125}

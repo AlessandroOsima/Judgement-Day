@@ -242,26 +242,26 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .941176474, g: .941176474, b: .941176474, a: 1}
   mPivot: 4
-  mWidth: 2277
+  mWidth: 1938
   mHeight: 720
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.1624999
-  mAtlas: {fileID: 11400000, guid: 384e94b8a6b54490e81f881172125bf9, type: 2}
-  mSpriteName: white
+  aspectRatio: 2.6916666
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: 384e94b8a6b54490e81f881172125bf9, type: 2}
+  mSpriteName: white
+  mFillCenter: 1
 --- !u!4 &195632393
 Transform:
   m_ObjectHideFlags: 0
@@ -362,6 +362,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1385650754}
   - 114: {fileID: 1385650755}
+  - 114: {fileID: 1385650756}
   m_Layer: 4
   m_Name: Label
   m_TagString: Untagged
@@ -442,6 +443,18 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &1385650756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1385650753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b11b21e20c68642b0880aec5a26d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingString: {fileID: 1385650755}
 --- !u!1 &1709051628
 GameObject:
   m_ObjectHideFlags: 0

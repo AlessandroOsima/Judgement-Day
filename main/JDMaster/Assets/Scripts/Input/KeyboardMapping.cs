@@ -15,7 +15,7 @@ public class KeyboardController : ActionController
 
 		var os = SystemInfo.operatingSystem;
 		
-		Debug.Log (os);
+		//Debug.Log (os);
 		
 		if (os.Contains ("OS X") || os.Contains ("Windows") || os.Contains ("Linux")) 
 			return true;

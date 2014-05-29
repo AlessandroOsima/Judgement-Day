@@ -34,7 +34,6 @@ public class Loading : MonoBehaviour
 
         if (Application.GetStreamProgressForLevel(sceneName) == 1)
         {
-			var GameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
 			Application.LoadLevel(GameManager.NextScene);
         }
     }

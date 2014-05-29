@@ -590,8 +590,8 @@ Renderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_LightmapIndex: 0
+  m_LightmapTilingOffset: {x: .0517578125, y: .0517578125, z: .278118134, w: .651165009}
   m_Materials:
   - {fileID: 2100000, guid: 477881e05c4b82e4fa7a6e6682ae3cc8, type: 2}
   m_SubsetIndices: 
@@ -611,8 +611,8 @@ Renderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_LightmapIndex: 0
+  m_LightmapTilingOffset: {x: .0205078125, y: .0205078125, z: .442302704, w: .562419891}
   m_Materials:
   - {fileID: 2100000, guid: 55f0e145335f1074787132154907edc5, type: 2}
   m_SubsetIndices: 
@@ -632,8 +632,8 @@ Renderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_LightmapIndex: 0
+  m_LightmapTilingOffset: {x: .0625, y: .0625, z: .108154297, w: .605224609}
   m_Materials:
   - {fileID: 2100000, guid: eaea4129f73746c46b3834509021d288, type: 2}
   m_SubsetIndices: 
@@ -653,8 +653,8 @@ Renderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_LightmapIndex: 0
+  m_LightmapTilingOffset: {x: .0478515625, y: .0478515625, z: .278133392, w: .809383392}
   m_Materials:
   - {fileID: 2100000, guid: 72a4e096ac7d8a44fa6c7fdd2ce30ec9, type: 2}
   m_SubsetIndices: 

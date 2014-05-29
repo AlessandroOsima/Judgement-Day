@@ -172,7 +172,7 @@ public class BasePowerDealer : Power
         }
     }
     
-    void OnGUI()
+    void Update()
     {
         //souls = GlobalManager.globalManager.souls;
         if (ready)
@@ -194,24 +194,33 @@ public class BasePowerDealer : Power
             if ((InputMapping.GetAction(Actions.Use) > 0) && enableUse)
             {
                 Debug.Log(InputMapping.GetAction(Actions.Use));
+
                 Vector3 clickPosition = InputMapping.GetActionPosition(Actions.Use);
                 if (clickPosition != Vector3.zero)
                 {
                     ray = Camera.main.ScreenPointToRay(clickPosition);
                     RaycastHit hit;
-                    int layerMask = 1 << 10;
+                    int layerMask = 1 << 10 | 1 << 2;
                     layerMask = ~layerMask;
+
+                    Debug.Log(layerMask);
+
                     if (Physics.Raycast(ray, out hit, 1000, layerMask))
                     {
-                        Debug.DrawRay(ray.origin, ray.direction, Color.blue, 100f);
-                        Debug.Log("hit ray " + hit.transform.tag);
+                       //Debug.DrawRay(ray.origin, ray.direction, Color.blue, 100f);
+                       //Debug.Log("hit ray " + hit.transform.tag);
                     }
                     else
-                        Debug.Log("NO");
+                       //Debug.Log("NO");
+
+                    
+                    Debug.Log(hit.point.ToString());
+
                     Location.x = hit.point.x;
                     Location.y = 0;
                     Location.z = hit.point.z;
                     transform.position = Location;
+                    //Debug.Log(Location);
                     particleEffect.transform.position = new Vector3(particleEffect.transform.position.x, 17.5f, particleEffect.transform.position.z);
 
                 }
@@ -223,7 +232,7 @@ public class BasePowerDealer : Power
         {
 
             particleEffect.transform.position = particleEffect.transform.position + Vector3.down * speed * Time.deltaTime;
-            transform.position = transform.position;
+            //transform.position = transform.position;
             if (particleEffect.transform.position.y <= -10f)
             {
                 ready = true;

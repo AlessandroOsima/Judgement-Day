@@ -16,7 +16,6 @@ public class ChangeScene : MonoBehaviour
 	static TweenPosition tweenPos;
 	bool running = true;
 	CameraControlMenu menuCamera;
-	GameManager gameManager;
 	private List<GameObject> islandsPositions;
 	private int selectedIsland = 0;
 	
@@ -24,7 +23,6 @@ public class ChangeScene : MonoBehaviour
 	{
 		menuCamera = FindObjectOfType<CameraControlMenu>();
 		tweenPos = CameraControlMenu.cameraTweenPosition;   //riprendo l'elemento TweenPosition della camera
-		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
 	}
 
 	void ChangeLevel()
@@ -52,7 +50,7 @@ public class ChangeScene : MonoBehaviour
 		if (running) 
 			return;
 
-		gameManager.NextScene = sceneName;
+		GameManager.NextScene = sceneName;
 
 		/*
 		try

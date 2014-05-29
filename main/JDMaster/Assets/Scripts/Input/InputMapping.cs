@@ -2,7 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//Actions that happens in the game
+//TODO: Serialize controller mapping data (string to match for UseOnPlatform and Button Mapping) to an XML file
+//TODO: Expose to Player via a GUI menu
+//TODO: Expose Friendly button names and current controller for the tutorials
+
+//Actions that happens in the game Action -> Input (float : max = 1.0, min = -1.0)
 //Mapped on floats with ranges 1.0,-1.0 for axis and 1.0(button down), 0.0(button up) for buttons
 public enum Actions 
 {
@@ -229,6 +233,14 @@ public static class InputMapping
 		RegisterControllers ();
 	}
 
+    public static ActionController CurrentController
+    {
+        get 
+        {
+            return controllers[currentController];
+        }
+    }
+
 	public static List<string> getValidControllersID()
 	{
 		if (controllers.Count == 0)
@@ -260,24 +272,29 @@ public static class InputMapping
 		return currentController;
 	}
 
+    //TODO: Better Controller-Platform detection. Support for Xbox360Pad on Linux (it could already work, if not just add the appropriate name in UseOnPlatform)
 	public static void RegisterControllers()
 	{
+
 		controllers = new List<ActionController> ();
 		//initialize correct controller
+
 		var os = SystemInfo.operatingSystem;
-
 		Debug.Log (os);
-		var keyboard = new KeyboardController ();
 
+        //If a keyboard is avaliable (aka : we are on PC) add it
+		var keyboard = new KeyboardController ();
 		if (keyboard.useOnPlatform("keyboard")) 
 		{
 				controllers.Add (keyboard);
 				isOnPC = true;
 		}
-		
-#if !UNITY_WP8 
-		var joysticks = Input.GetJoystickNames();
 
+        //GetJoystickNames is not exported in WP8 builds because unity is dumb (it should just return 0 instead of #if) 
+
+#if !UNITY_WP8 || (UNITY_WP8 && UNITY_EDITOR)
+        //Go trough every joystick and instantiate the correct controller (if it exist)
+		var joysticks = Input.GetJoystickNames();
 		Debug.Log("Found " + joysticks.Length + " joysticks");
 
 		//instantiate valid controller for every platfom
@@ -289,23 +306,22 @@ public static class InputMapping
 			{
 				Xbox360Pad.Start();
 				controllers.Add (Xbox360Pad);
-
 			}
 		}
-#endif
-        if (controllers.Count == 1 && isOnPC)
-            currentController = 0; //Use keyboard if no controller and on PC
-        else if (isOnPC)
-            currentController = 1;
 
-#if UNITY_WP8
+#endif
+
+        //If we are on a touch enabled platform instantiate a touch controller
 		var touchSensor = new TouchController();
 		if (touchSensor.useOnPlatform("touch"))
 		{
 				controllers.Add (touchSensor);
 		}
-#endif
 
+        if (controllers.Count == 1 && isOnPC)
+            currentController = 0; //Use keyboard if no controller and on PC
+        else if (isOnPC)
+            currentController = 1;
 	}
 
 

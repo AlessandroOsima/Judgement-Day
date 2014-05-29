@@ -2,22 +2,12 @@
 using System.Collections;
 
 //Where all the global game vars are (will be) located. This is against every programming rule..... fuck them.
-public class GameManager : MonoBehaviour 
+public static class GameManager 
 {
 	//InputMapping mapper;
-	string nextScene;
+	static string nextScene;
 
-	/*
-	public InputMapping inputMapping
-	{
-		get
-		{
-			return mapper;
-		}
-	}
-	*/
-
-	public string NextScene
+	public static string NextScene
 	{
 		get
 		{
@@ -28,21 +18,5 @@ public class GameManager : MonoBehaviour
 		{
 			nextScene = value;
 		}
-	}
-
-	// Use this for initialization
-	void Awake () 
-	{
-		//mapper = new InputMapping();
-		//mapper.RegisterControllers ();
-
-		//I will survive for ever !!
-		Object.DontDestroyOnLoad (this.gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
 	}
 }

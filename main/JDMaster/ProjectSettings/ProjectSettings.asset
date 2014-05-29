@@ -118,6 +118,9 @@ PlayerSettings:
   - m_BuildTarget: WP8
     m_StaticBatching: 1
     m_DynamicBatching: 0
+  - m_BuildTarget: Windows Store Apps
+    m_StaticBatching: 1
+    m_DynamicBatching: 0
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   wiiRegion: 1

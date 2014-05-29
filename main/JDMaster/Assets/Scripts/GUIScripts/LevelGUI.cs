@@ -514,7 +514,8 @@ public class LevelGUI : MonoBehaviour
 	
 	public void OnQuitButtonPress()
 	{
-		Application.LoadLevel ("LevelSelectionMenu");
+        GameManager.NextScene = "LevelSelectionMenu";
+		Application.LoadLevel ("LoadingScreen");
 	}
 	
 	public void OnReplayButtonPress()

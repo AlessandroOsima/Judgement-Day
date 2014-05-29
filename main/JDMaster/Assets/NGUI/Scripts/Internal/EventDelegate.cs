@@ -3,7 +3,7 @@
 // Copyright © 2011-2014 Tasharen Entertainment
 //----------------------------------------------
 
-#if UNITY_EDITOR || !UNITY_FLASH
+#if UNITY_EDITOR || (!UNITY_FLASH && !NETFX_CORE && !UNITY_WP8)
 #define REFLECTION_SUPPORT
 #endif
 
@@ -365,7 +365,9 @@ public class EventDelegate
 #else
 					for (mMethod = null; ; )
 					{
-						mMethod = type.GetMethod(mMethodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+                        mMethod = type.GetMethod(mMethodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
 						if (mMethod != null) break;
 						type = type.BaseType;
 						if (type == null) break;

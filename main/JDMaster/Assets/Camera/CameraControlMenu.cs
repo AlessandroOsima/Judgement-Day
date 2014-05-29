@@ -25,7 +25,6 @@ public class CameraControlMenu : MonoBehaviour
 	LevelCorner corner = LevelCorner.None;
 	int numberOfIsles = 0;
 	bool running = false;
-	GameManager gameManager;
 
 	IslandDescriptor currentIsland;
 	IslandDescriptor previousIsland;
@@ -45,12 +44,53 @@ public class CameraControlMenu : MonoBehaviour
 	Vector3 destination;
 	
 	int moveDirection = 0;
-	
+
+    #region Properties
+    public static TweenPosition cameraTweenPosition
+    {
+        get
+        {
+            return tweenPos;
+        }
+    }
+
+
+    public bool isRunning
+    {
+        get
+        {
+            return running;
+        }
+
+        set
+        {
+            running = value;
+        }
+    }
+
+    public static List<GameObject> IslandsPositions
+    {
+        get
+        {
+            return staticPositions;
+        }
+    }
+
+    public int SelectedIsle
+    {
+        get
+        {
+            return selectedIsland;
+        }
+    }
+
+    #endregion
+
 	void Start()
 	{
-		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
 
 		Debug.Log (InputMapping.getValidControllersCount ());
+
 		foreach (var ID in InputMapping.getValidControllersID ())
 						Debug.Log (ID);
 
@@ -145,53 +185,11 @@ public class CameraControlMenu : MonoBehaviour
 		if(islandTransitionEnd != null)
 		 islandTransitionEnd(previousIsland,currentIsland,corner);
 	}
-	
-	#region Properties
-	public static TweenPosition cameraTweenPosition
-	{
-		get
-		{
-			return tweenPos;
-		}
-	}
 
-
-	public bool isRunning
-	{
-		get
-		{
-			return running;
-		}
-
-		set
-		{
-			running = value;
-		}
-	}
-
-	public static List<GameObject> IslandsPositions
-	{
-		get
-		{
-			return staticPositions;
-		}
-	}
-	
-	public int SelectedIsle
-	{
-		get
-		{
-			return selectedIsland;
-		}
-	}
-
-	//To be Called when a level is selected only by ChangeSecen, a bit hacky, will have to replace this
-	public void notifyLevelSelected()
-	{
-		levelSelected(currentIsland);
-	}
-
-	#endregion
-	
+    //To be Called when a level is selected only by ChangeSecen, a bit hacky, will have to replace this
+    public void notifyLevelSelected()
+    {
+        levelSelected(currentIsland);
+    }
 }
 

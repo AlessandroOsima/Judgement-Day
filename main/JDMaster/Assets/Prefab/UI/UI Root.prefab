@@ -519,12 +519,15 @@ MonoBehaviour:
   onPress:
   - mTarget: {fileID: 11400014}
     mMethodName: OnReplayButtonPress
+    mParameters: []
     oneShot: 0
   onRelease: []
   onSelect: []
   onDeselect: []
   onClick: []
   onDoubleClick: []
+  onDragOver: []
+  onDragOut: []
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -584,19 +587,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Replay
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Replay
+  mFillCenter: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -634,19 +637,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Population
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Population
+  mFillCenter: 1
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -825,19 +828,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Souls
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Souls
+  mFillCenter: 1
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -875,19 +878,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Close
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Close
+  mFillCenter: 1
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -926,12 +929,15 @@ MonoBehaviour:
   onPress:
   - mTarget: {fileID: 11400014}
     mMethodName: OnQuitButtonPress
+    mParameters: []
     oneShot: 0
   onRelease: []
   onSelect: []
   onDeselect: []
   onClick: []
   onDoubleClick: []
+  onDragOver: []
+  onDragOut: []
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -969,19 +975,19 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.85714281
-  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
-  mSpriteName: Deaths
   mType: 3
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mFillCenter: 1
   centerType: 1
   leftType: 1
   rightType: 1
   bottomType: 1
   topType: 1
+  mAtlas: {fileID: 11400000, guid: b7bc1cab7b0ca477cb3a296e71674f84, type: 2}
+  mSpriteName: Deaths
+  mFillCenter: 1
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,9 +20,9 @@ public class TouchController : ActionController
 
 		var os = SystemInfo.operatingSystem;
 		
-		Debug.Log (os);
+		//Debug.Log (os);
 		
-		//if (os.Contains ("WindowsPhone")) 
+		if (os.Contains ("Windows Phone")) 
 			return true;
 
 
@@ -197,7 +197,12 @@ public class TouchController : ActionController
     {
         if (action == Actions.Use)
         {
-            return tapPosition;
+            Debug.Log(tapPosition);
+
+            if (tapPosition.x > 125)
+                return tapPosition;
+            else
+                return Vector3.zero;
         }
         return Vector3.zero;
     }
