@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Xbox360Controller : ActionController
+public class Xbox360Controller : BaseController
 {
 	Dictionary<Actions,Axis> axisMapping;
 	
@@ -13,6 +13,9 @@ public class Xbox360Controller : ActionController
 
 	public override bool useOnPlatform(string controllerName)
 	{
+        //sets the controller name
+        base.useOnPlatform(controllerName);
+
 		if (controllerName.Contains ("Wireless") || controllerName.Contains ("Xbox"))
 						return true;
 
@@ -91,20 +94,36 @@ public class Xbox360Controller : ActionController
 		axisMapping.Add(Actions.RotateVertical,new EmptyAxis());
 	}
 	
-	public override float GetAction(Actions action)
-	{
-		Axis axis;
-		axisMapping.TryGetValue (action,out axis);
-		return axis.getAxis ();
-	}
-
-    public override Vector3 GetActionPosition(Actions action)
-    {
-        return Vector3.zero;
-    }
-	
 	public override string ID()
 	{
 		return "Xbox360Pad";
 	}
+}
+
+public class XboxOneController : BaseController
+{
+
+    Dictionary<Actions,Axis> axisMapping;
+
+    public XboxOneController()
+	{
+        axisMapping = new Dictionary<Actions, Axis>();
+	}
+
+	public override bool useOnPlatform(string controllerName)
+	{
+        base.useOnPlatform(controllerName);
+
+        var os = SystemInfo.operatingSystem;
+
+        if (controllerName.Contains("One") && os.Contains("Windows"))
+		    return true;
+
+		return false;
+	}
+
+    public override string ID()
+    {
+        return "XboxOnePad";
+    }
 }

@@ -39,7 +39,8 @@ public abstract class ActionController
 {
 	public abstract void Start(); //init the controller when it's recognized
 	public abstract float GetAction(Actions action); //return an action val
-	public abstract string ID(); //human readable string representing a controller
+	public abstract string ID(); //string representing a controller
+    public abstract string FriendlyID(); //Human readable version of the ID, it can be displayed to the user
 	public abstract bool useOnPlatform(string controllerName);
     public abstract Vector3 GetActionPosition(Actions action);
 }
@@ -297,20 +298,45 @@ public static class InputMapping
 		var joysticks = Input.GetJoystickNames();
 		Debug.Log("Found " + joysticks.Length + " joysticks");
 
+        bool isControllerUsed = false;
+
 		//instantiate valid controller for every platfom
 		foreach (var joystick in joysticks) 
 		{
+            Debug.Log(joystick);
             var Xbox360Pad = new Xbox360Controller();
 
 			if(Xbox360Pad.useOnPlatform(joystick))
 			{
+                Debug.Log("Using 360 Controller");
+                isControllerUsed = true;
 				Xbox360Pad.Start();
 				controllers.Add (Xbox360Pad);
 			}
+
+            var xboneController =  new XboxOneController();
+
+            if(xboneController.useOnPlatform(joystick))
+            {
+                Debug.Log("Using One Controller");
+                isControllerUsed = true;
+                xboneController.Start();
+                controllers.Add(xboneController);
+            }
+            
+            //If this joystick can't be matched with a specific controller use the base one
+            if(!isControllerUsed)
+            {
+                Debug.Log("Using Base Controller");
+                var baseController = new BaseController();
+                baseController.useOnPlatform(joystick);
+                baseController.Start();
+                controllers.Add(baseController);
+            }
+
 		}
 
 #endif
-
         //If we are on a touch enabled platform instantiate a touch controller
 		var touchSensor = new TouchController();
 		if (touchSensor.useOnPlatform("touch"))
@@ -322,6 +348,13 @@ public static class InputMapping
             currentController = 0; //Use keyboard if no controller and on PC
         else if (isOnPC)
             currentController = 1;
+
+        Debug.Log("Starting controllers list :");
+
+        foreach (var controller in controllers)
+            Debug.Log(controller.FriendlyID());
+
+        Debug.Log("Ending controllers list :");
 	}
 
 

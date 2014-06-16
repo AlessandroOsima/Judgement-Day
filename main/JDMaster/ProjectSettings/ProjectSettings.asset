@@ -80,7 +80,7 @@ PlayerSettings:
   ForceSDCardPermission: 0
   CreateWallpaper: 0
   APKExpansionFiles: 0
-  StripUnusedMeshComponents: 0
+  StripUnusedMeshComponents: 1
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 22
   uIPrerenderedIcon: 0
@@ -111,7 +111,7 @@ PlayerSettings:
     m_DynamicBatching: 1
   - m_BuildTarget: Windows Store Apps
     m_StaticBatching: 1
-    m_DynamicBatching: 0
+    m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   XboxTitleId: 
@@ -168,7 +168,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Judgement Day
   metroStoreTileLogo80: 
-  metroStoreTileLogo: 
+  metroStoreTileLogo: C:/Users/alexo/Documents/screens/150x150Logo.png
   metroStoreTileLogo140: 
   metroStoreTileLogo180: 
   metroStoreTileWideLogo80: 
@@ -176,7 +176,7 @@ PlayerSettings:
   metroStoreTileWideLogo140: 
   metroStoreTileWideLogo180: 
   metroStoreTileSmallLogo80: 
-  metroStoreTileSmallLogo: 
+  metroStoreTileSmallLogo: C:/Users/alexo/Documents/screens/SmallTile.png
   metroStoreTileSmallLogo140: 
   metroStoreTileSmallLogo180: 
   metroStoreSmallTile80: 
@@ -196,7 +196,7 @@ PlayerSettings:
   metroPhoneSmallTile: 
   metroPhoneSmallTile140: 
   metroPhoneSmallTile240: 
-  metroPhoneMediumTile: 
+  metroPhoneMediumTile: C:/Users/alexo/Documents/screens/150x150Logo.png
   metroPhoneMediumTile140: 
   metroPhoneMediumTile240: 
   metroPhoneWideTile: 
@@ -209,7 +209,7 @@ PlayerSettings:
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
-  metroLargeTileShowName: 0
+  metroLargeTileShowName: 1
   metroWideTileShowName: 0
   metroDefaultTileSize: 1
   metroTileForegroundText: 1
@@ -219,12 +219,12 @@ PlayerSettings:
   metroCapabilities:
     EnterpriseAuthentication: 0
     InternetClient: 0
-    InternetClientServer: 0
+    InternetClientServer: 1
     Location: 0
     Microphone: 0
     MusicLibrary: 0
     PicturesLibrary: 0
-    PrivateNetworkClientServer: 0
+    PrivateNetworkClientServer: 1
     Proximity: 0
     RemovableStorage: 0
     SharedUserCertificates: 0

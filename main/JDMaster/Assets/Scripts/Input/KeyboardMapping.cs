@@ -10,6 +10,11 @@ public class KeyboardController : ActionController
 		
 	}
 
+    public override string FriendlyID()
+    {
+        return "Keyboard";
+    }
+
 	public override bool useOnPlatform(string controllerName)
 	{
 

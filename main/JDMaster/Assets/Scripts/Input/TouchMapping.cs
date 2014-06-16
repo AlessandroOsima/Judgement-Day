@@ -15,6 +15,11 @@ public class TouchController : ActionController
 		
 	}
 
+    public override string FriendlyID()
+    {
+        return "Touch Input";
+    }
+
 	public override bool useOnPlatform(string controllerName)
 	{
 
